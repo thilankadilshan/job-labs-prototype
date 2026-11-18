@@ -1,0 +1,931 @@
+---
+permalink: "/cookie-policy/"
+---
+{% extends "layouts/master.njk" %}
+{% block title %}Cookie Policy - Job Labs{% endblock %}
+{% block description %}Learn about how Job Labs uses cookies to enhance your experience on our recruitment platform.{% endblock %}
+{% block og_title %}Cookie Policy - Job Labs{% endblock %}
+{% block og_description %}Learn about how Job Labs uses cookies to enhance your experience on our recruitment platform.{% endblock %}
+{% block styles %}
+<style>
+    .cookie-policy {
+        background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+        min-height: 100vh;
+    }
+
+    .policy-hero {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+        color: white;
+        padding: 80px 0 60px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .policy-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+        opacity: 0.9;
+    }
+
+    .policy-hero h1 {
+        color: white;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .policy-hero p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.2rem;
+        max-width: 600px;
+    }
+
+    .policy-content {
+        position: relative;
+        z-index: 1;
+        padding: 60px 0 80px;
+    }
+
+    .policy-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(8, 1, 89, 0.08);
+        padding: 48px;
+        margin-bottom: 32px;
+        border: 1px solid rgba(8, 1, 89, 0.06);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .policy-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--primary-orange) 0%, #ff8533 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .policy-card:hover::before {
+        opacity: 1;
+    }
+
+    .policy-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(8, 1, 89, 0.12);
+    }
+
+    .section-title {
+        color: var(--primary-blue);
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .section-title::before {
+        content: '';
+        width: 32px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-orange) 0%, #ff8533 100%);
+        border-radius: 2px;
+        transition: width 0.3s ease;
+    }
+
+    .policy-card:hover .section-title::before {
+        width: 48px;
+    }
+
+    .section-content {
+        color: var(--text-light);
+        font-size: 1.05rem;
+        line-height: 1.8;
+    }
+
+    .section-content p {
+        margin-bottom: 16px;
+    }
+
+    .section-content ul {
+        margin: 20px 0;
+        padding-left: 24px;
+    }
+
+    .section-content li {
+        margin-bottom: 12px;
+        position: relative;
+    }
+
+    .section-content li::marker {
+        color: var(--primary-orange);
+        font-weight: 600;
+    }
+
+    .cookie-types {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin: 32px 0;
+    }
+
+    .cookie-type-card {
+        background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+        border: 1px solid rgba(8, 1, 89, 0.08);
+        border-radius: 12px;
+        padding: 24px;
+        transition: all 0.3s ease;
+    }
+
+    .cookie-type-card:hover {
+        border-color: var(--primary-orange);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(255, 102, 0, 0.1);
+    }
+
+    .cookie-type-title {
+        color: var(--primary-blue);
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .cookie-type-icon {
+        width: 20px;
+        height: 20px;
+        background: var(--primary-orange);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+    }
+
+    .browser-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin: 24px 0;
+    }
+
+    .browser-link {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        color: var(--primary-blue);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        gap: 12px;
+    }
+
+    .browser-link:hover {
+        background: var(--light-blue);
+        border-color: var(--primary-orange);
+        transform: translateY(-1px);
+    }
+
+    .browser-icon {
+        width: 24px;
+        height: 24px;
+        background: var(--primary-blue);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+    }
+
+    .contact-info-cookie {
+        background: linear-gradient(135deg, var(--light-blue) 0%, #ffffff 100%);
+        border-radius: 12px;
+        padding: 32px;
+        border: 1px solid rgba(8, 1, 89, 0.08);
+        margin-top: 32px;
+    }
+
+    .contact-title {
+        color: var(--primary-blue);
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+
+    .contact-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .contact-item-cookie {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--text-light);
+    }
+
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-orange);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+    }
+
+    .breadcrumb {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 12px 0;
+        margin-bottom: 40px;
+        border-radius: 8px;
+    }
+
+    .breadcrumb-list {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumb-item {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+    }
+
+    .breadcrumb-item a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .breadcrumb-item a:hover {
+        color: var(--primary-orange);
+    }
+
+    .breadcrumb-separator {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .last-updated {
+        background: linear-gradient(135deg, var(--primary-orange) 0%, #ff8533 100%);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-bottom: 24px;
+    }
+
+    /* Cookie Preference Toggle Styles */
+    .cookie-preference-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 16px;
+        padding: 16px 0;
+        border-top: 1px solid rgba(8, 1, 89, 0.1);
+    }
+
+    .cookie-preference-toggle:first-child {
+        border-top: none;
+        margin-top: 0;
+    }
+
+    .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 56px;
+        height: 28px;
+    }
+
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #cbd5e0;
+        transition: 0.3s ease;
+        border-radius: 28px;
+    }
+
+    .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.3s ease;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+        background: linear-gradient(135deg, var(--primary-orange), #ff8533);
+    }
+
+    .toggle-switch input:checked + .toggle-slider:before {
+        transform: translateX(28px);
+    }
+
+    .toggle-switch input:disabled + .toggle-slider {
+        background-color: #e2e8f0;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .toggle-switch input:disabled + .toggle-slider:before {
+        background-color: #f7fafc;
+    }
+
+    .cookie-preference-info {
+        flex: 1;
+        margin-right: 16px;
+    }
+
+    .cookie-preference-title {
+        font-weight: 600;
+        color: var(--primary-blue);
+        margin-bottom: 4px;
+    }
+
+    .cookie-preference-desc {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        line-height: 1.5;
+    }
+
+    .preference-actions {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 2px solid var(--border-color);
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .preference-actions .btn {
+        min-width: 140px;
+    }
+
+    .btn-accept-all {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+    }
+
+    .btn-accept-all:hover {
+        background: linear-gradient(135deg, #059669, #047857);
+    }
+
+    .btn-save-preferences {
+        background: var(--primary-blue);
+        color: white;
+    }
+
+    .btn-save-preferences:hover {
+        background: var(--dark-blue);
+    }
+
+    .preferences-status {
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        border: 1px solid #93c5fd;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-top: 16px;
+        display: none;
+    }
+
+    .preferences-status.show {
+        display: block;
+        animation: fadeInUp 0.3s ease;
+    }
+
+    .preferences-status.success {
+        background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+        border-color: #86efac;
+        color: #166534;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .policy-hero {
+            padding: 60px 0 40px;
+        }
+
+        .policy-card {
+            padding: 32px 24px;
+        }
+
+        .cookie-types,
+        .browser-links {
+            grid-template-columns: 1fr;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+        }
+
+        .contact-details {
+            grid-template-columns: 1fr;
+        }
+
+        .cookie-preference-toggle {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .preference-actions {
+            flex-direction: column;
+        }
+        
+        .preference-actions .btn {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .policy-card {
+            padding: 24px 20px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+        }
+    }
+
+    /* Print Styles */
+    @media print {
+        .policy-hero {
+            background: none !important;
+            color: var(--primary-blue) !important;
+        }
+
+        .policy-card {
+            box-shadow: none !important;
+            border: 1px solid #ddd !important;
+        }
+
+        .cookie-type-card {
+            background: none !important;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% include "partials/header.njk" %}
+
+<div class="cookie-policy">
+    <!-- Hero Section -->
+    <section class="policy-hero">
+        <div class="container">
+
+            <div class="animate-on-scroll">
+                <h1>Cookie Policy</h1>
+                <p style="font-size: 1.2rem; margin-top: 16px; color: rgba(255, 255, 255, 0.9);">
+                    Learn how we use cookies to enhance your experience on Job Labs
+                </p>
+                <div class="last-updated">
+                    <i class="fas fa-calendar-alt"></i> Effective Date: 15th September 2025
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="policy-content">
+        <div class="container">
+            <!-- Introduction -->
+            <div class="policy-card animate-on-scroll">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    Introduction
+                </h2>
+                <div class="section-content">
+                    <p>This Website, <a href="https://www.job-labs.lk" target="_blank" rel="noopener">www.job-labs.lk</a> (the "Website"), is owned and operated by <strong>Sharper Labs Academy (Private) Ltd</strong> ("we", "our", "us").</p>
+                    
+                    <p>This Cookie Policy explains how we use cookies and similar technologies when you visit and interact with the Website.</p>
+                    
+                    <p>By continuing to use the Website, you consent to our use of cookies as described in this Policy, unless you disable them through your browser or device settings.</p>
+                </div>
+            </div>
+
+            <!-- What Are Cookies -->
+            <div class="policy-card animate-on-scroll">
+                <h2 class="section-title">
+                    <i class="fas fa-question-circle"></i>
+                    What Are Cookies?
+                </h2>
+                <div class="section-content">
+                    <p>Cookies are small text files placed on your computer, smartphone, or device when you visit a website. They help websites function effectively, provide enhanced features, and supply information to the website operator.</p>
+                </div>
+            </div>
+
+            <!-- Types of Cookies -->
+            <div class="policy-card animate-on-scroll">
+                <h2 class="section-title">
+                    <i class="fas fa-list-alt"></i>
+                    Types of Cookies We Use
+                </h2>
+                <div class="section-content">
+                    <!--  -->
+                    <div class="cookie-types">
+                        <div class="cookie-type-card">
+                            <h3 class="cookie-type-title">
+                                <div class="cookie-type-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                Essential Cookies
+                            </h3>
+                            <p>Required for the Website to operate properly.</p>
+                            <p><strong>Examples:</strong> login sessions, account authentication, and security features.</p>
+                            
+                            <div class="cookie-preference-toggle">
+                                <div class="cookie-preference-info">
+                                    <div class="cookie-preference-title">Always Active</div>
+                                    <div class="cookie-preference-desc">These cookies are necessary for the website to function and cannot be switched off.</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="essential-cookies" checked disabled>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="cookie-type-card">
+                            <h3 class="cookie-type-title">
+                                <div class="cookie-type-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                Performance & Analytics Cookies
+                            </h3>
+                            <p>Help us understand how visitors use the Website.</p>
+                            <p><strong>Examples:</strong> Google Analytics (page visits, traffic sources, user behaviour).</p>
+                            
+                            <div class="cookie-preference-toggle">
+                                <div class="cookie-preference-info">
+                                    <div class="cookie-preference-title">Analytics & Performance</div>
+                                    <div class="cookie-preference-desc">Allow us to analyze website usage and improve performance.</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="analytics-cookies" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="cookie-type-card">
+                            <h3 class="cookie-type-title">
+                                <div class="cookie-type-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                Functionality Cookies
+                            </h3>
+                            <p>Enhance user experience by remembering preferences.</p>
+                            <p><strong>Examples:</strong> language settings, saved job searches, or remembering login details.</p>
+                            
+                            <div class="cookie-preference-toggle">
+                                <div class="cookie-preference-info">
+                                    <div class="cookie-preference-title">Functional Features</div>
+                                    <div class="cookie-preference-desc">Remember your preferences and provide enhanced features.</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="functional-cookies" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="cookie-type-card">
+                            <h3 class="cookie-type-title">
+                                <div class="cookie-type-icon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                Advertising & Third-Party Cookies
+                            </h3>
+                            <p>May be used to deliver relevant job adverts or personalised content.</p>
+                            <p><strong>Examples:</strong> cookies set by integrated third-party services.</p>
+                            
+                            <div class="cookie-preference-toggle">
+                                <div class="cookie-preference-info">
+                                    <div class="cookie-preference-title">Marketing & Advertising</div>
+                                    <div class="cookie-preference-desc">Show you relevant job advertisements and personalized content.</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="marketing-cookies">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preference Actions -->
+                    <div class="preference-actions">
+                        <button type="button" class="btn btn-accept-all" id="acceptAllCookies">
+                            <i class="fas fa-check-circle"></i>
+                            Accept All Cookies
+                        </button>
+                        <button type="button" class="btn btn-save-preferences" id="savePreferences">
+                            <i class="fas fa-save"></i>
+                            Save My Preferences
+                        </button>
+                        <button type="button" class="btn btn-outline" id="rejectOptional">
+                            <i class="fas fa-times-circle"></i>
+                            Reject Optional Cookies
+                        </button>
+                    </div>
+
+                    <!-- Status Message -->
+                    <div class="preferences-status" id="preferencesStatus">
+                        <i class="fas fa-info-circle"></i>
+                        <span id="statusMessage">Your cookie preferences have been saved.</span>
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+
+            <!-- How We Use Cookies -->
+            <div class="policy-card animate-on-scroll">
+                <h2 class="section-title">
+                    <i class="fas fa-tasks"></i>
+                    How We Use Cookies
+                </h2>
+                <div class="section-content">
+                    <p>We use cookies to:</p>
+                    <ul>
+                        <li>Enable secure login and account management.</li>
+                        <li>Improve Website performance and user experience.</li>
+                        <li>Analyse traffic, usage, and engagement trends.</li>
+                        <li>Deliver relevant job-related content and advertising.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Managing Cookies -->
+            <div class="policy-card animate-on-scroll">
+                <h2 class="section-title">
+                    <i class="fas fa-sliders-h"></i>
+                    Managing Cookies
+                </h2>
+                <div class="section-content">
+                    <p>You can control or disable cookies through your browser settings. Please note:</p>
+                    <ul>
+                        <li>Disabling <strong>essential cookies</strong> may affect Website functionality.</li>
+                        <li>You may also delete cookies already stored on your device at any time.</li>
+                    </ul>
+                    
+                    <p>For more information, see your browser's help section:</p>
+                    
+                    <div class="browser-links">
+                        <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener" class="browser-link">
+                            <div class="browser-icon">
+                                <i class="fab fa-chrome"></i>
+                            </div>
+                            <span>Chrome: Google Support</span>
+                        </a>
+                        <a href="https://support.mozilla.org/kb/enhanced-tracking-protection-firefox-desktop" target="_blank" rel="noopener" class="browser-link">
+                            <div class="browser-icon">
+                                <i class="fab fa-firefox"></i>
+                            </div>
+                            <span>Firefox: Mozilla Support</span>
+                        </a>
+                        <a href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac" target="_blank" rel="noopener" class="browser-link">
+                            <div class="browser-icon">
+                                <i class="fab fa-safari"></i>
+                            </div>
+                            <span>Safari: Apple Support</span>
+                        </a>
+                        <a href="https://support.microsoft.com/help/17442/windows-internet-explorer-delete-manage-cookies" target="_blank" rel="noopener" class="browser-link">
+                            <div class="browser-icon">
+                                <i class="fab fa-edge"></i>
+                            </div>
+                            <span>Microsoft Edge: Microsoft Support</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Updates to Policy -->
+            <div class="policy-card animate-on-scroll">
+                <h2 class="section-title">
+                    <i class="fas fa-sync-alt"></i>
+                    Updates to This Policy
+                </h2>
+                <div class="section-content">
+                    <p>We may update this Cookie Policy from time to time to reflect changes in technology, law, or our business practices. Updates will be posted on this page with a revised "Effective Date."</p>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-info-cookie animate-on-scroll">
+                <h2 class="contact-title">
+                    <i class="fas fa-envelope"></i>
+                    Contact Us
+                </h2>
+                <p style="margin-bottom: 24px; color: var(--text-light);">
+                    If you have any questions about this Cookie Policy or how cookies are used on the Website, please contact us at:
+                </p>
+                <div class="contact-details">
+                    <div class="contact-item-cookie">
+                        <div class="contact-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <strong>Sharper Labs Academy (Private) Ltd</strong><br>
+                            Company Registration No: 00328199
+                        </div>
+                    </div>
+                    <div class="contact-item-cookie">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <strong>Email:</strong><br>
+                            <a href="mailto:info@job-labs.lk">info@job-labs.lk</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include "partials/footer.njk" %}
+{% endblock %}
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Cookie preference management
+    const cookiePreferences = {
+        essential: true, // Always true
+        analytics: true,
+        functional: true,
+        marketing: false
+    };
+
+    // Load saved preferences
+    function loadPreferences() {
+        const saved = localStorage.getItem('cookiePreferences');
+        if (saved) {
+            const preferences = JSON.parse(saved);
+            Object.assign(cookiePreferences, preferences);
+            
+            // Update toggles
+            document.getElementById('analytics-cookies').checked = preferences.analytics;
+            document.getElementById('functional-cookies').checked = preferences.functional;
+            document.getElementById('marketing-cookies').checked = preferences.marketing;
+        }
+    }
+
+    // Save preferences
+    function savePreferences() {
+        localStorage.setItem('cookiePreferences', JSON.stringify(cookiePreferences));
+        showStatus('Your cookie preferences have been saved successfully!', 'success');
+        
+        // Here you would typically call your analytics/tracking setup functions
+        applyCookiePreferences();
+    }
+
+    // Apply cookie preferences (integrate with your actual cookie/analytics setup)
+    function applyCookiePreferences() {
+        // Example: Enable/disable Google Analytics
+        if (cookiePreferences.analytics) {
+            // Enable Google Analytics
+            console.log('Analytics cookies enabled');
+        } else {
+            // Disable Google Analytics
+            console.log('Analytics cookies disabled');
+        }
+
+        if (cookiePreferences.functional) {
+            // Enable functional cookies
+            console.log('Functional cookies enabled');
+        } else {
+            // Disable functional cookies
+            console.log('Functional cookies disabled');
+        }
+
+        if (cookiePreferences.marketing) {
+            // Enable marketing cookies
+            console.log('Marketing cookies enabled');
+        } else {
+            // Disable marketing cookies
+            console.log('Marketing cookies disabled');
+        }
+    }
+
+    // Show status message
+    function showStatus(message, type = 'info') {
+        const statusDiv = document.getElementById('preferencesStatus');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        statusMessage.textContent = message;
+        statusDiv.className = `preferences-status show ${type}`;
+        
+        setTimeout(() => {
+            statusDiv.className = 'preferences-status';
+        }, 5000);
+    }
+
+    // Event listeners for toggles
+    ['analytics', 'functional', 'marketing'].forEach(type => {
+        const checkbox = document.getElementById(`${type}-cookies`);
+        checkbox.addEventListener('change', function() {
+            cookiePreferences[type] = this.checked;
+        });
+    });
+
+    // Accept all cookies
+    document.getElementById('acceptAllCookies').addEventListener('click', function() {
+        cookiePreferences.analytics = true;
+        cookiePreferences.functional = true;
+        cookiePreferences.marketing = true;
+        
+        document.getElementById('analytics-cookies').checked = true;
+        document.getElementById('functional-cookies').checked = true;
+        document.getElementById('marketing-cookies').checked = true;
+        
+        savePreferences();
+    });
+
+    // Save current preferences
+    document.getElementById('savePreferences').addEventListener('click', function() {
+        savePreferences();
+    });
+
+    // Reject optional cookies
+    document.getElementById('rejectOptional').addEventListener('click', function() {
+        cookiePreferences.analytics = false;
+        cookiePreferences.functional = false;
+        cookiePreferences.marketing = false;
+        
+        document.getElementById('analytics-cookies').checked = false;
+        document.getElementById('functional-cookies').checked = false;
+        document.getElementById('marketing-cookies').checked = false;
+        
+        savePreferences();
+    });
+
+    // Load preferences on page load
+    loadPreferences();
+
+    // Enhanced smooth scrolling for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add external link indicators
+    const externalLinks = document.querySelectorAll('a[href^="http"]:not([href*="job-labs.lk"])');
+    externalLinks.forEach(link => {
+        link.setAttribute('rel', 'noopener noreferrer');
+        link.setAttribute('target', '_blank');
+    });
+
+    // Print functionality
+    if (window.location.search.includes('print=true')) {
+        window.print();
+    }
+});
+</script>
+{% endblock %}

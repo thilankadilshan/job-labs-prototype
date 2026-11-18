@@ -1,0 +1,2312 @@
+---
+permalink: "/employer/"
+---
+{% extends "layouts/master.njk" %}
+{% block title %}Hire Talent in Sri Lanka | Employer Recruitment Solutions | Job Labs{% endblock %}
+{% block description %}Find qualified candidates fast with Job Labs employer solutions. Post jobs, access ATS tools, and streamline your recruitment in Sri Lanka.{% endblock %}
+{% block keywords %}hire employees sri lanka, recruitment sri lanka, employer job posting, ats sri lanka{% endblock %}
+{% block og_title %}Hire Talent in Sri Lanka | Employer Recruitment Solutions | Job Labs{% endblock %}
+{% block og_description %}Find qualified candidates fast with Job Labs employer solutions. Post jobs, access ATS tools, and streamline your recruitment in Sri Lanka.{% endblock %}
+{% block styles %}
+<style>
+    body {
+        overflow-x: hidden !important;
+    }
+
+    /* floating-social styles with this updated version */
+    .floating-social {
+        position: fixed;
+        right: -45px;
+        /* Initially hidden */
+
+        bottom: 100px;
+        top: auto;
+        transform: none;
+
+        /* top: 50%; */
+        /* transform: translateY(-50%); */
+        z-index: 9999;
+        transition: right 0.3s ease;
+        overflow: hidden;
+    }
+
+    /* Show the container when hovered */
+    .floating-social:hover {
+        right: 20px;
+    }
+
+    /* Main toggle button */
+    .floating-social::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background: #080159;
+        border-radius: 50%;
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s ease;
+        z-index: 10;
+        cursor: pointer;
+    }
+
+    /* Add arrow icon to main button */
+    .floating-social::after {
+        content: '←';
+        position: absolute;
+        right: 17px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        z-index: 11;
+        transition: transform 0.3s ease;
+        pointer-events: none;
+    }
+
+    /* Rotate arrow on hover */
+    .floating-social:hover::after {
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    /* Container for social buttons */
+    .floating-social .social-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(20px);
+        transition: all 0.3s ease;
+        padding-right: 65px;
+        /* Space for main button */
+    }
+
+    /* Show social buttons on hover */
+    .floating-social:hover .social-buttons {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    /* Individual social media buttons */
+    .floating-social a {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        z-index: 5;
+    }
+
+    .floating-social a:hover {
+        transform: scale(1.1);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* Social media brand colors */
+    .floating-social .facebook {
+        background: #1877f2;
+    }
+
+    .floating-social .instagram {
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+    }
+
+    .floating-social .whatsapp {
+        background: #25d366;
+    }
+
+    .floating-social .linkedin {
+        background: #0077b5;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .floating-social {
+            right: -40px;
+        }
+
+        .floating-social:hover {
+            right: 15px;
+        }
+
+        .floating-social::before {
+            width: 45px;
+            height: 45px;
+        }
+
+        .floating-social::after {
+            right: 15px;
+            font-size: 16px;
+        }
+
+        .floating-social .social-buttons {
+            gap: 10px;
+            padding-right: 60px;
+        }
+
+        .floating-social a {
+            width: 45px;
+            height: 45px;
+            font-size: 18px;
+        }
+
+    }
+
+    /* Optional: Add tooltip for main button */
+    .floating-social .tooltip {
+        position: absolute;
+        right: 60px;
+        top: 50%;
+        transform: translateY(-50%) translateX(10px);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        overflow: hidden;
+
+    }
+
+    .floating-social:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0);
+    }
+
+    /* Arrow for tooltip */
+    .floating-social .tooltip::after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 5px solid transparent;
+        border-left-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Landing page header customizations */
+    .main-header {
+        background-color: #e5e5ecff !important;
+        border-bottom: none;
+        padding-top: 11px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<!-- Floating social -->
+<div class="floating-social">
+    <div class="tooltip">Social Media</div>
+    <div class="social-buttons">
+        <a href="https://www.facebook.com/Jobs-Centre-107561741435214" target="_blank" class="facebook" title="Follow us on Facebook" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com/jobs.centre?igshid=1e096vkv05mic" target="_blank" class="instagram" title="Follow us on Instagram" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+would+like+to+inquire+about+recruitment+services." target="_blank" class="whatsapp" title="Chat with us on WhatsApp" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/jobs-centre/" target="_blank" class="linkedin" title="Connect with us on LinkedIn" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Top Bar Section -->
+{% include "partials/top-bar.njk" %}
+
+<!-- Header Section -->
+{% include "partials/header.njk" %}
+
+<!-- Hiring manger hero -->
+
+
+
+
+<style>
+    @font-face {
+        font-family: 'Neue Machina';
+        src: url('/fonts/NeueMachina-Regular.otf') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Neue Machina';
+        src: url('/fonts/NeueMachina-Bold.otf') format('opentype');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    /* -----------------------------------------
+       ANIMATION KEYFRAMES
+    ----------------------------------------- */
+    @keyframes imageFadeInZoom {
+        from {
+            opacity: 0;
+            transform: scale(1.1);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* -----------------------------------------
+       BASE STYLES & FULL-WIDTH LAYOUT
+    ----------------------------------------- */
+    .hero-container-hm {
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+        width: 100%;
+        min-height: 55vh; /* Reduced height as requested */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 5rem 2rem 3rem; /* Adjusted padding */
+    }
+
+    /* Full Width Background Image & Overlay */
+    .hero-bg-hm {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-color: #1a1a1a;
+    }
+
+    .hero-bg-hm img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+    }
+
+    .hero-bg-hm img.animate-img {
+        animation: imageFadeInZoom 3s ease-out forwards;
+    }
+
+    .hero-overlay-hm {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.45) 100%);
+        z-index: 2;
+    }
+
+    /* Content Wrapper */
+    .hero-content-hm {
+        position: relative;
+        z-index: 3; /* Above the overlay */
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Text Content */
+    .hero-text-content-hm {
+        width: 100%;
+        max-width: 900px;
+        color: #fff;
+        opacity: 0;
+    }
+
+    .hero-text-content-hm.animate-text {
+        opacity: 1;
+        transition: opacity 0.1s;
+    }
+
+    .hero-text-content-hm h1 {
+        display: none; /* Hide source text */
+    }
+
+    .animated-text-output {
+        font-family: 'Neue Machina', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #fff;
+        white-space: pre-wrap;
+        margin-bottom: 1.2rem;
+        text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .hero-text-content-hm p {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: #f0f0f0;
+        opacity: 0;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .hero-text-content-hm p.animate-p {
+        animation: fadeInUp 0.8s ease-out forwards;
+        animation-delay: 1.2s;
+    }
+
+    /* Floating Bottom Bar - Now Transparent */
+    .hero-bottom-bar-hm {
+        background-color: transparent; /* Removed white background */
+        width: 100%;
+        max-width: 900px; /* Kept constrained so elements don't drift too far apart */
+        margin-top: 3.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        opacity: 0;
+    }
+
+    .hero-bottom-bar-hm.animate-bottom {
+        animation: fadeInUp 1s ease-out forwards;
+        animation-delay: 1.8s;
+    }
+
+    /* Stats inside the transparent bar */
+    .stats-wrapper-hm {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+    }
+
+    .stat-box-hm {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .stat-box-hm i {
+        font-size: 1.4rem;
+        color: #A92036; /* Brand red for icons */
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Drop shadow for visibility */
+    }
+
+    .stat-box-hm span {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #fff; /* Changed to white */
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Drop shadow to pop off the image */
+    }
+
+    /* Call to Action Button */
+    .collaborate-btn-hm {
+        background-color: #A92036; 
+        color: #fff;
+        padding: 0.9rem 2.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(169, 32, 54, 0.4);
+    }
+
+    .collaborate-btn-hm:hover {
+        background-color: #8f2626;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(169, 32, 54, 0.6);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .animated-text-output {
+            font-size: 2.8rem;
+        }
+        .hero-bottom-bar-hm {
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .stats-wrapper-hm {
+            width: 100%;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-container-hm {
+            padding: 4rem 1rem 2rem;
+            min-height: 60vh; /* Controlled mobile height */
+        }
+        .animated-text-output {
+            font-size: 2rem;
+        }
+        .hero-text-content-hm p {
+            font-size: 1rem;
+        }
+        .stats-wrapper-hm {
+            gap: 1.5rem;
+        }
+        .stat-box-hm span {
+            font-size: 1.1rem;
+        }
+        .collaborate-btn-hm {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+
+<section class="hero-container-hm">
+    
+    <!-- Background Image & Overlay -->
+    <div class="hero-bg-hm">
+        <img id="hero-image-hm" src="/images/hero-team-image.jpeg" alt="Team collaborating in an office">
+        <div class="hero-overlay-hm"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="hero-content-hm">
+        
+        <!-- Centered Text Block -->
+        <div class="hero-text-content-hm" id="hero-text-content-hm">
+            <h1 id="animated-headline">
+                <span id="headline-source-text">Reach Over 500+ Active Job Seekers Daily In Sri Lanka!</span>
+            </h1>
+            <div id="animated-text-container" class="animated-text-output"></div>
+            <p id="animated-paragraph">Hire Local Talent With An Understanding Of Sri Lankan Culture</p>
+        </div>
+
+        <!-- Transparent Bottom Bar with Stats and CTA -->
+        <div class="hero-bottom-bar-hm" id="hero-bottom-bar-hm">
+            <div class="stats-wrapper-hm">
+                <div class="stat-box-hm">
+                    <i class="fa-solid fa-building"></i>
+                    <span>1000+</span>
+                </div>
+                <div class="stat-box-hm">
+                    <i class="fa-solid fa-users"></i>
+                    <span>500+</span>
+                </div>
+                <div class="stat-box-hm">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>2000+</span>
+                </div>
+            </div>
+            
+            <a href="/recruiters-signup" class="collaborate-btn-hm">Join Us Today! &rarr;</a>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const heroImage = document.getElementById('hero-image-hm');
+        const headlineSource = document.getElementById('headline-source-text');
+        const animatedTextContainer = document.getElementById('animated-text-container');
+        const animatedParagraph = document.getElementById('animated-paragraph');
+        const heroTextContent = document.getElementById('hero-text-content-hm');
+        const bottomBar = document.getElementById('hero-bottom-bar-hm');
+
+        const textToAnimate = headlineSource.textContent.trim();
+
+        // Trigger animations
+        heroImage.classList.add('animate-img');
+        heroTextContent.classList.add('animate-text');
+        animatedParagraph.classList.add('animate-p');
+        bottomBar.classList.add('animate-bottom');
+
+        // Headline animation (randomized reveal)
+        function animateHeadline() {
+            // Split the text into WORDS, not characters.
+            const words = textToAnimate.split(' ');
+
+            animatedTextContainer.innerHTML = words.map(word => {
+                // Create a container for each word to keep its characters together.
+                const charSpans = word.split('').map(char =>
+                    `<span style="opacity:0; filter:blur(4px); transition:opacity 0.15s, filter 0.15s; display:inline-block;">${char}</span>`
+                ).join('');
+                return `<span style="display: inline-block; margin-right: 0.3em;">${charSpans}</span>`;
+            }).join(''); 
+
+            const charSpans = animatedTextContainer.querySelectorAll('span span');
+            const totalChars = charSpans.length;
+            const charsVisible = new Array(totalChars).fill(false);
+
+            const interval = setInterval(() => {
+                const hiddenIndices = charsVisible
+                    .map((visible, i) => visible ? -1 : i)
+                    .filter(i => i !== -1);
+
+                if (hiddenIndices.length === 0) {
+                    clearInterval(interval);
+                    return;
+                }
+
+                const randomIndex = hiddenIndices[Math.floor(Math.random() * hiddenIndices.length)];
+                if (charSpans[randomIndex]) {
+                    charSpans[randomIndex].style.opacity = 1;
+                    charSpans[randomIndex].style.filter = 'blur(0)';
+                    charsVisible[randomIndex] = true;
+                }
+            }, 30); 
+        }
+
+        // Start headline animation immediately
+        animateHeadline();
+    });
+</script>
+
+
+
+<!-- About Section -->
+<section class="about-section" id="about">
+    <div class="container-about">
+        <!-- Header Section -->
+        <div class="section-header fade-in">
+            <h2 class="section-title">Who Are We?</h2>
+            <p class="section-description">
+                We are simply different from all other job offering sites. Our mantra is <strong>"Real Jobs for Real People"</strong>. 
+                At Job Labs, we work with our clients to ensure their vacancies are authentic and require immediate hiring. 
+                We want to make sure the "Time to Hire" and "On-Boarding" stretches are reduced so that both parties can enjoy the recruitment process.
+            </p>
+            <a href="/" class="cta-button-about">
+                <span>Explore All Vacancies</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+:root {
+    --primary-blue: #080159;
+    --primary-orange: #ff6b00;
+    --light-blue: #f0f4ff;
+    --text-light: #6b7280;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.about-section {
+    position: relative;
+    background: linear-gradient(135deg, #ffffff 0%, var(--light-blue) 100%);
+    padding: 50px 0;
+    overflow: hidden;
+}
+
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.03) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.container-about {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header Section */
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    color: #A92036;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: #A92036;
+    border-radius: 2px;
+}
+
+.section-description {
+    max-width: 700px;
+    margin: 0 auto 48px;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+.section-description strong {
+    color: #A92036;
+    font-weight: 600;
+    position: relative;
+}
+
+.cta-button-about {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    background: #8f2626;
+    color: white;
+    text-decoration: none;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 12px 32px rgba(169, 32, 54, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button-about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.cta-button-about:hover::before {
+    left: 100%;
+}
+
+.cta-button-about:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(169, 32, 54, 0.35);
+}
+
+.cta-button-about i {
+    transition: transform 0.3s ease;
+}
+
+.cta-button-about:hover i {
+    transform: translateX(4px);
+}
+
+/* Sectors Container */
+.sectors-container {
+    position: relative;
+    margin-top: 100px;
+}
+
+.sectors-grid {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    gap: 32px;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.sectors-slider {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 150%; /* 3 sectors * 50% each = 150% */
+}
+
+.sector-card {
+    flex: 0 0 calc(50% - 16px); /* Show 2 cards at a time */
+    background: white;
+    border-radius: 24px;
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06); */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.sector-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-orange));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.sector-card:hover {
+    transform: translateY(-8px);
+    /* box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12); */
+}
+
+.sector-card:hover::before {
+    transform: scaleX(1);
+}
+
+.sector-card.active {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #1a0b7a 100%);
+    color: white;
+    margin-top: 10px;
+    /* transform: translateY(-12px); */
+    /* box-shadow: 0 32px 64px rgba(8, 1, 89, 0.25); */
+}
+
+.sector-card.active::before {
+    transform: scaleX(1);
+    background: var(--primary-orange);
+}
+
+.sector-card.active .sector-icon {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-orange);
+}
+
+.sector-card.active .sector-description,
+.sector-card.active .feature-item span {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.sector-card.active .feature-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sector-card.active .sector-stats .stat-number {
+    color: var(--primary-orange);
+}
+
+.sector-card.active .sector-btn {
+    background: var(--primary-orange);
+    box-shadow: 0 8px 24px rgba(255, 107, 0, 0.4);
+}
+
+.sector-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.sector-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--light-blue) 0%, rgba(8, 1, 89, 0.1) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+}
+
+.sector-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    line-height: 1.3;
+}
+
+.sector-card.active .sector-title {
+    color: white;
+}
+
+.sector-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin-bottom: 32px;
+}
+
+.sector-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(8, 1, 89, 0.04);
+    border-radius: 12px;
+    border: 1px solid rgba(8, 1, 89, 0.08);
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(8, 1, 89, 0.08);
+    transform: translateX(4px);
+}
+
+.feature-item i {
+    color: var(--primary-orange);
+    font-size: 1rem;
+    width: 16px;
+}
+
+.feature-item span {
+    color: var(--primary-blue);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.sector-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+}
+
+.sector-card.active .sector-stats {
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-orange);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.sector-card.active .stat-label {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.sector-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(8, 1, 89, 0.2);
+}
+
+.sector-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(8, 1, 89, 0.3);
+}
+
+.sector-btn i {
+    transition: transform 0.3s ease;
+}
+
+.sector-btn:hover i {
+    transform: translateX(3px);
+}
+
+/* Navigation */
+.sector-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.nav-controls-about {
+    display: flex;
+    gap: 16px;
+}
+
+.nav-btn-about {
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn-about:hover:not(:disabled) {
+    background: var(--primary-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(8, 1, 89, 0.2);
+}
+
+.nav-btn-about:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.nav-info {
+    text-align: center;
+}
+
+.current-sector {
+    font-weight: 600;
+    color: var(--primary-blue);
+    font-size: 1rem;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.sector-counter {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.nav-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(8, 1, 89, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+    background: var(--primary-orange);
+    transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .sectors-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 24px;
+    }
+    
+    .sector-card {
+        padding: 36px 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 80px 0;
+    }
+    
+    .container-about {
+        padding: 0 20px;
+    }
+    
+    .section-header {
+        margin-bottom: 60px;
+    }
+    
+    .sectors-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* .sector-card {
+        padding: 32px 24px;
+    } */
+    
+    .sector-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .sector-stats {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+    }
+    
+    .nav-controls-about {
+        order: -1;
+    }
+    
+    .sector-navigation {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .sectors-slider {
+        width: 300%; /* 3 sectors * 100% each = 300% on mobile */
+    }
+    
+    .sector-card {
+        flex: 0 0 calc(100% - 16px); /* Show 1 card at a time on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .section-description {
+        font-size: 1.1rem;
+    }
+    
+    .sector-card {
+        padding: 28px 20px;
+    }
+    
+    .sector-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .cta-button-about {
+        padding: 16px 28px;
+        font-size: 1rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.slide-up {
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sectorsSlider = document.getElementById('sectorsSlider');
+    const sectorCards = document.querySelectorAll('.sector-card');
+    const navDots = document.querySelectorAll('.nav-dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSectorLabel = document.getElementById('currentSector');
+    const sectorCounter = document.getElementById('sectorCounter');
+    
+    let currentSector = 0;
+    let isAnimating = false;
+    let autoRotateInterval;
+    
+    const sectorNames = [
+        'Professional & Corporate',
+        'Service & Hospitality',
+        'Skilled Trades & Industrial'
+    ];
+
+    function updateSector(newIndex, animate = true) {
+        if (isAnimating || newIndex === currentSector) return;
+        
+        if (animate) {
+            isAnimating = true;
+            setTimeout(() => { isAnimating = false; }, 600);
+        }
+
+        currentSector = newIndex;
+
+        // Calculate transform based on screen size
+        const isMobile = window.innerWidth <= 768;
+        let translateX;
+        
+        if (isMobile) {
+            // Mobile: show 1 card at a time
+            translateX = -(currentSector * 100);
+        } else {
+            // Desktop: show 2 cards at a time
+            if (currentSector === 0) translateX = 0;
+            else if (currentSector === 1) translateX = -33.333;
+            else translateX = -66.666;
+        }
+        
+        sectorsSlider.style.transform = `translateX(${translateX}%)`;
+
+        // Update active states
+        sectorCards.forEach((card, index) => {
+            card.classList.toggle('active', index === currentSector);
+        });
+        
+        navDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSector);
+        });
+
+        // Update navigation info
+        currentSectorLabel.textContent = sectorNames[currentSector];
+        sectorCounter.textContent = `${currentSector + 1} / ${sectorCards.length}`;
+
+        // Update button states
+        prevBtn.disabled = currentSector === 0;
+        nextBtn.disabled = currentSector === sectorCards.length - 1;
+    }
+
+    // Auto-rotation function
+    // function startAutoRotate() {
+    //     autoRotateInterval = setInterval(() => {
+    //         const nextIndex = currentSector === sectorCards.length - 1 ? 0 : currentSector + 1;
+    //         updateSector(nextIndex);
+    //     }, 4000); // Rotate every 4 seconds
+    // }
+
+    // function stopAutoRotate() {
+    //     clearInterval(autoRotateInterval);
+    // }
+
+    // function restartAutoRotate() {
+    //     stopAutoRotate();
+    //     setTimeout(startAutoRotate, 1000); // Restart after 1 second
+    // }
+
+    // Sector card click handlers
+    sectorCards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            updateSector(index);
+            restartAutoRotate(); // Restart auto-rotation after manual interaction
+        });
+    });
+
+    // Navigation dot click handlers
+    navDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            updateSector(index);
+            restartAutoRotate();
+        });
+    });
+
+    // Navigation button handlers
+    prevBtn.addEventListener('click', () => {
+        if (currentSector > 0) {
+            updateSector(currentSector - 1);
+            restartAutoRotate();
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentSector < sectorCards.length - 1) {
+            updateSector(currentSector + 1);
+            restartAutoRotate();
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && currentSector > 0) {
+            updateSector(currentSector - 1);
+            restartAutoRotate();
+        } else if (e.key === 'ArrowRight' && currentSector < sectorCards.length - 1) {
+            updateSector(currentSector + 1);
+            restartAutoRotate();
+        }
+    });
+
+    // Pause auto-rotate on hover
+    const sectorsContainer = document.querySelector('.sectors-container');
+    sectorsContainer.addEventListener('mouseenter', stopAutoRotate);
+    sectorsContainer.addEventListener('mouseleave', startAutoRotate);
+
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateSector(currentSector, false); // Update without animation
+        }, 250);
+    });
+
+    // Intersection Observer for animations (keep existing code)
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationDelay = '0.2s';
+                entry.target.classList.add('slide-up');
+            }
+        });
+    }, observerOptions);
+
+    // Observe sector cards for staggered animation
+    sectorCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        observer.observe(card);
+    });
+
+    // Initialize
+    updateSector(0, false);
+    startAutoRotate(); // Start auto-rotation
+});
+</script>
+
+<!-- Steps Section -->
+<section class="steps-section">
+    <div class="container-step-uk">
+        <div class="steps-content">
+            <div class="section-header-step-uk animate-fade-in">
+                <h2 class="section-title-step-uk">Take the Next Step</h2>
+                <div class="title-underline-step-uk"></div>
+                <p class="section-description-step-uk">
+                    Getting started with Job Labs is simple and straightforward. Follow these three easy steps to begin your hiring journey.
+                </p>
+            </div>
+            
+            <div class="steps-container">
+                <!-- Step 1 - Content Left, Image Right -->
+                <div class="step-item step-left animate-slide-right" data-step="1">
+                    <div class="step-content">
+                        <div class="step-number">1</div>
+                        <h3>Sign Up</h3>
+                        <p>Just tell us what you are looking for. Please complete and submit the requisite form. We will contact you shortly to discuss your requirements and understand your hiring needs.</p>
+                        <div class="step-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Quick registration process</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Personalized consultation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <div class="image-wrapper">
+                            <img src="/assets/front/images/hr/img1.jpg" alt="Sign Up Process" loading="lazy">
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 - Image Left, Content Right -->
+                <div class="step-item step-right animate-slide-left" data-step="2">
+                    <div class="step-image">
+                        <div class="image-wrapper">
+                            <img src="/assets/front/images/hr/img2.jpg" alt="Access to ATS" loading="lazy">
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-number">2</div>
+                        <h3>Access to ATS</h3>
+                        <p>Once your hiring requirements are agreed upon, we create your dedicated account and grant you instant access to our powerful Applicant Tracking System (ATS). You are now equipped with everything needed for seamless candidate tracking.</p>
+                        <div class="step-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Direct access to Job Labs ATS</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Secure login & dedicated portal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 - Content Left, Image Right -->
+                <div class="step-item step-left animate-slide-right" data-step="3">
+                    <div class="step-content">
+                        <div class="step-number">3</div>
+                        <h3>Post Your Vacancy</h3>
+                        <p>Log in to your Hiring Manager portal and post your vacancies with ease. You can manage your vacancy listings and candidates from here on using our comprehensive portal system.</p>
+                        <div class="step-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Easy vacancy management</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Candidate tracking system</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <div class="image-wrapper">
+                            <img src="/assets/front/images/hr/img3.jpg" alt="Post Vacancy" loading="lazy">
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<style>
+:root {
+    --primary-blue: #080159;
+    --primary-orange: #A92036;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.steps-section {
+    padding: 100px 0;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.container-step-uk {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-header-step-uk {
+    text-align: center;
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.section-title-step-uk {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    letter-spacing: -0.025em;
+}
+
+.title-underline-step-uk {
+    width: 80px;
+    height: 4px;
+    background: #A92036;
+    margin: 0 auto 25px;
+    border-radius: 2px;
+}
+
+.section-description-step-uk {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.step-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    opacity: 0;
+    transform: translateX(-50px);
+    position: relative;
+}
+
+.step-item::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -40px;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--border-color));
+    transform: translateX(-50%);
+}
+
+.step-item:first-child::before {
+    display: none;
+}
+
+.step-right {
+    transform: translateX(50px);
+}
+
+.step-content {
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.step-content:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-orange);
+}
+
+.step-number {
+    position: absolute;
+    top: -20px;
+    left: 40px;
+    width: 60px;
+    height: 60px;
+    background: var(--primary-orange);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    box-shadow: var(--shadow-lg);
+    z-index: 2;
+}
+
+.step-content h3 {
+    color: var(--primary-blue);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.step-content p {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+.step-features {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.feature-item i {
+    color: var(--primary-orange);
+    font-size: 1rem;
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.step-image {
+    position: relative;
+}
+
+.image-wrapper {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.4s ease;
+}
+
+.image-wrapper:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-xl);
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.image-wrapper:hover img {
+    transform: scale(1.1);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(249, 115, 22, 0.1));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.image-wrapper:hover .image-overlay {
+    opacity: 1;
+}
+
+.cta-container {
+    text-align: center;
+    margin-top: 100px;
+    padding: 50px;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-radius: 30px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 20px 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    background: var(--primary-orange);
+    color: white;
+    text-decoration: none;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.4s ease;
+    border: none;
+}
+
+.cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+    text-decoration: none;
+    color: white;
+}
+
+.cta-text {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Animation Classes */
+.animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+    animation-delay: 0.2s;
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.8s ease forwards;
+}
+
+.animate-slide-left {
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Intersection Observer Animations */
+.steps-container .step-item:nth-child(1) { animation-delay: 0.4s; }
+.steps-container .step-item:nth-child(2) { animation-delay: 0.6s; }
+.steps-container .step-item:nth-child(3) { animation-delay: 0.8s; }
+.cta-container { animation-delay: 1s; }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container-step-uk {
+        padding: 0 30px;
+    }
+    
+    .step-item {
+        gap: 40px;
+    }
+    
+    .step-content {
+        padding: 30px;
+    }
+    
+    .step-content h3 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .steps-section {
+        padding: 60px 0;
+    }
+    
+    .section-header-step-uk {
+        margin-bottom: 60px;
+    }
+    
+    .section-title-step-uk {
+        font-size: 2.5rem;
+    }
+    
+    .section-description-step-uk {
+        font-size: 1.1rem;
+    }
+    
+    .steps-container {
+        gap: 60px;
+    }
+    
+    .step-item {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .step-right .step-image {
+        order: 2;
+    }
+    
+    .step-right .step-content {
+        order: 1;
+    }
+    
+    .step-content {
+        padding: 30px 25px;
+    }
+    
+    .step-number {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .step-content h3 {
+        font-size: 1.6rem;
+        margin-top: 25px;
+    }
+    
+    .image-wrapper img {
+        height: 300px;
+    }
+    
+    .cta-container {
+        margin-top: 60px;
+        padding: 40px 30px;
+    }
+    
+    .cta-button {
+        width: 100%;
+        max-width: 320px;
+        padding: 18px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-step-uk {
+        padding: 0 20px;
+    }
+    
+    .section-title-step-uk {
+        font-size: 2rem;
+    }
+    
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+        top: -15px;
+    }
+    
+    .step-content {
+        padding: 25px 20px;
+        border-radius: 20px;
+    }
+    
+    .step-content h3 {
+        font-size: 1.4rem;
+        margin-top: 20px;
+    }
+    
+    .step-content p {
+        font-size: 1rem;
+    }
+    
+    .feature-item {
+        font-size: 0.9rem;
+    }
+    
+    .image-wrapper {
+        border-radius: 20px;
+    }
+    
+    .image-wrapper img {
+        height: 250px;
+    }
+    
+    .cta-container {
+        padding: 30px 20px;
+        border-radius: 25px;
+    }
+    
+    .cta-button {
+        font-size: 1.1rem;
+        padding: 16px 35px;
+    }
+}
+
+@media (max-width: 320px) {
+    .section-title-step-uk {
+        font-size: 1.8rem;
+    }
+    
+    .step-content {
+        padding: 20px 15px;
+    }
+    
+    .step-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .image-wrapper img {
+        height: 220px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-right, .animate-slide-left');
+    animatedElements.forEach(el => {
+        el.style.animationPlayState = 'paused';
+        observer.observe(el);
+    });
+});
+</script>
+
+
+
+
+<!-- Hiring manger banner -->
+<!-- resources/views/pages/front/sl-jobs/sections/hmbanner.blade.php -->
+<section class="hm-banner">
+    <div class="hm-banner-container">
+        <!-- Employer Solution Card -->
+        <div class="hm-employer-card">
+            <div class="hm-employer-content">
+                <span class="hm-badge">Employer Solutions</span>
+                <h2>Become an Employer</h2>
+                <p>Hire smarter and faster by connecting with skilled professionals ready to grow your business.</p>
+                <div class="hm-btn-wrapper">
+                    <a href="/recruiters-signup" class="hm-advertise-btn">
+                        <span>Advertise Your Vacancy</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Section container */
+    .hm-banner {
+        padding: 60px 20px;
+        background: #ffffff;
+        overflow: hidden;
+    }
+
+    .hm-banner-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Employer Card */
+    .hm-employer-card {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        background-color: #ded9d4;
+        background-image: url('/assets/images/hmbanner2.jpg');
+        background-size: cover;
+        background-position: right center;
+        background-repeat: no-repeat;
+        min-height: 380px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        opacity: 0;
+        transform: translateY(25px);
+        transition: transform 700ms cubic-bezier(.2, .8, .2, 1), opacity 600ms ease, box-shadow 300ms ease;
+    }
+
+    .hm-employer-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hm-employer-card:hover {
+        box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.14);
+    }
+
+    /* Content Area with Soft Gradient Overlay */
+    .hm-employer-content {
+        position: relative;
+        z-index: 2;
+        max-width: 600px;
+        padding: 60px 50px;
+        background: linear-gradient(90deg, rgba(222, 217, 212, 0.97) 0%, rgba(222, 217, 212, 0.92) 65%, rgba(222, 217, 212, 0) 100%);
+        border-radius: 24px 0 0 24px;
+    }
+
+    .hm-badge {
+        display: inline-block;
+        background: rgba(169, 32, 54, 0.12);
+        color: #A92036;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 6px 14px;
+        border-radius: 20px;
+        margin-bottom: 15px;
+    }
+
+    .hm-employer-content h2 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 15px;
+        line-height: 1.25;
+    }
+
+    .hm-employer-content p {
+        font-size: 1.15rem;
+        color: #374151;
+        margin-bottom: 28px;
+        line-height: 1.6;
+        max-width: 480px;
+    }
+
+    .hm-btn-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Advertise Your Vacancy CTA Button */
+    .hm-advertise-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: #A92036;
+        color: #ffffff !important;
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 16px 36px;
+        border-radius: 50px;
+        text-decoration: none !important;
+        box-shadow: 0 8px 20px rgba(169, 32, 54, 0.35);
+        transition: all 0.3s ease;
+    }
+
+    .hm-advertise-btn:hover {
+        background: #8e182b;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(169, 32, 54, 0.45);
+        color: #ffffff !important;
+    }
+
+    .hm-advertise-btn i {
+        transition: transform 0.3s ease;
+    }
+
+    .hm-advertise-btn:hover i {
+        transform: translateX(4px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .hm-employer-card {
+            min-height: 340px;
+        }
+
+        .hm-employer-content {
+            max-width: 520px;
+            padding: 40px 35px;
+        }
+
+        .hm-employer-content h2 {
+            font-size: 1.85rem;
+        }
+
+        .hm-employer-content p {
+            font-size: 1.05rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hm-banner {
+            padding: 40px 15px;
+        }
+
+        .hm-employer-card {
+            background-position: 80% center;
+            min-height: auto;
+        }
+
+        .hm-employer-content {
+            max-width: 100%;
+            padding: 40px 25px;
+            background: linear-gradient(180deg, rgba(222, 217, 212, 0.96) 0%, rgba(222, 217, 212, 0.92) 100%);
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .hm-employer-content p {
+            max-width: 100%;
+            font-size: 1rem;
+            margin-bottom: 22px;
+        }
+
+        .hm-employer-content h2 {
+            font-size: 1.6rem;
+        }
+
+        .hm-btn-wrapper {
+            justify-content: center;
+        }
+
+        .hm-advertise-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 14px 24px;
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var card = document.querySelector('.hm-employer-card');
+        if (!card) return;
+
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+            io.observe(card);
+        } else {
+            card.classList.add('in-view');
+        }
+    });
+</script>
+
+
+
+<!-- Footer -->
+{% include "partials/footer.njk" %}
+{% endblock %}
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('.main-header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight - 20;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Enhanced floating social media functionality
+        let socialTimeout;
+        const floatingSocial = document.querySelector('.floating-social');
+
+        // Show on hover
+        floatingSocial.addEventListener('mouseenter', function() {
+            clearTimeout(socialTimeout);
+            this.style.right = '20px';
+        });
+
+        // Hide after delay when mouse leaves
+        floatingSocial.addEventListener('mouseleave', function() {
+            socialTimeout = setTimeout(() => {
+                this.style.right = '-45px';
+            }, 1000); // 1 second delay before hiding
+        });
+
+        // Enhanced scroll behavior for floating social
+        let lastScrollTop = 0;
+        let isScrolling = false;
+
+        window.addEventListener('scroll', function() {
+            if (!isScrolling) {
+                window.requestAnimationFrame(function() {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const floatingSocial = document.querySelector('.floating-social');
+
+                    if (scrollTop > lastScrollTop && scrollTop > 100) {
+                        // Scrolling down - hide completely
+                        floatingSocial.style.right = '-60px';
+                    } else if (scrollTop < lastScrollTop) {
+                        // Scrolling up - show peek
+                        floatingSocial.style.right = '-45px';
+                    }
+
+                    // Show fully when near top
+                    if (scrollTop < 50) {
+                        floatingSocial.style.right = '-45px';
+                    }
+
+                    lastScrollTop = scrollTop;
+                    isScrolling = false;
+                });
+            }
+            isScrolling = true;
+        }, {
+            passive: true
+        });
+
+        // Add touch support for mobile devices
+        if ('ontouchstart' in window) {
+            floatingSocial.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                if (this.style.right === '20px' || this.style.right === '') {
+                    this.style.right = '-45px';
+                } else {
+                    this.style.right = '20px';
+                }
+            });
+        }
+
+        // Optional: Add click to expand/collapse for accessibility
+        floatingSocial.addEventListener('click', function(e) {
+            // Only trigger if clicking on the main button area (not social links)
+            if (e.target === this || e.target.classList.contains('tooltip')) {
+                if (this.style.right === '20px') {
+                    this.style.right = '-45px';
+                } else {
+                    this.style.right = '20px';
+                }
+            }
+        });
+
+        // Keyboard accessibility
+        floatingSocial.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                if (this.style.right === '20px') {
+                    this.style.right = '-45px';
+                } else {
+                    this.style.right = '20px';
+                    // Focus first social link for keyboard navigation
+                    setTimeout(() => {
+                        this.querySelector('a').focus();
+                    }, 300);
+                }
+            }
+        });
+
+        // Make the floating social focusable for keyboard users
+        floatingSocial.setAttribute('tabindex', '0');
+        floatingSocial.setAttribute('role', 'button');
+        floatingSocial.setAttribute('aria-label', 'Social media links');
+
+        // ##########################################
+
+        // Auto-open modal on first visit (optional)
+        const modalShown = localStorage.getItem('jobModalShown');
+        if (!modalShown) {
+            setTimeout(function() {
+                openJobModal();
+                localStorage.setItem('jobModalShown', 'true');
+            }, 3000);
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-up');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Performance optimization - lazy load images
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // Error handling for images
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', function() {
+                this.style.opacity = '0.5';
+                console.warn('Image failed to load:', this.src);
+            });
+        });
+    });
+
+    // Global functions for modal
+    window.openJobModal = function() {
+        const modal = document.getElementById('jobModal');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Focus management for accessibility
+        modal.querySelector('.modal-close').focus();
+    };
+
+    window.closeJobModal = function() {
+        const modal = document.getElementById('jobModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    };
+
+
+</script>
+{% endblock %}

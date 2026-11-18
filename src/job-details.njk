@@ -1,0 +1,980 @@
+---
+pagination:
+  data: jobs
+  size: 1
+  alias: job
+permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
+---
+{% extends "layouts/master.njk" %}
+{% set applyUrl = (job | jobUrl) ~ '/apply' %}{# guest flow; candidate login is not part of the prototype #}
+{% set displayedViews = job.job_adv_views %}
+{% block title %}{{ job.job_title ~ ' - Job Labs' }}{% endblock %}
+{% block description %}{{ (job.job_adv_description | plainText | limitStr(160)) }}{% endblock %}
+{% block og_title %}{{ job.job_title ~ ' - Job Labs' }}{% endblock %}
+{% block og_image %}{{ ('/upload/' ~ job.company_logo) if job.company_logo else '/assets/front/images/hr/job_logo.png' }}{% endblock %}
+{% block og_description %}{{ (job.job_adv_description | plainText | limitStr(160)) }}{% endblock %}
+{% block styles %}
+<style>
+    :root {
+        --primary-blue: #2563eb;
+        --primary-orange: #ff6600;
+        --dark-blue: #1e40af;
+        --text-dark: #1f2937;
+        --text-gray: #6b7280;
+        --border-color: #e5e7eb;
+        --bg-light: #f8fafc;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        --shadow-xl: 0 20px 35px -10px rgb(0 0 0 / 0.18);
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+    }
+
+    .job-detail-container {
+        min-height: 100vh;
+        padding: 32px 0 120px;
+        background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+    }
+
+    /* Full-width centered wrapper with appropriate margins */
+    .jd-wrap {
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* ---------------- Breadcrumb ---------------- */
+    .breadcrumb {
+        background: white;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 0;
+    }
+
+    .breadcrumb-list {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex-wrap: wrap;
+    }
+
+    .breadcrumb-item { display: flex; align-items: center; gap: 10px; }
+
+    .breadcrumb-link {
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .breadcrumb-link:hover { color: var(--primary-blue); }
+    .breadcrumb-separator { color: var(--border-color); }
+
+    /* ---------------- Header ---------------- */
+    .job-header-section {
+        background: white;
+        margin: 24px auto 28px;
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-color);
+        overflow: visible;
+    }
+
+    .job-header-content {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 30px;
+        align-items: start;
+        padding: 32px;
+    }
+
+    .job-title-section { min-width: 0; }
+
+    .job-head-top {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        margin-bottom: 18px;
+    }
+
+    /* Title + hover summary trigger */
+    .title-summary-wrap { position: relative; display: inline-block; max-width: 100%; }
+
+    .job-title-section h1 {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #1f2937;
+        line-height: 1.25;
+        margin: 0;
+        cursor: default;
+    }
+
+    .job-company-name {
+        font-size: 1.15rem;
+        color: var(--primary-blue);
+        font-weight: 600;
+        margin-top: 6px;
+    }
+
+    /* Summary chip under title */
+    .summary-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        padding: 8px 16px;
+        background: #eff6ff;
+        color: var(--primary-blue);
+        border: 1px solid #bfdbfe;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        user-select: none;
+    }
+
+    .summary-chip:hover {
+        background: var(--primary-blue);
+        color: #fff;
+        border-color: var(--primary-blue);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .summary-chip svg { width: 16px; height: 16px; }
+
+    /* Desktop hover popover */
+    .summary-popover {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        width: 420px;
+        max-width: 90vw;
+        background: #fff;
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        box-shadow: var(--shadow-xl);
+        padding: 22px 24px;
+        z-index: 60;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+
+    .summary-popover::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: 36px;
+        width: 16px;
+        height: 16px;
+        background: #fff;
+        border-left: 1px solid var(--border-color);
+        border-top: 1px solid var(--border-color);
+        transform: rotate(45deg);
+    }
+
+    .summary-popover-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .summary-popover-title svg { width: 18px; height: 18px; color: var(--primary-orange); }
+
+    /* Show popover on hover (desktop only) */
+    @media (min-width: 769px) {
+        .title-summary-wrap:hover .summary-popover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    }
+
+    /* Summary table (shared by popover + modal) */
+    .job-info-table { width: 100%; border-collapse: collapse; }
+    .job-info-table tr { border-bottom: 1px solid var(--border-color); }
+    .job-info-table tr:last-child { border-bottom: none; }
+    .job-info-table td { padding: 11px 0; vertical-align: top; font-size: 0.92rem; }
+    .job-info-table td:first-child { font-weight: 500; color: var(--text-gray); width: 45%; }
+    .job-info-table td:last-child { color: var(--text-dark); font-weight: 600; }
+    .salary-highlight { color: var(--primary-blue); font-weight: 700; }
+
+    /* Meta info */
+    .job-meta-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin: 18px 0;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-gray);
+        font-size: 0.93rem;
+    }
+
+    .meta-icon { width: 18px; height: 18px; color: var(--primary-orange); flex-shrink: 0; }
+
+    .job-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .job-badge {
+        padding: 7px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .badge-top-rated {
+        background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        color: white; display: flex; align-items: center; gap: 6px;
+    }
+
+    .badge-active { background: #dcfce7; color: #166534; }
+    .badge-urgent { background: #fee2e2; color: #dc2626; }
+
+    /* Header actions */
+    .job-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        min-width: 200px;
+    }
+
+    .btn-apply-large {
+        background: var(--primary-orange);
+        color: white;
+        padding: 16px 32px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.05rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow-md);
+        white-space: nowrap;
+    }
+
+    .btn-apply-large:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+        color: #fff;
+    }
+
+    /* ---------------- Section navigation (sticky) ---------------- */
+    .section-nav {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: rgba(255,255,255,0.92);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        padding: 10px;
+        margin-bottom: 24px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .section-nav a {
+        flex: 1;
+        text-align: center;
+        min-width: 120px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: all 0.25s ease;
+        white-space: nowrap;
+    }
+
+    .section-nav a:hover { background: var(--bg-light); color: var(--primary-blue); }
+
+    .section-nav a.active {
+        background: var(--primary-blue);
+        color: #fff;
+        box-shadow: var(--shadow-sm);
+    }
+
+    /* ---------------- Main content (full width) ---------------- */
+    .job-main-content {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-color);
+    }
+
+    .content-section { scroll-margin-top: 90px; }
+    .content-section + .content-section { margin-top: 44px; padding-top: 8px; }
+
+    /* Scroll reveal animation */
+    .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .section-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--primary-orange);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .job-description {
+        color: var(--text-dark);
+        line-height: 1.75;
+        font-size: 1rem;
+    }
+
+    .job-description h2,
+    .job-description h3,
+    .job-description h4 {
+        color: var(--text-dark);
+        margin: 25px 0 15px 0;
+        font-weight: 600;
+    }
+
+    .job-description ul, .job-description ol { margin: 15px 0; padding-left: 25px; }
+    .job-description li { margin-bottom: 8px; }
+
+    /* ---------------- Social share ---------------- */
+    .social-share-container {
+        background-color: #f1f5ff;
+        padding: 24px;
+        border-radius: 12px;
+        margin-top: 44px;
+        border: 1px solid #e0e7ff;
+    }
+
+    .social-share-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary-blue);
+        margin-bottom: 16px;
+    }
+
+    .social-share-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .social-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        color: white;
+    }
+
+    .social-btn i { margin-right: 8px; font-size: 1rem; }
+    .social-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); color: #fff; }
+    .social-btn-facebook { background-color: #1877f2; }
+    .social-btn-facebook:hover { background-color: #166fe5; }
+    .social-btn-linkedin { background-color: #0a66c2; }
+    .social-btn-linkedin:hover { background-color: #0958a5; }
+    .social-btn-whatsapp { background-color: #25d366; }
+    .social-btn-whatsapp:hover { background-color: #22c55e; }
+    .social-btn-copy { background-color: #6b7280; }
+    .social-btn-copy:hover { background-color: #5b6470; }
+
+    /* Company logos */
+    .company-logo {
+        width: 64px; height: 64px; object-fit: contain;
+        border-radius: 8px; border: 1px solid var(--border-color);
+        background-color: #ffffff; padding: 4px; flex-shrink: 0;
+    }
+
+    .company-logo-placeholder {
+        width: 64px; height: 64px; background-color: #f7fafc;
+        border-radius: 8px; display: flex; align-items: center; justify-content: center;
+        border: 1px solid var(--border-color); color: var(--text-gray);
+        font-size: 0.75rem; text-align: center; flex-shrink: 0;
+    }
+
+    /* ---------------- Vacancy Summary Modal (mobile / tap) ---------------- */
+    .summary-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15,23,42,0.55);
+        z-index: 1000;
+        display: none;
+        align-items: flex-end;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .summary-modal-overlay.open { display: flex; opacity: 1; }
+
+    .summary-modal {
+        background: #fff;
+        width: 100%;
+        max-width: 560px;
+        border-radius: 20px 20px 0 0;
+        padding: 24px;
+        max-height: 85vh;
+        overflow-y: auto;
+        transform: translateY(100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: var(--shadow-xl);
+    }
+
+    .summary-modal-overlay.open .summary-modal { transform: translateY(0); }
+
+    .summary-modal-handle {
+        width: 44px; height: 5px; border-radius: 3px;
+        background: #cbd5e1; margin: 0 auto 16px;
+    }
+
+    .summary-modal-header {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .summary-modal-header h3 {
+        font-size: 1.2rem; font-weight: 700; color: var(--text-dark);
+        margin: 0; display: flex; align-items: center; gap: 8px;
+    }
+
+    .summary-modal-header h3 svg { width: 20px; height: 20px; color: var(--primary-orange); }
+
+    .summary-modal-close {
+        background: var(--bg-light); border: none; border-radius: 50%;
+        width: 36px; height: 36px; cursor: pointer; font-size: 1.2rem;
+        color: var(--text-gray); display: flex; align-items: center; justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .summary-modal-close:hover { background: #fee2e2; color: #dc2626; }
+
+    /* ---------------- Floating / sticky Apply ---------------- */
+    /* Desktop floating apply (appears on scroll) */
+    .floating-apply {
+        position: fixed;
+        right: 28px;
+        bottom: 28px;
+        z-index: 900;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.35s ease;
+    }
+
+    .floating-apply.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+    .floating-apply a {
+        background: var(--primary-orange);
+        color: #fff;
+        padding: 15px 28px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: var(--shadow-xl);
+        transition: all 0.3s ease;
+    }
+
+    .floating-apply a:hover { transform: translateY(-3px); color: #fff; }
+
+    /* Mobile sticky apply bar */
+    .mobile-apply-bar {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        z-index: 950;
+        background: #fff;
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+        display: none;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .mobile-apply-bar .btn-apply-mobile {
+        flex: 1;
+        background: var(--primary-orange);
+        color: #fff;
+        padding: 15px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .mobile-apply-bar .btn-summary-mobile {
+        background: #eff6ff;
+        color: var(--primary-blue);
+        border: 1px solid #bfdbfe;
+        padding: 15px 18px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* ---------------- Responsive ---------------- */
+    @media (max-width: 992px) {
+        .job-header-content { grid-template-columns: 1fr; gap: 24px; }
+        .job-actions { min-width: 0; }
+    }
+
+    @media (max-width: 768px) {
+        .jd-wrap { padding: 0 16px; }
+        .job-detail-container { padding: 20px 0 90px; }
+        .job-header-content { padding: 24px 20px; }
+        .job-title-section h1 { font-size: 1.45rem; }
+        .job-company-name { font-size: 1.05rem; }
+
+        .job-head-top { flex-direction: row; align-items: flex-start; gap: 14px; }
+
+        .job-meta-info { gap: 12px; }
+
+        .job-main-content { padding: 24px 20px; }
+
+        /* Hide desktop popover + header apply on mobile; use modal + sticky bar */
+        .summary-popover { display: none; }
+        .job-actions { display: none; }
+        .floating-apply { display: none; }
+        .mobile-apply-bar { display: flex; }
+
+        .section-nav { top: 0; padding: 8px; gap: 6px; overflow-x: auto; flex-wrap: nowrap; }
+        .section-nav a { flex: 0 0 auto; min-width: auto; font-size: 0.85rem; padding: 9px 14px; }
+    }
+
+    @media (max-width: 480px) {
+        .job-title-section h1 { font-size: 1.3rem; }
+        .company-logo, .company-logo-placeholder { width: 52px; height: 52px; }
+        .social-share-buttons { flex-direction: column; }
+        .social-btn { justify-content: center; width: 100%; }
+        .summary-chip { width: 100%; justify-content: center; }
+    }
+
+    /* Utility */
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+</style>
+{% endblock %}
+{% block content %}
+<!-- Header Section -->
+{% include "partials/header.njk" %}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+    <div class="jd-wrap">
+        <ul class="breadcrumb-list">
+            <li class="breadcrumb-item">
+                <a href="/" class="breadcrumb-link">Jobs</a>
+                <span class="breadcrumb-separator">›</span>
+            </li>
+            <li class="breadcrumb-item">
+                <span>{{ job.job_title }}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="job-detail-container">
+    <div class="jd-wrap">
+
+        <!-- Job Header -->
+        <div class="job-header-section">
+            <div class="job-header-content">
+                <div class="job-title-section">
+                    <div class="job-head-top">
+                        {% if job.company_logo %}
+                        <img src="{{ ('/upload/' ~ job.company_logo) }}" alt="{{ job.company_name }} Logo" class="company-logo">
+                        {% else %}
+                        <div class="company-logo-placeholder">No Logo</div>
+                        {% endif %}
+
+                        <div style="min-width:0;">
+                            <!-- Title with hover Vacancy Summary popover -->
+                            <div class="title-summary-wrap">
+                                <h1 id="jobTitle">{{ job.job_title }}</h1>
+
+                                <!-- Desktop hover popover -->
+                                <div class="summary-popover" role="tooltip">
+                                    <p class="summary-popover-title">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Vacancy Summary
+                                    </p>
+                                    {% include "partials/vacancy-summary-table.njk" %}
+                                </div>
+                            </div>
+
+                            <div class="job-company-name">{% if job.company_id  and  job.company_name %}<a href="{{ (job | companyUrl) }}" class="company-link">{{ job.company_name }}</a>{% else %} {{ job.company_name  or  'Company Name' }} {% endif %}</div>
+
+                            <!-- Summary chip (opens modal on tap / hover hint on desktop) -->
+                            <span class="summary-chip" id="summaryChip" role="button" tabindex="0" aria-label="View vacancy summary">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                View Vacancy Summary
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="job-meta-info">
+                        <div class="meta-item">
+                            <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>{{ job.city_name  or  job.country_name  or  'Sri Lanka' }}</span>
+                        </div>
+
+                        <div class="meta-item">
+                            <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0H8" />
+                            </svg>
+                            <span>{{ job.jobtype  or  'N/A' }}</span>
+                        </div>
+
+                        <div class="meta-item">
+                            <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>Posted {{ ((job.job_adv_livedate | diffForHumans) if job.job_adv_livedate else "Recently") }}</span>
+                        </div>
+
+                        <div class="meta-item">
+                            <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <span>{{ (displayedViews | numberFormat) }} {{ ("view" if displayedViews == 1 else "views") }}</span>
+                        </div>
+
+                        {% if job.days_until_closing != null %}
+                        <div class="meta-item">
+                            <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>
+                                {% if job.days_until_closing > 0 %}
+                                {{ job.days_until_closing }} days left to apply
+                                {% else %}
+                                Application deadline passed
+                                {% endif %}
+                            </span>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="job-badges">
+                        {% if job.job_adv_top_rated == '1' %}
+                        <span class="job-badge badge-top-rated">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            Top Rated
+                        </span>
+                        {% endif %}
+
+                        {% if job.job_adv_status == '1' %}
+                        <span class="job-badge badge-active">LIVE</span>
+                        {% endif %}
+
+                        {% if job.days_until_closing != null  and  job.days_until_closing <= 7  and  job.days_until_closing > 0 %}
+                        <span class="job-badge badge-urgent">Closing Soon</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="job-actions">
+                    <a href="{{ applyUrl }}" class="btn-apply-large">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                        </svg>
+                        Apply Now
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section navigation -->
+        <nav class="section-nav" id="sectionNav">
+            <a href="#sec-description" class="active">Job Description</a>
+            {% if job.job_adv_keyword %}
+            <a href="#sec-requirements">What We're Looking For</a>
+            {% endif %}
+            {% if job.job_benifits %}
+            <a href="#sec-benefits">Benefits &amp; Perks</a>
+            {% endif %}
+        </nav>
+
+        <!-- Main Content (full width) -->
+        <div class="job-main-content">
+
+            <section id="sec-description" class="content-section reveal">
+                <div class="section-title">
+                    <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Job Description
+                </div>
+                <div class="job-description">
+                    {% if job.job_adv_description %}
+                    {{ job.job_adv_description | safe }}
+                    {% else %}
+                    <p>No detailed description available for this position. Please contact the employer for more information.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            {% if job.job_adv_keyword %}
+            <section id="sec-requirements" class="content-section reveal">
+                <div class="section-title">
+                    <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    What We're Looking For
+                </div>
+                <div class="job-description">
+                    {{ job.job_adv_keyword | safe }}
+                </div>
+            </section>
+            {% endif %}
+
+            {% if job.job_benifits %}
+            <section id="sec-benefits" class="content-section reveal">
+                <div class="section-title">
+                    <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Benefits &amp; Perks
+                </div>
+                <div class="job-description">
+                    {{ job.job_benifits | safe }}
+                </div>
+            </section>
+            {% endif %}
+
+            {% if job.company_overview %}
+            <section id="sec-about-company" class="content-section reveal">
+                <div class="section-title">
+                    <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    About {{ job.company_name  or  'Company' }}
+                </div>
+                <div class="job-description">
+                    <p style="white-space: pre-line;">{{ job.company_overview }}</p>
+                </div>
+                {% if job.company_id %}
+                <a href="{{ (job | companyUrl) }}" class="company-profile-btn">
+                    View company profile &amp; all jobs &rarr;
+                </a>
+                {% endif %}
+            </section>
+            {% endif %}
+
+            <!-- Social Media Share Section -->
+            <div class="social-share-container reveal">
+                <h4 class="social-share-title">Share this job:</h4>
+                <div class="social-share-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ ((site.url ~ page.url)) | urlencode }}" target="_blank" class="social-btn social-btn-facebook">
+                        <i class="fab fa-facebook-f"></i>Facebook
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ ((site.url ~ page.url)) | urlencode }}" target="_blank" class="social-btn social-btn-linkedin">
+                        <i class="fab fa-linkedin-in"></i>LinkedIn
+                    </a>
+                    <a href="https://wa.me/?text={{ ('Check out this job: ' ~ job.job_title ~ ' at ' ~ job.company_name ~ ' - ' ~ (site.url ~ page.url)) | urlencode }}" target="_blank" class="social-btn social-btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i>WhatsApp
+                    </a>
+                    <button onclick="copyJobLink()" class="social-btn social-btn-copy">
+                        <i class="fas fa-link"></i>Copy Link
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Desktop floating apply button (appears on scroll) -->
+<div class="floating-apply" id="floatingApply">
+    <a href="{{ applyUrl }}">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+        Apply Now
+    </a>
+</div>
+
+<!-- Mobile sticky apply bar -->
+<div class="mobile-apply-bar">
+    <button class="btn-summary-mobile" id="summaryChipMobile" aria-label="View vacancy summary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Summary
+    </button>
+    <a href="{{ applyUrl }}" class="btn-apply-mobile">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+        Apply Now
+    </a>
+</div>
+
+<!-- Vacancy Summary Modal (mobile / tap) -->
+<div class="summary-modal-overlay" id="summaryModal">
+    <div class="summary-modal" role="dialog" aria-modal="true" aria-label="Vacancy Summary">
+        <div class="summary-modal-handle"></div>
+        <div class="summary-modal-header">
+            <h3>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Vacancy Summary
+            </h3>
+            <button class="summary-modal-close" id="summaryModalClose" aria-label="Close">&times;</button>
+        </div>
+        {% include "partials/vacancy-summary-table.njk" %}
+    </div>
+</div>
+
+<!-- Footer -->
+{% include "partials/footer.njk" %}
+{% endblock %}
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        /* ---------- Vacancy Summary modal ---------- */
+        const modal = document.getElementById('summaryModal');
+        const openModal = () => { modal.classList.add('open'); document.body.style.overflow = 'hidden'; };
+        const closeModal = () => { modal.classList.remove('open'); document.body.style.overflow = ''; };
+
+        const chip = document.getElementById('summaryChip');
+        const chipMobile = document.getElementById('summaryChipMobile');
+        const closeBtn = document.getElementById('summaryModalClose');
+
+        // Chip under title: open modal on tap (mobile). On desktop the hover popover already shows it,
+        // but clicking still opens the modal as a reliable fallback.
+        if (chip) {
+            chip.addEventListener('click', openModal);
+            chip.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); } });
+        }
+        if (chipMobile) chipMobile.addEventListener('click', openModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (modal) modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        /* ---------- Smooth scroll for section nav ---------- */
+        document.querySelectorAll('.section-nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        /* ---------- Scroll reveal animation ---------- */
+        const revealEls = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            revealEls.forEach(el => revealObserver.observe(el));
+        } else {
+            revealEls.forEach(el => el.classList.add('is-visible'));
+        }
+
+        /* ---------- Active section highlight in nav ---------- */
+        const navLinks = document.querySelectorAll('.section-nav a');
+        const sections = document.querySelectorAll('.content-section');
+        if ('IntersectionObserver' in window && sections.length) {
+            const spyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+            sections.forEach(sec => spyObserver.observe(sec));
+        }
+
+        /* ---------- Desktop floating apply on scroll ---------- */
+        const floating = document.getElementById('floatingApply');
+        const header = document.querySelector('.job-header-section');
+        if (floating && header) {
+            const headerObserver = new IntersectionObserver((entries) => {
+                // Show floating button once the header has scrolled out of view
+                floating.classList.toggle('show', !entries[0].isIntersecting);
+            }, { threshold: 0 });
+            headerObserver.observe(header);
+        }
+    });
+
+    /* ---------- Copy link ---------- */
+    function copyJobLink() {
+        navigator.clipboard.writeText(window.location.href).then(function () {
+            alert('Job link copied to clipboard!');
+        }, function () {
+            const textArea = document.createElement("textarea");
+            textArea.value = window.location.href;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Job link copied to clipboard!');
+        });
+    }
+</script>
+{% endblock %}

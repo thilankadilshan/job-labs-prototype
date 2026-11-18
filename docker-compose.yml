@@ -1,0 +1,10 @@
+services:
+  job-labs-prototype:
+    build:
+      context: .
+      args:
+        SITE_URL: "http://localhost:8081"
+    container_name: job-labs-prototype
+    ports:
+      - "8081:80"   # 8000 is already used by the main job-labs app
+    restart: unless-stopped

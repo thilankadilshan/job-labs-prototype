@@ -1,0 +1,511 @@
+---
+permalink: "/signup/verify-otp/"
+---
+{% extends "layouts/master.njk" %}
+{% block title %}Verify Your Email - Job Labs{% endblock %}
+{% block description %}Enter the verification code sent to your email to complete your registration.{% endblock %}
+{% block og_title %}Verify Your Email - Job Labs{% endblock %}
+{% block og_description %}Enter the verification code sent to your email to complete your registration.{% endblock %}
+{% block styles %}
+<style>
+    /* ── Page Layout ── */
+    .verify-section {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+        background-color: #f8f9fa;
+    }
+
+    .verify-container {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    /* ── Card ── */
+    .verify-card {
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .verify-card-header {
+        background: linear-gradient(135deg, #ff6600 0%, #ff8533 100%);
+        padding: 35px 30px;
+        text-align: center;
+    }
+
+    .verify-card-header .icon-circle {
+        width: 70px;
+        height: 70px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+    }
+
+    .verify-card-header .icon-circle i {
+        font-size: 30px;
+        color: #ffffff;
+    }
+
+    .verify-card-header h1 {
+        color: #ffffff;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin: 0 0 8px;
+    }
+
+    .verify-card-header p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    /* ── Card Body ── */
+    .verify-card-body {
+        padding: 35px 30px;
+    }
+
+    .email-display {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 0.95rem;
+        color: #495057;
+    }
+
+    .email-display strong {
+        color: #ff6600;
+    }
+
+    /* ── OTP Input Group ── */
+    .otp-label {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 12px;
+        text-align: center;
+    }
+
+    .otp-inputs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .otp-inputs input[type="text"] {
+        width: 52px;
+        height: 60px;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1f2937;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        background: #ffffff;
+        caret-color: #ff6600;
+    }
+
+    .otp-inputs input[type="text"]:focus {
+        border-color: #ff6600;
+        box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+    }
+
+    .otp-inputs input[type="text"].filled {
+        border-color: #ff6600;
+        background: #fff8f5;
+    }
+
+    /* Hidden real input that holds the full OTP */
+    #otp_code {
+        display: none;
+    }
+
+    /* ── Timer ── */
+    .otp-timer {
+        text-align: center;
+        font-size: 0.85rem;
+        color: #6b7280;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .otp-timer span#countdown {
+        font-weight: 700;
+        color: #ff6600;
+    }
+
+    .otp-timer span#countdown.expired {
+        color: #dc3545;
+    }
+
+    /* ── Submit Button ── */
+    .btn-verify {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #ff6600, #ff8533);
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .btn-verify:hover {
+        opacity: 0.92;
+        transform: translateY(-1px);
+    }
+
+    .btn-verify:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* ── Resend Section ── */
+    .resend-section {
+        text-align: center;
+        padding-top: 15px;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .resend-section p {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 10px;
+    }
+
+    .btn-resend {
+        background: none;
+        border: 2px solid #ff6600;
+        color: #ff6600;
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-resend:hover:not(:disabled) {
+        background: #ff6600;
+        color: #ffffff;
+    }
+
+    .btn-resend:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+    }
+
+    /* ── Alert Messages ── */
+    .alert {
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .alert-success {
+        background: #ecfdf5;
+        border: 1px solid #6ee7b7;
+        color: #065f46;
+    }
+
+    .alert-error {
+        background: #fef2f2;
+        border: 1px solid #fca5a5;
+        color: #991b1b;
+    }
+
+    .alert-warning {
+        background: #fffbeb;
+        border: 1px solid #fcd34d;
+        color: #92400e;
+    }
+
+    /* ── Help Text ── */
+    .help-text {
+        text-align: center;
+        font-size: 0.8rem;
+        color: #9ca3af;
+        margin-top: 20px;
+        line-height: 1.5;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+{% include "partials/top-bar.njk" %}
+{% include "partials/header.njk" %}
+
+<section class="verify-section">
+    <div class="verify-container">
+
+        <div class="verify-card">
+
+            
+            <div class="verify-card-header">
+                <div class="icon-circle">
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <h1>Verify Your Email</h1>
+                <p>We've sent a 6-digit verification code to your email</p>
+            </div>
+
+            
+            <div class="verify-card-body">
+
+                
+                {% if '' %}
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <span></span>
+                    </div>
+                {% endif %}
+
+                {% if '' %}
+                    <div class="alert alert-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span></span>
+                    </div>
+                {% endif %}
+
+                {% if '' %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span></span>
+                    </div>
+                {% endif %}
+
+                
+                <div class="email-display">
+                    Code sent to: <strong id="protoMaskedEmail">y***@example.com</strong>
+                </div>
+
+                
+                <form
+                    method="POST"
+                    action="/signup/verify-otp"
+                    id="otpForm"
+                >
+                    <input type="hidden" name="_token" value="prototype-csrf-token">
+
+                    
+                    <input type="hidden" name="lead_id" value="1">
+
+                    
+                    <input type="hidden" name="otp_code" id="otp_code">
+
+                    
+                    <label class="otp-label">Enter your 6-digit verification code</label>
+                    <div class="otp-inputs" id="otpInputs">
+                        <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" autocomplete="off" pattern="[0-9]">
+                        <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" autocomplete="off" pattern="[0-9]">
+                        <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" autocomplete="off" pattern="[0-9]">
+                        <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" autocomplete="off" pattern="[0-9]">
+                        <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" autocomplete="off" pattern="[0-9]">
+                        <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" autocomplete="off" pattern="[0-9]">
+                    </div>
+
+                    
+                    <div class="otp-timer">
+                        Code expires in: <span id="countdown">10:00</span>
+                    </div>
+
+                    
+                    <button
+                        type="submit"
+                        class="btn-verify"
+                        id="btnVerify"
+                        disabled
+                    >
+                        <i class="fas fa-shield-alt"></i>
+                        Verify Email
+                    </button>
+
+                </form>
+
+                
+                <div class="resend-section">
+                    <p>Didn't receive the code?</p>
+                    <form method="POST" action="/signup/resend-otp" id="resendForm">
+                        <input type="hidden" name="_token" value="prototype-csrf-token">
+                        <input type="hidden" name="lead_id" value="1">
+                        <button
+                            type="submit"
+                            class="btn-resend"
+                            id="btnResend"
+                            disabled
+                        >
+                            <i class="fas fa-redo" style="margin-right:5px;"></i>
+                            Resend Code
+                        </button>
+                    </form>
+                </div>
+
+                
+                <p class="help-text">
+                    Please check your spam or junk folder if you don't see the email.<br>
+                    The code is valid for 10 minutes only.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% include "partials/footer.njk" %}
+
+{% endblock %}
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const digits      = document.querySelectorAll('.otp-digit');
+    const hiddenInput = document.getElementById('otp_code');
+    const btnVerify   = document.getElementById('btnVerify');
+    const btnResend   = document.getElementById('btnResend');
+    const otpForm     = document.getElementById('otpForm');
+    const countdown   = document.getElementById('countdown');
+
+    // ── OTP digit box behaviour ──────────────────────────────
+
+    digits.forEach(function (input, index) {
+
+        // Only allow numeric input
+        input.addEventListener('keypress', function (e) {
+            if (!/[0-9]/.test(e.key)) {
+                e.preventDefault();
+            }
+        });
+
+        input.addEventListener('input', function () {
+            // Keep only the last character typed
+            this.value = this.value.replace(/[^0-9]/g, '').slice(-1);
+
+            if (this.value !== '') {
+                this.classList.add('filled');
+                // Move focus to next box
+                if (index < digits.length - 1) {
+                    digits[index + 1].focus();
+                }
+            } else {
+                this.classList.remove('filled');
+            }
+
+            syncHiddenInput();
+        });
+
+        // Backspace moves focus to previous box
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                digits[index - 1].focus();
+                digits[index - 1].value = '';
+                digits[index - 1].classList.remove('filled');
+                syncHiddenInput();
+            }
+        });
+
+        // Allow paste of full 6-digit code into first box
+        input.addEventListener('paste', function (e) {
+            e.preventDefault();
+            const pasted = (e.clipboardData || window.clipboardData)
+                .getData('text')
+                .replace(/[^0-9]/g, '')
+                .slice(0, 6);
+
+            pasted.split('').forEach(function (char, i) {
+                if (digits[i]) {
+                    digits[i].value = char;
+                    digits[i].classList.add('filled');
+                }
+            });
+
+            // Focus last filled box
+            const lastIndex = Math.min(pasted.length, digits.length) - 1;
+            if (lastIndex >= 0) digits[lastIndex].focus();
+
+            syncHiddenInput();
+        });
+    });
+
+    // Collect all digit values into the hidden input
+    // and enable/disable the verify button
+    function syncHiddenInput() {
+        let fullOtp = '';
+        digits.forEach(function (d) { fullOtp += d.value; });
+        hiddenInput.value = fullOtp;
+        btnVerify.disabled = (fullOtp.length !== 6);
+    }
+
+    // Focus first box on load
+    if (digits[0]) digits[0].focus();
+
+    // ── Countdown Timer ──────────────────────────────────────
+
+    // 10 minutes = 600 seconds
+    let timeLeft = 600;
+
+    const timer = setInterval(function () {
+        timeLeft--;
+
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        countdown.textContent =
+            String(minutes).padStart(2, '0') + ':' +
+            String(seconds).padStart(2, '0');
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            countdown.textContent = 'Expired';
+            countdown.classList.add('expired');
+
+            // Disable verify button, enable resend
+            btnVerify.disabled = true;
+            digits.forEach(function (d) { d.disabled = true; });
+            btnResend.disabled = false;
+        }
+
+        // Enable resend after 60 seconds
+        if (timeLeft <= 540) {
+            btnResend.disabled = false;
+        }
+
+    }, 1000);
+
+    // ── Form submit guard ────────────────────────────────────
+
+    otpForm.addEventListener('submit', function (e) {
+        if (hiddenInput.value.length !== 6) {
+            e.preventDefault();
+            alert('Please enter all 6 digits of your verification code.');
+        }
+    });
+
+});
+</script>
+{% endblock %}

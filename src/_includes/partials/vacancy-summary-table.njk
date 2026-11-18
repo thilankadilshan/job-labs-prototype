@@ -1,0 +1,39 @@
+
+<table class="job-info-table">
+    <tr>
+        <td>Job Reference</td>
+        <td>{{ job.job_refno  or  'N/A' }}</td>
+    </tr>
+    <tr>
+        <td>Salary</td>
+        <td class="salary-highlight">{{ ('LKR ' ~ job.job_adv_salary if job.job_adv_salary else "Salary Negotiable") }}</td>
+    </tr>
+    <tr>
+        <td>Job Type</td>
+        <td>{{ job.jobtype  or  'N/A' }}</td>
+    </tr>
+    <tr>
+        <td>Work Type</td>
+        <td>{{ job.worktype  or  'N/A' }}</td>
+    </tr>
+    <tr>
+        <td>Job Sector</td>
+        <td>{{ job.jobsector  or  'N/A' }}</td>
+    </tr>
+    <tr>
+        <td>Industry</td>
+        <td>{{ job.industrysector  or  'N/A' }}</td>
+    </tr>
+    <tr>
+        <td>Vacancies</td>
+        <td>{{ job.job_adv_total_vacancies }} Position{{ ("s" if job.job_adv_total_vacancies > 1 else "") }}</td>
+    </tr>
+    <tr>
+        <td>Expected Start Date</td>
+        <td>{{ ((job.job_adv_startdate | fmtDate) if job.job_adv_startdate else "ASAP") }}</td>
+    </tr>
+    <tr>
+        <td>Application Deadline</td>
+        <td>{{ ((job.job_adv_closingdate | fmtDate) if job.job_adv_closingdate else "Open") }}</td>
+    </tr>
+</table>

@@ -1,0 +1,2232 @@
+---
+permalink: "/services/"
+---
+{% extends "layouts/master.njk" %}
+{% block title %}Recruitment Services in Sri Lanka | Job Labs{% endblock %}
+{% block description %}Explore Job Labs recruitment services in Sri Lanka, including dedicated consultants, ATS tools, job boards, and end-to-end hiring solutions for employers.{% endblock %}
+{% block og_title %}Recruitment Services in Sri Lanka | Job Labs{% endblock %}
+{% block og_description %}Explore Job Labs recruitment services in Sri Lanka, including dedicated consultants, ATS tools, job boards, and end-to-end hiring solutions for employers.{% endblock %}
+{% block styles %}
+<style>
+    /* ==========================================================================
+       Services Hero Section - Job Labs Signature Red Theme (#A92036)
+       ========================================================================== */
+    .services-hero {
+        position: relative;
+        min-height: 52vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 105px 0 85px;
+        overflow: hidden;
+        background-color: #3b050e;
+        isolation: isolate;
+    }
+
+    .services-hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .services-hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        filter: brightness(0.95) contrast(1.02);
+        transform: scale(1.03);
+        animation: heroKenBurns 18s ease-in-out infinite alternate;
+        transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .services-hero:hover .services-hero-bg img {
+        transform: scale(1.07);
+    }
+
+    @keyframes heroKenBurns {
+        0% {
+            transform: scale(1.02) translate(0, 0);
+        }
+        50% {
+            transform: scale(1.06) translate(-1%, -1%);
+        }
+        100% {
+            transform: scale(1.04) translate(1%, 0);
+        }
+    }
+
+    /* Clean translucent dark overlay - Keeps Sri Lankan Team bright, natural & clearly visible */
+    .services-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            180deg,
+            rgba(10, 15, 29, 0.50) 0%,
+            rgba(10, 15, 29, 0.36) 50%,
+            rgba(10, 15, 29, 0.65) 100%
+        );
+        z-index: 2;
+    }
+
+    /* Ambient animated red light glow */
+    .services-hero-glow {
+        position: absolute;
+        top: -20%;
+        right: 10%;
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(circle, rgba(255, 77, 109, 0.35) 0%, rgba(169, 32, 54, 0.15) 50%, transparent 70%);
+        border-radius: 50%;
+        filter: blur(60px);
+        z-index: 2;
+        pointer-events: none;
+        animation: heroGlowPulse 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroGlowPulse {
+        0% {
+            transform: scale(0.9) translate(0, 0);
+            opacity: 0.7;
+        }
+        100% {
+            transform: scale(1.15) translate(20px, -20px);
+            opacity: 1;
+        }
+    }
+
+    /* Subtle geometric mesh pattern */
+    .services-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><path d="M0,0v46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1000,0,1000,0Z" fill="%23ffffff" fill-opacity="0.05"></path></svg>') repeat-x bottom;
+        background-size: 1000px 70px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .services-hero .container {
+        position: relative;
+        z-index: 3;
+    }
+
+    .hero-content {
+        position: relative;
+        text-align: center;
+        color: #ffffff;
+        max-width: 860px;
+        margin: 0 auto;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumb-nav {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 50px;
+        padding: 6px 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 1.1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        animation: heroFadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+
+    .breadcrumb-nav a {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-size: 0.86rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.25s ease;
+    }
+
+    .breadcrumb-nav a:hover {
+        color: #ffffff;
+    }
+
+    .breadcrumb-nav .separator {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.72rem;
+    }
+
+    .breadcrumb-nav .current {
+        color: #ffd0d8;
+        font-size: 0.86rem;
+        font-weight: 600;
+    }
+
+    /* Badge */
+    .services-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        color: #fff0f2;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        padding: 6px 18px;
+        border-radius: 50px;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+        animation: heroFadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+    }
+
+    .services-hero-badge i {
+        color: #ffb3be;
+        font-size: 0.85rem;
+    }
+
+    /* Title */
+    .hero-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(2.4rem, 5vw, 3.8rem);
+        font-weight: 800;
+        margin-bottom: 1.2rem;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -0.5px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+        animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+    }
+
+    .hero-title .brand-accent {
+        color: #ffffff;
+        position: relative;
+        display: inline-block;
+    }
+
+    .hero-title .brand-accent::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: #ffffff;
+        border-radius: 3px;
+        opacity: 0.85;
+        box-shadow: 0 2px 10px rgba(255, 255, 255, 0.4);
+        animation: expandAccent 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s backwards;
+    }
+
+    @keyframes expandAccent {
+        from {
+            width: 0;
+            opacity: 0;
+        }
+        to {
+            width: 100%;
+            opacity: 0.85;
+        }
+    }
+
+    /* Subtitle */
+    .hero-subtitle {
+        font-size: clamp(1.05rem, 2vw, 1.25rem);
+        color: rgba(255, 255, 255, 0.95);
+        max-width: 680px;
+        margin: 0 auto 1.8rem;
+        line-height: 1.65;
+        font-weight: 400;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+        animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
+    }
+
+    /* Feature Chips */
+    .services-hero-chips {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 0.5rem;
+        animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+    }
+
+    .hero-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        color: #ffffff;
+        font-size: 0.88rem;
+        font-weight: 500;
+        padding: 8px 18px;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero-chip:hover {
+        background: rgba(255, 255, 255, 0.24);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-chip i {
+        color: #ffd0d8;
+        font-size: 0.9rem;
+    }
+
+    /* Keyframe Animations */
+    @keyframes heroFadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes heroFadeDown {
+        from {
+            opacity: 0;
+            transform: translateY(-16px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive Adjustments for Hero */
+    @media (max-width: 991px) {
+        .services-hero {
+            padding: 95px 0 70px;
+            min-height: auto;
+        }
+
+        .hero-title {
+            margin-bottom: 1rem;
+        }
+
+        .services-hero-glow {
+            width: 360px;
+            height: 360px;
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        .services-hero-badge {
+            font-size: 0.75rem;
+            letter-spacing: 1.2px;
+            padding: 5px 14px;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb-nav {
+            padding: 5px 14px;
+            font-size: 0.8rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .services-hero-chips {
+            gap: 8px;
+        }
+
+        .hero-chip {
+            font-size: 0.8rem;
+            padding: 6px 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .services-hero {
+            padding: 75px 12px 45px;
+        }
+
+        .services-hero-chips {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-chip {
+            width: fit-content;
+        }
+    }
+
+    /* Accessibility: Respect Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+        .services-hero-bg img,
+        .services-hero-glow,
+        .breadcrumb-nav,
+        .services-hero-badge,
+        .hero-title,
+        .hero-title .brand-accent::after,
+        .hero-subtitle,
+        .services-hero-chips,
+        .services-hero-chips .hero-chip {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+
+    /* ==========================================================================
+       Services Page Content Styles - Job Labs Signature Red (#A92036)
+       ========================================================================== */
+    .services-section {
+        padding: 95px 0 100px;
+        background: #ffffff;
+        position: relative;
+    }
+
+    .section-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 65px;
+    }
+
+    .section-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff0f2;
+        border: 1px solid #fecdd3;
+        color: #A92036;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.4px;
+        padding: 6px 18px;
+        border-radius: 50px;
+        margin-bottom: 1.1rem;
+        box-shadow: 0 2px 8px rgba(169, 32, 54, 0.08);
+    }
+
+    .section-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(2.1rem, 4vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 1.1rem;
+        color: #0f172a;
+        line-height: 1.2;
+    }
+
+    .brand-accent-red {
+        color: #A92036;
+        position: relative;
+        display: inline-block;
+    }
+
+    .section-subtitle {
+        font-size: 1.15rem;
+        color: #64748b;
+        line-height: 1.7;
+        margin: 0 auto;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 32px;
+    }
+
+    .service-card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 40px 34px;
+        border: 1px solid #f1f5f9;
+        box-shadow: 0 10px 30px -8px rgba(15, 23, 42, 0.06);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .service-card-top-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #A92036 0%, #e11d48 50%, #f43f5e 100%);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .service-card:hover .service-card-top-bar {
+        transform: scaleX(1);
+    }
+
+    .service-card:hover {
+        transform: translateY(-8px);
+        border-color: #fecdd3;
+        box-shadow: 0 20px 40px -10px rgba(169, 32, 54, 0.16);
+    }
+
+    .service-icon-wrapper {
+        width: 72px;
+        height: 72px;
+        background: linear-gradient(135deg, #A92036 0%, #801225 100%);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+        box-shadow: 0 10px 22px rgba(169, 32, 54, 0.28);
+        transition: transform 0.35s ease;
+    }
+
+    .service-card:hover .service-icon-wrapper {
+        transform: scale(1.08) rotate(-2deg);
+    }
+
+    .service-icon-wrapper i {
+        font-size: 1.85rem;
+        color: #ffffff;
+    }
+
+    .service-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.38rem;
+        font-weight: 700;
+        margin-bottom: 14px;
+        color: #0f172a;
+        line-height: 1.3;
+    }
+
+    .service-description {
+        color: #475569;
+        line-height: 1.7;
+        margin-bottom: 24px;
+        font-size: 0.96rem;
+    }
+
+    .service-features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+    }
+
+    .service-features li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #334155;
+        font-size: 0.92rem;
+        font-weight: 500;
+    }
+
+    .service-features li i {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+        background: #fff0f2;
+        color: #A92036;
+        border: 1px solid #fecdd3;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.72rem;
+    }
+
+    /* ==========================================================================
+       Stats Section - Job Labs Crimson Glass
+       ========================================================================== */
+    .stats-section {
+        background: linear-gradient(135deg, #2b030a 0%, #520713 50%, #801225 100%);
+        padding: 85px 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stats-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 20% 50%, rgba(255, 77, 109, 0.15) 0%, transparent 60%),
+                    radial-gradient(circle at 80% 50%, rgba(169, 32, 54, 0.2) 0%, transparent 60%);
+        pointer-events: none;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .stat-item {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 18px;
+        padding: 32px 24px;
+        text-align: center;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .stat-item:hover {
+        transform: translateY(-5px);
+        border-color: rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    .stat-icon {
+        font-size: 1.8rem;
+        color: #ffb3be;
+        margin-bottom: 12px;
+    }
+
+    .stat-number-wrap {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 2px;
+        margin-bottom: 6px;
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+        line-height: 1;
+        letter-spacing: -0.5px;
+    }
+
+    .stat-plus {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ff8095;
+    }
+
+    .stat-label {
+        font-size: 1.05rem;
+        color: #ffe4e8;
+        font-weight: 500;
+    }
+
+    /* ==========================================================================
+       CTA Section - Job Labs Bold Crimson Banner
+       ========================================================================== */
+    .cta-section {
+        background: linear-gradient(135deg, #520713 0%, #801225 60%, #A92036 100%);
+        padding: 95px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-section::before {
+        content: '';
+        position: absolute;
+        top: -40%;
+        left: -30%;
+        width: 160%;
+        height: 180%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 65%);
+        pointer-events: none;
+    }
+
+    .cta-content {
+        position: relative;
+        z-index: 2;
+        color: #ffffff;
+        max-width: 780px;
+        margin: 0 auto;
+    }
+
+    .cta-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.4px;
+        padding: 6px 18px;
+        border-radius: 50px;
+        margin-bottom: 1.25rem;
+    }
+
+    .cta-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+        font-weight: 800;
+        margin-bottom: 1.2rem;
+        color: #ffffff;
+        line-height: 1.2;
+    }
+
+    .cta-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.95);
+        max-width: 680px;
+        margin: 0 auto 2.6rem;
+        line-height: 1.7;
+    }
+
+    .cta-buttons-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .btn-cta-primary {
+        background: #ffffff;
+        color: #A92036;
+        padding: 16px 36px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        border-radius: 12px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-cta-primary:hover {
+        background: #fff0f2;
+        color: #801225;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        text-decoration: none;
+    }
+
+    .btn-cta-whatsapp {
+        background: #16a34a;
+        color: #ffffff;
+        padding: 16px 32px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        border-radius: 12px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(22, 163, 74, 0.3);
+    }
+
+    .btn-cta-whatsapp:hover {
+        background: #15803d;
+        color: #ffffff;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(22, 163, 74, 0.4);
+        text-decoration: none;
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 991px) {
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .services-section {
+            padding: 65px 0 75px;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .service-card {
+            padding: 30px 24px;
+        }
+
+        .stats-section {
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .stat-item {
+            padding: 24px;
+        }
+
+        .stat-number {
+            font-size: 2.6rem;
+        }
+
+        .cta-section {
+            padding: 70px 0;
+        }
+
+        .cta-buttons-wrap {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .btn-cta-primary,
+        .btn-cta-whatsapp {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .services-section {
+            padding: 45px 0 55px;
+        }
+
+        .service-card {
+            padding: 24px 18px;
+            border-radius: 16px;
+        }
+
+        .service-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            font-size: 1.4rem;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .stats-section {
+            padding: 45px 0;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .stat-item {
+            padding: 16px 10px;
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+        }
+
+        .cta-section {
+            padding: 50px 0;
+        }
+
+        .cta-content h2 {
+            font-size: 1.65rem;
+        }
+
+        .cta-content p {
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .btn-cta-primary,
+        .btn-cta-whatsapp {
+            padding: 14px 20px;
+            font-size: 0.95rem;
+        }
+    }
+
+    /* Scroll Animation Classes */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .animate-on-scroll.animate-fade-up {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .stagger-1 {
+        transition-delay: 0.1s;
+    }
+
+    .stagger-2 {
+        transition-delay: 0.2s;
+    }
+
+    .stagger-3 {
+        transition-delay: 0.3s;
+    }
+
+    .stagger-4 {
+        transition-delay: 0.4s;
+    }
+
+
+    /* ==========================================================================
+       Compact & Professional Pricing Table Styles - Job Labs Red (#A92036)
+       ========================================================================== */
+    .pricing-matrix-section {
+        padding: 75px 0 85px;
+        background: #fbfcfd;
+        position: relative;
+    }
+
+    .pricing-section-header {
+        max-width: 720px;
+        margin: 0 auto 38px;
+    }
+
+    .pricing-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #fff0f2;
+        border: 1px solid #fecdd3;
+        color: #A92036;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        padding: 5px 16px;
+        border-radius: 50px;
+        margin-bottom: 0.8rem;
+    }
+
+    .pricing-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(2rem, 3.5vw, 2.7rem);
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 0.6rem;
+        line-height: 1.2;
+    }
+
+    .pricing-subtitle {
+        font-size: 1.05rem;
+        color: #64748b;
+        margin-bottom: 0;
+        line-height: 1.5;
+    }
+
+    /* Table Container Card */
+        /* Table Container Card */
+    .pricing-table-card {
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+        position: relative;
+    }
+
+    .table-responsive {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-x pan-y !important;
+        position: relative !important;
+    }
+
+    .pricing-table {
+        width: 100%;
+        min-width: 820px;
+        border-collapse: collapse;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.92rem;
+    }
+
+    /* Table Header */
+    .pricing-table thead th {
+        background: #f8fafc;
+        border-bottom: 2px solid #e2e8f0;
+        padding: 20px 14px 16px;
+        vertical-align: top;
+    }
+
+    .col-feature-title {
+        width: 30%;
+        min-width: 240px;
+        text-align: left;
+        padding: 12px 20px !important;
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+    .col-feature-title .header-label {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .col-plan {
+        width: 14%;
+        min-width: 124px;
+        text-align: center;
+        padding: 12px 10px;
+        vertical-align: middle;
+    }
+
+    .plan-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .plan-name {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 2px;
+    }
+
+    .plan-price {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.3px;
+        white-space: nowrap;
+    }
+
+    .plan-price .period {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #64748b;
+    }
+
+    .plan-type {
+        font-size: 0.72rem;
+        color: #64748b;
+        background: #f1f5f9;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .plan-type-popular {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    /* Popular Column Highlight */
+    .col-popular {
+        background-color: #fff9fa !important;
+        position: relative;
+    }
+
+    .pricing-table thead th.col-popular {
+        background-color: #fff1f3 !important;
+        border-top: 3px solid #A92036;
+        border-left: 1px solid #fecdd3;
+        border-right: 1px solid #fecdd3;
+    }
+
+    .pricing-table tbody td.col-popular {
+        border-left: 1px solid #fecdd3;
+        border-right: 1px solid #fecdd3;
+        background-color: #fff9fa;
+    }
+
+    .popular-pill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #A92036;
+        color: #ffffff;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        padding: 3px 6px;
+        text-align: center;
+    }
+
+    /* Buttons */
+    .btn-plan {
+        display: inline-block;
+        width: 100%;
+        max-width: 130px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.25s ease;
+        text-align: center;
+    }
+
+    .btn-plan-outline {
+        background: #ffffff;
+        color: #1e293b;
+        border: 1px solid #cbd5e1;
+    }
+
+    .btn-plan-outline:hover {
+        background: #A92036;
+        color: #ffffff;
+        border-color: #A92036;
+        text-decoration: none;
+    }
+
+    .btn-plan-primary {
+        background: #A92036;
+        color: #ffffff;
+        border: 1px solid #A92036;
+        box-shadow: 0 3px 10px rgba(169, 32, 54, 0.3);
+    }
+
+    .btn-plan-primary:hover {
+        background: #801225;
+        border-color: #801225;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    /* Table Body */
+    .pricing-table tbody tr {
+        border-bottom: 1px solid #f1f5f9;
+        transition: background-color 0.15s ease;
+    }
+
+    .pricing-table tbody tr:nth-child(even) td:not(.col-popular) {
+        background-color: #fafbfc;
+    }
+
+    .pricing-table tbody tr:hover td:not(.col-popular) {
+        background-color: #f1f5f9;
+    }
+
+    .pricing-table tbody td {
+        padding: 11px 12px;
+        color: #334155;
+    }
+
+    .highlight-val {
+        color: #A92036;
+        font-weight: 700;
+    }
+
+    .check-yes {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #A92036;
+        font-weight: 600;
+        font-size: 0.84rem;
+    }
+
+    .check-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #A92036;
+        font-size: 0.95rem;
+    }
+
+    .highlight-check {
+        color: #A92036;
+        font-weight: 900;
+    }
+
+    .dash {
+        color: #cbd5e1;
+        font-size: 1.1rem;
+    }
+
+    .badge-unlimited {
+        display: inline-block;
+        background: #dcfce7;
+        color: #166534;
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 12px;
+        border: 1px solid #86efac;
+    }
+
+    /* Footer Note */
+    .pricing-table-footer {
+        padding: 14px 20px;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .footer-conditions-note {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 0;
+        line-height: 1.5;
+    }
+
+    /* 14-Day Free Trial Strip */
+    .pricing-trial-strip {
+        margin-top: 24px;
+        background: #ffffff;
+        border: 1px solid #fecdd3;
+        border-radius: 12px;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        box-shadow: 0 4px 15px rgba(169, 32, 54, 0.05);
+    }
+
+    .trial-strip-text {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.92rem;
+        color: #334155;
+        flex-wrap: wrap;
+    }
+
+    .trial-tag {
+        background: #A92036;
+        color: #ffffff;
+        font-size: 0.74rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: 3px 10px;
+        border-radius: 20px;
+    }
+
+    .btn-trial-strip {
+        background: #16a34a;
+        color: #ffffff;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 8px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        transition: all 0.25s ease;
+    }
+
+    .btn-trial-strip:hover {
+        background: #15803d;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        .pricing-matrix-section {
+            padding: 55px 0 65px;
+        }
+
+        .pricing-trial-strip {
+            flex-direction: column;
+            text-align: center;
+            gap: 12px;
+        }
+
+        .trial-strip-text {
+            justify-content: center;
+        }
+
+        .btn-trial-strip {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% include "partials/header.njk" %}
+
+<!-- Hero Section -->
+<section class="services-hero">
+    <!-- Full-width Background Image & Dark Cinematic Red Theme Overlay -->
+    <div class="services-hero-bg">
+        <img src="/images/services-hero-bg.jpg" alt="Job Labs Recruitment Services Team" fetchpriority="high">
+        <div class="services-hero-overlay"></div>
+        <div class="services-hero-glow"></div>
+    </div>
+
+    <div class="container">
+        <div class="hero-content animate-on-scroll">
+            <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+                <a href="/"><i class="fas fa-home"></i> Home</a>
+                <span class="separator"><i class="fas fa-chevron-right"></i></span>
+                <span class="current">Services</span>
+            </nav>
+
+            <div class="services-hero-badge">
+                <i class="fas fa-briefcase"></i> Recruitment Solutions
+            </div>
+
+            <h1 class="hero-title">Our <span class="brand-accent">Services</span></h1>
+            <p class="hero-subtitle">
+                Comprehensive recruitment solutions designed to streamline your hiring process
+                and connect talent with opportunity seamlessly.
+            </p>
+
+            <div class="services-hero-chips">
+                <div class="hero-chip">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Dedicated Consultants</span>
+                </div>
+                <div class="hero-chip">
+                    <i class="fas fa-cogs"></i>
+                    <span>Intelligent ATS</span>
+                </div>
+                <div class="hero-chip">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Talent Analytics</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Services Section -->
+<section class="services-section">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <div class="section-badge">
+                <i class="fas fa-layer-group"></i> Tailored Solutions
+            </div>
+            <h2 class="section-title">What We <span class="brand-accent-red">Offer</span></h2>
+            <p class="section-subtitle">
+                Our comprehensive suite of recruitment tools and services designed to make hiring efficient,
+                effective, and engaging for both employers and job seekers.
+            </p>
+        </div>
+
+        <div class="services-grid">
+            <!-- Service 1: Dedicated Recruitment Consultant -->
+            <div class="service-card animate-on-scroll stagger-1">
+                <span class="service-card-top-bar"></span>
+                <div class="service-icon-wrapper">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3 class="service-title">Dedicated Recruitment Consultant</h3>
+                <p class="service-description">
+                    Every hiring manager gets a dedicated recruitment consultant who understands your unique
+                    requirements and works exclusively to find the perfect candidates for your organization.
+                </p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> <span>Personalized recruitment strategy</span></li>
+                    <li><i class="fas fa-check"></i> <span>Industry expertise and market insights</span></li>
+                    <li><i class="fas fa-check"></i> <span>Direct communication channel</span></li>
+                    <li><i class="fas fa-check"></i> <span>Candidate pre-screening and interviews</span></li>
+                    <li><i class="fas fa-check"></i> <span>Hiring process optimization</span></li>
+                </ul>
+            </div>
+
+            <!-- Service 2: Advanced ATS Platform -->
+            <div class="service-card animate-on-scroll stagger-2">
+                <span class="service-card-top-bar"></span>
+                <div class="service-icon-wrapper">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 class="service-title">Advanced ATS Platform</h3>
+                <p class="service-description">
+                    Our state-of-the-art Applicant Tracking System streamlines your entire recruitment workflow
+                    from job posting to candidate onboarding with intelligent automation.
+                </p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> <span>Automated candidate screening</span></li>
+                    <li><i class="fas fa-check"></i> <span>Interview scheduling system</span></li>
+                    <li><i class="fas fa-check"></i> <span>Collaborative hiring tools</span></li>
+                    <li><i class="fas fa-check"></i> <span>Real-time analytics and reporting</span></li>
+                    <li><i class="fas fa-check"></i> <span>Mobile-responsive interface</span></li>
+                </ul>
+            </div>
+
+            <!-- Service 3: Job Board Platform -->
+            <div class="service-card animate-on-scroll stagger-3">
+                <span class="service-card-top-bar"></span>
+                <div class="service-icon-wrapper">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3 class="service-title">Comprehensive Job Board</h3>
+                <p class="service-description">
+                    A user-friendly job board that connects talented professionals with exciting opportunities,
+                    featuring advanced search capabilities and personalized job recommendations.
+                </p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> <span>Smart job matching algorithm</span></li>
+                    <li><i class="fas fa-check"></i> <span>One-click application process</span></li>
+                    <li><i class="fas fa-check"></i> <span>Career profile builder</span></li>
+                    <li><i class="fas fa-check"></i> <span>Job alert notifications</span></li>
+                    <li><i class="fas fa-check"></i> <span>Mobile job search app</span></li>
+                </ul>
+            </div>
+
+            <!-- Service 4: Talent Analytics -->
+            <div class="service-card animate-on-scroll stagger-4">
+                <span class="service-card-top-bar"></span>
+                <div class="service-icon-wrapper">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="service-title">Talent Analytics & Insights</h3>
+                <p class="service-description">
+                    Data-driven insights to optimize your recruitment strategy with comprehensive analytics,
+                    market trends, and predictive hiring recommendations.
+                </p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> <span>Recruitment performance metrics</span></li>
+                    <li><i class="fas fa-check"></i> <span>Market salary benchmarking</span></li>
+                    <li><i class="fas fa-check"></i> <span>Candidate quality scoring</span></li>
+                    <li><i class="fas fa-check"></i> <span>Time-to-hire optimization</span></li>
+                    <li><i class="fas fa-check"></i> <span>Custom reporting dashboards</span></li>
+                </ul>
+            </div>
+
+            <!-- Service 5: Interview Management -->
+            <div class="service-card animate-on-scroll stagger-1">
+                <span class="service-card-top-bar"></span>
+                <div class="service-icon-wrapper">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3 class="service-title">Interview Management Suite</h3>
+                <p class="service-description">
+                    Streamlined interview scheduling and management system with video conferencing integration,
+                    automated reminders, and collaborative evaluation tools.
+                </p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> <span>Automated scheduling system</span></li>
+                    <li><i class="fas fa-check"></i> <span>Video interview platform</span></li>
+                    <li><i class="fas fa-check"></i> <span>Interview scorecards</span></li>
+                    <li><i class="fas fa-check"></i> <span>Panel interview coordination</span></li>
+                    <li><i class="fas fa-check"></i> <span>Feedback collection tools</span></li>
+                </ul>
+            </div>
+
+            <!-- Service 6: Employer Branding -->
+            <div class="service-card animate-on-scroll stagger-2">
+                <span class="service-card-top-bar"></span>
+                <div class="service-icon-wrapper">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3 class="service-title">Employer Branding Solutions</h3>
+                <p class="service-description">
+                    Build and showcase your company culture to attract top talent with customized employer
+                    branding solutions and targeted recruitment marketing campaigns.
+                </p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> <span>Company profile optimization</span></li>
+                    <li><i class="fas fa-check"></i> <span>Employee testimonials showcase</span></li>
+                    <li><i class="fas fa-check"></i> <span>Culture videos and content</span></li>
+                    <li><i class="fas fa-check"></i> <span>Social media recruitment</span></li>
+                    <li><i class="fas fa-check"></i> <span>Talent community building</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Employer Recruitment Packages & Pricing Section (Comparison Table) -->
+<!-- ==========================================================================
+     Job Labs Pricing Comparison Section - Clean, Professional & 100% Mobile Responsive
+     ========================================================================== -->
+<section class="pricing-matrix-section" id="pricing-plans">
+    <div class="container">
+        <!-- Section Header -->
+        <div class="pricing-section-header text-center animate-on-scroll">
+            <span class="pricing-badge">
+                <i class="fas fa-tag"></i> Transparent Pricing
+            </span>
+            <h2 class="pricing-title">Hire Smarter. <span class="brand-accent-red">Choose Your Plan</span></h2>
+            <p class="pricing-subtitle">
+                Starter, Growth, Standard and Premium are one-time purchases; Enterprise is billed monthly.
+            </p>
+        </div>
+
+        <!-- Mobile Plan Selector Pills (Tap any plan to scroll directly to it) -->
+        <div class="pricing-plan-nav-wrapper">
+            <div class="pricing-plan-tabs">
+                <button type="button" class="plan-tab-btn" data-target="starter">
+                    Starter
+                </button>
+                <button type="button" class="plan-tab-btn" data-target="growth">
+                    Growth
+                </button>
+                <button type="button" class="plan-tab-btn active" data-target="standard">
+                    <i class="fas fa-crown"></i> Standard
+                </button>
+                <button type="button" class="plan-tab-btn" data-target="premium">
+                    Premium
+                </button>
+                <button type="button" class="plan-tab-btn" data-target="enterprise">
+                    Enterprise
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Horizontal Swipe Indicator -->
+        <div class="pricing-mobile-hint">
+            <i class="fas fa-hand-pointer"></i>
+            <span>Swipe horizontally or tap plans above to compare</span>
+            <i class="fas fa-arrows-left-right"></i>
+        </div>
+
+        <!-- Clean Compact Table -->
+        <div class="pricing-table-card animate-on-scroll">
+            <div class="table-responsive" id="pricingTableResponsive">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th class="col-feature-title">
+                                <span class="header-label">Package Features</span>
+                            </th>
+                            <th class="col-plan" data-plan="starter">
+                                <div class="plan-header">
+                                    <h3 class="plan-name">Starter</h3>
+                                    <div class="plan-price">LKR 1,990</div>
+                                    <span class="plan-type">One-time</span>
+                                    <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+would+like+to+get+started+with+the+Starter+Package+%28LKR+1%2C990%29." 
+                                       target="_blank" class="btn-plan btn-plan-outline">Get Starter</a>
+                                </div>
+                            </th>
+                            <th class="col-plan" data-plan="growth">
+                                <div class="plan-header">
+                                    <h3 class="plan-name">Growth</h3>
+                                    <div class="plan-price">LKR 4,990</div>
+                                    <span class="plan-type">One-time</span>
+                                    <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+would+like+to+get+started+with+the+Growth+Package+%28LKR+4%2C990%29." 
+                                       target="_blank" class="btn-plan btn-plan-outline">Get Growth</a>
+                                </div>
+                            </th>
+                            <th class="col-plan col-popular" data-plan="standard">
+                                <div class="popular-pill"><i class="fas fa-crown"></i> MOST POPULAR</div>
+                                <div class="plan-header">
+                                    <h3 class="plan-name text-danger">Standard</h3>
+                                    <div class="plan-price text-danger">LKR 9,900</div>
+                                    <span class="plan-type plan-type-popular">Best Value • One-time</span>
+                                    <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+would+like+to+get+started+with+the+Standard+Package+%28LKR+9%2C900%29." 
+                                       target="_blank" class="btn-plan btn-plan-primary">Choose Standard</a>
+                                </div>
+                            </th>
+                            <th class="col-plan" data-plan="premium">
+                                <div class="plan-header">
+                                    <h3 class="plan-name">Premium</h3>
+                                    <div class="plan-price">LKR 14,900</div>
+                                    <span class="plan-type">One-time</span>
+                                    <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+would+like+to+get+started+with+the+Premium+Package+%28LKR+14%2C900%29." 
+                                       target="_blank" class="btn-plan btn-plan-outline">Get Premium</a>
+                                </div>
+                            </th>
+                            <th class="col-plan" data-plan="enterprise">
+                                <div class="plan-header">
+                                    <h3 class="plan-name">Enterprise</h3>
+                                    <div class="plan-price">LKR 25,000<span class="period">/mo</span></div>
+                                    <span class="plan-type">Monthly</span>
+                                    <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+would+like+to+discuss+the+Enterprise+Monthly+Plan+%28LKR+25%2C000%2Fmonth%29." 
+                                       target="_blank" class="btn-plan btn-plan-outline">Contact Sales</a>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 1. Job advertisements -->
+                        <tr>
+                            <td class="col-feature-title">Job advertisements</td>
+                            <td class="col-plan">1</td>
+                            <td class="col-plan">5</td>
+                            <td class="col-plan col-popular"><strong class="highlight-val">10</strong></td>
+                            <td class="col-plan">15</td>
+                            <td class="col-plan"><span class="badge-unlimited">Unlimited</span></td>
+                        </tr>
+
+                        <!-- 2. ATS access -->
+                        <tr>
+                            <td class="col-feature-title">ATS access</td>
+                            <td class="col-plan">90 days</td>
+                            <td class="col-plan">Ongoing</td>
+                            <td class="col-plan col-popular"><strong class="highlight-val">Ongoing</strong></td>
+                            <td class="col-plan">Ongoing</td>
+                            <td class="col-plan">Ongoing</td>
+                        </tr>
+
+                        <!-- 3. Pre-screening questionnaires (Upon Request) -->
+                        <tr>
+                            <td class="col-feature-title">Pre-screening questionnaires <small class="text-muted">(Upon Request)</small></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan col-popular"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                        </tr>
+
+                        <!-- 4. CV Filtering (Upon Request - Quotation Based) -->
+                        <tr>
+                            <td class="col-feature-title">CV Filtering <small class="text-muted">(Quotation Based)</small></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan col-popular"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                        </tr>
+
+                        <!-- 5. Unlimited CV access -->
+                        <tr>
+                            <td class="col-feature-title">Unlimited CV access</td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan col-popular"><span class="check-icon highlight-check"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                        </tr>
+
+                        <!-- 6. Talent Analytics & Reports (Dashboard) -->
+                        <tr>
+                            <td class="col-feature-title">Talent Analytics & Reports <small class="text-muted">(Dashboard)</small></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan col-popular"><span class="check-icon highlight-check"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                        </tr>
+
+                        <!-- 7. Social media advertisements -->
+                        <tr>
+                            <td class="col-feature-title">Social media advertisements</td>
+                            <td class="col-plan">1</td>
+                            <td class="col-plan">5</td>
+                            <td class="col-plan col-popular"><strong class="highlight-val">10</strong></td>
+                            <td class="col-plan">15</td>
+                            <td class="col-plan"><span class="badge-unlimited">Unlimited</span></td>
+                        </tr>
+
+                        <!-- 8. Location-targeted candidate allocation -->
+                        <tr>
+                            <td class="col-feature-title">Location-targeted candidate allocation</td>
+                            <td class="col-plan">10</td>
+                            <td class="col-plan">60</td>
+                            <td class="col-plan col-popular"><strong class="highlight-val">75</strong></td>
+                            <td class="col-plan">100</td>
+                            <td class="col-plan"><strong>200</strong></td>
+                        </tr>
+
+                        <!-- 9. Targeted Meta Ads campaign -->
+                        <tr>
+                            <td class="col-feature-title">Targeted Meta Ads campaign</td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan">1 Campaign</td>
+                            <td class="col-plan col-popular"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                        </tr>
+
+                        <!-- 10. Free featured advertisements per month -->
+                        <tr>
+                            <td class="col-feature-title">Free featured advertisements per month</td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan col-popular"><strong class="highlight-val">1</strong></td>
+                            <td class="col-plan">2</td>
+                            <td class="col-plan">3</td>
+                        </tr>
+
+                        <!-- 11. Video job advertisements -->
+                        <tr>
+                            <td class="col-feature-title">Video job advertisements</td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan">1</td>
+                            <td class="col-plan col-popular"><strong class="highlight-val">3</strong></td>
+                            <td class="col-plan">5</td>
+                            <td class="col-plan">10</td>
+                        </tr>
+
+                        <!-- 12. LinkedIn candidate sourcing -->
+                        <tr>
+                            <td class="col-feature-title">LinkedIn candidate sourcing</td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan col-popular"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                        </tr>
+
+                        <!-- 13. Manual Screening and Shortlisting -->
+                        <tr>
+                            <td class="col-feature-title">Manual Screening and Shortlisting</td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan col-popular"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                        </tr>
+
+                        <!-- 14. Email Automations (Upon Request - Quotation Based) -->
+                        <tr>
+                            <td class="col-feature-title">Email Automations <small class="text-muted">(Quotation Based)</small></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan col-popular"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                        </tr>
+
+                        <!-- 15. Dedicated recruitment consultation -->
+                        <tr>
+                            <td class="col-feature-title">Dedicated recruitment consultation</td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan"><span class="dash">—</span></td>
+                            <td class="col-plan col-popular"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
+                        </tr>
+
+                        <!-- 16. 24/7 recruitment support -->
+                        <tr>
+                            <td class="col-feature-title">24/7 recruitment support</td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan col-popular"><span class="check-icon highlight-check"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                            <td class="col-plan"><span class="check-icon"><i class="fas fa-check"></i></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Compact Footnote Note directly from PDF/Slide 5 -->
+            <div class="pricing-table-footer">
+                <p class="footer-conditions-note">
+                    <i class="fas fa-info-circle text-danger"></i> 
+                    Starter, Growth, Standard and Premium are one-time purchases; Enterprise is billed monthly. 
+                    Manual screening and shortlisting is delivered through the dedicated recruitment consultation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Compact Free Trial Strip -->
+        <div class="pricing-trial-strip animate-on-scroll">
+            <div class="trial-strip-text">
+                <span class="trial-tag">14-Day Free Trial</span>
+                <span>First-time recruiter? Get <strong>1 vacancy for 14 calendar days</strong> completely free with full ATS access.</span>
+            </div>
+            <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+am+a+first-time+recruiter+and+would+like+to+claim+the+14-Day+Free+Trial." 
+               target="_blank" 
+               class="btn-trial-strip">
+                <i class="fab fa-whatsapp"></i> Claim Free Trial
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* --------------------------------------------------------------------------
+       Pricing Matrix Responsive Styles
+       -------------------------------------------------------------------------- */
+    .pricing-table-card {
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+        position: relative;
+    }
+
+    /* Scrollable Container with Momentum Touch */
+    .table-responsive {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-x pan-y !important;
+        position: relative !important;
+        overscroll-behavior-x: contain !important;
+    }
+
+    .table-responsive::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .table-responsive::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 4px;
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+        background: #A92036;
+    }
+
+    .pricing-table {
+        width: 100% !important;
+        min-width: 820px !important;
+        border-collapse: collapse !important;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.92rem;
+    }
+
+    /* Plan Tabs for Mobile */
+    .pricing-plan-nav-wrapper {
+        display: none;
+        margin-bottom: 12px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+    }
+
+    .pricing-plan-tabs {
+        display: inline-flex;
+        gap: 8px;
+        background: #f1f5f9;
+        padding: 5px;
+        border-radius: 50px;
+        margin: 0 auto;
+    }
+
+    .plan-tab-btn {
+        border: none;
+        background: transparent;
+        color: #475569;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 7px 16px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .plan-tab-btn.active {
+        background: #A92036;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(169, 32, 54, 0.25);
+    }
+
+    .pricing-mobile-hint {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #fff0f2;
+        border: 1px solid #fecdd3;
+        color: #A92036;
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 8px 18px;
+        border-radius: 50px;
+        margin: 0 auto 16px;
+        width: fit-content;
+        box-shadow: 0 2px 8px rgba(169, 32, 54, 0.06);
+    }
+
+    /* Mobile & Tablet Overrides */
+    @media (max-width: 991px) {
+        .pricing-plan-nav-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pricing-mobile-hint {
+            display: inline-flex;
+        }
+
+        .pricing-table {
+            min-width: 780px !important;
+        }
+
+        /* Sticky Left Column for Package Features on Mobile/Tablet */
+        .pricing-table th.col-feature-title,
+        .pricing-table td.col-feature-title {
+            position: sticky !important;
+            left: 0 !important;
+            z-index: 5 !important;
+            background: #ffffff !important;
+            box-shadow: 4px 0 10px -2px rgba(15, 23, 42, 0.08) !important;
+            border-right: 1px solid #e2e8f0 !important;
+        }
+
+        .pricing-table thead th.col-feature-title {
+            z-index: 8 !important;
+            background: #f8fafc !important;
+        }
+
+        .pricing-table tbody tr:nth-child(even) td.col-feature-title {
+            background: #fafbfc !important;
+        }
+
+        .pricing-table tbody tr:hover td.col-feature-title {
+            background: #f1f5f9 !important;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .pricing-matrix-section {
+            padding: 50px 0 65px;
+        }
+
+        .pricing-title {
+            font-size: 1.85rem;
+        }
+
+        .pricing-subtitle {
+            font-size: 0.95rem;
+        }
+
+        .pricing-table {
+            min-width: 750px !important;
+            font-size: 0.88rem;
+        }
+
+        .col-feature-title {
+            min-width: 165px !important;
+            font-size: 0.85rem;
+            padding: 10px 14px !important;
+        }
+
+        .col-feature-title .header-label {
+            font-size: 0.95rem;
+        }
+
+        .col-plan {
+            min-width: 115px !important;
+            padding: 10px 6px;
+        }
+
+        .plan-name {
+            font-size: 1.05rem;
+        }
+
+        .plan-price {
+            font-size: 1.15rem;
+        }
+
+        .btn-plan {
+            padding: 6px 8px;
+            font-size: 0.74rem;
+            max-width: 110px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pricing-matrix-section {
+            padding: 40px 0 50px;
+        }
+
+        .pricing-title {
+            font-size: 1.55rem;
+        }
+
+        .pricing-plan-tabs {
+            padding: 4px;
+        }
+
+        .plan-tab-btn {
+            font-size: 0.76rem;
+            padding: 5px 12px;
+        }
+
+        .pricing-table-card {
+            border-radius: 12px;
+        }
+
+        .pricing-mobile-hint {
+            font-size: 0.76rem;
+            padding: 6px 14px;
+            margin-bottom: 14px;
+        }
+
+        .col-feature-title {
+            min-width: 140px !important;
+            font-size: 0.8rem;
+            padding: 8px 10px !important;
+        }
+
+        .col-plan {
+            min-width: 105px !important;
+            padding: 8px 4px;
+        }
+
+        .plan-name {
+            font-size: 0.95rem;
+        }
+
+        .plan-price {
+            font-size: 1.05rem;
+        }
+
+        .plan-type {
+            font-size: 0.66rem;
+            padding: 1px 6px;
+        }
+
+        .footer-conditions-note {
+            font-size: 0.76rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tableWrapper = document.getElementById('pricingTableResponsive');
+        const tabBtns = document.querySelectorAll('.plan-tab-btn');
+
+        if (tableWrapper && tabBtns.length > 0) {
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const planKey = this.getAttribute('data-target');
+                    const targetTh = tableWrapper.querySelector(`th[data-plan="${planKey}"]`);
+                    const stickyTh = tableWrapper.querySelector('.col-feature-title');
+
+                    if (targetTh) {
+                        const stickyWidth = stickyTh ? stickyTh.offsetWidth : 140;
+                        const scrollLeftPos = targetTh.offsetLeft - stickyWidth - 6;
+                        tableWrapper.scrollTo({
+                            left: Math.max(0, scrollLeftPos),
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Sync active tab on scroll
+            let scrollTimeout;
+            tableWrapper.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const stickyTh = tableWrapper.querySelector('.col-feature-title');
+                    const stickyWidth = stickyTh ? stickyTh.offsetWidth : 140;
+                    const currentScroll = tableWrapper.scrollLeft + stickyWidth + 30;
+
+                    const allThs = Array.from(tableWrapper.querySelectorAll('th[data-plan]'));
+                    for (let i = allThs.length - 1; i >= 0; i--) {
+                        if (currentScroll >= allThs[i].offsetLeft) {
+                            const planKey = allThs[i].getAttribute('data-plan');
+                            tabBtns.forEach(b => {
+                                if (b.getAttribute('data-target') === planKey) {
+                                    b.classList.add('active');
+                                } else {
+                                    b.classList.remove('active');
+                                }
+                            });
+                            break;
+                        }
+                    }
+                }, 100);
+            }, { passive: true });
+        }
+    });
+</script>
+
+
+<!-- Statistics Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item animate-on-scroll stagger-1">
+                <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+                <div class="stat-number-wrap">
+                    <span class="stat-number" data-target="10000">0</span>
+                    <span class="stat-plus">+</span>
+                </div>
+                <div class="stat-label">Jobs Posted</div>
+            </div>
+            <div class="stat-item animate-on-scroll stagger-2">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number-wrap">
+                    <span class="stat-number" data-target="50000">0</span>
+                    <span class="stat-plus">+</span>
+                </div>
+                <div class="stat-label">Candidates Placed</div>
+            </div>
+            <div class="stat-item animate-on-scroll stagger-3">
+                <div class="stat-icon"><i class="fas fa-building"></i></div>
+                <div class="stat-number-wrap">
+                    <span class="stat-number" data-target="1200">0</span>
+                    <span class="stat-plus">+</span>
+                </div>
+                <div class="stat-label">Partner Companies</div>
+            </div>
+            <div class="stat-item animate-on-scroll stagger-4">
+                <div class="stat-icon"><i class="fas fa-award"></i></div>
+                <div class="stat-number-wrap">
+                    <span class="stat-number" data-target="98">0</span>
+                    <span class="stat-plus">%</span>
+                </div>
+                <div class="stat-label">Success Rate %</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content animate-on-scroll">
+            <div class="cta-badge">
+                <i class="fas fa-bolt"></i> Elevate Your Workforce
+            </div>
+            <h2 class="cta-title">Ready to Transform Your Hiring?</h2>
+            <p class="cta-subtitle">
+                Join thousands of companies who have streamlined their recruitment process with Job Labs.
+                Get started today and experience the difference.
+            </p>
+            <div class="cta-buttons-wrap">
+                <a href="/recruiters-signup" class="btn-cta-primary">
+                    <span>Get Started Today</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+would+like+to+consult+on+recruitment+solutions+for+my+business." 
+                   target="_blank" 
+                   class="btn-cta-whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Talk with a Consultant</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "partials/footer.njk" %}
+{% endblock %}
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = Math.max(1, Math.floor(target / 80));
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = current.toLocaleString();
+                }, 20);
+            });
+        }
+
+        // Intersection Observer for stats animation
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
+                    animateCounters();
+                }
+            });
+        }, {
+            threshold: 0.25
+        });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Scroll Observer for animate-on-scroll elements
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-up');
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // Smooth scroll behavior for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetSelector = this.getAttribute('href');
+                if (targetSelector && targetSelector.length > 1) {
+                    const target = document.querySelector(targetSelector);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

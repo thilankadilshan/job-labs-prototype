@@ -1,0 +1,781 @@
+---
+permalink: "/privacy-policy/"
+---
+{% extends "layouts/master.njk" %}
+{% block title %}Privacy & Disclaimer Policy - Job Labs{% endblock %}
+{% block description %}Privacy policy and disclaimer for Job Labs recruitment platform. Learn how we protect your personal data and our terms of service.{% endblock %}
+{% block og_title %}Privacy & Disclaimer Policy - Job Labs{% endblock %}
+{% block og_description %}Privacy policy and disclaimer for Job Labs recruitment platform. Learn how we protect your personal data and our terms of service.{% endblock %}
+{% block styles %}
+<style>
+    .policy-hero {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+        padding: 80px 0 60px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .policy-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+        /* background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>'); */
+        opacity: 0.9;
+    }
+
+    .policy-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .policy-hero h1 {
+        color: white;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .policy-hero p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.2rem;
+        max-width: 600px;
+    }
+
+    .breadcrumb-nav {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        padding: 12px 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb-nav a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .breadcrumb-nav a:hover {
+        color: white;
+    }
+
+    .breadcrumb-nav span {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.8rem;
+    }
+
+    .policy-main {
+        padding: 80px 0;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+    }
+
+    .policy-sidebar {
+        background: white;
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border-color);
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+    }
+
+    .policy-sidebar h3 {
+        color: var(--primary-blue);
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--light-blue);
+    }
+
+    .policy-nav {
+        list-style: none;
+    }
+
+    .policy-nav li {
+        margin-bottom: 0.75rem;
+    }
+
+    .policy-nav a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 0.95rem;
+        padding: 8px 12px;
+        border-radius: 8px;
+        display: block;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+    }
+
+    .policy-nav a:hover,
+    .policy-nav a.active {
+        background: var(--light-blue);
+        color: var(--primary-blue);
+        border-left-color: var(--primary-orange);
+        transform: translateX(4px);
+    }
+
+    .policy-document {
+        background: white;
+        border-radius: 16px;
+        padding: 48px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border-color);
+    }
+
+    .policy-section {
+        margin-bottom: 3rem;
+        scroll-margin-top: 120px;
+    }
+
+    .policy-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .policy-section h2 {
+        color: var(--primary-blue);
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--light-blue);
+        position: relative;
+    }
+
+    .policy-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 60px;
+        height: 2px;
+        background: var(--primary-orange);
+    }
+
+    .policy-section h3 {
+        color: var(--primary-blue);
+        font-size: 1.25rem;
+        margin: 2rem 0 1rem;
+    }
+
+    .policy-section p {
+        margin-bottom: 1.25rem;
+        text-align: justify;
+    }
+
+    .policy-section ul {
+        margin: 1.25rem 0;
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .policy-section li {
+        position: relative;
+        padding-left: 24px;
+        margin-bottom: 0.75rem;
+        color: var(--text-light);
+        line-height: 1.6;
+    }
+
+    .policy-section li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: var(--primary-orange);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .company-info {
+        background: linear-gradient(135deg, var(--light-blue) 0%, rgba(255, 102, 0, 0.05) 100%);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 2rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .company-info::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--primary-orange);
+    }
+
+    .company-info h4 {
+        color: var(--primary-blue);
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .company-info p {
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .highlight-box {
+        background: linear-gradient(135deg, rgba(255, 102, 0, 0.05) 0%, rgba(8, 1, 89, 0.05) 100%);
+        border: 1px solid rgba(255, 102, 0, 0.2);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 1.5rem 0;
+        position: relative;
+    }
+
+    .highlight-box::before {
+        content: '⚠️';
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 1.2rem;
+    }
+
+    .highlight-box h4 {
+        color: var(--primary-blue);
+        margin-left: 32px;
+        margin-bottom: 0.75rem;
+    }
+
+    .highlight-box p {
+        margin-left: 32px;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-section {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+        color: white;
+        border-radius: 16px;
+        padding: 32px;
+        margin: 3rem 0;
+        text-align: center;
+    }
+
+    .contact-section h3 {
+        color: white;
+        margin-bottom: 1rem;
+    }
+
+    .contact-section p {
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-info-privacy {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+    .contact-item-privacy {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px 20px;
+        border-radius: 25px;
+        backdrop-filter: blur(10px);
+    }
+
+    .contact-item-privacy i {
+        color: var(--primary-orange);
+        font-size: 1.1rem;
+    }
+
+    .contact-item-privacy a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .last-updated {
+        background: var(--light-blue);
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 2rem;
+        text-align: center;
+        border: 1px solid var(--border-color);
+    }
+
+    .last-updated p {
+        margin: 0;
+        color: var(--primary-blue);
+        font-weight: 500;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .policy-main {
+            padding: 60px 0;
+        }
+        
+        .policy-sidebar {
+            position: static;
+            margin-bottom: 2rem;
+        }
+        
+        .policy-document {
+            padding: 32px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .policy-hero {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        .policy-main {
+            padding: 40px 0;
+        }
+        
+        .policy-document {
+            padding: 24px;
+        }
+        
+        .policy-section h2 {
+            font-size: 1.5rem;
+        }
+        
+        .contact-info-privacy {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .breadcrumb-nav {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .policy-hero {
+            padding: 40px 0 30px;
+        }
+        
+        .policy-document {
+            padding: 20px;
+        }
+        
+        .policy-sidebar {
+            padding: 24px;
+        }
+        
+        .company-info,
+        .highlight-box {
+            padding: 20px;
+        }
+        
+        .contact-section {
+            padding: 24px;
+        }
+    }
+
+    /* Smooth scroll behavior for navigation links */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Print styles */
+    @media print {
+        .policy-sidebar,
+        .breadcrumb-nav,
+        .contact-section {
+            display: none;
+        }
+        
+        .policy-document {
+            box-shadow: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .policy-hero {
+            background: none;
+            color: black;
+            padding: 20px 0;
+        }
+        
+        .policy-hero h1,
+        .policy-section h2,
+        .policy-section h3 {
+            color: black;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% include "partials/header.njk" %}
+
+<!-- Hero Section -->
+<section class="policy-hero">
+    <div class="container">
+        <div class="policy-content">
+            <!-- <nav class="breadcrumb-nav animate-fade-up">
+                <a href="/">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <span>/</span>
+                <span>Privacy & Disclaimer Policy</span>
+            </nav>
+             -->
+            <h1 class="animate-fade-up">Privacy & Disclaimer Policy</h1>
+            <p class="animate-fade-up">
+                Your privacy matters to us. Learn how we collect, use, and protect your personal information on our recruitment platform.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="policy-main">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-lg-3 col-md-4">
+                <div class="policy-sidebar animate-fade-left">
+                    <h3>
+                        <i class="fas fa-list-ul"></i>
+                        Quick Navigation
+                    </h3>
+                    <ul class="policy-nav">
+                        <li><a href="#introduction" class="nav-link">1. Introduction</a></li>
+                        <li><a href="#information-collection" class="nav-link">2. Information We Collect</a></li>
+                        <li><a href="#information-usage" class="nav-link">3. How We Use Your Information</a></li>
+                        <li><a href="#information-sharing" class="nav-link">4. Sharing Your Information</a></li>
+                        <li><a href="#data-retention" class="nav-link">5. Data Retention</a></li>
+                        <li><a href="#security" class="nav-link">6. Security</a></li>
+                        <li><a href="#your-rights" class="nav-link">7. Your Rights</a></li>
+                        <li><a href="#cookies" class="nav-link">8. Cookies</a></li>
+                        <li><a href="#children-privacy" class="nav-link">9. Children's Privacy</a></li>
+                        <li><a href="#contact" class="nav-link">10. Contact Us</a></li>
+                        <li><a href="#disclaimer" class="nav-link">11. Disclaimer</a></li>
+                        <li><a href="#liability" class="nav-link">12. Limitation of Liability</a></li>
+                        <li><a href="#ownership" class="nav-link">13. Ownership & IP</a></li>
+                        <li><a href="#changes" class="nav-link">14. Policy Changes</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Policy Document -->
+            <div class="col-lg-9 col-md-8">
+                <div class="policy-document animate-fade-right">
+                    <!-- Last Updated -->
+                    <div class="last-updated">
+                        <p>
+                            <i class="fas fa-calendar-alt"></i>
+                            Last Updated: 15th September 2025
+                        </p>
+                    </div>
+
+                    <!-- Company Information -->
+                    <div class="company-info">
+                        <h4>Sharper Labs Academy (Private) Ltd</h4>
+                        <p><strong>Company Registration No:</strong> 00328199</p>
+                        <p><strong>Website:</strong> <a href="https://www.job-labs.lk" target="_blank">www.job-labs.lk</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:info@job-labs.lk">info@job-labs.lk</a></p>
+                    </div>
+
+                    <!-- Section 1: Introduction -->
+                    <div class="policy-section" id="introduction">
+                        <h2>1. Introduction</h2>
+                        <p>
+                            Sharper Labs Academy (Private) Ltd ("we", "our", "us") respects your privacy and is committed to protecting your personal data. This Privacy & Disclaimer Policy explains how we collect, use, disclose, and safeguard your information when you use our recruitment/job board website <a href="https://www.job-labs.lk" target="_blank">www.job-labs.lk</a> (the "Website").
+                        </p>
+                        <p>
+                            By using this Website, you agree to the terms set out below. If you do not agree, please do not use the Website.
+                        </p>
+                    </div>
+
+                    <!-- Section 2: Information We Collect -->
+                    <div class="policy-section" id="information-collection">
+                        <h2>2. Information We Collect</h2>
+                        <p>When you register or apply for jobs through the Website, we may collect:</p>
+                        <ul>
+                            <li><strong>Personal Information:</strong> Name, date of birth, gender, contact details, address, and identification details.</li>
+                            <li><strong>Professional Information:</strong> Education, qualifications, CV/resume, work experience, skills, and references.</li>
+                            <li><strong>Account Information:</strong> Username, password, and communication preferences.</li>
+                            <li><strong>Technical Information:</strong> IP address, device details, browser type, cookies, and usage data.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 3: How We Use Your Information -->
+                    <div class="policy-section" id="information-usage">
+                        <h2>3. How We Use Your Information</h2>
+                        <p>Your data will be used to:</p>
+                        <ul>
+                            <li>Create and manage your account.</li>
+                            <li>Allow you to search and apply for job opportunities.</li>
+                            <li>Share your information with prospective employers and hiring managers.</li>
+                            <li>Communicate with you regarding applications, updates, and support.</li>
+                            <li>Improve the Website and personalise your experience.</li>
+                            <li>Comply with legal obligations under Sri Lankan law.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 4: Sharing Your Information -->
+                    <div class="policy-section" id="information-sharing">
+                        <h2>4. Sharing Your Information</h2>
+                        <p>We may share your information with:</p>
+                        <ul>
+                            <li><strong>Employers and Hiring Managers:</strong> To evaluate your application.</li>
+                            <li><strong>Service Providers:</strong> For hosting, IT, or analytics.</li>
+                            <li><strong>Regulatory Authorities:</strong> Where legally required.</li>
+                        </ul>
+                        <div class="highlight-box">
+                            <h4>Important Notice</h4>
+                            <p>We do <strong>not</strong> sell your personal data to third parties.</p>
+                        </div>
+                    </div>
+
+                    <!-- Section 5: Data Retention -->
+                    <div class="policy-section" id="data-retention">
+                        <h2>5. Data Retention</h2>
+                        <ul>
+                            <li>Candidate accounts remain active until you request deletion.</li>
+                            <li>Application data may be kept for up to <strong>12 months</strong> for compliance unless otherwise required by law.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 6: Security -->
+                    <div class="policy-section" id="security">
+                        <h2>6. Security</h2>
+                        <p>
+                            We use technical and organisational measures to safeguard your data, but no system is 100% secure.
+                        </p>
+                    </div>
+
+                    <!-- Section 7: Your Rights -->
+                    <div class="policy-section" id="your-rights">
+                        <h2>7. Your Rights</h2>
+                        <p>Under the <strong>Sri Lanka Personal Data Protection Act No. 9 of 2022</strong>, you may:</p>
+                        <ul>
+                            <li>Access and obtain a copy of your data.</li>
+                            <li>Request correction or deletion.</li>
+                            <li>Withdraw consent for processing (where applicable).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 8: Cookies -->
+                    <div class="policy-section" id="cookies">
+                        <h2>8. Cookies</h2>
+                        <p>
+                            The Website uses cookies to improve user experience and track performance. You may disable cookies in your browser, but this may limit functionality.
+                        </p>
+                    </div>
+
+                    <!-- Section 9: Children's Privacy -->
+                    <div class="policy-section" id="children-privacy">
+                        <h2>9. Children's Privacy</h2>
+                        <p>
+                            This Website is not intended for individuals under <strong>16</strong>. We do not knowingly collect children's data.
+                        </p>
+                    </div>
+
+                    <!-- Section 10: Contact Us -->
+                    <div class="policy-section" id="contact">
+                        <h2>10. Contact Us</h2>
+                        <p>For all enquiries, please contact us at:</p>
+                        <div class="company-info">
+                            <h4>Sharper Labs Academy (Private) Ltd</h4>
+                            <p><strong>Registration No:</strong> 00328199</p>
+                            <p><strong>Email:</strong> <a href="mailto:info@job-labs.lk">info@job-labs.lk</a></p>
+                        </div>
+                        <p>
+                            We encourage all correspondence to be sent via <strong>email</strong>, as this is an online platform. This ensures your request is logged and dealt with promptly.
+                        </p>
+                    </div>
+
+                    <!-- Section 11: Disclaimer -->
+                    <div class="policy-section" id="disclaimer">
+                        <h2>11. Disclaimer</h2>
+                        <p>
+                            <a href="https://www.job-labs.lk" target="_blank">www.job-labs.lk</a> is an online platform connecting candidates with employers. We do not guarantee:
+                        </p>
+                        <ul>
+                            <li>The accuracy or reliability of job postings submitted by employers.</li>
+                            <li>The accuracy of information provided by candidates.</li>
+                            <li>That job applications will lead to employment.</li>
+                        </ul>
+                        <p>All recruitment decisions are the sole responsibility of employers.</p>
+                    </div>
+
+                    <!-- Section 12: Limitation of Liability -->
+                    <div class="policy-section" id="liability">
+                        <h2>12. Limitation of Liability</h2>
+                        <p>
+                            Sharper Labs Academy (Private) Ltd is not liable for any loss, damage, or inconvenience resulting from reliance on job postings, applications, or communications through the Website. Users must independently verify job offers and candidate information.
+                        </p>
+                    </div>
+
+                    <!-- Section 13: Ownership and Intellectual Property -->
+                    <div class="policy-section" id="ownership">
+                        <h2>13. Ownership and Intellectual Property</h2>
+                        <p>
+                            The Website <a href="https://www.sharper-labs.com" target="_blank">www.sharper-labs.com</a>, including design, content, logos, and trademarks, is owned and operated by <strong>Sharper Labs Academy (Private) Ltd</strong>.
+                        </p>
+                        <p>
+                            All rights reserved. No part of this Website may be copied, reproduced, or transmitted without prior written consent, except as permitted by law.
+                        </p>
+                    </div>
+
+                    <!-- Section 14: Changes to This Policy -->
+                    <div class="policy-section" id="changes">
+                        <h2>14. Changes to This Policy</h2>
+                        <p>
+                            We may update this Policy from time to time. Updates will be posted here with a revised "Effective Date."
+                        </p>
+                    </div>
+
+                    <!-- Contact Section -->
+                    <div class="contact-section">
+                        <h3>Need Help?</h3>
+                        <p>If you have any questions about this Privacy Policy or need assistance, we're here to help.</p>
+                        <div class="contact-info-privacy">
+                            <div class="contact-item-privacy">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:info@job-labs.lk">info@job-labs.lk</a>
+                            </div>
+                            <div class="contact-item-privacy">
+                                <i class="fas fa-globe"></i>
+                                <a href="https://www.job-labs.lk" target="_blank">www.job-labs.lk</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "partials/footer.njk" %}
+{% endblock %}
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll for navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.policy-section');
+    
+    // Handle navigation clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const headerOffset = 120;
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Update active navigation link on scroll
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '-120px 0px -50% 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                const correspondingNavLink = document.querySelector(`a[href="#${id}"]`);
+                
+                // Remove active class from all nav links
+                navLinks.forEach(link => link.classList.remove('active'));
+                
+                // Add active class to current nav link
+                if (correspondingNavLink) {
+                    correspondingNavLink.classList.add('active');
+                }
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all sections
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+    
+    // Back to top functionality
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--primary-orange);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    `;
+    
+    document.body.appendChild(backToTopBtn);
+    
+    // Show/hide back to top button
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 500) {
+            backToTopBtn.style.opacity = '1';
+            backToTopBtn.style.visibility = 'visible';
+        } else {
+            backToTopBtn.style.opacity = '0';
+            backToTopBtn.style.visibility = 'hidden';
+        }
+    });
+    
+    // Back to top click handler
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Print functionality
+    // const printBtn = document.createElement('button');
+    // printBtn.innerHTML = '<i class="fas fa-print"></i> Print Policy';
+    // printBtn.className = 'btn btn-outline';
+    // printBtn.style.cssText = `
+    //     position: fixed;
+    //     bottom: 30px;
+    //     left: 30px;
+    //     z-index: 1000;
+    // `;
+    
+    // document.body.appendChild(printBtn);
+    
+    // printBtn.addEventListener('click', function() {
+    //     window.print();
+    // });
+});
+</script>
+{% endblock %}

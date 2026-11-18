@@ -1,0 +1,1124 @@
+---
+permalink: "/recruiters-signup/"
+---
+{% extends "layouts/master.njk" %}
+{% block title %}Recruiter & Employer Sign Up - Job Labs Sri Lanka{% endblock %}
+{% block description %}Sign up for Job Labs employer account. Access premium recruitment solutions, post vacancies, and connect with top Sri Lankan talent.{% endblock %}
+{% block og_title %}Recruiter & Employer Sign Up - Job Labs Sri Lanka{% endblock %}
+{% block og_description %}Sign up for Job Labs employer account. Access premium recruitment solutions, post vacancies, and connect with top Sri Lankan talent.{% endblock %}
+{% block styles %}
+<style>
+    /* ==========================================================================
+       Job Labs Employer Sign-Up - Red Theme Design System (#A92036)
+       ========================================================================== */
+    :root {
+        --primary-red: #A92036;
+        --primary-red-dark: #801225;
+        --primary-red-wine: #520713;
+        --primary-red-soft: #fff8f9;
+        --primary-red-border: #fecdd3;
+        --primary-red-glow: rgba(169, 32, 54, 0.25);
+        --text-dark: #0f172a;
+        --text-muted: #64748b;
+        --border-radius: 12px;
+        --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+        background: linear-gradient(180deg, #ffffff 0%, #fffbfb 100%);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* --------------------------------------------------------------------------
+       Hero Section with Sri Lankan Team Image
+       -------------------------------------------------------------------------- */
+    .signup-hero {
+        position: relative;
+        min-height: 48vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 95px 0 100px;
+        overflow: hidden;
+        background-color: var(--primary-red-wine);
+    }
+
+    .signup-hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .signup-hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 25%;
+        filter: brightness(0.98) contrast(1.02);
+        transform: scale(1.02);
+        transition: transform 8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .signup-hero:hover .signup-hero-bg img {
+        transform: scale(1.06);
+    }
+
+    /* Clean translucent neutral-dark overlay for natural skin tones */
+    .signup-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            180deg,
+            rgba(10, 15, 29, 0.52) 0%,
+            rgba(10, 15, 29, 0.38) 50%,
+            rgba(10, 15, 29, 0.68) 100%
+        );
+        z-index: 2;
+    }
+
+    .signup-hero .container {
+        position: relative;
+        z-index: 3;
+    }
+
+    .signup-hero-content {
+        text-align: center;
+        color: #ffffff;
+        max-width: 860px;
+        margin: 0 auto;
+    }
+
+    .signup-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #ffffff;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        padding: 7px 20px;
+        border-radius: 50px;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .signup-hero-badge i {
+        color: #ffccd3;
+        font-size: 0.9rem;
+    }
+
+    .signup-hero-content h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(2.3rem, 5vw, 3.6rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -0.5px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .signup-hero-content h1 .brand-accent {
+        color: #ffffff;
+        position: relative;
+        display: inline-block;
+    }
+
+    .signup-hero-content h1 .brand-accent::after {
+        content: '';
+        position: absolute;
+        bottom: 6px;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: linear-gradient(90deg, #ff8597, #ffffff);
+        border-radius: 3px;
+        opacity: 0.85;
+        z-index: -1;
+    }
+
+    .signup-hero-content p {
+        font-family: 'Inter', sans-serif;
+        font-size: clamp(1.05rem, 2vw, 1.2rem);
+        color: rgba(255, 255, 255, 0.95);
+        max-width: 720px;
+        margin: 0 auto 1.5rem;
+        line-height: 1.7;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .signup-hero-chips {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 1rem;
+    }
+
+    .hero-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 18px;
+        border-radius: 50px;
+        color: #ffffff;
+        font-size: 0.88rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .hero-chip:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+    }
+
+    .hero-chip i {
+        color: var(--primary-red);
+        font-size: 0.85rem;
+        background: #ffffff;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* --------------------------------------------------------------------------
+       Main Form Section
+       -------------------------------------------------------------------------- */
+    .signup-section {
+        padding: 40px 0 90px;
+        position: relative;
+    }
+
+    .signup-container {
+        max-width: 980px;
+        margin: -60px auto 0;
+        padding: 0 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .signup-card {
+        background: #ffffff;
+        border-radius: 20px;
+        border: 1px solid var(--primary-red-border);
+        border-top: 5px solid var(--primary-red);
+        box-shadow: 0 16px 40px -10px rgba(169, 32, 54, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        overflow: hidden;
+        transition: var(--transition);
+    }
+
+    .signup-card:hover {
+        box-shadow: 0 22px 50px -10px rgba(169, 32, 54, 0.18);
+    }
+
+    /* Form Header */
+    .form-header {
+        background: linear-gradient(135deg, #ffffff 0%, var(--primary-red-soft) 100%);
+        padding: 38px 45px 30px;
+        text-align: center;
+        border-bottom: 1px solid var(--primary-red-border);
+    }
+
+    .form-header-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(169, 32, 54, 0.08);
+        border: 1px solid rgba(169, 32, 54, 0.22);
+        color: var(--primary-red);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        padding: 4px 14px;
+        border-radius: 50px;
+        margin-bottom: 0.8rem;
+    }
+
+    .form-header h2 {
+        font-family: 'Poppins', sans-serif;
+        color: var(--text-dark);
+        font-size: 2.1rem;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+        letter-spacing: -0.5px;
+    }
+
+    .form-header h2 span {
+        color: var(--primary-red);
+    }
+
+    .form-header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin: 0;
+    }
+
+    /* Form Body */
+    .form-body {
+        padding: 48px 45px;
+    }
+
+    /* Section Subheaders */
+    .form-section-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 25px 0 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .form-section-title:first-of-type {
+        margin-top: 0;
+    }
+
+    .form-section-title i {
+        color: var(--primary-red);
+        font-size: 1.1rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 22px;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+        position: relative;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 8px;
+        font-size: 0.92rem;
+    }
+
+    .required-star {
+        color: var(--primary-red);
+        font-weight: 700;
+    }
+
+    /* Input Controls */
+    .form-control {
+        width: 100%;
+        padding: 13px 16px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: var(--border-radius);
+        font-size: 0.98rem;
+        transition: var(--transition);
+        background: #f8fafc;
+        font-family: inherit;
+        color: var(--text-dark);
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--primary-red);
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(169, 32, 54, 0.12);
+        transform: translateY(-1px);
+    }
+
+    .form-select {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23A92036" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: calc(100% - 16px) center;
+        background-size: 13px;
+        padding-right: 42px;
+        cursor: pointer;
+    }
+
+    /* File Upload */
+    .file-upload {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .file-upload input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 5;
+    }
+
+    .file-upload-label {
+        display: flex;
+        align-items: center;
+        padding: 16px 20px;
+        border: 2px dashed #cbd5e1;
+        border-radius: var(--border-radius);
+        background: #f8fafc;
+        cursor: pointer;
+        transition: var(--transition);
+        gap: 12px;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+    }
+
+    .file-upload-label:hover {
+        border-color: var(--primary-red);
+        background: var(--primary-red-soft);
+        color: var(--primary-red);
+    }
+
+    .file-upload-icon {
+        font-size: 1.3rem;
+        color: var(--primary-red);
+    }
+
+    .logo-preview {
+        margin-top: 12px;
+        padding: 10px;
+        border: 1px solid var(--primary-red-border);
+        border-radius: 10px;
+        background: #ffffff;
+        position: relative;
+        display: inline-block;
+    }
+
+    .logo-preview img {
+        max-height: 80px;
+        border-radius: 6px;
+        display: block;
+    }
+
+    .remove-logo-btn {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--primary-red);
+        color: #ffffff;
+        border: none;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Modern Checkbox Cards */
+    .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-top: 12px;
+    }
+
+    .checkbox-item {
+        display: flex;
+        align-items: center;
+        padding: 14px 18px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+        cursor: pointer;
+        background: #ffffff;
+    }
+
+    .checkbox-item:hover {
+        border-color: var(--primary-red-border);
+        background: var(--primary-red-soft);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 12px;
+        accent-color: var(--primary-red);
+        cursor: pointer;
+    }
+
+    .checkbox-item label {
+        flex: 1;
+        cursor: pointer;
+        font-weight: 500;
+        color: #334155;
+        font-size: 0.92rem;
+        margin-bottom: 0;
+        line-height: 1.4;
+    }
+
+    .checkbox-item.checked,
+    .checkbox-item:has(input[type="checkbox"]:checked) {
+        border-color: var(--primary-red);
+        background: #fff5f6;
+    }
+
+    .checkbox-item:has(input[type="checkbox"]:checked) label {
+        color: var(--primary-red);
+        font-weight: 600;
+    }
+
+    /* Validation Messages */
+    .validation-message {
+        margin-top: 6px;
+        font-size: 0.82rem;
+        display: none;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .valid-feedback {
+        color: #16a34a;
+    }
+
+    .invalid-feedback {
+        color: #ef4444;
+    }
+
+    .was-validated .form-control:valid ~ .valid-feedback {
+        display: flex;
+    }
+
+    .was-validated .form-control:invalid ~ .invalid-feedback,
+    .form-control.is-invalid ~ .invalid-feedback {
+        display: flex;
+    }
+
+    .was-validated .form-control:invalid,
+    .form-control.is-invalid {
+        border-color: #ef4444 !important;
+        background: #fef2f2 !important;
+    }
+
+    /* Submit Section */
+    .submit-section {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid #f1f5f9;
+        margin-top: 35px;
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+        color: #ffffff;
+        border: none;
+        padding: 16px 48px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif;
+        box-shadow: 0 10px 24px -4px var(--primary-red-glow);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-submit::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+        transition: 0.6s ease;
+    }
+
+    .btn-submit:hover {
+        background: linear-gradient(135deg, #c4263f 0%, var(--primary-red) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px -4px rgba(169, 32, 54, 0.4);
+    }
+
+    .btn-submit:hover::before {
+        left: 100%;
+    }
+
+    .btn-submit:active {
+        transform: translateY(1px);
+    }
+
+    /* --------------------------------------------------------------------------
+       Responsive Rules
+       -------------------------------------------------------------------------- */
+    @media (max-width: 991px) {
+        .form-body {
+            padding: 38px 30px;
+        }
+
+        .checkbox-group {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .signup-hero {
+            padding: 75px 0 70px;
+            min-height: auto;
+        }
+
+        .signup-container {
+            margin-top: -30px;
+            padding: 0 15px;
+        }
+
+        .form-header {
+            padding: 28px 20px 22px;
+        }
+
+        .form-header h2 {
+            font-size: 1.75rem;
+        }
+
+        .form-body {
+            padding: 28px 20px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 0;
+            margin-bottom: 0;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px 24px;
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .signup-hero-content h1 {
+            font-size: 2rem;
+        }
+
+        .signup-hero-content p {
+            font-size: 0.98rem;
+        }
+
+        .signup-card {
+            border-radius: 16px;
+        }
+
+        .form-control {
+            font-size: 0.95rem;
+            padding: 12px 14px;
+        }
+
+        .checkbox-item {
+            padding: 12px 14px;
+        }
+
+        .checkbox-item label {
+            font-size: 0.88rem;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+<!-- Header Section -->
+{% include "partials/header.njk" %}
+
+<!-- Redesigned Hero Section with Authentic Sri Lankan Recruiter Background Image -->
+<section class="signup-hero">
+    <div class="signup-hero-bg">
+        <img src="/assets/front/images/recruiter-signup-hero-bg.jpg" alt="Job Labs Employer & Recruiter Team">
+    </div>
+    <div class="signup-hero-overlay"></div>
+
+    <div class="container">
+        <div class="signup-hero-content">
+            <div class="signup-hero-badge">
+                <i class="fas fa-building-user"></i> Employer Registration
+            </div>
+            <h1>Empower Your Hiring with <span class="brand-accent">Job Labs</span></h1>
+            <p>Create your employer account today. Connect with verified Sri Lankan talent, streamline shortlisting, and scale your organization.</p>
+
+            <div class="signup-hero-chips">
+                <span class="hero-chip"><i class="fas fa-bolt"></i> Fast 2-Minute Setup</span>
+                <span class="hero-chip"><i class="fas fa-users-gear"></i> Integrated ATS Access</span>
+                <span class="hero-chip"><i class="fas fa-shield-halved"></i> 100% Confidential</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Signup Form Section -->
+<section class="signup-section">
+    <div class="signup-container">
+        <div class="signup-card">
+            <div class="form-header">
+                <div class="form-header-badge"><i class="fas fa-user-plus"></i> Recruiter Registration</div>
+                <h2>Create Your <span>Employer Account</span></h2>
+                <p>Fill in your business details below to get started with our recruitment platform</p>
+            </div>
+
+            <div class="form-body">
+                <form method="POST" class="cmxform needs-validation" novalidate enctype="multipart/form-data" action="/user/request">
+                    <input type="hidden" name="_token" value="prototype-csrf-token">
+
+                    <!-- Section 1: Contact Person Information -->
+                    <div class="form-section-title">
+                        <i class="fas fa-id-card"></i> Contact Person Information
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user_title" class="form-label">
+                                Title <span class="required-star">*</span>
+                            </label>
+                            <select name="user_title" id="user_title" class="form-control form-select" required>
+                                <option value="">Select Title</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Ms">Ms</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Dr">Dr</option>
+                            </select>
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please select a valid title
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user_fname" class="form-label">
+                                First Name <span class="required-star">*</span>
+                            </label>
+                            <input type="text"
+                                id="user_fname"
+                                name="user_fname"
+                                class="form-control"
+                                pattern="^[a-zA-Z]+\s?[a-zA-Z]+$"
+                                required
+                                placeholder="Enter your first name">
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please enter a valid first name
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user_lname" class="form-label">
+                                Surname <span class="required-star">*</span>
+                            </label>
+                            <input type="text"
+                                id="user_lname"
+                                name="user_lname"
+                                class="form-control"
+                                pattern="^[a-zA-Z]+\s?[a-zA-Z]+$"
+                                required
+                                placeholder="Enter your surname">
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please enter a valid surname
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user_email" class="form-label">
+                                Email Address <span class="required-star">*</span>
+                            </label>
+                            <input type="email"
+                                id="user_email"
+                                name="user_email"
+                                class="form-control"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                required
+                                placeholder="Enter your email address">
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please enter a valid email address
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Company Details -->
+                    <div class="form-section-title">
+                        <i class="fas fa-building"></i> Company Information
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user_cname" class="form-label">
+                                Company Name <span class="required-star">*</span>
+                            </label>
+                            <input type="text"
+                                id="user_cname"
+                                name="user_cname"
+                                class="form-control"
+                                pattern="^[A-Za-z0-9&.,'()\-]+(?: [A-Za-z0-9&.,'()\-]+)*$"
+                                required
+                                placeholder="Enter your company name">
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please enter your company name
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user_postion" class="form-label">
+                                Your Position / Job Title <span class="required-star">*</span>
+                            </label>
+                            <input type="text"
+                                id="user_postion"
+                                name="user_postion"
+                                class="form-control"
+                                pattern="[a-zA-Z][a-zA-Z ]{4,}"
+                                required
+                                placeholder="e.g. HR Director, Hiring Manager">
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please enter your position
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Logo Upload -->
+                    <div class="form-group">
+                        <label for="user_clogo" class="form-label">Company Logo <span style="font-weight: 400; color: #94a3b8;">(Optional)</span></label>
+                        <div class="file-upload">
+                            <input type="file" id="user_clogo" name="user_clogo" accept="image/*">
+                            <label for="user_clogo" class="file-upload-label">
+                                <i class="fas fa-cloud-arrow-up file-upload-icon"></i>
+                                <span>Choose company logo or drag & drop here (Max 2MB)</span>
+                            </label>
+                        </div>
+                        <div id="logo-preview" class="logo-preview" style="display: none;">
+                            <img id="logo-image" src="" alt="Company Logo Preview" />
+                            <button type="button" id="remove-logo" class="remove-logo-btn" title="Remove logo">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Contact & Consultation Scheduling -->
+                    <div class="form-section-title">
+                        <i class="fas fa-phone-volume"></i> Contact & Consultation
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user_phone" class="form-label">
+                                Mobile Number <span class="required-star">*</span>
+                            </label>
+                            <input type="tel"
+                                id="user_phone"
+                                name="user_phone"
+                                class="form-control"
+                                maxlength="11"
+                                pattern="^[0-9]+\s?[0-9]+\s?[0-9]+$"
+                                required
+                                placeholder="077 123 4567">
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please enter a valid mobile number
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user_officeno" class="form-label">
+                                Office / Landline Number <span class="required-star">*</span>
+                            </label>
+                            <input type="tel"
+                                id="user_officeno"
+                                name="user_officeno"
+                                class="form-control"
+                                maxlength="12"
+                                pattern="^[0-9]+\s?[0-9]+\s?[0-9]+$"
+                                required
+                                placeholder="011 234 5678">
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please enter a valid office number
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="preftime" class="form-label">
+                                Preferred Contact Date & Time <span class="required-star">*</span>
+                            </label>
+                            <input type="datetime-local"
+                                id="preftime"
+                                name="user_datetime"
+                                class="form-control"
+                                required>
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please select your preferred contact time
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user_sector" class="form-label">
+                                Industrial Sector <span class="required-star">*</span>
+                            </label>
+                            <select name="user_sector" id="user_sector" class="form-control form-select" required>
+                                <option value="">Select Industrial Sector</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Health Care">Health Care</option>
+                                <option value="Security">Security</option>
+                                <option value="Drivers and Receptionists">Drivers and Receptionists</option>
+                                <option value="Professionals">Professionals</option>
+                            </select>
+                            <div class="valid-feedback validation-message">
+                                <i class="fas fa-check-circle"></i> Looks good!
+                            </div>
+                            <div class="invalid-feedback validation-message">
+                                <i class="fas fa-exclamation-circle"></i> Please select an industrial sector
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Recruitment Needs -->
+                    <div class="form-section-title">
+                        <i class="fas fa-clipboard-check"></i> Recruitment Needs
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            What are you looking for? <span class="required-star">*</span>
+                        </label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="uvan" name="user_uvan" value="Urgent vacancy advertising needs">
+                                <label for="uvan">Urgent vacancy advertising needs</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fvan" name="user_fvan" value="Future vacancy advertising needs">
+                                <label for="fvan">Future vacancy advertising needs</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="ootva" name="user_ootva" value="One off vacancy advert">
+                                <label for="ootva">One off vacancy advert</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="rva" name="user_rva" value="Regular vacancy adverts">
+                                <label for="rva">Regular vacancy adverts</label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="jett" name="user_jett" value="Just an enquiry at this time">
+                                <label for="jett">Just an enquiry at this time</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Section -->
+                    <div class="submit-section">
+                        <button id="button" type="submit" class="btn-submit">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Create Account</span>
+                        </button>
+                        <p style="margin-top: 18px; color: #64748b; font-size: 0.88rem;">
+                            By creating an account, you agree to our <a href="/terms-of-service" style="color: var(--primary-red); text-decoration: underline;">Terms of Service</a> and <a href="/privacy-policy" style="color: var(--primary-red); text-decoration: underline;">Privacy Policy</a>.
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+{% include "partials/footer.njk" %}
+
+{# reCAPTCHA (htmlScriptTagJsApi) removed in the prototype #}
+
+{% endblock %}
+{% block scripts %}
+<!-- Add jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+    function callbackThen(response) {
+        console.log(response.status);
+        response.json().then(function(data) {
+            console.log(data);
+        });
+    }
+
+    function callbackCatch(error) {
+        console.error('Error:', error);
+    }
+
+    $(document).ready(function() {
+        'use strict';
+
+        // Set minimum datetime for preferred contact time
+        const elem = document.getElementById("preftime");
+        if (elem) {
+            const now = new Date();
+            // Format YYYY-MM-DDTHH:MM local time
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const localMinDate = `${year}-${month}-${day}T${hours}:${minutes}`;
+            elem.value = localMinDate;
+            elem.min = localMinDate;
+        }
+
+        // File upload enhancement with image preview
+        const fileInput = document.getElementById('user_clogo');
+        const fileUploadContainer = document.querySelector('.file-upload');
+        const logoPreview = document.getElementById('logo-preview');
+        const logoImage = document.getElementById('logo-image');
+        const removeLogoBtn = document.getElementById('remove-logo');
+
+        if (fileInput) {
+            const fileLabel = fileInput.nextElementSibling ? fileInput.nextElementSibling.querySelector('span') : null;
+
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+
+                if (file) {
+                    if (!file.type.startsWith('image/')) {
+                        alert('Please select a valid image file');
+                        fileInput.value = '';
+                        return;
+                    }
+
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('File size must be less than 2MB');
+                        fileInput.value = '';
+                        return;
+                    }
+
+                    if (fileLabel) {
+                        fileLabel.textContent = file.name;
+                        fileLabel.style.color = '#A92036';
+                    }
+                    if (fileUploadContainer) {
+                        fileUploadContainer.classList.add('has-preview');
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        if (logoImage) logoImage.src = evt.target.result;
+                        if (logoPreview) logoPreview.style.display = 'inline-block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    resetFileUpload();
+                }
+            });
+
+            if (removeLogoBtn) {
+                removeLogoBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    fileInput.value = '';
+                    resetFileUpload();
+                });
+            }
+
+            function resetFileUpload() {
+                if (fileLabel) {
+                    fileLabel.textContent = 'Choose company logo or drag & drop here (Max 2MB)';
+                    fileLabel.style.color = '';
+                }
+                if (logoPreview) logoPreview.style.display = 'none';
+                if (logoImage) logoImage.src = '';
+                if (fileUploadContainer) fileUploadContainer.classList.remove('has-preview');
+            }
+        }
+
+        // Form validation
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                // Safely verify reCAPTCHA only if active on page
+                if (typeof grecaptcha !== 'undefined' && document.getElementById('captcha')) {
+                    const response = grecaptcha.getResponse();
+                    if (response === "") {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        document.getElementById('captcha').innerHTML = "Please complete the reCAPTCHA";
+                        alert("You can't leave Captcha Code empty");
+                    } else if (document.getElementById('captchas')) {
+                        document.getElementById('captchas').innerHTML = "reCAPTCHA verified successfully!";
+                    }
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+
+        // Phone number numbers-only validation
+        $("#user_phone, #user_officeno").on('keypress', function(e) {
+            const maxlengthNumber = parseInt($(this).attr('maxlength'));
+            const inputValueLength = $(this).val().length + 1;
+
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                return false;
+            }
+
+            if (maxlengthNumber < inputValueLength) {
+                return false;
+            }
+        });
+    });
+</script>
+{% endblock %}

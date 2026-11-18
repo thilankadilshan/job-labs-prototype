@@ -1,0 +1,684 @@
+---
+permalink: "/terms-of-service/"
+---
+{% extends "layouts/master.njk" %}
+{% block title %}Terms of Service - Job Labs{% endblock %}
+{% block description %}Read our comprehensive Terms of Service for Job Labs recruitment platform. Understand your rights and responsibilities as candidates and employers.{% endblock %}
+{% block og_title %}Terms of Service - Job Labs{% endblock %}
+{% block og_description %}Read our comprehensive Terms of Service for Job Labs recruitment platform. Understand your rights and responsibilities as candidates and employers.{% endblock %}
+{% block styles %}
+<style>
+    .terms-hero {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+        padding: 80px 0 60px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .terms-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+        /* background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.05)"><polygon points="0,0 1000,0 1000,100 0,80"/></svg>'); */
+        opacity: 0.9;
+    }
+
+    .terms-hero .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .terms-hero h1 {
+        color: white;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .terms-hero p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.2rem;
+        max-width: 600px;
+    }
+
+    .terms-content {
+        padding: 80px 0;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+    }
+
+    .terms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 16px;
+        box-shadow: var(--shadow-xl);
+        overflow: hidden;
+    }
+
+    .terms-header {
+        background: var(--light-blue);
+        padding: 40px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .company-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .info-item {
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        border-top: 4px solid var(--primary-orange);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-item:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .info-item .label {
+        font-size: 0.875rem;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+
+    .info-item .value {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        font-weight: 600;
+    }
+
+    .info-item .value a {
+        color: var(--primary-blue);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .info-item .value a:hover {
+        color: var(--primary-orange);
+    }
+
+    .effective-date {
+        background: linear-gradient(135deg, var(--primary-orange), #ff8533);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        font-weight: 600;
+        box-shadow: var(--shadow-md);
+    }
+
+    .effective-date i {
+        margin-right: 10px;
+        font-size: 1.1rem;
+    }
+
+    .terms-body {
+        padding: 50px;
+    }
+
+    .terms-section {
+        margin-bottom: 40px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .terms-section:nth-child(odd) { animation-delay: 0.1s; }
+    .terms-section:nth-child(even) { animation-delay: 0.2s; }
+
+    .section-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--light-blue);
+    }
+
+    .section-number {
+        background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+
+    .section-title h3 {
+        color: var(--primary-blue);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .section-content {
+        padding-left: 55px;
+    }
+
+    .section-content p {
+        margin-bottom: 15px;
+        color: var(--text-dark);
+        line-height: 1.8;
+    }
+
+    .section-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+    }
+
+    .section-content ul li {
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 12px;
+        color: var(--text-dark);
+        line-height: 1.7;
+    }
+
+    .section-content ul li::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--primary-orange);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .highlight-box {
+        background: var(--light-blue);
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid var(--primary-orange);
+        border-radius: 8px;
+        padding: 25px;
+        margin: 25px 0;
+    }
+
+    .highlight-box h4 {
+        color: var(--primary-blue);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .highlight-box h4 i {
+        margin-right: 10px;
+        color: var(--primary-orange);
+    }
+
+    .contact-section {
+        background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+        color: white;
+        padding: 40px;
+        margin-top: 40px;
+        border-radius: 16px;
+        text-align: center;
+    }
+
+    .contact-section h3 {
+        color: white;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contact-section h3 i {
+        margin-right: 12px;
+        color: var(--primary-orange);
+    }
+
+    .contact-info-terms {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .contact-item-terms {
+        background: rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+    }
+
+    .contact-item-terms:hover {
+        transform: translateY(-3px);
+        background: rgba(255,255,255,0.15);
+    }
+
+    .contact-item-terms .label {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        margin-bottom: 8px;
+    }
+
+    .contact-item-terms .value {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .contact-item-terms .value a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .contact-item-terms .value a:hover {
+        color: var(--primary-orange);
+    }
+
+    .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: var(--primary-orange);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .back-to-top:hover {
+        transform: translateY(-3px);
+        background: var(--orange-hover);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .terms-hero {
+            padding: 60px 0 40px;
+        }
+        
+        .terms-content {
+            padding: 60px 0;
+        }
+        
+        .terms-wrapper {
+            margin: 0 15px;
+        }
+        
+        .terms-header,
+        .terms-body {
+            padding: 30px 25px;
+        }
+        
+        .company-info {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .section-content {
+            padding-left: 0;
+        }
+        
+        .section-title {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .section-number {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info-terms {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .back-to-top {
+            bottom: 20px;
+            right: 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .terms-hero h1 {
+            font-size: 2rem;
+        }
+        
+        .terms-hero p {
+            font-size: 1.1rem;
+        }
+        
+        .terms-header,
+        .terms-body {
+            padding: 25px 20px;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% include "partials/header.njk" %}
+
+<!-- Terms Hero Section -->
+<section class="terms-hero">
+    <div class="container text-center">
+        <h1 class="animate-fade-up">Terms of Service</h1>
+        <p class="animate-fade-up" style="animation-delay: 0.2s;">
+            Please read these terms carefully before using our recruitment platform
+        </p>
+    </div>
+</section>
+
+<!-- Terms Content -->
+<section class="terms-content">
+    <div class="container">
+        <div class="terms-wrapper">
+            <!-- Header Information -->
+            <div class="terms-header">
+                <div class="company-info">
+                    <div class="info-item">
+                        <div class="label">Company Name</div>
+                        <div class="value">Sharper Labs Academy (Private) Ltd</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">Registration Number</div>
+                        <div class="value">00328199</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">Website</div>
+                        <div class="value">
+                            <a href="https://www.job-labs.lk" target="_blank">www.job-labs.lk</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="effective-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        Effective Date: 15th September 2025
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terms Body -->
+            <div class="terms-body">
+                <!-- Section 1 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">1</div>
+                        <h3>Acceptance of Terms</h3>
+                    </div>
+                    <div class="section-content">
+                        <p>By accessing or using <strong>www.job-labs.lk</strong> (the "Website"), you agree to comply with and be bound by these Terms of Service. If you do not agree, you must not use the Website.</p>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">2</div>
+                        <h3>Our Role</h3>
+                    </div>
+                    <div class="section-content">
+                        <p>Sharper Labs Academy (Private) Ltd ("we", "our", "us") operates the Website as an <strong>online job board</strong>. We are not an employer, recruiter, or employment agency. We do not participate in hiring decisions and are not responsible for the accuracy of job postings or candidate applications.</p>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">3</div>
+                        <h3>Eligibility</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li>You must be at least <strong>16 years old</strong> to use this Website.</li>
+                            <li>Employers and hiring managers must be legally authorised to represent their organisation in recruitment matters.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">4</div>
+                        <h3>User Accounts</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li><strong>Registration:</strong> You may be required to create an account and provide accurate information.</li>
+                            <li><strong>Confidentiality:</strong> You are responsible for keeping your login credentials secure.</li>
+                            <li><strong>Misuse:</strong> We may suspend or terminate accounts that breach these Terms.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 5 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">5</div>
+                        <h3>Candidate Responsibilities</h3>
+                    </div>
+                    <div class="section-content">
+                        <p>When using the Website as a candidate, you agree to:</p>
+                        <ul>
+                            <li>Provide accurate, current, and complete information in your profile and applications.</li>
+                            <li>Apply only for roles you are genuinely interested in and qualified for.</li>
+                            <li>Not post or upload false, misleading, or defamatory content.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 6 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">6</div>
+                        <h3>Employer / Hiring Manager Responsibilities</h3>
+                    </div>
+                    <div class="section-content">
+                        <p>When using the Website as an employer or hiring manager, you agree to:</p>
+                        <ul>
+                            <li>Post only accurate and lawful job opportunities.</li>
+                            <li>Not request or process candidate information beyond recruitment purposes.</li>
+                            <li>Not engage in discriminatory, misleading, or fraudulent practices.</li>
+                            <li>Comply with all applicable employment and data protection laws.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 7 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">7</div>
+                        <h3>Prohibited Uses</h3>
+                    </div>
+                    <div class="section-content">
+                        <p>You agree not to:</p>
+                        <ul>
+                            <li>Use the Website for unlawful, abusive, or harmful purposes.</li>
+                            <li>Impersonate another person or misrepresent your affiliation.</li>
+                            <li>Attempt to interfere with the Website's security or functionality.</li>
+                            <li>Collect or misuse candidate or employer information outside legitimate recruitment purposes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 8 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">8</div>
+                        <h3>Content Ownership</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li>Candidates retain ownership of their CVs, profiles, and content but grant us a licence to display and share them with employers.</li>
+                            <li>Employers retain ownership of their job postings but grant us a licence to display and promote them on the Website.</li>
+                            <li>The Website design, branding, and features remain the property of <strong>Sharper Labs Academy (Private) Ltd</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 9 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">9</div>
+                        <h3>Privacy</h3>
+                    </div>
+                    <div class="section-content">
+                        <div class="highlight-box">
+                            <h4><i class="fas fa-shield-alt"></i>Important Notice</h4>
+                            <p>Use of the Website is also governed by our <strong>Privacy & Disclaimer Policy</strong>, available on our website.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 10 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">10</div>
+                        <h3>Disclaimers</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li>We do not guarantee that job applications will result in employment.</li>
+                            <li>We do not guarantee that job postings will attract candidates.</li>
+                            <li>We do not verify every candidate or employer profile; users must carry out their own due diligence.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 11 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">11</div>
+                        <h3>Limitation of Liability</h3>
+                    </div>
+                    <div class="section-content">
+                        <p>To the maximum extent permitted by law, Sharper Labs Academy (Private) Ltd is not liable for:</p>
+                        <ul>
+                            <li>Any loss, damage, or inconvenience caused by reliance on job postings, applications, or communications.</li>
+                            <li>Any disputes between candidates and employers.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 12 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">12</div>
+                        <h3>Termination</h3>
+                    </div>
+                    <div class="section-content">
+                        <p>We may suspend or terminate access to the Website if you breach these Terms. You may close your account at any time by contacting us.</p>
+                    </div>
+                </div>
+
+                <!-- Section 13 -->
+                <div class="terms-section">
+                    <div class="section-title">
+                        <div class="section-number">13</div>
+                        <h3>Governing Law</h3>
+                    </div>
+                    <div class="section-content">
+                        <p>These Terms are governed by the laws of <strong>Sri Lanka</strong>, and any disputes shall be subject to the exclusive jurisdiction of Sri Lankan courts.</p>
+                    </div>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="contact-section">
+                    <h3><i class="fas fa-envelope"></i>Contact Us</h3>
+                    <p>For questions about these Terms, please contact us at:</p>
+                    
+                    <div class="contact-info-terms">
+                        <div class="contact-item-terms">
+                            <div class="label">Company Name</div>
+                            <div class="value">Sharper Labs Academy (Private) Ltd</div>
+                        </div>
+                        <div class="contact-item-terms">
+                            <div class="label">Registration Number</div>
+                            <div class="value">00328199</div>
+                        </div>
+                        <div class="contact-item-terms">
+                            <div class="label">Email Address</div>
+                            <div class="value">
+                                <a href="mailto:info@job-labs.lk">info@job-labs.lk</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+{% include "partials/footer.njk" %}
+{% endblock %}
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Back to top functionality
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    
+    backToTop.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,297 @@
+<footer class="main-footer">
+    <div class="footer-content">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/images/logo-white.png" alt="Job Labs" class="footer-logo-img">
+                        <h3>Job Labs</h3>
+                    </div>
+                    <p class="footer-description">
+                        <b>Real Jobs for Real People.</b>
+At Job Labs, we connect candidates with verified opportunities across <b>Retail, Healthcare, Security, Driving & Reception, and Professional roles</b>.
+We provide <b>authentic, trusted job listings</b> designed to match the right people with the right employers.
+Discover your next career move today with <b>Job Labs where talent meets opportunity</b>.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/17LDn2cdnr/?mibextid=wwXIfr" target="_blank" class="social-link facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/job.labs?igsh=bDM5N2ZsYmZ5eGJx" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+would+like+to+inquire+about+job+opportunities." target="_blank" class="social-link whatsapp" title="Chat with us on WhatsApp" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/job-labs-sri-lanka/" target="_blank" class="social-link linkedin">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Job Sectors</h4>
+                    <ul class="footer-links">
+                        <li><a href="/?industry_sector=72" target="_blank">Retail Jobs</a></li>
+                        <li><a href="/?industry_sector=60" target="_blank">Healthcare Jobs</a></li>
+                        <li><a href="/?industry_sector=75" target="_blank">Security Jobs</a></li>
+                        <li><a href="/?industry_sector=79" target="_blank">Drivers & Receptionists</a></li>
+                        <li><a href="/?industry_sector=80" target="_blank">Professional Roles</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about-us">About Us</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/recruiters-signup">Sign Up</a></li>
+                        <li><a href="/login">Login</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:info@job-labs.lk">info@job-labs.lk</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <a href="https://www.job-labs.lk" target="_blank">www.job-labs.lk</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-content">
+                <p>&copy; {{ site.year }} Job Labs. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-of-service">Terms of Service</a>
+                    <a href="/cookie-policy">Cookie Policy</a>
+                    <a href="/faq">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+.main-footer {
+    background: #261f20ff;
+    color: white;
+    position: relative;
+}
+
+.footer-content {
+    padding: 60px 0 40px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer-section h3 {
+    color: white;
+    font-weight: 600;
+}
+
+.footer-section h4 {
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.footer-logo-img {
+    height: 50px;
+    width: auto;
+}
+
+.footer-description {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    border-color: #A92036;
+    background: #A92036
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+.footer-links a::before {
+    content: '→';
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover::before {
+    opacity: 1;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-item i {
+    width: 20px;
+    color: #ffffff;
+}
+
+.contact-item a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+    background: #801225ff;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bottom-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    /* Hide the long top footer on mobile — keep only the red bottom bar */
+    .footer-content {
+        display: none;
+    }
+
+    .footer-bottom {
+        border-top: none;
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .footer-bottom-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links a {
+        justify-content: center;
+    }
+    
+    .contact-item {
+        justify-content: center;
+    }
+    
+    .social-links {
+        gap: 10px;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+    }
+}
+</style>

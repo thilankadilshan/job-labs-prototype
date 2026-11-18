@@ -1,0 +1,1372 @@
+---
+permalink: "/faq/"
+---
+{% extends "layouts/master.njk" %}
+{% block title %}Frequently Asked Questions (FAQ) | Job Labs{% endblock %}
+{% block description %}Find answers to frequently asked questions about job searching, applications, employer recruitment solutions, CV building, and account services on Job Labs Sri Lanka.{% endblock %}
+{% block keywords %}job labs faq, sri lanka jobs faq, recruitment questions, job seeker help, employer hiring faq, cv builder support{% endblock %}
+{% block og_title %}Frequently Asked Questions (FAQ) | Job Labs{% endblock %}
+{% block og_description %}Find answers to frequently asked questions about job searching, applications, employer recruitment solutions, CV building, and account services on Job Labs Sri Lanka.{% endblock %}
+{% block styles %}
+<style>
+    /* FAQ Hero Section - Job Labs Signature Red Theme */
+    .faq-hero {
+        background: linear-gradient(135deg, #A92036 0%, #801225 55%, #520713 100%);
+        padding: 100px 0 70px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .faq-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><path d="M0,0v46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1000,0,1000,0Z" fill="%23ffffff" fill-opacity="0.06"></path></svg>') repeat-x;
+        background-size: cover;
+    }
+
+    .faq-hero .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .breadcrumb-nav {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        padding: 8px 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .breadcrumb-nav a {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .breadcrumb-nav a:hover {
+        color: #ffffff;
+    }
+
+    .breadcrumb-nav span {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.8rem;
+    }
+
+    .breadcrumb-nav .current {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .hero-content {
+        text-align: center;
+        color: white;
+        max-width: 820px;
+        margin: 0 auto;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 6px 18px;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-title {
+        font-size: clamp(2.2rem, 5vw, 3.4rem);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: white;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1.05rem, 2vw, 1.25rem);
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    /* Search Box in Hero */
+    .faq-search-wrapper {
+        max-width: 650px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .faq-search-box {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: white;
+        border-radius: 50px;
+        padding: 6px 8px 6px 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq-search-box:focus-within {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 35px rgba(169, 32, 54, 0.3);
+    }
+
+    .faq-search-icon {
+        color: #A92036;
+        font-size: 1.2rem;
+        margin-right: 12px;
+    }
+
+    .faq-search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        font-family: inherit;
+        color: #1e293b;
+        background: transparent;
+        padding: 10px 0;
+    }
+
+    .faq-search-input::placeholder {
+        color: #94a3b8;
+    }
+
+    .faq-search-clear {
+        background: #fdf2f4;
+        border: none;
+        color: #A92036;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-right: 6px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .faq-search-clear:hover {
+        background: #ffe4e8;
+        color: #801225;
+    }
+
+    /* Category Navigation Cards */
+    .faq-quick-categories {
+        padding: 40px 0 20px;
+        margin-top: -30px;
+        position: relative;
+        z-index: 3;
+    }
+
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .category-card {
+        background: white;
+        border-radius: 14px;
+        padding: 24px 20px;
+        border: 1px solid #eef0f3;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(169, 32, 54, 0.12);
+        border-color: #A92036;
+    }
+
+    .category-card.active {
+        border-color: #A92036;
+        background: #fff8f8;
+        box-shadow: 0 8px 20px rgba(169, 32, 54, 0.15);
+    }
+
+    .category-card-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        background: rgba(169, 32, 54, 0.08);
+        color: #A92036;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+
+    .category-card:hover .category-card-icon,
+    .category-card.active .category-card-icon {
+        background: linear-gradient(135deg, #A92036 0%, #801225 100%);
+        color: white;
+        transform: scale(1.08);
+    }
+
+    .category-card h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0;
+        transition: color 0.2s ease;
+    }
+
+    .category-card:hover h4,
+    .category-card.active h4 {
+        color: #A92036;
+    }
+
+    .category-card p {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* Filter Tabs Bar */
+    .faq-tabs-section {
+        padding: 20px 0 10px;
+    }
+
+    .faq-tabs-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .faq-tab-btn {
+        background: white;
+        border: 1px solid #e2e8f0;
+        color: #1e293b;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .faq-tab-btn:hover {
+        background: #fff5f6;
+        border-color: #f8c0c8;
+        color: #A92036;
+    }
+
+    .faq-tab-btn.active {
+        background: linear-gradient(135deg, #A92036 0%, #801225 100%);
+        color: white;
+        border-color: #A92036;
+        box-shadow: 0 4px 14px rgba(169, 32, 54, 0.25);
+    }
+
+    .faq-tab-btn .tab-count {
+        background: rgba(0, 0, 0, 0.07);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+    }
+
+    .faq-tab-btn.active .tab-count {
+        background: rgba(255, 255, 255, 0.3);
+        color: white;
+    }
+
+    /* Main FAQ Section */
+    .faq-main-section {
+        padding: 40px 0 80px;
+        background: #fdfdfd;
+    }
+
+    .faq-content-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .faq-group {
+        margin-bottom: 45px;
+    }
+
+    .faq-group-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #ffe8ec;
+    }
+
+    .faq-group-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(169, 32, 54, 0.12);
+        color: #A92036;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+    }
+
+    .faq-group-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    /* Accordion Item */
+    .faq-item {
+        background: white;
+        border-radius: 12px;
+        border: 1px solid #eef0f3;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+    }
+
+    .faq-item:hover {
+        border-color: #f8c0c8;
+        box-shadow: 0 4px 12px rgba(169, 32, 54, 0.06);
+    }
+
+    .faq-item.active {
+        border-color: rgba(169, 32, 54, 0.4);
+        box-shadow: 0 6px 18px rgba(169, 32, 54, 0.1);
+    }
+
+    .faq-question-btn {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #1e293b;
+        line-height: 1.4;
+        transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .faq-question-btn:hover {
+        color: #A92036;
+    }
+
+    .faq-item.active .faq-question-btn {
+        color: #A92036;
+        background-color: #fff9f9;
+    }
+
+    .faq-question-text {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+    }
+
+    .faq-question-indicator {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #475569;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .faq-item.active .faq-question-indicator {
+        background: linear-gradient(135deg, #A92036 0%, #801225 100%);
+        color: white;
+        transform: rotate(180deg);
+    }
+
+    .faq-answer-collapse {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-answer-body {
+        padding: 0 24px 22px 24px;
+        color: #475569;
+        font-size: 0.98rem;
+        line-height: 1.7;
+        border-top: 1px solid #fdf2f4;
+        background-color: #ffffff;
+    }
+
+    .faq-answer-body p {
+        margin-top: 16px;
+        margin-bottom: 12px;
+        color: #475569;
+        font-size: 0.98rem;
+    }
+
+    .faq-answer-body p:first-child {
+        margin-top: 16px;
+    }
+
+    .faq-answer-body p:last-child {
+        margin-bottom: 0;
+    }
+
+    .faq-answer-body ul {
+        margin: 10px 0 16px 20px;
+        color: #475569;
+    }
+
+    .faq-answer-body li {
+        margin-bottom: 6px;
+    }
+
+    .faq-answer-body strong {
+        color: #1e293b;
+    }
+
+    .faq-link {
+        color: #A92036;
+        text-decoration: underline;
+        font-weight: 600;
+        transition: color 0.2s ease;
+    }
+
+    .faq-link:hover {
+        color: #801225;
+    }
+
+    /* No Results State */
+    .faq-no-results {
+        display: none;
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 16px;
+        border: 1px dashed #f8c0c8;
+        margin: 30px 0;
+    }
+
+    .faq-no-results-icon {
+        font-size: 3rem;
+        color: #A92036;
+        opacity: 0.4;
+        margin-bottom: 16px;
+    }
+
+    .faq-no-results h3 {
+        font-size: 1.4rem;
+        color: #1e293b;
+        margin-bottom: 8px;
+    }
+
+    .faq-no-results p {
+        color: #64748b;
+        margin-bottom: 20px;
+    }
+
+    .btn-reset-search {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #A92036 0%, #801225 100%);
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(169, 32, 54, 0.25);
+    }
+
+    .btn-reset-search:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(169, 32, 54, 0.35);
+    }
+
+    /* Still Have Questions CTA Card - Red Theme */
+    .faq-cta-section {
+        background: linear-gradient(135deg, #A92036 0%, #801225 60%, #520713 100%);
+        border-radius: 20px;
+        padding: 50px 40px;
+        color: white;
+        margin-top: 50px;
+        box-shadow: 0 15px 35px rgba(169, 32, 54, 0.25);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .faq-cta-section::before {
+        content: '';
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 220px;
+        height: 220px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        filter: blur(40px);
+    }
+
+    .faq-cta-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .faq-cta-text h3 {
+        color: white;
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        font-weight: 700;
+    }
+
+    .faq-cta-text p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.05rem;
+        margin: 0;
+        max-width: 520px;
+    }
+
+    .faq-cta-buttons {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .btn-faq-contact {
+        background: white;
+        color: #A92036;
+        padding: 12px 26px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-faq-contact:hover {
+        background: #fdf2f4;
+        color: #801225;
+        transform: translateY(-2px);
+    }
+
+    .btn-faq-whatsapp {
+        background: #25D366;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-faq-whatsapp:hover {
+        background: #20ba5a;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .categories-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .faq-hero {
+            padding: 80px 0 50px;
+        }
+
+        .categories-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .category-card {
+            flex-direction: row;
+            text-align: left;
+            padding: 16px 20px;
+        }
+
+        .faq-cta-content {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .faq-cta-text p {
+            margin: 0 auto;
+        }
+
+        .faq-cta-buttons {
+            justify-content: center;
+            width: 100%;
+        }
+
+        .faq-question-btn {
+            padding: 16px 18px;
+            font-size: 0.98rem;
+        }
+
+        .faq-answer-body {
+            padding: 0 18px 18px 18px;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% include "partials/header.njk" %}
+
+<!-- Hero Section -->
+<section class="faq-hero">
+    <div class="container">
+        <div class="hero-content">
+            <nav class="breadcrumb-nav" aria-label="breadcrumb">
+                <a href="/"><i class="fas fa-home"></i> Home</a>
+                <span>/</span>
+                <span class="current">FAQ</span>
+            </nav>
+
+            <div class="hero-badge">
+                <i class="fas fa-question-circle"></i> Help & Knowledge Base
+            </div>
+
+            <h1 class="hero-title">Frequently Asked Questions</h1>
+            <p class="hero-subtitle">
+                Everything you need to know about discovering verified jobs, employer recruitment services, resume building, and working with Job Labs.
+            </p>
+
+            <!-- Real-Time Search Bar -->
+            <div class="faq-search-wrapper">
+                <div class="faq-search-box">
+                    <i class="fas fa-search faq-search-icon"></i>
+                    <input type="text"
+                           id="faqSearchInput"
+                           class="faq-search-input"
+                           placeholder="Search questions (e.g., apply, resume, employer, cost)..."
+                           autocomplete="off">
+                    <button type="button" class="faq-search-clear" id="faqSearchClear" aria-label="Clear search">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Topic Cards -->
+<section class="faq-quick-categories">
+    <div class="container">
+        <div class="categories-grid">
+            <a href="#seekers" class="category-card" data-category="seekers">
+                <div class="category-card-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h4>Job Seekers</h4>
+                <p>Applying, job board alerts, requirements & candidate support</p>
+            </a>
+
+            <a href="#employers" class="category-card" data-category="employers">
+                <div class="category-card-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h4>Employers & Hiring</h4>
+                <p>Talent sourcing, candidate screening & ATS recruitment tools</p>
+            </a>
+
+            <a href="#cv-builder" class="category-card" data-category="cv-builder">
+                <div class="category-card-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h4>CV & Applications</h4>
+                <p>Resume Builder, document formats & interview scheduling</p>
+            </a>
+
+            <a href="#account-security" class="category-card" data-category="account-security">
+                <div class="category-card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>Privacy & Safety</h4>
+                <p>Data privacy, OTP verification & contact information</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Tabs Bar -->
+<section class="faq-tabs-section">
+    <div class="container">
+        <div class="faq-tabs-container">
+            <button type="button" class="faq-tab-btn active" data-category="all">
+                <i class="fas fa-layer-group"></i> All Questions
+                <span class="tab-count" id="totalCount">18</span>
+            </button>
+            <button type="button" class="faq-tab-btn" data-category="seekers">
+                <i class="fas fa-user-graduate"></i> Job Seekers
+            </button>
+            <button type="button" class="faq-tab-btn" data-category="employers">
+                <i class="fas fa-building"></i> Employers & Recruiters
+            </button>
+            <button type="button" class="faq-tab-btn" data-category="cv-builder">
+                <i class="fas fa-file-invoice"></i> CV & Applications
+            </button>
+            <button type="button" class="faq-tab-btn" data-category="account-security">
+                <i class="fas fa-lock"></i> Account & Privacy
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Main FAQ Content Section -->
+<section class="faq-main-section">
+    <div class="container">
+        <div class="faq-content-container">
+
+            <!-- No Results State -->
+            <div class="faq-no-results" id="faqNoResults">
+                <i class="fas fa-search faq-no-results-icon"></i>
+                <h3>No Matching Questions Found</h3>
+                <p>We couldn't find any questions matching your search. Try different keywords or browse our categories.</p>
+                <button type="button" class="btn-reset-search" id="btnResetSearch">
+                    <i class="fas fa-redo"></i> Reset Search
+                </button>
+            </div>
+
+            <!-- Group 1: Job Seekers -->
+            <div class="faq-group" data-category="seekers" id="group-seekers">
+                <div class="faq-group-header">
+                    <div class="faq-group-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h2 class="faq-group-title">Job Seekers & Vacancies</h2>
+                </div>
+
+                <div class="faq-item" data-keywords="free cost pay charge money fee candidate">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            Is Job Labs completely free for job seekers?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p><strong>Yes, 100% free!</strong> Job seekers do not have to pay any registration, application, or placement fees to find and apply for jobs on Job Labs.</p>
+                            <p>We believe in genuine, verified opportunities. You can freely explore vacancies across Retail, Healthcare, Security, Driving, Reception, and Professional roles without any hidden charges.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="apply job vacancy application process how to apply">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            How do I apply for a job on Job Labs?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>Applying for a job is quick and simple:</p>
+                            <ul>
+                                <li>Browse open vacancies on our <a href="/" class="faq-link">Jobs Board</a>.</li>
+                                <li>Filter by job title, industry sector, city, or work type.</li>
+                                <li>Click on the job that interests you to read the detailed job description, duties, and qualifications.</li>
+                                <li>Click the <strong>"Apply Now"</strong> button, fill in your details, attach your CV, and submit.</li>
+                            </ul>
+                            <p>You will receive a confirmation message and email immediately upon successful submission.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="sectors industries retail healthcare security drivers professional roles">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            What industries and job sectors does Job Labs specialize in?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>Job Labs connects talent across a diverse spectrum of sectors throughout Sri Lanka and overseas, including:</p>
+                            <ul>
+                                <li><strong>Retail:</strong> Cashiers, store associates, sales executives, and supervisors.</li>
+                                <li><strong>Healthcare:</strong> Nurses, medical assistants, caregivers, and clinic support staff.</li>
+                                <li><strong>Security:</strong> Security officers, premises supervisors, and surveillance operators.</li>
+                                <li><strong>Driving & Logistics:</strong> Corporate chauffeurs, delivery drivers, and heavy vehicle operators.</li>
+                                <li><strong>Reception & Admin:</strong> Front-desk officers, administrative assistants, and customer service staff.</li>
+                                <li><strong>Professional Roles:</strong> IT, accounting, human resources, management, and marketing.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="account register sign up login track application need account">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            Do I need an account to apply, or can I apply directly?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>You can apply directly with our fast application form without creating an account. However, registering for a free candidate account allows you to:</p>
+                            <ul>
+                                <li>Track your submitted applications and interview invitations in real time.</li>
+                                <li>Save your master CV so you can apply to vacancies with a single click.</li>
+                                <li>Receive personalized job recommendations tailored to your profile.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="updates notification status review employer response shortlisted">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            How do I know if an employer has reviewed my application?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>Once you submit your application, our automated recruitment system forwards your profile directly to the hiring manager and recruitment team. You will be notified via email when:</p>
+                            <ul>
+                                <li>Your application has been received and logged.</li>
+                                <li>The employer shortlists your profile for further evaluation.</li>
+                                <li>An interview or screening call is scheduled.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 2: Employers & Hiring -->
+            <div class="faq-group" data-category="employers" id="group-employers">
+                <div class="faq-group-header">
+                    <div class="faq-group-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h2 class="faq-group-title">Employers & Recruiters</h2>
+                </div>
+
+                <div class="faq-item" data-keywords="post job post vacancy hire talent employer recruitment company">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            How can companies post job vacancies or hire talent through Job Labs?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>Employers can easily partner with Job Labs by visiting our <a href="/employer" class="faq-link">Hire Talent Portal</a> or reaching out via <a href="/contact" class="faq-link">Contact Us</a>.</p>
+                            <p>Our recruitment consultants will collaborate with your HR team to understand your exact requirements, prepare targeted job listings, and source verified candidates rapidly.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="services solutions ats screening headhunting staffing dedicated consultant">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            What recruitment services does Job Labs offer employers?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>We provide full-lifecycle workforce solutions customized for businesses of all sizes:</p>
+                            <ul>
+                                <li><strong>Targeted Job Advertising:</strong> High-visibility listings across our portal, social media channels, and talent network.</li>
+                                <li><strong>Pre-Screening & Candidate Vetting:</strong> Background, qualification, and initial screening to ensure quality candidates.</li>
+                                <li><strong>ATS & Applicant Tracking:</strong> Centralized dashboard for managing candidate pipelines, interview schedules, and notes.</li>
+                                <li><strong>Dedicated Recruitment Account Managers:</strong> Personalized support to fulfill bulk or specialized niche vacancies quickly.</li>
+                            </ul>
+                            <p>Learn more on our <a href="/services" class="faq-link">Services Page</a>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="verified candidates fake profiles authentic trust screening quality">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            How does Job Labs ensure candidate authenticity and quality?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>We prioritize <em>"Real Jobs for Real People"</em>. Our team reviews incoming candidate profiles, verifies contact phone numbers, validates work histories, and checks relevant licenses (such as driving licenses or medical registrations) before shortlisting for interviews.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="pricing cost employer package plans hiring rates">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            What are the pricing options for employer job postings?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>We offer flexible packages tailored to your hiring scale — from single-job postings for small businesses to end-to-end retained recruitment and volume hiring for large enterprises.</p>
+                            <p>Contact our corporate solutions team at <a href="mailto:info@job-labs.lk" class="faq-link">info@job-labs.lk</a> or via WhatsApp for a tailored quote.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 3: CV Builder & Applications -->
+            <div class="faq-group" data-category="cv-builder" id="group-cv-builder">
+                <div class="faq-group-header">
+                    <div class="faq-group-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h2 class="faq-group-title">CV, Resume Builder & Applications</h2>
+                </div>
+
+                <div class="faq-item" data-keywords="resume builder cv maker template ats format free create cv">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            What is the Job Labs Resume Builder and how do I use it?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>The <a href="/cv-builder" target="_blank" class="faq-link">Job Labs Resume Builder</a> is our free online tool designed to help job seekers create professional, ATS-friendly CVs in minutes.</p>
+                            <p>It provides pre-structured templates, industry-proven layouts, and prompts to showcase your education, skills, and work experience clearly so employers take notice.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="format pdf word doc docx file size upload cv">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            What file formats and sizes are accepted when submitting a CV?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>We accept <strong>PDF (.pdf)</strong> and <strong>Microsoft Word (.doc, .docx)</strong> document formats.</p>
+                            <p>The maximum recommended file size is <strong>5 MB</strong>. We strongly recommend PDF format as it preserves your fonts, styling, and formatting across all devices and recruiter screens.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="interview zoom online physical in person schedule meeting">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            How are interviews conducted and scheduled?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>Interviews may be conducted either in person at the employer's premises or virtually via online video conferencing (such as Zoom or Microsoft Teams).</p>
+                            <p>When an employer schedules an interview, you will receive an invitation email containing the exact date, time, location (or Zoom meeting link), and any documents you need to prepare.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="multiple jobs apply several vacancies limit">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            Can I apply for more than one job at the same time?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p><strong>Yes, absolutely.</strong> There is no limit to the number of vacancies you can apply for. We encourage candidates to apply for all positions that match their qualifications, skills, and career aspirations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 4: Account, Safety & Privacy -->
+            <div class="faq-group" data-category="account-security" id="group-account-security">
+                <div class="faq-group-header">
+                    <div class="faq-group-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h2 class="faq-group-title">Account, Safety & Privacy</h2>
+                </div>
+
+                <div class="faq-item" data-keywords="privacy data protection safe confidential gdpr information personal">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            Is my personal information and resume safe on Job Labs?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p><strong>Your privacy and security are our highest priority.</strong> We strictly adhere to our <a href="/privacy-policy" class="faq-link">Privacy Policy</a> and industry best practices:</p>
+                            <ul>
+                                <li>Your contact details and CV are only shared with verified employers whose vacancies you apply for.</li>
+                                <li>We never sell, rent, or trade your personal information to third-party marketing companies.</li>
+                                <li>All communications and file transfers are secured with SSL encryption.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="otp verification phone mobile code sms security">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            Why do I need to verify my email or phone number with an OTP?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>One-Time Password (OTP) verification ensures that only authentic job seekers and hiring managers register on the platform. It prevents spam accounts and safeguards your profile so only you have access to your account.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="forgot password reset login access account credentials">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            What should I do if I forget my password or cannot log in?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>On the <a href="/login" class="faq-link">Login Page</a>, click on the <strong>"Forgot Your Password?"</strong> link. Enter your registered email address, and we will send you secure instructions to reset your password immediately.</p>
+                            <p>If you experience any difficulties, reach out to our support team at <a href="mailto:info@job-labs.lk" class="faq-link">info@job-labs.lk</a>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="contact support phone whatsapp help question email location office">
+                    <button class="faq-question-btn" type="button" aria-expanded="false">
+                        <span class="faq-question-text">
+                            How can I contact Job Labs for additional assistance?
+                        </span>
+                        <span class="faq-question-indicator">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            <p>You can get in touch with our friendly support and advisory team through multiple channels:</p>
+                            <ul>
+                                <li><strong>Email:</strong> <a href="mailto:info@job-labs.lk" class="faq-link">info@job-labs.lk</a></li>
+                                <li><strong>WhatsApp Support:</strong> <a href="https://wa.me/94715515252" target="_blank" class="faq-link">+94 71 551 5252</a></li>
+                                <li><strong>Website:</strong> <a href="https://www.job-labs.lk" target="_blank" class="faq-link">www.job-labs.lk</a></li>
+                                <li><strong>Contact Form:</strong> Fill out our quick form on the <a href="/contact" class="faq-link">Contact Page</a>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Still Have Questions CTA Banner - Job Labs Red Theme -->
+            <div class="faq-cta-section">
+                <div class="faq-cta-content">
+                    <div class="faq-cta-text">
+                        <h3>Still Have Questions?</h3>
+                        <p>Can't find the answer you're looking for? Our recruitment consultants and support team in Sri Lanka are ready to help you.</p>
+                    </div>
+                    <div class="faq-cta-buttons">
+                        <a href="/contact" class="btn-faq-contact">
+                            <i class="fas fa-envelope"></i> Contact Us
+                        </a>
+                        <a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+have+a+question+regarding+your+services."
+                           target="_blank"
+                           class="btn-faq-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% include "partials/footer.njk" %}
+{% endblock %}
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const faqItems = document.querySelectorAll('.faq-item');
+    const faqGroups = document.querySelectorAll('.faq-group');
+    const searchInput = document.getElementById('faqSearchInput');
+    const searchClear = document.getElementById('faqSearchClear');
+    const noResults = document.getElementById('faqNoResults');
+    const btnResetSearch = document.getElementById('btnResetSearch');
+    const tabButtons = document.querySelectorAll('.faq-tab-btn');
+    const categoryCards = document.querySelectorAll('.category-card');
+    const totalCountEl = document.getElementById('totalCount');
+
+    let currentCategory = 'all';
+
+    // Update total count
+    if (totalCountEl) {
+        totalCountEl.textContent = faqItems.length;
+    }
+
+    // Accordion Toggle
+    faqItems.forEach(item => {
+        const btn = item.querySelector('.faq-question-btn');
+        const collapse = item.querySelector('.faq-answer-collapse');
+
+        btn.addEventListener('click', function () {
+            const isCurrentlyActive = item.classList.contains('active');
+
+            // Close other items in the same group for a clean accordion experience
+            const siblingItems = item.parentElement.querySelectorAll('.faq-item');
+            siblingItems.forEach(sibling => {
+                if (sibling !== item && sibling.classList.contains('active')) {
+                    sibling.classList.remove('active');
+                    const sibBtn = sibling.querySelector('.faq-question-btn');
+                    const sibCollapse = sibling.querySelector('.faq-answer-collapse');
+                    if (sibBtn) sibBtn.setAttribute('aria-expanded', 'false');
+                    if (sibCollapse) sibCollapse.style.maxHeight = null;
+                }
+            });
+
+            // Toggle clicked item
+            if (isCurrentlyActive) {
+                item.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
+                collapse.style.maxHeight = null;
+            } else {
+                item.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+                collapse.style.maxHeight = collapse.scrollHeight + 30 + 'px';
+            }
+        });
+    });
+
+    // Real-Time Search and Filter Function
+    function filterFAQs() {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        // Toggle clear button
+        if (query.length > 0) {
+            searchClear.style.display = 'inline-flex';
+        } else {
+            searchClear.style.display = 'none';
+        }
+
+        faqGroups.forEach(group => {
+            const groupCategory = group.getAttribute('data-category');
+            const matchesCategory = (currentCategory === 'all' || currentCategory === groupCategory);
+            const itemsInGroup = group.querySelectorAll('.faq-item');
+            let visibleInThisGroup = 0;
+
+            itemsInGroup.forEach(item => {
+                const questionText = item.querySelector('.faq-question-text').textContent.toLowerCase();
+                const answerText = item.querySelector('.faq-answer-body').textContent.toLowerCase();
+                const keywords = (item.getAttribute('data-keywords') || '').toLowerCase();
+
+                const matchesSearch = !query ||
+                    questionText.includes(query) ||
+                    answerText.includes(query) ||
+                    keywords.includes(query);
+
+                if (matchesCategory && matchesSearch) {
+                    item.style.display = '';
+                    visibleInThisGroup++;
+                    visibleCount++;
+
+                    // If user searched for something, auto-expand matching questions
+                    if (query.length >= 3) {
+                        item.classList.add('active');
+                        const btn = item.querySelector('.faq-question-btn');
+                        const collapse = item.querySelector('.faq-answer-collapse');
+                        if (btn) btn.setAttribute('aria-expanded', 'true');
+                        if (collapse) collapse.style.maxHeight = collapse.scrollHeight + 30 + 'px';
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Show or hide the whole group heading
+            if (matchesCategory && visibleInThisGroup > 0) {
+                group.style.display = '';
+            } else {
+                group.style.display = 'none';
+            }
+        });
+
+        // Show/hide no results box
+        if (visibleCount === 0) {
+            noResults.style.display = 'block';
+        } else {
+            noResults.style.display = 'none';
+        }
+    }
+
+    // Search Input Event
+    searchInput.addEventListener('input', filterFAQs);
+
+    // Clear Search Button
+    searchClear.addEventListener('click', function () {
+        searchInput.value = '';
+        searchInput.focus();
+        filterFAQs();
+    });
+
+    // Reset Button in No Results State
+    if (btnResetSearch) {
+        btnResetSearch.addEventListener('click', function () {
+            searchInput.value = '';
+            currentCategory = 'all';
+            updateActiveTab('all');
+            filterFAQs();
+        });
+    }
+
+    // Category Tabs Switching
+    function setCategory(cat) {
+        currentCategory = cat;
+        updateActiveTab(cat);
+        filterFAQs();
+    }
+
+    function updateActiveTab(cat) {
+        tabButtons.forEach(btn => {
+            if (btn.getAttribute('data-category') === cat) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        categoryCards.forEach(card => {
+            if (card.getAttribute('data-category') === cat) {
+                card.classList.add('active');
+            } else {
+                card.classList.remove('active');
+            }
+        });
+    }
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const cat = this.getAttribute('data-category');
+            setCategory(cat);
+        });
+    });
+
+    categoryCards.forEach(card => {
+        card.addEventListener('click', function (e) {
+            e.preventDefault();
+            const cat = this.getAttribute('data-category');
+            setCategory(cat);
+
+            // Scroll to the targeted group smoothly
+            const targetGroup = document.getElementById('group-' + cat);
+            if (targetGroup) {
+                targetGroup.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Handle Hash in URL (e.g. #seekers, #employers)
+    if (window.location.hash) {
+        const hash = window.location.hash.replace('#', '');
+        if (['seekers', 'employers', 'cv-builder', 'account-security'].includes(hash)) {
+            setCategory(hash);
+            const targetGroup = document.getElementById('group-' + hash);
+            if (targetGroup) {
+                setTimeout(() => {
+                    targetGroup.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

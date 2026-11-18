@@ -1,0 +1,1287 @@
+---
+permalink: "/contact/"
+---
+{% extends "layouts/master.njk" %}
+{% block title %}Contact Job Labs | Recruitment Support in Sri Lanka{% endblock %}
+{% block description %}Contact Job Labs for job seeker support, employer recruitment assistance, and business inquiries. Our team is here to help.{% endblock %}
+{% block keywords %}contact job labs, recruitment support sri lanka, job help sri lanka{% endblock %}
+{% block og_title %}Contact Job Labs | Recruitment Support in Sri Lanka{% endblock %}
+{% block og_description %}Contact Job Labs for job seeker support, employer recruitment assistance, and business inquiries. Our team is here to help.{% endblock %}
+{% block styles %}
+<style>
+    /* ==========================================================================
+       Job Labs Contact Page - Red Theme Design System
+       Brand Colors: #A92036 (Primary Red), #801225 (Deep Crimson), #520713 (Wine)
+       ========================================================================== */
+
+    :root {
+        --contact-red-primary: #A92036;
+        --contact-red-dark: #801225;
+        --contact-red-wine: #520713;
+        --contact-red-light: #fff5f6;
+        --contact-red-soft: #fff8f9;
+        --contact-red-border: #fecdd3;
+        --contact-red-border-light: #ffe4e8;
+        --contact-red-glow: rgba(169, 32, 54, 0.25);
+        --contact-text-dark: #0f172a;
+        --contact-text-muted: #64748b;
+    }
+
+    /* --------------------------------------------------------------------------
+       Hero Section
+       -------------------------------------------------------------------------- */
+    .contact-hero {
+        position: relative;
+        min-height: 52vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 0 85px;
+        overflow: hidden;
+        background-color: var(--contact-red-wine);
+    }
+
+    .contact-hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .contact-hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 25%;
+        filter: brightness(0.98) contrast(1.02);
+        transform: scale(1.02);
+        transition: transform 8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .contact-hero:hover .contact-hero-bg img {
+        transform: scale(1.06);
+    }
+
+    /* Clear, Translucent Neutral Overlay - Keeps Sri Lankan Team Bright & Natural */
+    .contact-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            180deg,
+            rgba(10, 15, 29, 0.52) 0%,
+            rgba(10, 15, 29, 0.38) 50%,
+            rgba(10, 15, 29, 0.65) 100%
+        );
+        z-index: 2;
+    }
+
+    .contact-hero .container {
+        position: relative;
+        z-index: 3;
+    }
+
+    .contact-hero-content {
+        text-align: center;
+        color: #ffffff;
+        max-width: 860px;
+        margin: 0 auto;
+    }
+
+    .contact-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #ffffff;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        padding: 7px 20px;
+        border-radius: 50px;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .contact-hero-badge i {
+        color: #ffccd3;
+        font-size: 0.9rem;
+    }
+
+    .contact-hero h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(2.4rem, 5vw, 3.8rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -0.5px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .contact-hero h1 .brand-accent {
+        color: #ffffff;
+        position: relative;
+        display: inline-block;
+    }
+
+    .contact-hero h1 .brand-accent::after {
+        content: '';
+        position: absolute;
+        bottom: 6px;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: linear-gradient(90deg, #ff8597, #ffffff);
+        border-radius: 3px;
+        opacity: 0.85;
+        z-index: -1;
+    }
+
+    .contact-hero p {
+        font-family: 'Inter', sans-serif;
+        font-size: clamp(1.05rem, 2vw, 1.25rem);
+        color: rgba(255, 255, 255, 0.95);
+        max-width: 720px;
+        margin: 0 auto 1.75rem;
+        line-height: 1.75;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Hero Chips */
+    .contact-hero-chips {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 1rem;
+    }
+
+    .hero-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 18px;
+        border-radius: 50px;
+        color: #ffffff;
+        font-size: 0.88rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .hero-chip:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+    }
+
+    .hero-chip i {
+        color: var(--contact-red-primary);
+        font-size: 0.85rem;
+        background: #ffffff;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* --------------------------------------------------------------------------
+       Main Content Section
+       -------------------------------------------------------------------------- */
+    .contact-main {
+        padding: 90px 0;
+        background: linear-gradient(180deg, #ffffff 0%, #fffbfb 100%);
+        position: relative;
+    }
+
+    .contact-main::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--contact-red-primary) 0%, #dc2626 50%, var(--contact-red-dark) 100%);
+    }
+
+    .contact-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1.25fr;
+        gap: 48px;
+        align-items: start;
+    }
+
+    /* --------------------------------------------------------------------------
+       Left Column: Contact Information Section
+       -------------------------------------------------------------------------- */
+    .contact-info-section {
+        background: linear-gradient(145deg, #ffffff 0%, var(--contact-red-soft) 100%);
+        border: 1px solid var(--contact-red-border);
+        border-top: 5px solid var(--contact-red-primary);
+        border-radius: 20px;
+        padding: 44px 38px;
+        position: sticky;
+        top: 100px;
+        box-shadow: 0 12px 35px -8px rgba(169, 32, 54, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-info-section:hover {
+        box-shadow: 0 20px 45px -10px rgba(169, 32, 54, 0.18);
+    }
+
+    .contact-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(169, 32, 54, 0.08);
+        border: 1px solid rgba(169, 32, 54, 0.22);
+        color: var(--contact-red-primary);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        padding: 5px 14px;
+        border-radius: 50px;
+        margin-bottom: 0.85rem;
+    }
+
+    .contact-info-section h2 {
+        font-family: 'Poppins', sans-serif;
+        color: var(--contact-text-dark);
+        margin-bottom: 12px;
+        font-size: 2.1rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    .contact-info-section h2 span {
+        color: var(--contact-red-primary);
+    }
+
+    .contact-info-section > p {
+        color: var(--contact-text-muted);
+        font-size: 1.05rem;
+        margin-bottom: 35px;
+        line-height: 1.7;
+    }
+
+    .contact-methods {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-method {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 22px 24px;
+        background: #ffffff;
+        border-radius: 14px;
+        border: 1px solid var(--contact-red-border-light);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .contact-method::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--contact-red-primary), var(--contact-red-dark));
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.3s ease;
+    }
+
+    .contact-method:hover {
+        transform: translateX(6px);
+        box-shadow: 0 8px 24px rgba(169, 32, 54, 0.12);
+        border-color: var(--contact-red-border);
+    }
+
+    .contact-method:hover::before {
+        transform: scaleY(1);
+    }
+
+    .contact-icon {
+        width: 54px;
+        height: 54px;
+        background: linear-gradient(135deg, var(--contact-red-primary) 0%, var(--contact-red-dark) 100%);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+        box-shadow: 0 8px 18px -4px var(--contact-red-glow);
+        transition: transform 0.3s ease;
+    }
+
+    .contact-method:hover .contact-icon {
+        transform: scale(1.08) rotate(3deg);
+    }
+
+    .contact-details {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        overflow: hidden;
+    }
+
+    .contact-details h5 {
+        color: var(--contact-text-dark);
+        font-size: 0.92rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin: 0;
+    }
+
+    .contact-details a {
+        color: var(--contact-red-primary);
+        text-decoration: none;
+        font-size: 1.08rem;
+        font-weight: 600;
+        transition: color 0.25s ease;
+        word-break: break-all;
+    }
+
+    .contact-details a:hover {
+        color: var(--contact-red-dark);
+        text-decoration: underline;
+    }
+
+    /* Trust Assurance Card inside Info */
+    .contact-trust-card {
+        margin-top: 32px;
+        padding: 20px 22px;
+        background: rgba(169, 32, 54, 0.05);
+        border-radius: 12px;
+        border: 1px dashed var(--contact-red-border);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .contact-trust-card i {
+        font-size: 1.8rem;
+        color: var(--contact-red-primary);
+        flex-shrink: 0;
+    }
+
+    .contact-trust-card div h6 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--contact-red-wine);
+        margin-bottom: 2px;
+    }
+
+    .contact-trust-card div p {
+        font-size: 0.85rem;
+        color: var(--contact-text-muted);
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* --------------------------------------------------------------------------
+       Right Column: Contact Form Section
+       -------------------------------------------------------------------------- */
+    .contact-form-section {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 46px 42px;
+        border: 1px solid var(--contact-red-border);
+        border-top: 5px solid var(--contact-red-primary);
+        box-shadow: 0 12px 35px -8px rgba(169, 32, 54, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form-section:hover {
+        box-shadow: 0 20px 45px -10px rgba(169, 32, 54, 0.15);
+    }
+
+    .contact-form-header {
+        margin-bottom: 30px;
+    }
+
+    .contact-form-section h2 {
+        font-family: 'Poppins', sans-serif;
+        color: var(--contact-text-dark);
+        font-size: 2.1rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin-bottom: 6px;
+    }
+
+    .contact-form-section h2 span {
+        color: var(--contact-red-primary);
+    }
+
+    .contact-form-subtitle {
+        color: var(--contact-text-muted);
+        font-size: 0.98rem;
+        margin: 0;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .form-group label {
+        color: #1e293b;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 0.92rem;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .form-group label .required-mark {
+        color: var(--contact-red-primary);
+        font-weight: 700;
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-wrapper i.field-icon {
+        position: absolute;
+        left: 18px;
+        color: #94a3b8;
+        font-size: 1rem;
+        pointer-events: none;
+        transition: color 0.25s ease;
+        z-index: 2;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 14px 18px 14px 46px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 0.98rem;
+        color: var(--contact-text-dark);
+        background: #f8fafc;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        font-family: 'Inter', sans-serif;
+    }
+
+    .form-group textarea {
+        padding: 16px 18px 16px 46px;
+        resize: vertical;
+        min-height: 140px;
+        line-height: 1.6;
+    }
+
+    .form-group textarea ~ i.field-icon {
+        top: 20px;
+    }
+
+    /* Select Dropdown Styling */
+    .form-group select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23A92036" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: calc(100% - 18px) center;
+        background-size: 14px;
+        padding-right: 42px;
+    }
+
+    /* Focus States */
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        background: #ffffff;
+        border-color: var(--contact-red-primary);
+        box-shadow: 0 0 0 4px rgba(169, 32, 54, 0.12);
+        transform: translateY(-1px);
+    }
+
+    .form-group input:focus ~ i.field-icon,
+    .form-group textarea:focus ~ i.field-icon,
+    .form-group select:focus ~ i.field-icon {
+        color: var(--contact-red-primary);
+    }
+
+    /* Error States */
+    .form-group input.error,
+    .form-group textarea.error,
+    .form-group select.error {
+        border-color: #ef4444 !important;
+        background: #fef2f2 !important;
+        box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12) !important;
+    }
+
+    .error-message {
+        color: #ef4444;
+        font-size: 0.82rem;
+        font-weight: 500;
+        margin-top: 6px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    /* Submit Button (Executive Red) */
+    .form-submit {
+        margin-top: 8px;
+    }
+
+    .btn-contact-submit {
+        width: 100%;
+        padding: 17px 28px;
+        font-size: 1.08rem;
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        background: linear-gradient(135deg, var(--contact-red-primary) 0%, var(--contact-red-dark) 100%);
+        border: none;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        cursor: pointer;
+        box-shadow: 0 10px 24px -4px var(--contact-red-glow);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-contact-submit::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+        transition: 0.6s ease;
+    }
+
+    .btn-contact-submit:hover {
+        background: linear-gradient(135deg, #c4263f 0%, var(--contact-red-primary) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px -4px rgba(169, 32, 54, 0.4);
+    }
+
+    .btn-contact-submit:hover::before {
+        left: 100%;
+    }
+
+    .btn-contact-submit:active {
+        transform: translateY(1px);
+        box-shadow: 0 6px 16px -2px rgba(169, 32, 54, 0.3);
+    }
+
+    /* Loading State */
+    .btn-loading {
+        position: relative;
+        color: transparent !important;
+        pointer-events: none;
+    }
+
+    .btn-loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 22px;
+        height: 22px;
+        margin: -11px 0 0 -11px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: spinSubmit 0.8s linear infinite;
+    }
+
+    @keyframes spinSubmit {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Alert Messages */
+    .alert {
+        padding: 16px 20px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        animation: slideDownAlert 0.4s ease;
+    }
+
+    @keyframes slideDownAlert {
+        from { opacity: 0; transform: translateY(-12px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .alert-success {
+        background: #f0fdf4;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+        border-left: 5px solid #22c55e;
+    }
+
+    .alert-danger {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+        border-left: 5px solid #ef4444;
+    }
+
+    /* --------------------------------------------------------------------------
+       Additional Info Section (3 Cards)
+       -------------------------------------------------------------------------- */
+    .additional-info {
+        background: linear-gradient(180deg, #fffbfb 0%, var(--contact-red-soft) 100%);
+        padding: 85px 0 95px;
+        position: relative;
+        border-top: 1px solid var(--contact-red-border-light);
+    }
+
+    .additional-info-header {
+        text-align: center;
+        max-width: 650px;
+        margin: 0 auto 50px;
+    }
+
+    .additional-info-header h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+        font-weight: 700;
+        color: var(--contact-text-dark);
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+    }
+
+    .additional-info-header p {
+        color: var(--contact-text-muted);
+        font-size: 1.05rem;
+        margin: 0;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+    }
+
+    .info-card {
+        background: #ffffff;
+        padding: 40px 32px;
+        border-radius: 18px;
+        text-align: center;
+        border: 1px solid var(--contact-red-border-light);
+        border-top: 4px solid var(--contact-red-primary);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .info-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 35px -8px rgba(169, 32, 54, 0.16);
+        border-color: var(--contact-red-border);
+    }
+
+    .info-card-icon {
+        width: 72px;
+        height: 72px;
+        background: linear-gradient(135deg, var(--contact-red-primary) 0%, var(--contact-red-dark) 100%);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        color: #ffffff;
+        font-size: 1.6rem;
+        box-shadow: 0 10px 22px -4px var(--contact-red-glow);
+        transition: transform 0.35s ease;
+    }
+
+    .info-card:hover .info-card-icon {
+        transform: scale(1.1) rotate(6deg);
+    }
+
+    .info-card h3 {
+        font-family: 'Poppins', sans-serif;
+        color: var(--contact-text-dark);
+        margin-bottom: 12px;
+        font-size: 1.35rem;
+        font-weight: 700;
+    }
+
+    .info-card p {
+        color: var(--contact-text-muted);
+        line-height: 1.65;
+        font-size: 0.98rem;
+        margin: 0;
+    }
+
+    /* --------------------------------------------------------------------------
+       Scroll Animations
+       -------------------------------------------------------------------------- */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+    }
+
+    .animate-on-scroll.animate-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* --------------------------------------------------------------------------
+       Responsive Media Queries
+       -------------------------------------------------------------------------- */
+    @media (max-width: 992px) {
+        .contact-wrapper {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .contact-info-section {
+            position: static;
+        }
+
+        .info-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .contact-hero {
+            padding: 85px 0 65px;
+            min-height: auto;
+        }
+
+        .contact-main {
+            padding: 60px 0;
+        }
+
+        .contact-info-section,
+        .contact-form-section {
+            padding: 32px 24px;
+            border-radius: 16px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .contact-method {
+            padding: 18px 20px;
+        }
+
+        .info-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .additional-info {
+            padding: 60px 0 70px;
+        }
+
+        .info-card {
+            padding: 32px 24px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .contact-hero h1 {
+            font-size: 2.1rem;
+        }
+
+        .contact-hero p {
+            font-size: 1rem;
+        }
+
+        .contact-info-section,
+        .contact-form-section {
+            padding: 26px 18px;
+        }
+
+        .contact-icon {
+            width: 46px;
+            height: 46px;
+            font-size: 1.1rem;
+        }
+
+        .contact-details a {
+            font-size: 0.98rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding-left: 42px;
+            font-size: 0.95rem;
+        }
+
+        .btn-contact-submit {
+            padding: 15px 22px;
+            font-size: 1rem;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% include "partials/header.njk" %}
+
+<!-- Contact Hero Section (Redesigned with Red Theme & Cinematic Background) -->
+<section class="contact-hero">
+    <div class="contact-hero-bg">
+        <img src="/assets/front/images/contact-hero-bg.jpg" alt="Job Labs Recruitment Support">
+    </div>
+    <div class="contact-hero-overlay"></div>
+
+    <div class="container">
+        <div class="contact-hero-content animate-on-scroll">
+            <div class="contact-hero-badge">
+                <i class="fas fa-headset"></i> We're Here For You
+            </div>
+            <h1>Contact <span class="brand-accent">Job Labs</span></h1>
+            <p>Ready to revolutionize your hiring process? Get in touch with our team and let's discuss how we can help you find the perfect candidates for your organization.</p>
+
+            <div class="contact-hero-chips">
+                <span class="hero-chip"><i class="fas fa-bolt"></i> 24h Response</span>
+                <span class="hero-chip"><i class="fas fa-shield-alt"></i> Dedicated Support</span>
+                <span class="hero-chip"><i class="fas fa-map-marker-alt"></i> Sri Lanka</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Contact Content Section -->
+<section class="contact-main">
+    <div class="container">
+        <div class="contact-wrapper">
+            <!-- Left Column: Contact Information -->
+            <div class="contact-info-section animate-on-scroll">
+                <span class="contact-badge"><i class="fas fa-id-card"></i> Contact Information</span>
+                <h2>Get In <span>Touch</span></h2>
+                <p>We're here to help you streamline your recruitment process. Whether you have questions about our ATS platform, need technical support, or want to discuss your hiring needs, our team is ready to assist.</p>
+
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Email Address</h5>
+                            <a href="mailto:info@job-labs.lk">info@job-labs.lk</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Official Website</h5>
+                            <a href="https://www.job-labs.lk" target="_blank" rel="noopener">www.job-labs.lk</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-trust-card">
+                    <i class="fas fa-clock-rotate-left"></i>
+                    <div>
+                        <h6>Support Hours</h6>
+                        <p>Monday – Friday, 8:30 AM – 5:30 PM (SLST). We prioritize all client and applicant inquiries.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Contact Form -->
+            <div class="contact-form-section animate-on-scroll">
+                <div class="contact-form-header">
+                    <span class="contact-badge"><i class="fas fa-paper-plane"></i> Quick Message</span>
+                    <h2>Send Us a <span>Message</span></h2>
+                    <p class="contact-form-subtitle">Fill out the form below and an expert recruitment consultant will respond promptly.</p>
+                </div>
+
+                {% if '' %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    
+                </div>
+                {% endif %}
+
+                {% if '' %}
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle"></i>
+                    
+                </div>
+                {% endif %}
+
+                <form class="contact-form" id="contactForm" method="POST" action="/contact/submit">
+                    <input type="hidden" name="_token" value="prototype-csrf-token">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required-mark">*</span></label>
+                            <div class="input-wrapper">
+                                <input type="text" id="name" name="name" value="" placeholder="John Doe" required>
+                                <i class="fas fa-user field-icon"></i>
+                            </div>
+                            {% if false %}
+                            <small class="error-message"><i class="fas fa-circle-exclamation"></i> {{ message }}</small>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required-mark">*</span></label>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" name="email" value="" placeholder="john@example.com" required>
+                                <i class="fas fa-envelope field-icon"></i>
+                            </div>
+                            {% if false %}
+                            <small class="error-message"><i class="fas fa-circle-exclamation"></i> {{ message }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <div class="input-wrapper">
+                                <input type="tel" id="phone" name="phone" value="" placeholder="+94 77 123 4567">
+                                <i class="fas fa-phone field-icon"></i>
+                            </div>
+                            {% if false %}
+                            <small class="error-message"><i class="fas fa-circle-exclamation"></i> {{ message }}</small>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject <span class="required-mark">*</span></label>
+                            <div class="input-wrapper">
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general_inquiry" {{ ("selected" if '' == 'general_inquiry' else "") }}>General Inquiry</option>
+                                    <option value="technical_support" {{ ("selected" if '' == 'technical_support' else "") }}>Technical Support</option>
+                                    <option value="hiring_solutions" {{ ("selected" if '' == 'hiring_solutions' else "") }}>Hiring Solutions</option>
+                                    <option value="partnership" {{ ("selected" if '' == 'partnership' else "") }}>Partnership</option>
+                                    <option value="other" {{ ("selected" if '' == 'other' else "") }}>Other</option>
+                                </select>
+                                <i class="fas fa-tag field-icon"></i>
+                            </div>
+                            {% if false %}
+                            <small class="error-message"><i class="fas fa-circle-exclamation"></i> {{ message }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message <span class="required-mark">*</span></label>
+                        <div class="input-wrapper">
+                            <textarea id="message" name="message" rows="5" required placeholder="Please describe how we can help you..."></textarea>
+                            <i class="fas fa-comment-dots field-icon"></i>
+                        </div>
+                        {% if false %}
+                        <small class="error-message"><i class="fas fa-circle-exclamation"></i> {{ message }}</small>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="btn-contact-submit" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Send Message</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Additional Information Cards Section -->
+<section class="additional-info">
+    <div class="container">
+        <div class="additional-info-header animate-on-scroll">
+            <span class="contact-badge"><i class="fas fa-heart"></i> Why Connect With Us</span>
+            <h2>Dedicated Recruitment Assistance</h2>
+            <p>We are committed to delivering the highest level of service to employers and job seekers.</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card animate-on-scroll">
+                <div class="info-card-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Response Time</h3>
+                <p>We typically respond to all inquiries within 24 hours during business days.</p>
+            </div>
+
+            <div class="info-card animate-on-scroll">
+                <div class="info-card-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Our technical support team is available around the clock for urgent matters.</p>
+            </div>
+
+            <div class="info-card animate-on-scroll">
+                <div class="info-card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Expert Team</h3>
+                <p>Connect with our experienced recruitment and technology specialists.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "partials/footer.njk" %}
+{% endblock %}
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Scroll Intersection Observer for smooth reveal animations
+        const observerOptions = {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach((el, index) => {
+            if (el.classList.contains('info-card')) {
+                el.style.transitionDelay = `${(index % 3) * 0.15}s`;
+            }
+            observer.observe(el);
+        });
+
+        // Form submission handling
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formSection = document.querySelector('.contact-form-section');
+
+        if (form && submitBtn) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Add loading state
+                submitBtn.classList.add('btn-loading');
+                submitBtn.disabled = true;
+
+                // Remove existing alerts
+                const existingAlerts = formSection.querySelectorAll('.alert');
+                existingAlerts.forEach(alert => alert.remove());
+
+                // Form data
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || document.querySelector('input[name="_token"]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    submitBtn.classList.remove('btn-loading');
+                    submitBtn.disabled = false;
+
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = data.success ? 'alert alert-success' : 'alert alert-danger';
+                    alertDiv.innerHTML = `
+                        <i class="fas fa-${data.success ? 'check' : 'exclamation'}-circle"></i>
+                        <span>${data.message}</span>
+                    `;
+
+                    const formHeader = formSection.querySelector('.contact-form-header');
+                    formHeader.parentNode.insertBefore(alertDiv, formHeader.nextSibling);
+
+                    if (data.success) {
+                        form.reset();
+                        formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                        setTimeout(() => {
+                            hideAlert(alertDiv);
+                        }, 5000);
+                    } else {
+                        alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    submitBtn.classList.remove('btn-loading');
+                    submitBtn.disabled = false;
+
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-danger';
+                    alertDiv.innerHTML = `
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>An unexpected error occurred. Please try again or contact us directly.</span>
+                    `;
+
+                    const formHeader = formSection.querySelector('.contact-form-header');
+                    formHeader.parentNode.insertBefore(alertDiv, formHeader.nextSibling);
+
+                    alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            });
+        }
+
+        function hideAlert(alertElement) {
+            alertElement.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            alertElement.style.opacity = '0';
+            alertElement.style.transform = 'translateY(-15px)';
+
+            setTimeout(() => {
+                if (alertElement.parentNode) {
+                    alertElement.parentNode.removeChild(alertElement);
+                }
+            }, 400);
+        }
+
+        // Real-time client side validation
+        const inputs = form ? form.querySelectorAll('input, textarea, select') : [];
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+
+            input.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    this.classList.remove('error');
+                    const errorMsg = this.closest('.form-group')?.querySelector('.error-message');
+                    if (errorMsg) {
+                        errorMsg.remove();
+                    }
+                }
+            });
+        });
+
+        function validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+            let errorMessage = '';
+
+            field.classList.remove('error');
+            const parentGroup = field.closest('.form-group');
+            const existingError = parentGroup ? parentGroup.querySelector('.error-message') : null;
+            if (existingError) {
+                existingError.remove();
+            }
+
+            switch (field.name) {
+                case 'name':
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'Full name is required.';
+                    }
+                    break;
+
+                case 'email':
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'Email address is required.';
+                    } else if (!emailRegex.test(value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid email address.';
+                    }
+                    break;
+
+                case 'subject':
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'Please select a subject.';
+                    }
+                    break;
+
+                case 'message':
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'Message is required.';
+                    } else if (value.length < 10) {
+                        isValid = false;
+                        errorMessage = 'Message must be at least 10 characters long.';
+                    } else if (value.length > 1000) {
+                        isValid = false;
+                        errorMessage = 'Message cannot exceed 1000 characters.';
+                    }
+                    break;
+            }
+
+            if (!isValid && parentGroup) {
+                field.classList.add('error');
+                const errorDiv = document.createElement('small');
+                errorDiv.className = 'error-message';
+                errorDiv.innerHTML = `<i class="fas fa-circle-exclamation"></i> ${errorMessage}`;
+                parentGroup.appendChild(errorDiv);
+            }
+
+            return isValid;
+        }
+    });
+</script>
+{% endblock %}
