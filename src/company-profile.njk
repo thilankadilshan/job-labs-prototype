@@ -14,7 +14,7 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
 {% set initial = (companyName | trim)[0] | upper %}
 {% set overview = (company.company_overview or '') | trim %}
 {% set isLongAbout = overview | length > 600 %}
-{% set shareUrl = site.url ~ page.url %}
+{% set shareUrl = site.url ~ page.url ~ '#open-jobs' %}{# shared links open straight at the Open Jobs section #}
 {% set shareText = 'Explore jobs at ' ~ companyName ~ ' on Job Labs' %}
 {% block title %}{{ company.company_name ~ ' - Jobs & Company Profile | Job Labs' }}{% endblock %}
 {% block og_title %}{{ company.company_name ~ ' - Jobs & Company Profile | Job Labs' }}{% endblock %}
@@ -332,6 +332,33 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
         .cp-hero-actions .cp-btn { flex: 1 1 100%; justify-content: center; }
         .cp-section-title { font-size: 19px; }
     }
+    .cp-badge-urgent { background: #fff4ec; color: #c2410c; border: 1px solid #fdba74; }
+
+    /* ---------- Mobile: compact hero (logo left, details right) + one-row stats ---------- */
+    @media (max-width: 768px) {
+        .cp-hero { padding: 22px 0 66px; }
+        .cp-hero-grid { flex-direction: row; align-items: flex-start; text-align: left; gap: 14px; }
+        .cp-logo-box { width: 78px; height: 78px; border-radius: 16px; padding: 8px; }
+        .cp-logo-initial { font-size: 32px; }
+        .cp-hero-text { flex: 1; min-width: 0; }
+        .cp-eyebrow, .cp-meta-country, .cp-btn-about { display: none !important; }
+        .cp-name { font-size: 21px; line-height: 1.25; margin: 2px 0 6px; }
+        .cp-hero-meta { justify-content: flex-start; gap: 4px 14px; font-size: 13px; }
+        .cp-hero-meta span { gap: 6px; }
+        .cp-hero-actions { justify-content: flex-start; margin-top: 12px; }
+        .cp-hero-actions .cp-btn { flex: 0 0 auto; padding: 8px 16px; font-size: 13.5px; border-radius: 10px; gap: 8px; }
+
+        .cp-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: -46px; }
+        .cp-stat { flex-direction: column; text-align: center; gap: 6px; padding: 10px 4px; border-radius: 12px; }
+        .cp-stat-icon { width: 30px; height: 30px; font-size: 13px; border-radius: 9px; }
+        .cp-stat-num { font-size: 17px; }
+        .cp-stat-label { font-size: 10.5px; line-height: 1.2; margin-top: 2px; }
+    }
+    @media (max-width: 360px) {
+        .cp-logo-box { width: 64px; height: 64px; }
+        .cp-name { font-size: 19px; }
+        .cp-stat-label { font-size: 9.5px; }
+    }
 </style>
 {% endblock %}
 {% block content %}
@@ -376,7 +403,7 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
                             {{ stats.locations | first3 | join(', ') }}{{ (' +' ~ (stats.locations | length - 3) ~ ' more' if stats.locations | length > 3 else "") }}
                         </span>
                     {% endif %}
-                    <span><i class="fas fa-flag"></i> Sri Lanka</span>
+                    <span class="cp-meta-country"><i class="fas fa-flag"></i> Sri Lanka</span>
                 </div>
                 <div class="cp-hero-actions">
                     {% if stats.open > 0 %}
@@ -385,7 +412,7 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
                         <a href="/" class="cp-btn cp-btn-primary"><i class="fas fa-search"></i> Browse All Jobs</a>
                     {% endif %}
                     {% if overview != '' %}
-                        <a href="#about-company" class="cp-btn cp-btn-ghost js-scroll"><i class="fas fa-info-circle"></i> About Company</a>
+                        <a href="#about-company" class="cp-btn cp-btn-ghost cp-btn-about js-scroll"><i class="fas fa-info-circle"></i> About Company</a>
                     {% endif %}
                 </div>
             </div>
@@ -454,10 +481,13 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
                                    data-search="{{ ((job.job_title ~ ' ' ~ place ~ ' ' ~ (job.jobtype  or  '') ~ ' ' ~ (job.worktype  or  '')) | lower) }}">
                                     <h3 class="cp-job-title">{{ job.job_title }}</h3>
 
-                                    {% if job.job_adv_top_rated == '1'  or  isNew %}
+                                    {% if job.job_adv_top_rated == '1'  or  job.job_adv_urgent == '1'  or  isNew %}
                                     <div class="cp-badges">
                                         {% if job.job_adv_top_rated == '1' %}
-                                            <span class="cp-badge cp-badge-top"><i class="fas fa-star"></i> Top Rated</span>
+                                            <span class="cp-badge cp-badge-top"><i class="fas fa-star"></i> Featured</span>
+                                        {% endif %}
+                                        {% if job.job_adv_urgent == '1' %}
+                                            <span class="cp-badge cp-badge-urgent"><i class="fas fa-bolt"></i> Urgent</span>
                                         {% endif %}
                                         {% if isNew %}
                                             <span class="cp-badge cp-badge-new"><i class="fas fa-bolt"></i> New</span>
@@ -671,6 +701,33 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
         document.addEventListener('DOMContentLoaded', init);
     } else {
         init();
+    }
+
+    /* Shared links (…/company/x/name#open-jobs) land on the Open Jobs section.
+       Wait until the page (logo, images, loader) has settled, then scroll with
+       room for the sticky header. */
+    if (window.location.hash === '#open-jobs') {
+        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+        var goToJobs = function () {
+            var target = document.getElementById('open-jobs');
+            if (!target) return;
+            target.classList.add('is-visible');
+            var targetTop = function () {
+                return Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - 90);
+            };
+            window.scrollTo({ top: targetTop(), behavior: 'smooth' });
+            /* Backup: if smooth scrolling was interrupted (slow device, background tab),
+               jump straight there so the visitor always lands on Open Jobs. */
+            setTimeout(function () {
+                if (Math.abs(window.pageYOffset - targetTop()) > 40) {
+                    document.documentElement.style.scrollBehavior = 'auto';
+                    window.scrollTo(0, targetTop());
+                    document.documentElement.style.scrollBehavior = '';
+                }
+            }, 1200);
+        };
+        var onReady = function () { setTimeout(goToJobs, 350); };
+        if (document.readyState === 'complete') { onReady(); } else { window.addEventListener('load', onReady); }
     }
 })();
 </script>

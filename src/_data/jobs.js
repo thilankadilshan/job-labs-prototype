@@ -141,6 +141,9 @@ const RAW = [
     "Retail operations, Supervision", "Bonus, Staff discount"],
 ];
 
+// Vacancies marked "Urgent" in the admin (job_adv_urgent = 1) - shown with an Urgent badge
+const URGENT_REFS = new Set([203, 204, 207, 213, 217]);
+
 const slugify = (s) => String(s).toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 const jobs = RAW.map((r, i) => {
@@ -162,7 +165,8 @@ const jobs = RAW.map((r, i) => {
     job_industrysector: ind, industrysector: I[ind].label_name,
     job_adv_total_vacancies: vac,
     job_adv_salary: salary,
-    job_adv_top_rated: top ? "1" : "0",
+    job_adv_top_rated: top ? "1" : "0",   // shown as "Featured"
+    job_adv_urgent: URGENT_REFS.has(ref) ? "1" : "0",
     job_adv_status: "1",
     job_adv_active: "1",
     job_adv_livedate: iso(-posted),

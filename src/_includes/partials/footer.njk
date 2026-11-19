@@ -30,13 +30,12 @@ Discover your next career move today with <b>Job Labs where talent meets opportu
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Job Sectors</h4>
+                    <h4>Industry Sectors</h4>
                     <ul class="footer-links">
-                        <li><a href="/?industry_sector=72" target="_blank">Retail Jobs</a></li>
-                        <li><a href="/?industry_sector=60" target="_blank">Healthcare Jobs</a></li>
-                        <li><a href="/?industry_sector=75" target="_blank">Security Jobs</a></li>
-                        <li><a href="/?industry_sector=79" target="_blank">Drivers & Receptionists</a></li>
-                        <li><a href="/?industry_sector=80" target="_blank">Professional Roles</a></li>
+                        {% for industry in lookups.industrySectors %}
+                        <li><a href="/?industry_sector={{ industry.label_id }}">{{ industry.label_name }}</a></li>
+                        {% endfor %}
+                        <li><a href="/">All Jobs &rarr;</a></li>
                     </ul>
                 </div>
                 

@@ -11,7 +11,8 @@
   var params = new URLSearchParams(window.location.search);
   var get = function (k) { return (params.get(k) || '').trim(); };
 
-  var hasSearch = !!(get('search') || get('job_type') || get('city'));
+  // Any filter (hero Job Sector dropdown, sidebar filters, footer Industry Sector links) shows the results view
+  var hasSearch = !!(get('search') || get('job_type') || get('job_sector') || get('work_type') || get('industry_sector') || get('city') || get('salary_range'));
   var hasFilters = ['search', 'job_type', 'job_sector', 'work_type', 'industry_sector', 'city', 'salary_range']
     .some(function (k) { return get(k) !== ''; });
 

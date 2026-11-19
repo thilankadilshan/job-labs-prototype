@@ -245,7 +245,8 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
     }
 
     .badge-active { background: #dcfce7; color: #166534; }
-    .badge-urgent { background: #fee2e2; color: #dc2626; }
+    .badge-urgent { background: #fff4ec; color: #c2410c; border: 1px solid #fdba74; display: inline-flex; align-items: center; gap: 6px; }
+    .job-badges .job-badge { line-height: 1.4; }
 
     /* Header actions */
     .job-actions {
@@ -713,7 +714,14 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
                             <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
-                            Top Rated
+                            Featured
+                        </span>
+                        {% endif %}
+
+                        {% if job.job_adv_urgent == '1' %}
+                        <span class="job-badge badge-urgent">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                            Urgent Hiring
                         </span>
                         {% endif %}
 

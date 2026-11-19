@@ -2,515 +2,575 @@
 permalink: "/login/"
 ---
 {% extends "layouts/mini-modern.njk" %}
+
 {% block title %}Sign In{% endblock %}
+
 {% block styles %}
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    /* ==========================================================================
+       Job Labs - Sign In (redesign)
+       Brand red #A92036 · Sri Lankan workplace imagery · responsive + animated
+       ========================================================================== */
+    :root {
+        --jl-red: #A92036;
+        --jl-red-dark: #7a1628;
+        --jl-red-soft: #fdecef;
+        --jl-ink: #1f2430;
+        --jl-muted: #6b7280;
+        --jl-line: #e6e8ee;
+        --jl-radius: 22px;
     }
 
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #f6f4f5;
         overflow-x: hidden;
     }
 
-    .fullscreen-auth-container {
-        display: flex;
+    .jl-auth {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
         min-height: 100vh;
-        width: 100%;
-        position: relative;
+        gap: 0;
     }
 
-    /* Left Section - Hero Image with Content */
-    .auth-hero-section {
-        flex: 1;
-        background: linear-gradient(135deg, rgba(169, 32, 55, 0.77) 0%, rgba(120, 22, 38, 0.81) 100%),
-                    url('/assets/front/images/career-success-key.jpg') center/cover;
+    /* ---------------- Left: showcase ---------------- */
+    .jl-showcase {
+        position: relative;
+        margin: 18px 0 18px 18px;
+        border-radius: var(--jl-radius);
+        overflow: hidden;
+        color: #fff;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 4rem 6rem;
-        color: white;
+        justify-content: space-between;
+        padding: 40px 44px;
+        min-height: calc(100vh - 36px);
+        isolation: isolate;
+        animation: jlFadeIn .9s ease both;
+    }
+
+    .jl-slides { position: absolute; inset: 0; z-index: -2; }
+    .jl-slide {
+        position: absolute; inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transform: scale(1.08);
+        transition: opacity 1.4s ease, transform 7s ease-out;
+    }
+    .jl-slide.is-active { opacity: 1; transform: scale(1); }
+
+    .jl-showcase::before {
+        content: '';
+        position: absolute; inset: 0; z-index: -1;
+        background:
+            linear-gradient(180deg, rgba(122, 22, 40, .55) 0%, rgba(122, 22, 40, .15) 38%, rgba(40, 8, 16, .82) 100%),
+            linear-gradient(90deg, rgba(169, 32, 54, .55) 0%, rgba(169, 32, 54, 0) 70%);
+    }
+
+    .jl-brand {
+        display: inline-flex; align-items: center; gap: 12px;
+        background: rgba(255, 255, 255, .14);
+        border: 1px solid rgba(255, 255, 255, .28);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 8px 16px 8px 8px;
+        border-radius: 999px;
+        font-weight: 600; font-size: .9rem; letter-spacing: .3px;
+        align-self: flex-start;
+        animation: jlSlideDown .8s .2s ease both;
+    }
+    .jl-brand-dot {
+        width: 34px; height: 34px; border-radius: 50%;
+        background: #fff; display: grid; place-items: center;
+    }
+    .jl-brand-dot img { width: 24px; height: 24px; object-fit: contain; }
+
+    .jl-flag {
+        display: inline-flex; gap: 3px; margin-left: 4px;
+    }
+    .jl-flag i { width: 6px; height: 14px; border-radius: 2px; display: block; }
+
+    .jl-hero-copy { max-width: 560px; }
+    .jl-eyebrow {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: .78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+        color: #ffd9df;
+        animation: jlRise .8s .35s ease both;
+    }
+    .jl-eyebrow::before { content: ''; width: 28px; height: 2px; background: #ffd9df; border-radius: 2px; }
+
+    .jl-title {
+        font-family: 'Poppins', 'Inter', sans-serif;
+        font-size: clamp(2rem, 3.4vw, 3.3rem);
+        line-height: 1.12; font-weight: 700;
+        margin: 14px 0 14px;
+        animation: jlRise .8s .45s ease both;
+    }
+    .jl-title .jl-rotator {
+        display: inline-block; position: relative;
+        color: #ffd166;
+        min-width: 4ch;
+    }
+    .jl-rotator span {
+        display: inline-block;
+        animation: jlWordIn .6s ease both;
+    }
+    .jl-sub {
+        font-size: 1.05rem; line-height: 1.65; color: rgba(255, 255, 255, .88);
+        max-width: 480px;
+        animation: jlRise .8s .55s ease both;
+    }
+
+    .jl-cards {
+        display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px;
+        animation: jlRise .8s .65s ease both;
+    }
+    .jl-glass {
+        display: flex; align-items: center; gap: 12px;
+        background: rgba(255, 255, 255, .14);
+        border: 1px solid rgba(255, 255, 255, .25);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 12px 16px; border-radius: 16px;
+        font-size: .88rem; line-height: 1.35;
+        animation: jlFloat 6s ease-in-out infinite;
+    }
+    .jl-glass:nth-child(2) { animation-delay: -2s; }
+    .jl-glass:nth-child(3) { animation-delay: -4s; }
+    .jl-glass strong { display: block; font-size: .95rem; }
+    .jl-glass .jl-ic {
+        width: 36px; height: 36px; flex: 0 0 36px; border-radius: 12px;
+        background: #fff; color: var(--jl-red);
+        display: grid; place-items: center;
+    }
+
+    .jl-marquee {
+        margin-top: 26px; overflow: hidden;
+        mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    }
+    .jl-marquee-track {
+        display: flex; gap: 10px; width: max-content;
+        animation: jlMarquee 28s linear infinite;
+    }
+    .jl-chip {
+        white-space: nowrap; font-size: .8rem; font-weight: 600;
+        padding: 7px 14px; border-radius: 999px;
+        background: rgba(0, 0, 0, .28); border: 1px solid rgba(255, 255, 255, .22);
+    }
+
+    .jl-dots { display: flex; gap: 8px; margin-top: 22px; }
+    .jl-dots button {
+        width: 10px; height: 10px; border-radius: 999px; border: 0; padding: 0; cursor: pointer;
+        background: rgba(255, 255, 255, .45); transition: width .35s ease, background .35s ease;
+    }
+    .jl-dots button.is-active { width: 30px; background: #fff; }
+
+    /* ---------------- Right: form ---------------- */
+    .jl-form-side {
         position: relative;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        padding: 40px 28px 24px;
         overflow: hidden;
     }
-
-    .auth-hero-section::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-        animation: pulse 15s ease-in-out infinite;
+    .jl-blob {
+        position: absolute; border-radius: 50%; filter: blur(60px); opacity: .45; z-index: 0;
+        animation: jlBlob 14s ease-in-out infinite;
     }
+    .jl-blob.b1 { width: 320px; height: 320px; background: #f7c6cf; top: -80px; right: -60px; }
+    .jl-blob.b2 { width: 260px; height: 260px; background: #ffe2b8; bottom: 60px; left: -90px; animation-delay: -6s; }
 
-    @keyframes pulse {
-        0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
-        50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+    .jl-card {
+        position: relative; z-index: 1;
+        width: 100%; max-width: 440px;
+        background: #fff;
+        border: 1px solid var(--jl-line);
+        border-radius: var(--jl-radius);
+        box-shadow: 0 24px 60px -24px rgba(122, 22, 40, .28), 0 2px 6px rgba(0, 0, 0, .04);
+        padding: 38px 36px 30px;
+        animation: jlCardIn .9s .15s cubic-bezier(.2, .8, .2, 1) both;
     }
+    .jl-card-logo { display: flex; justify-content: center; margin-bottom: 18px; }
+    .jl-card-logo img { height: 56px; width: auto; object-fit: contain; }
 
-    .hero-content {
-        position: relative;
-        z-index: 2;
-        max-width: 600px;
+    .jl-card h2 {
+        font-family: 'Poppins', 'Inter', sans-serif;
+        font-size: 1.6rem; font-weight: 700; color: var(--jl-ink);
+        text-align: center; margin-bottom: 6px;
     }
+    .jl-card .jl-lead { text-align: center; color: var(--jl-muted); font-size: .95rem; margin-bottom: 26px; }
 
-    .hero-logo {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 3rem;
-        font-size: 1.5rem;
-        font-weight: 300;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
-
-    .hero-logo svg {
-        width: 32px;
-        height: 32px;
-        fill: white;
-    }
-
-    .hero-title {
-        font-size: 4rem;
-        font-weight: 800;
-        line-height: 1.1;
-        margin-bottom: 1.5rem;
-        text-transform: uppercase;
-        letter-spacing: -1px;
-        animation: slideInLeft 1s ease-out;
-    }
-
-    .hero-subtitle {
-        font-size: 1.5rem;
-        font-weight: 400;
-        margin-bottom: 1.5rem;
-        line-height: 1.4;
-        opacity: 0.95;
-        animation: slideInLeft 1.2s ease-out;
-    }
-
-    .hero-description {
-        font-size: 1rem;
-        line-height: 1.6;
-        opacity: 0.9;
-        max-width: 500px;
-        animation: slideInLeft 1.4s ease-out;
-    }
-
-    .hero-subtitle2 {
-        font-size: 1.3rem;
-        font-weight: 700;
-        /* Bold to make it stand out */
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-top: 3rem;
-        /* Add space above it */
-        animation: slideInLeft 1.6s ease-out;
-        /* Staggered animation */
-    }
-
-    .hero-description2 {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        opacity: 0.9;
-        max-width: 450px;
-        margin-top: 0.5rem;
-        /* Small space between subtitle2 and this */
-        animation: slideInLeft 1.8s ease-out;
-        /* Staggered animation */
-    }
-
-    @keyframes slideInLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    /* Right Section - Login Form */
-    .auth-form-section {
-        flex: 0 0 480px;
-        background: #f5f5f5;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 3rem 2rem;
-        position: relative;
-    }
-
-    .auth-form-container {
-        width: 100%;
-        max-width: 400px;
-        animation: slideInRight 1s ease-out;
-    }
-
-    @keyframes slideInRight {
-        from {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    .form-logo {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .form-logo img {
-        max-height: 60px;
-        width: auto;
-    }
-
-    .login-form {
-        background: white;
-        padding: 2.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
+    .jl-field { margin-bottom: 18px; opacity: 0; animation: jlRise .6s ease forwards; }
+    .jl-field:nth-of-type(1) { animation-delay: .45s; }
+    .jl-field:nth-of-type(2) { animation-delay: .55s; }
 
     .form-label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #333;
-        margin-bottom: 0.5rem;
+        display: block; font-size: .85rem; font-weight: 600; color: var(--jl-ink); margin-bottom: 8px;
     }
-
-    .form-input-wrapper {
-        position: relative;
+    .jl-input-wrap { position: relative; transition: transform .25s ease; }
+    .jl-input-wrap .jl-lead-ic {
+        position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+        color: #9aa1ad; pointer-events: none; transition: color .25s ease;
+        display: flex;
     }
-
     .form-input {
         width: 100%;
-        padding: 0.875rem 1rem;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 0.95rem;
-        transition: all 0.3s ease;
-        background: white;
-        color: #333;
-    }
-
-    .form-input:focus {
+        height: 52px;
+        padding: 0 48px 0 46px;
+        font-size: .97rem; font-family: inherit; color: var(--jl-ink);
+        background: #f8f9fb;
+        border: 1.5px solid var(--jl-line);
+        border-radius: 14px;
         outline: none;
-        border-color: #A92036;
-        box-shadow: 0 0 0 3px rgba(169, 32, 54, 0.1);
+        transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
     }
-
+    .form-input::placeholder { color: #a5abb6; }
+    .form-input:focus {
+        background: #fff;
+        border-color: var(--jl-red);
+        box-shadow: 0 0 0 4px rgba(169, 32, 54, .12);
+    }
+    .jl-input-wrap:focus-within .jl-lead-ic { color: var(--jl-red); }
     .form-input.error {
-        border-color: #dc3545;
+        border-color: #dc3545; background: #fff7f8;
+        animation: jlShake .4s ease;
     }
-
     .error-message {
-        color: #dc3545;
-        font-size: 0.813rem;
-        margin-top: 0.375rem;
-        display: block;
+        display: flex; align-items: center; gap: 6px;
+        color: #c0263b; font-size: .82rem; font-weight: 500; margin-top: 7px;
+        animation: jlRise .3s ease both;
     }
 
-    .form-footer {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-bottom: 1.5rem;
+    .jl-toggle-pass {
+        position: absolute; right: 8px; top: 26px; transform: translateY(-50%);
+        width: 36px; height: 36px; border: 0; border-radius: 10px; cursor: pointer;
+        background: transparent; color: #8a919d; display: grid; place-items: center;
+        transition: background .2s ease, color .2s ease;
     }
+    .jl-toggle-pass:hover, .jl-toggle-pass:focus-visible { background: var(--jl-red-soft); color: var(--jl-red); outline: none; }
 
-    .forgot-password {
-        color: #A92036;
-        text-decoration: none;
-        font-size: 0.875rem;
-        font-weight: 500;
-        transition: opacity 0.3s ease;
+    .jl-caps {
+        display: none; margin-top: 7px; font-size: .78rem; color: #b26a00; font-weight: 600;
     }
-
-    .forgot-password:hover {
-        opacity: 0.8;
-        text-decoration: underline;
-    }
+    .jl-caps.show { display: block; }
 
     .submit-btn {
-        width: 100%;
-        padding: 1rem;
-        background: #A92036;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+        position: relative; overflow: hidden;
+        width: 100%; height: 54px; margin-top: 6px;
+        border: 0; border-radius: 14px; cursor: pointer;
+        background: linear-gradient(135deg, #c0283f 0%, var(--jl-red) 45%, var(--jl-red-dark) 100%);
+        background-size: 200% 200%;
+        color: #fff; font-family: inherit; font-size: 1rem; font-weight: 700; letter-spacing: .3px;
+        display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+        box-shadow: 0 12px 24px -10px rgba(169, 32, 54, .6);
+        transition: transform .2s ease, box-shadow .2s ease, background-position .6s ease;
+        opacity: 0; animation: jlRise .6s .65s ease forwards;
     }
-
-    .submit-btn:hover {
-        background: #8a1a2d;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(169, 32, 54, 0.3);
+    .submit-btn:hover { transform: translateY(-2px); background-position: 100% 0; box-shadow: 0 16px 30px -12px rgba(169, 32, 54, .7); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:focus-visible { outline: 3px solid rgba(169, 32, 54, .35); outline-offset: 3px; }
+    .submit-btn::after {
+        content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .35), transparent);
+        transform: skewX(-20deg);
+        animation: jlShine 3.8s 1.5s ease-in-out infinite;
     }
-
-    .submit-btn:active {
-        transform: translateY(0);
+    .submit-btn .jl-arrow { transition: transform .25s ease; display: flex; }
+    .submit-btn:hover .jl-arrow { transform: translateX(4px); }
+    .submit-btn .jl-spinner {
+        display: none; width: 20px; height: 20px; border-radius: 50%;
+        border: 2.5px solid rgba(255, 255, 255, .4); border-top-color: #fff;
+        animation: spin .8s linear infinite;
     }
-
-    .submit-btn:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-        transform: none;
-    }
+    .submit-btn.btn-loading { pointer-events: none; opacity: .9; }
+    .submit-btn.btn-loading .jl-spinner { display: inline-block; }
+    .submit-btn.btn-loading .jl-arrow { display: none; }
 
     .divider {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        margin: 1.5rem 0;
-        color: #999;
-        font-size: 0.875rem;
+        display: flex; align-items: center; gap: 12px; margin: 24px 0 18px;
+        color: #a0a6b1; font-size: .8rem; text-transform: uppercase; letter-spacing: 1.5px;
     }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--jl-line); }
 
-    .divider::before,
-    .divider::after {
-        content: '';
-        flex: 1;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .divider span {
-        padding: 0 1rem;
-    }
-
-    .signup-link {
-        text-align: center;
-        margin-top: 1.5rem;
-        color: #666;
-        font-size: 0.875rem;
-    }
-
+    .signup-link { text-align: center; font-size: .92rem; color: var(--jl-muted); line-height: 2; }
     .signup-link a {
-        color: #A92036;
-        text-decoration: none;
-        font-weight: 600;
-        transition: opacity 0.3s ease;
+        color: var(--jl-red); font-weight: 700; text-decoration: none;
+        background-image: linear-gradient(var(--jl-red), var(--jl-red));
+        background-size: 0 2px; background-repeat: no-repeat; background-position: 0 100%;
+        transition: background-size .3s ease;
+    }
+    .signup-link a:hover { background-size: 100% 2px; }
+    .signup-link .jl-back {
+        display: inline-flex; align-items: center; gap: 6px; color: var(--jl-muted); font-weight: 600;
+        background-image: linear-gradient(var(--jl-muted), var(--jl-muted));
+    }
+    .signup-link .jl-back:hover { color: var(--jl-ink); }
+
+    .jl-secure {
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        margin-top: 18px; font-size: .78rem; color: #9aa1ad;
     }
 
-    .signup-link a:hover {
-        opacity: 0.8;
-        text-decoration: underline;
+    .jl-illustration {
+        position: relative; z-index: 1;
+        width: 100%; max-width: 520px; margin-top: 26px;
+        opacity: 0; animation: jlRise .9s .8s ease forwards;
+    }
+    .jl-illustration img { width: 100%; height: auto; display: block; border-radius: 18px; }
+    .jl-illustration figcaption {
+        text-align: center; font-size: .82rem; color: var(--jl-muted); margin-top: 10px; font-weight: 500;
+    }
+    .jl-illustration figcaption b { color: var(--jl-red); }
+
+    /* ---------------- Animations ---------------- */
+    @keyframes jlFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes jlRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes jlSlideDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes jlCardIn { from { opacity: 0; transform: translateY(30px) scale(.97); } to { opacity: 1; transform: none; } }
+    @keyframes jlFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes jlMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes jlBlob { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(20px, 30px) scale(1.1); } }
+    @keyframes jlShine { 0% { left: -60%; } 40%, 100% { left: 130%; } }
+    @keyframes jlShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    @keyframes jlWordIn { from { opacity: 0; transform: translateY(60%); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+
+    /* ---------------- Responsive ---------------- */
+    @media (max-width: 1199px) {
+        .jl-showcase { padding: 34px 32px; }
+        .jl-glass { font-size: .82rem; }
     }
 
-    /* Responsive Design */
-    @media (max-width: 1024px) {
-        .auth-hero-section {
-            padding: 3rem 4rem;
+    @media (max-width: 991px) {
+        .jl-auth { grid-template-columns: 1fr; }
+        .jl-showcase {
+            margin: 12px 12px 0;
+            min-height: 0;
+            padding: 24px 22px 70px;
         }
-
-        .hero-title {
-            font-size: 3rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-        }
-
-        .auth-form-section {
-            flex: 0 0 420px;
-        }
+        .jl-title { font-size: clamp(1.7rem, 5.4vw, 2.4rem); margin: 10px 0; }
+        .jl-sub { font-size: .95rem; }
+        .jl-cards { margin-top: 18px; }
+        .jl-glass:nth-child(3) { display: none; }
+        .jl-form-side { padding: 0 16px 28px; margin-top: -48px; }
     }
 
-    @media (max-width: 768px) {
-        .fullscreen-auth-container {
-            flex-direction: column;
-        }
-
-        .auth-hero-section {
-            min-height: 40vh;
-            padding: 2rem;
-            align-items: center;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 100%;
-        }
-
-        .hero-title {
-            font-size: 2.5rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.1rem;
-        }
-
-        .hero-description {
-            font-size: 0.95rem;
-        }
-
-        .auth-form-section {
-            flex: 1;
-            padding: 2rem 1.5rem;
-        }
-
-        .login-form {
-            padding: 2rem 1.5rem;
-        }
+    @media (max-width: 575px) {
+        .jl-showcase { padding: 20px 18px 64px; border-radius: 18px; }
+        .jl-brand { font-size: .8rem; }
+        .jl-hero-copy { margin-top: 26px; }
+        .jl-cards { display: none; }
+        .jl-marquee { margin-top: 16px; }
+        .jl-dots { margin-top: 14px; }
+        .jl-card { padding: 28px 20px 24px; border-radius: 18px; }
+        .jl-card h2 { font-size: 1.4rem; }
+        .jl-card-logo img { height: 46px; }
+        .form-input { height: 50px; font-size: 16px; } /* 16px stops iOS zoom on focus */
+        .jl-toggle-pass { top: 25px; }
     }
 
-    @media (max-width: 480px) {
-        .auth-hero-section {
-            min-height: 35vh;
-            padding: 1.5rem;
-        }
+    /* ==========================================================================
+       FIT-TO-SCREEN (desktop / laptop): whole page fits the viewport, no scroll
+       ========================================================================== */
+    @media (min-width: 992px) {
+        html, body { height: 100%; }
+        .jl-auth { height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; }
 
-        .hero-logo {
-            margin-bottom: 2rem;
-            font-size: 1.2rem;
+        .jl-showcase {
+            height: calc(100vh - 32px); height: calc(100dvh - 32px);
+            min-height: 0;
+            margin: 16px 0 16px 16px;
+            padding: clamp(20px, 3.4vh, 40px) clamp(24px, 3vw, 44px);
+            overflow: hidden;
         }
+        .jl-title { font-size: clamp(1.8rem, min(3.2vw, 5.2vh), 3.2rem); margin: clamp(6px, 1.2vh, 14px) 0; }
+        .jl-sub { font-size: clamp(.88rem, 1.9vh, 1.05rem); line-height: 1.55; }
+        .jl-cards { margin-top: clamp(12px, 2.4vh, 26px); gap: 10px; }
+        .jl-glass { padding: clamp(8px, 1.3vh, 12px) 14px; }
+        .jl-marquee { margin-top: clamp(10px, 2vh, 26px); }
+        .jl-dots { margin-top: clamp(10px, 1.8vh, 22px); }
 
-        .hero-title {
-            font-size: 2rem;
+        .jl-form-side {
+            height: 100vh; height: 100dvh;
+            padding: clamp(12px, 2.2vh, 32px) 28px;
+            justify-content: center;
+            gap: clamp(8px, 1.6vh, 20px);
+            overflow-y: auto; /* safety net for very short windows only */
         }
+        .jl-card { padding: clamp(18px, 3vh, 34px) 34px clamp(16px, 2.4vh, 26px); flex-shrink: 0; }
+        .jl-card-logo { margin-bottom: clamp(6px, 1.2vh, 14px); }
+        .jl-card-logo img { height: clamp(36px, 5.4vh, 52px); }
+        .jl-card h2 { font-size: clamp(1.3rem, 2.8vh, 1.6rem); margin-bottom: 4px; }
+        .jl-card .jl-lead { margin-bottom: clamp(12px, 2.2vh, 22px); font-size: .9rem; }
+        .jl-field { margin-bottom: clamp(10px, 1.7vh, 16px); }
+        .form-label { margin-bottom: 6px; }
+        .form-input { height: clamp(42px, 5.6vh, 50px); }
+        .jl-toggle-pass { top: clamp(21px, 2.8vh, 25px); }
+        .submit-btn { height: clamp(44px, 6vh, 52px); }
+        .divider { margin: clamp(10px, 2vh, 20px) 0 clamp(8px, 1.4vh, 14px); }
+        .signup-link { line-height: 1.8; font-size: .88rem; }
+        .jl-secure { margin-top: clamp(8px, 1.4vh, 14px); }
 
-        .hero-subtitle {
-            font-size: 1rem;
-        }
-
-        .hero-description {
-            font-size: 0.875rem;
-        }
-
-        .auth-form-section {
-            padding: 1.5rem 1rem;
-        }
-
-        .login-form {
-            padding: 1.5rem;
-        }
-
-        .form-input {
-            padding: 0.75rem;
-        }
-
-        .submit-btn {
-            padding: 0.875rem;
-        }
+        /* illustration shrinks with the screen height, and hides when there is no room */
+        .jl-illustration { margin-top: 0; flex: 0 1 auto; min-height: 0; display: flex; flex-direction: column; align-items: center; }
+        .jl-illustration img { width: auto; max-width: 100%; height: clamp(110px, calc(100vh - 640px), 220px); object-fit: contain; }
+        .jl-illustration figcaption { margin-top: 6px; }
+    }
+    @media (min-width: 992px) and (max-height: 820px) {
+        .jl-illustration figcaption { display: none; }
+    }
+    @media (min-width: 992px) and (max-height: 860px) {
+        .jl-glass:nth-child(3) { display: none; }
+    }
+    @media (min-width: 992px) and (max-height: 790px) {
+        .jl-illustration { display: none; }
+    }
+    @media (min-width: 992px) and (max-height: 640px) {
+        .jl-cards { display: none; }
+        .jl-secure { display: none; }
     }
 
-    /* Loading State */
-    .btn-loading {
-        position: relative;
-        color: transparent;
-        pointer-events: none;
+    /* Phones: keep the form on the first screen - slimmer banner, illustration last */
+    @media (max-width: 575px) {
+        .jl-hero-copy { margin-top: 14px; }
+        .jl-sub { display: none; }
+        .jl-title { font-size: 1.6rem; }
+        .jl-showcase { padding-bottom: 58px; }
+        .jl-card-logo img { height: 40px; }
+        .jl-card .jl-lead { margin-bottom: 18px; }
     }
 
-    .btn-loading::after {
-        content: '';
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        top: 50%;
-        left: 50%;
-        margin-left: -10px;
-        margin-top: -10px;
-        border: 2px solid transparent;
-        border-top-color: white;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-        to { transform: rotate(360deg); }
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        .jl-slide { transform: none !important; }
     }
 </style>
 {% endblock %}
 {% block content %}
-<div class="fullscreen-auth-container">
-    <!-- Left Section - Hero -->
-    <div class="auth-hero-section">
-        <div class="hero-content">
-            <div class="hero-logo">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" 
-                    fill="currentColor" width="40" height="40">
-                    <path d="M12 2L13.09 8.26L19 9.27L14.5 13.14L15.82 19L12 15.77L8.18 19L9.5 13.14L5 9.27L10.91 8.26L12 2Z"/>
-                </svg>
-                <span>TALENT</span>
-            </div>
-            <h1 class="hero-title">CRAFT YOUR<br>TEAMS</h1>
-            <p class="hero-subtitle">Find exceptional talent that matches your vision.</p>
-            <p class="hero-description">
-                Streamline recruitment and connect with the people who will drive your success - your next great hire is just a click away. </p>
-            <p class="hero-subtitle2">SIGN IN.</p>
-            <p class="hero-description2">Build, grow, and connect with top talent faster..</p>
+<div class="jl-auth">
 
+    {# ================= Left: Sri Lankan workplace showcase ================= #}
+    <section class="jl-showcase" aria-label="Job Labs Sri Lanka">
+        <div class="jl-slides" aria-hidden="true">
+            <div class="jl-slide is-active" style="background-image:url('/assets/front/images/login/login-slide-1.jpg')"></div>
+            <div class="jl-slide" style="background-image:url('/assets/front/images/login/login-slide-2.jpg')"></div>
+            <div class="jl-slide" style="background-image:url('/assets/front/images/login/login-slide-3.jpg')"></div>
         </div>
-    </div>
 
-    <!-- Right Section - Login Form -->
-    <div class="auth-form-section">
-        <div class="auth-form-container">
-            <div class="form-logo">
+        <div class="jl-brand">
+            <span class="jl-brand-dot"><img src="/favicon/favicon-32x32.png" alt=""></span>
+            Job Labs &middot; Sri Lanka
+            <span class="jl-flag" aria-hidden="true"><i style="background:#ffbe29"></i><i style="background:#00534e"></i><i style="background:#eb7400"></i><i style="background:#8d153a"></i></span>
+        </div>
+
+        <div class="jl-hero-copy">
+            <span class="jl-eyebrow">Employer &amp; Recruiter Portal</span>
+            <h1 class="jl-title">
+                Hire Sri Lanka's best<br>
+                <span class="jl-rotator" id="jlRotator"><span>talent</span></span> faster.
+            </h1>
+            <p class="jl-sub">
+                Post vacancies, track every applicant and shortlist with confidence &mdash; all from one Job Labs dashboard.
+            </p>
+
+            <div class="jl-cards">
+                <div class="jl-glass">
+                    <span class="jl-ic">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </span>
+                    <span><strong>Verified listings</strong>Real jobs for real people</span>
+                </div>
+                <div class="jl-glass">
+                    <span class="jl-ic">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </span>
+                    <span><strong>Island-wide reach</strong>Colombo &middot; Kandy &middot; Galle &middot; Jaffna</span>
+                </div>
+                <div class="jl-glass">
+                    <span class="jl-ic">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg>
+                    </span>
+                    <span><strong>Full ATS</strong>Track applicants end to end</span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="jl-marquee" aria-hidden="true">
+                <div class="jl-marquee-track">
+                    {% set chips = ['Healthcare', 'IT & Software', 'Retail', 'Security', 'Drivers', 'Hospitality', 'Banking & Finance', 'Apparel', 'Tea & Agriculture', 'Reception & Admin', 'Logistics', 'Education'] %}
+                    {% for round in [1, 2] %}{% for chip in chips %}
+                        <span class="jl-chip">{{ chip }}</span>
+                    {% endfor %}{% endfor %}
+                </div>
+            </div>
+            <div class="jl-dots" role="tablist" aria-label="Background images">
+                <button type="button" class="is-active" aria-label="Image 1"></button>
+                <button type="button" aria-label="Image 2"></button>
+                <button type="button" aria-label="Image 3"></button>
+            </div>
+        </div>
+    </section>
+
+    {# ================= Right: Sign-in form ================= #}
+    <section class="jl-form-side">
+        <span class="jl-blob b1" aria-hidden="true"></span>
+        <span class="jl-blob b2" aria-hidden="true"></span>
+
+        <div class="jl-card">
+            <div class="jl-card-logo">
                 <img src="/assets/front/images/hr/job_logo.png" alt="Job Labs Logo">
             </div>
+            <h2>Welcome back</h2>
+            <p class="jl-lead">Sign in to manage your vacancies and candidates.</p>
 
             <div class="login-form">
-                <form method="POST" action="/ats" id="loginForm">
+                <form method="POST" action="/ats" id="loginForm" novalidate>
                     <input type="hidden" name="_token" value="prototype-csrf-token">
 
                     <!-- Email Field -->
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <div class="form-input-wrapper">
-                            <input 
-                                id="email" 
-                                type="email" 
-                                class="form-input {% if false %} error {% endif %}" 
-                                name="email" 
-                                value="" 
-                                required 
-                                autocomplete="email" 
-                                autofocus 
-                                placeholder="Enter your email"
+                    <div class="jl-field form-group">
+                        <label for="email" class="form-label">Email address</label>
+                        <div class="jl-input-wrap form-input-wrapper">
+                            <span class="jl-lead-ic" aria-hidden="true">
+                                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></svg>
+                            </span>
+                            <input
+                                id="email"
+                                type="email"
+                                class="form-input"
+                                name="email"
+                                value=""
+                                required
+                                autocomplete="email"
+                                autofocus
+                                placeholder="you@company.lk"
                             >
-                            {% if false %}
-                                <span class="error-message">{{ message }}</span>
-                            {% endif %}
                         </div>
                     </div>
 
                     <!-- Password Field -->
-                    <div class="form-group">
+                    <div class="jl-field form-group">
                         <label for="password" class="form-label">Password</label>
-                        <div class="form-input-wrapper">
-                            <input 
-                                id="password" 
-                                type="password" 
-                                class="form-input {% if false %} error {% endif %}" 
-                                name="password" 
-                                required 
+                        <div class="jl-input-wrap form-input-wrapper">
+                            <span class="jl-lead-ic" aria-hidden="true">
+                                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                            </span>
+                            <input
+                                id="password"
+                                type="password"
+                                class="form-input"
+                                name="password"
+                                required
                                 autocomplete="current-password"
                                 placeholder="Enter your password"
                             >
-                            {% if false %}
-                                <span class="error-message">{{ message }}</span>
-                            {% endif %}
+                            <button type="button" class="jl-toggle-pass" id="togglePassword" aria-label="Show password" aria-pressed="false">
+                                <svg class="jl-eye" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="jl-eye-off" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
+                            </button>
+                            <span class="jl-caps" id="capsWarning">Caps Lock is on</span>
                         </div>
                     </div>
 
@@ -525,7 +585,11 @@ permalink: "/login/"
 
                     <!-- Submit Button -->
                     <button type="submit" class="submit-btn" id="submitBtn">
-                        Sign In
+                        <span class="jl-btn-text">Sign In</span>
+                        <span class="jl-arrow" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </span>
+                        <span class="jl-spinner" aria-hidden="true"></span>
                     </button>
 
                     <!-- Divider -->
@@ -537,28 +601,95 @@ permalink: "/login/"
                     {% if true %}
                     <div class="signup-link">
                         Are you new? <a href="/recruiters-signup">Create an Account</a><br/>
-                        <a href="/employer">Back to Employer Details</a>
+                        <a href="/employer" class="jl-back">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 19l-7-7 7-7"/></svg>
+                            Back to Employer Details
+                        </a>
                     </div>
                     {% endif %}
                 </form>
             </div>
+
+            <div class="jl-secure">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                Secure sign-in &middot; Your data stays in Sri Lanka's trusted hiring network
+            </div>
         </div>
-    </div>
+
+        <figure class="jl-illustration">
+            <img src="/assets/front/images/login/login-sl-workforce.svg"
+                 alt="Illustration of Sri Lankan professionals: a nurse, an IT professional, a tea plucker, a manager, a security officer and a driver"
+                 loading="lazy" width="820" height="360">
+            <figcaption><b>Real Jobs for Real People</b> &mdash; across every industry in Sri Lanka</figcaption>
+        </figure>
+    </section>
 </div>
 {% endblock %}
 {% block scripts %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('loginForm');
     const submitBtn = document.getElementById('submitBtn');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Email validation
-    emailInput.addEventListener('blur', function() {
+    /* ---------- Background slideshow (Sri Lankan workplace photos) ---------- */
+    const slides = document.querySelectorAll('.jl-slide');
+    const dots = document.querySelectorAll('.jl-dots button');
+    let current = 0, slideTimer = null;
+
+    function showSlide(i) {
+        slides[current].classList.remove('is-active');
+        dots[current].classList.remove('is-active');
+        current = (i + slides.length) % slides.length;
+        slides[current].classList.add('is-active');
+        dots[current].classList.add('is-active');
+    }
+    function startSlides() {
+        if (reduceMotion || slides.length < 2) return;
+        clearInterval(slideTimer);
+        slideTimer = setInterval(() => showSlide(current + 1), 6000);
+    }
+    dots.forEach((dot, i) => dot.addEventListener('click', () => { showSlide(i); startSlides(); }));
+    startSlides();
+
+    /* ---------- Rotating headline word ---------- */
+    const rotator = document.getElementById('jlRotator');
+    const words = ['talent', 'nurses', 'engineers', 'drivers', 'cashiers', 'teams'];
+    let w = 0;
+    if (rotator && !reduceMotion) {
+        setInterval(() => {
+            w = (w + 1) % words.length;
+            rotator.innerHTML = '<span>' + words[w] + '</span>';
+        }, 2400);
+    }
+
+    /* ---------- Show / hide password ---------- */
+    const toggle = document.getElementById('togglePassword');
+    if (toggle) {
+        toggle.addEventListener('click', function () {
+            const show = passwordInput.type === 'password';
+            passwordInput.type = show ? 'text' : 'password';
+            this.setAttribute('aria-pressed', show ? 'true' : 'false');
+            this.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+            this.querySelector('.jl-eye').style.display = show ? 'none' : '';
+            this.querySelector('.jl-eye-off').style.display = show ? '' : 'none';
+            passwordInput.focus();
+        });
+    }
+
+    /* ---------- Caps Lock hint ---------- */
+    const caps = document.getElementById('capsWarning');
+    ['keydown', 'keyup'].forEach(evt => passwordInput.addEventListener(evt, function (e) {
+        if (caps && e.getModifierState) caps.classList.toggle('show', e.getModifierState('CapsLock'));
+    }));
+    passwordInput.addEventListener('blur', () => caps && caps.classList.remove('show'));
+
+    /* ---------- Email validation (same rules as before) ---------- */
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    emailInput.addEventListener('blur', function () {
         const email = this.value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
         if (email && !emailRegex.test(email)) {
             this.classList.add('error');
         } else {
@@ -566,42 +697,47 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Remove error class on input
+    // Remove error state while the user types
     [emailInput, passwordInput].forEach(input => {
-        input.addEventListener('input', function() {
+        input.addEventListener('input', function () {
             this.classList.remove('error');
             const errorMsg = this.parentElement.querySelector('.error-message');
-            if (errorMsg && !errorMsg.textContent.includes('{{ "{{" }}')) {
-                errorMsg.remove();
-            }
+            if (errorMsg) errorMsg.remove();
         });
     });
 
-    // Form submission
-    form.addEventListener('submit', function(e) {
-        // Add loading state
+    /* ---------- Submit: light client check + loading state ---------- */
+    form.addEventListener('submit', function (e) {
+        const email = emailInput.value.trim();
+        let ok = true;
+        if (!email || !emailRegex.test(email)) { emailInput.classList.add('error'); ok = false; }
+        if (!passwordInput.value) { passwordInput.classList.add('error'); ok = false; }
+
+        if (!ok) {
+            e.preventDefault();
+            (emailInput.classList.contains('error') ? emailInput : passwordInput).focus();
+            return;
+        }
+
         submitBtn.classList.add('btn-loading');
         submitBtn.disabled = true;
-
-        // If there are validation errors, re-enable the button
-        setTimeout(() => {
-            if (document.querySelector('.error-message')) {
-                submitBtn.classList.remove('btn-loading');
-                submitBtn.disabled = false;
-            }
-        }, 100);
+        const label = submitBtn.querySelector('.jl-btn-text');
+        if (label) label.textContent = 'Signing in...';
+        // Prototype: mock-api.js shows a "sign-in is disabled" notice instead of logging in,
+        // so put the button back once that notice is closed.
+        setTimeout(function () {
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.disabled = false;
+            if (label) label.textContent = 'Sign In';
+        }, 600);
     });
 
-    // Add smooth focus effects
-    const inputs = document.querySelectorAll('.form-input');
-    inputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.style.transform = 'translateY(-2px)';
-        });
-        
-        input.addEventListener('blur', function() {
-            this.parentElement.style.transform = 'translateY(0)';
-        });
+    // If the user comes back via the browser's back button, reset the button
+    window.addEventListener('pageshow', function () {
+        submitBtn.classList.remove('btn-loading');
+        submitBtn.disabled = false;
+        const label = submitBtn.querySelector('.jl-btn-text');
+        if (label) label.textContent = 'Sign In';
     });
 });
 </script>
