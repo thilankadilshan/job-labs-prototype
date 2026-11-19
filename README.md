@@ -86,8 +86,8 @@ Dashboard / admin / candidate-account pages are intentionally **not** included.
 - Google Analytics / AdSense / site-verification tags removed and pages marked `noindex`
   (so the prototype never pollutes production analytics or search results).
 - reCAPTCHA removed from the recruiter sign-up form.
-- "Resume Builder" links point to the in-repo `/cv-builder` page (the external
-  resume-builder.job-labs.lk app is a separate project). CV downloads produce a simple placeholder file.
+- "Resume Builder" links go to the live https://resume-builder.job-labs.lk/ (same as the live site).
+  The old in-repo `/cv-builder` page is still included; its downloads produce a simple placeholder file.
 - ATS sign-in, password reset and candidate accounts are not part of the prototype.
 
 ## Notes
