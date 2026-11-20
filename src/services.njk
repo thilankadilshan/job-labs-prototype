@@ -40,24 +40,11 @@ permalink: "/services/"
         object-position: center center;
         filter: brightness(0.95) contrast(1.02);
         transform: scale(1.03);
-        animation: heroKenBurns 18s ease-in-out infinite alternate;
         transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .services-hero:hover .services-hero-bg img {
         transform: scale(1.07);
-    }
-
-    @keyframes heroKenBurns {
-        0% {
-            transform: scale(1.02) translate(0, 0);
-        }
-        50% {
-            transform: scale(1.06) translate(-1%, -1%);
-        }
-        100% {
-            transform: scale(1.04) translate(1%, 0);
-        }
     }
 
     /* Clean translucent dark overlay - Keeps Sri Lankan Team bright, natural & clearly visible */
@@ -468,6 +455,18 @@ permalink: "/services/"
     .services-grid .service-features li { align-items: flex-start; }
     .services-grid .service-features li i { margin-top: 1px; }
     .service-features li strong { color: #1e293b; font-weight: 700; }
+
+    /* Line up titles, descriptions and checklists across cards in the same row */
+    @supports (grid-template-rows: subgrid) {
+        .services-grid .service-card {
+            display: grid;
+            grid-row: span 4;
+            grid-template-rows: subgrid;
+            row-gap: 0;
+            align-content: start;
+        }
+        .services-grid .service-card > .service-features { align-self: start; }
+    }
     .service-card {
         background: #ffffff;
         border-radius: 20px;
@@ -537,7 +536,7 @@ permalink: "/services/"
     .service-description {
         color: #475569;
         line-height: 1.7;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         font-size: 0.96rem;
     }
 
@@ -545,7 +544,6 @@ permalink: "/services/"
         list-style: none;
         padding: 0;
         margin: 0;
-        margin-top: auto;
         display: flex;
         flex-direction: column;
         gap: 11px;
@@ -1769,14 +1767,14 @@ permalink: "/services/"
                             <td class="col-plan">60</td>
                             <td class="col-plan col-popular"><strong class="highlight-val">75</strong></td>
                             <td class="col-plan">100</td>
-                            <td class="col-plan"><strong>200</strong></td>
+                            <td class="col-plan">200</td>
                         </tr>
 
                         <!-- 9. Targeted Meta Ads campaign -->
                         <tr>
                             <td class="col-feature-title">Targeted Meta Ads campaign</td>
                             <td class="col-plan"><span class="dash">—</span></td>
-                            <td class="col-plan">1 Campaign</td>
+                            <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
                             <td class="col-plan col-popular"><span class="check-yes"><i class="fas fa-check"></i></span></td>
                             <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
                             <td class="col-plan"><span class="check-yes"><i class="fas fa-check"></i></span></td>
@@ -1868,7 +1866,7 @@ permalink: "/services/"
                             <h4 class="addon-title">CV Filtering</h4>
                             <span class="addon-tag">Quotation based</span>
                         </div>
-                        <p class="addon-desc">We go through your applicant CVs and filter them against your must-have requirements, so you only review the strongest matches.</p>
+                        <p class="addon-desc">Our AI automation screens applicant CVs against the keywords and must-have requirements your hiring manager sets, so you only review the strongest matches.</p>
                         <a href="https://wa.me/94715515252?text={{ 'Hello Job Labs, I would like a quotation for the CV Filtering add-on.' | urlencode }}" target="_blank" rel="noopener" class="addon-btn">
                             <i class="fab fa-whatsapp"></i> Request a Quote
                         </a>
@@ -2272,41 +2270,41 @@ permalink: "/services/"
 </script>
 
 
-<!-- Statistics Section (same rounded figures as the live site) -->
+<!-- Statistics Section (same figures as the live site; Applications is a live ATS count there - fixed at 2,929 in this prototype) -->
 <section class="stats-section">
     <div class="container">
         <div class="stats-grid">
             <div class="stat-item animate-on-scroll stagger-1">
                 <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
                 <div class="stat-number-wrap">
-                    <span class="stat-number" data-target="100">0</span>
+                    <span class="stat-number" data-target="100">100</span>
                     <span class="stat-plus">+</span>
                 </div>
                 <div class="stat-label">Jobs Posted</div>
             </div>
             <div class="stat-item animate-on-scroll stagger-2">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-number-wrap">
-                    <span class="stat-number" data-target="1700">0</span>
-                    <span class="stat-plus">+</span>
-                </div>
-                <div class="stat-label">Registered Candidates</div>
-            </div>
-            <div class="stat-item animate-on-scroll stagger-3">
-                <div class="stat-icon"><i class="fas fa-building"></i></div>
-                <div class="stat-number-wrap">
-                    <span class="stat-number" data-target="90">0</span>
-                    <span class="stat-plus">+</span>
-                </div>
-                <div class="stat-label">Partner Companies</div>
-            </div>
-            <div class="stat-item animate-on-scroll stagger-4">
                 <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
                 <div class="stat-number-wrap">
-                    <span class="stat-number" data-target="2000">0</span>
+                    <span class="stat-number" data-target="2929">2,929</span>
                     <span class="stat-plus">+</span>
                 </div>
                 <div class="stat-label">Applications Received</div>
+            </div>
+            <div class="stat-item animate-on-scroll stagger-3">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number-wrap">
+                    <span class="stat-number" data-target="3400">3,400</span>
+                    <span class="stat-plus">+</span>
+                </div>
+                <div class="stat-label">Active Job Seekers</div>
+            </div>
+            <div class="stat-item animate-on-scroll stagger-4">
+                <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+                <div class="stat-number-wrap">
+                    <span class="stat-number" data-target="20">20</span>
+                    <span class="stat-plus">+</span>
+                </div>
+                <div class="stat-label">Partnerships</div>
             </div>
         </div>
     </div>
@@ -2345,23 +2343,40 @@ permalink: "/services/"
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Counter Animation
+        // Counter Animation: eases up from 0 and always finishes on the exact value
+        function formatStat(n) {
+            return n.toLocaleString('en-US');
+        }
+
         function animateCounters() {
             const counters = document.querySelectorAll('.stat-number');
+            const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const duration = 1800; // ms
 
             counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                const increment = Math.max(1, Math.floor(target / 80));
-                let current = 0;
+                const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
 
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
+                if (reduceMotion || target === 0) {
+                    counter.textContent = formatStat(target);
+                    return;
+                }
+
+                const start = performance.now();
+                counter.textContent = '0';
+
+                function step(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+                    counter.textContent = formatStat(Math.floor(eased * target));
+
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        counter.textContent = formatStat(target); // land exactly on the real value
                     }
-                    counter.textContent = current.toLocaleString();
-                }, 20);
+                }
+
+                requestAnimationFrame(step);
             });
         }
 
