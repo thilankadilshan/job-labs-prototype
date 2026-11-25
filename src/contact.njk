@@ -11,18 +11,18 @@ permalink: "/contact/"
 <style>
     /* ==========================================================================
        Job Labs Contact Page - Red Theme Design System
-       Brand Colors: #A92036 (Primary Red), #801225 (Deep Crimson), #520713 (Wine)
+       Brand Colors: #790D16 (Primary Red), #5E0A11 (Deep Crimson), #45070D (Wine)
        ========================================================================== */
 
     :root {
-        --contact-red-primary: #A92036;
-        --contact-red-dark: #801225;
-        --contact-red-wine: #520713;
-        --contact-red-light: #fff5f6;
-        --contact-red-soft: #fff8f9;
-        --contact-red-border: #fecdd3;
-        --contact-red-border-light: #ffe4e8;
-        --contact-red-glow: rgba(169, 32, 54, 0.25);
+        --contact-red-primary: #790D16;
+        --contact-red-dark: #5E0A11;
+        --contact-red-wine: #45070D;
+        --contact-red-light: #F5EFE1;
+        --contact-red-soft: #FAF7EF;
+        --contact-red-border: #E5D3AF;
+        --contact-red-border-light: #E5D3AF;
+        --contact-red-glow: rgba(121, 13, 22, 0.25);
         --contact-text-dark: #0f172a;
         --contact-text-muted: #64748b;
     }
@@ -104,7 +104,7 @@ permalink: "/contact/"
         text-transform: uppercase;
         letter-spacing: 1.5px;
         padding: 7px 20px;
-        border-radius: 50px;
+        border-radius: 6px;
         margin-bottom: 1.25rem;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         backdrop-filter: blur(10px);
@@ -112,14 +112,14 @@ permalink: "/contact/"
     }
 
     .contact-hero-badge i {
-        color: #ffccd3;
+        color: #E5D3AF;
         font-size: 0.9rem;
     }
 
     .contact-hero h1 {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: clamp(2.4rem, 5vw, 3.8rem);
-        font-weight: 800;
+        font-weight: 700;
         margin-bottom: 1rem;
         color: #ffffff;
         line-height: 1.15;
@@ -140,7 +140,7 @@ permalink: "/contact/"
         left: 0;
         width: 100%;
         height: 6px;
-        background: linear-gradient(90deg, #ff8597, #ffffff);
+        background: #E5D3AF;
         border-radius: 3px;
         opacity: 0.85;
         z-index: -1;
@@ -173,7 +173,7 @@ permalink: "/contact/"
         background: rgba(255, 255, 255, 0.14);
         border: 1px solid rgba(255, 255, 255, 0.3);
         padding: 8px 18px;
-        border-radius: 50px;
+        border-radius: 6px;
         color: #ffffff;
         font-size: 0.88rem;
         font-weight: 600;
@@ -205,7 +205,7 @@ permalink: "/contact/"
        -------------------------------------------------------------------------- */
     .contact-main {
         padding: 90px 0;
-        background: linear-gradient(180deg, #ffffff 0%, #fffbfb 100%);
+        background: #ffffff;
         position: relative;
     }
 
@@ -216,7 +216,7 @@ permalink: "/contact/"
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, var(--contact-red-primary) 0%, #dc2626 50%, var(--contact-red-dark) 100%);
+        background: var(--contact-red-primary);
     }
 
     .contact-wrapper {
@@ -230,39 +230,39 @@ permalink: "/contact/"
        Left Column: Contact Information Section
        -------------------------------------------------------------------------- */
     .contact-info-section {
-        background: linear-gradient(145deg, #ffffff 0%, var(--contact-red-soft) 100%);
+        background: #ffffff;
         border: 1px solid var(--contact-red-border);
-        border-top: 5px solid var(--contact-red-primary);
-        border-radius: 20px;
+        border-top: 3px solid var(--contact-red-primary);
+        border-radius: 4px;
         padding: 44px 38px;
         position: sticky;
         top: 100px;
-        box-shadow: 0 12px 35px -8px rgba(169, 32, 54, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 12px 35px -8px rgba(31, 42, 51, 0.07), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .contact-info-section:hover {
-        box-shadow: 0 20px 45px -10px rgba(169, 32, 54, 0.18);
+        box-shadow: 0 20px 45px -10px rgba(31, 42, 51, 0.11);
     }
 
     .contact-badge {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: rgba(169, 32, 54, 0.08);
-        border: 1px solid rgba(169, 32, 54, 0.22);
+        background: rgba(121, 13, 22, 0.08);
+        border: 1px solid rgba(121, 13, 22, 0.22);
         color: var(--contact-red-primary);
         font-size: 0.8rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 1.2px;
         padding: 5px 14px;
-        border-radius: 50px;
+        border-radius: 6px;
         margin-bottom: 0.85rem;
     }
 
     .contact-info-section h2 {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         color: var(--contact-text-dark);
         margin-bottom: 12px;
         font-size: 2.1rem;
@@ -308,7 +308,7 @@ permalink: "/contact/"
         left: 0;
         width: 4px;
         height: 100%;
-        background: linear-gradient(180deg, var(--contact-red-primary), var(--contact-red-dark));
+        background: var(--contact-red-primary);
         transform: scaleY(0);
         transform-origin: bottom;
         transition: transform 0.3s ease;
@@ -316,7 +316,7 @@ permalink: "/contact/"
 
     .contact-method:hover {
         transform: translateX(6px);
-        box-shadow: 0 8px 24px rgba(169, 32, 54, 0.12);
+        box-shadow: 0 8px 24px rgba(31, 42, 51, 0.07);
         border-color: var(--contact-red-border);
     }
 
@@ -327,7 +327,7 @@ permalink: "/contact/"
     .contact-icon {
         width: 54px;
         height: 54px;
-        background: linear-gradient(135deg, var(--contact-red-primary) 0%, var(--contact-red-dark) 100%);
+        background: var(--contact-red-primary);
         border-radius: 14px;
         display: flex;
         align-items: center;
@@ -377,7 +377,7 @@ permalink: "/contact/"
     .contact-trust-card {
         margin-top: 32px;
         padding: 20px 22px;
-        background: rgba(169, 32, 54, 0.05);
+        background: rgba(121, 13, 22, 0.05);
         border-radius: 12px;
         border: 1px dashed var(--contact-red-border);
         display: flex;
@@ -392,7 +392,7 @@ permalink: "/contact/"
     }
 
     .contact-trust-card div h6 {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 0.95rem;
         font-weight: 700;
         color: var(--contact-red-wine);
@@ -411,17 +411,17 @@ permalink: "/contact/"
        -------------------------------------------------------------------------- */
     .contact-form-section {
         background: #ffffff;
-        border-radius: 20px;
+        border-radius: 4px;
         padding: 46px 42px;
         border: 1px solid var(--contact-red-border);
-        border-top: 5px solid var(--contact-red-primary);
-        box-shadow: 0 12px 35px -8px rgba(169, 32, 54, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        border-top: 3px solid var(--contact-red-primary);
+        box-shadow: 0 12px 35px -8px rgba(31, 42, 51, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
         position: relative;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .contact-form-section:hover {
-        box-shadow: 0 20px 45px -10px rgba(169, 32, 54, 0.15);
+        box-shadow: 0 20px 45px -10px rgba(31, 42, 51, 0.09);
     }
 
     .contact-form-header {
@@ -429,7 +429,7 @@ permalink: "/contact/"
     }
 
     .contact-form-section h2 {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         color: var(--contact-text-dark);
         font-size: 2.1rem;
         font-weight: 700;
@@ -501,11 +501,11 @@ permalink: "/contact/"
     .form-group select {
         width: 100%;
         padding: 14px 18px 14px 46px;
-        border: 1.5px solid #e2e8f0;
+        border: 1.5px solid #E7E1D5;
         border-radius: 12px;
         font-size: 0.98rem;
         color: var(--contact-text-dark);
-        background: #f8fafc;
+        background: #FBF9F4;
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         font-family: 'Inter', sans-serif;
     }
@@ -541,7 +541,7 @@ permalink: "/contact/"
         outline: none;
         background: #ffffff;
         border-color: var(--contact-red-primary);
-        box-shadow: 0 0 0 4px rgba(169, 32, 54, 0.12);
+        box-shadow: 0 0 0 4px rgba(121, 13, 22, 0.12);
         transform: translateY(-1px);
     }
 
@@ -580,11 +580,11 @@ permalink: "/contact/"
         padding: 17px 28px;
         font-size: 1.08rem;
         font-weight: 700;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         color: #ffffff;
-        background: linear-gradient(135deg, var(--contact-red-primary) 0%, var(--contact-red-dark) 100%);
+        background: var(--contact-red-primary);
         border: none;
-        border-radius: 12px;
+        border-radius: 6px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -608,9 +608,9 @@ permalink: "/contact/"
     }
 
     .btn-contact-submit:hover {
-        background: linear-gradient(135deg, #c4263f 0%, var(--contact-red-primary) 100%);
+        background: #790D16;
         transform: translateY(-2px);
-        box-shadow: 0 14px 28px -4px rgba(169, 32, 54, 0.4);
+        box-shadow: 0 14px 28px -4px rgba(31, 42, 51, 0.12);
     }
 
     .btn-contact-submit:hover::before {
@@ -619,7 +619,7 @@ permalink: "/contact/"
 
     .btn-contact-submit:active {
         transform: translateY(1px);
-        box-shadow: 0 6px 16px -2px rgba(169, 32, 54, 0.3);
+        box-shadow: 0 6px 16px -2px rgba(31, 42, 51, 0.12);
     }
 
     /* Loading State */
@@ -683,7 +683,7 @@ permalink: "/contact/"
        Additional Info Section (3 Cards)
        -------------------------------------------------------------------------- */
     .additional-info {
-        background: linear-gradient(180deg, #fffbfb 0%, var(--contact-red-soft) 100%);
+        background: #FAF7EF;
         padding: 85px 0 95px;
         position: relative;
         border-top: 1px solid var(--contact-red-border-light);
@@ -696,7 +696,7 @@ permalink: "/contact/"
     }
 
     .additional-info-header h2 {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: clamp(1.8rem, 3.5vw, 2.3rem);
         font-weight: 700;
         color: var(--contact-text-dark);
@@ -719,10 +719,10 @@ permalink: "/contact/"
     .info-card {
         background: #ffffff;
         padding: 40px 32px;
-        border-radius: 18px;
+        border-radius: 4px;
         text-align: center;
         border: 1px solid var(--contact-red-border-light);
-        border-top: 4px solid var(--contact-red-primary);
+        border-top: 3px solid var(--contact-red-primary);
         box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
         transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         position: relative;
@@ -731,14 +731,14 @@ permalink: "/contact/"
 
     .info-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 20px 35px -8px rgba(169, 32, 54, 0.16);
+        box-shadow: 0 20px 35px -8px rgba(31, 42, 51, 0.1);
         border-color: var(--contact-red-border);
     }
 
     .info-card-icon {
         width: 72px;
         height: 72px;
-        background: linear-gradient(135deg, var(--contact-red-primary) 0%, var(--contact-red-dark) 100%);
+        background: var(--contact-red-primary);
         border-radius: 18px;
         display: flex;
         align-items: center;
@@ -755,7 +755,7 @@ permalink: "/contact/"
     }
 
     .info-card h3 {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         color: var(--contact-text-dark);
         margin-bottom: 12px;
         font-size: 1.35rem;

@@ -9,15 +9,15 @@ permalink: "/recruiters-signup/"
 {% block styles %}
 <style>
     /* ==========================================================================
-       Job Labs Employer Sign-Up - Red Theme Design System (#A92036)
+       Job Labs Employer Sign-Up - Red Theme Design System (#790D16)
        ========================================================================== */
     :root {
-        --primary-red: #A92036;
-        --primary-red-dark: #801225;
-        --primary-red-wine: #520713;
-        --primary-red-soft: #fff8f9;
-        --primary-red-border: #fecdd3;
-        --primary-red-glow: rgba(169, 32, 54, 0.25);
+        --primary-red: #790D16;
+        --primary-red-dark: #5E0A11;
+        --primary-red-wine: #45070D;
+        --primary-red-soft: #FAF7EF;
+        --primary-red-border: #E5D3AF;
+        --primary-red-glow: rgba(121, 13, 22, 0.25);
         --text-dark: #0f172a;
         --text-muted: #64748b;
         --border-radius: 12px;
@@ -25,7 +25,7 @@ permalink: "/recruiters-signup/"
     }
 
     body {
-        background: linear-gradient(180deg, #ffffff 0%, #fffbfb 100%);
+        background: #ffffff;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -106,7 +106,7 @@ permalink: "/recruiters-signup/"
         text-transform: uppercase;
         letter-spacing: 1.5px;
         padding: 7px 20px;
-        border-radius: 50px;
+        border-radius: 6px;
         margin-bottom: 1.25rem;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         backdrop-filter: blur(10px);
@@ -114,14 +114,14 @@ permalink: "/recruiters-signup/"
     }
 
     .signup-hero-badge i {
-        color: #ffccd3;
+        color: #E5D3AF;
         font-size: 0.9rem;
     }
 
     .signup-hero-content h1 {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: clamp(2.3rem, 5vw, 3.6rem);
-        font-weight: 800;
+        font-weight: 700;
         margin-bottom: 1rem;
         color: #ffffff;
         line-height: 1.15;
@@ -142,7 +142,7 @@ permalink: "/recruiters-signup/"
         left: 0;
         width: 100%;
         height: 6px;
-        background: linear-gradient(90deg, #ff8597, #ffffff);
+        background: #E5D3AF;
         border-radius: 3px;
         opacity: 0.85;
         z-index: -1;
@@ -174,7 +174,7 @@ permalink: "/recruiters-signup/"
         background: rgba(255, 255, 255, 0.14);
         border: 1px solid rgba(255, 255, 255, 0.3);
         padding: 8px 18px;
-        border-radius: 50px;
+        border-radius: 6px;
         color: #ffffff;
         font-size: 0.88rem;
         font-weight: 600;
@@ -219,21 +219,21 @@ permalink: "/recruiters-signup/"
 
     .signup-card {
         background: #ffffff;
-        border-radius: 20px;
+        border-radius: 4px;
         border: 1px solid var(--primary-red-border);
-        border-top: 5px solid var(--primary-red);
-        box-shadow: 0 16px 40px -10px rgba(169, 32, 54, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        border-top: 3px solid var(--primary-red);
+        box-shadow: 0 16px 40px -10px rgba(31, 42, 51, 0.07), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
         overflow: hidden;
         transition: var(--transition);
     }
 
     .signup-card:hover {
-        box-shadow: 0 22px 50px -10px rgba(169, 32, 54, 0.18);
+        box-shadow: 0 22px 50px -10px rgba(31, 42, 51, 0.11);
     }
 
     /* Form Header */
     .form-header {
-        background: linear-gradient(135deg, #ffffff 0%, var(--primary-red-soft) 100%);
+        background: #ffffff;
         padding: 38px 45px 30px;
         text-align: center;
         border-bottom: 1px solid var(--primary-red-border);
@@ -243,20 +243,20 @@ permalink: "/recruiters-signup/"
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(169, 32, 54, 0.08);
-        border: 1px solid rgba(169, 32, 54, 0.22);
+        background: rgba(121, 13, 22, 0.08);
+        border: 1px solid rgba(121, 13, 22, 0.22);
         color: var(--primary-red);
         font-size: 0.8rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 1.2px;
         padding: 4px 14px;
-        border-radius: 50px;
+        border-radius: 6px;
         margin-bottom: 0.8rem;
     }
 
     .form-header h2 {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         color: var(--text-dark);
         font-size: 2.1rem;
         font-weight: 700;
@@ -284,13 +284,13 @@ permalink: "/recruiters-signup/"
         display: flex;
         align-items: center;
         gap: 10px;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.15rem;
         font-weight: 700;
         color: var(--text-dark);
         margin: 25px 0 20px;
         padding-bottom: 10px;
-        border-bottom: 1px solid #f1f5f9;
+        border-bottom: 1px solid #F4F0E7;
     }
 
     .form-section-title:first-of-type {
@@ -331,11 +331,11 @@ permalink: "/recruiters-signup/"
     .form-control {
         width: 100%;
         padding: 13px 16px;
-        border: 1.5px solid #e2e8f0;
+        border: 1.5px solid #E7E1D5;
         border-radius: var(--border-radius);
         font-size: 0.98rem;
         transition: var(--transition);
-        background: #f8fafc;
+        background: #FBF9F4;
         font-family: inherit;
         color: var(--text-dark);
     }
@@ -344,7 +344,7 @@ permalink: "/recruiters-signup/"
         outline: none;
         border-color: var(--primary-red);
         background: #ffffff;
-        box-shadow: 0 0 0 3px rgba(169, 32, 54, 0.12);
+        box-shadow: 0 0 0 3px rgba(121, 13, 22, 0.12);
         transform: translateY(-1px);
     }
 
@@ -381,7 +381,7 @@ permalink: "/recruiters-signup/"
         padding: 16px 20px;
         border: 2px dashed #cbd5e1;
         border-radius: var(--border-radius);
-        background: #f8fafc;
+        background: #FBF9F4;
         cursor: pointer;
         transition: var(--transition);
         gap: 12px;
@@ -446,7 +446,7 @@ permalink: "/recruiters-signup/"
         display: flex;
         align-items: center;
         padding: 14px 18px;
-        border: 1.5px solid #e2e8f0;
+        border: 1.5px solid #E7E1D5;
         border-radius: var(--border-radius);
         transition: var(--transition);
         cursor: pointer;
@@ -479,7 +479,7 @@ permalink: "/recruiters-signup/"
     .checkbox-item.checked,
     .checkbox-item:has(input[type="checkbox"]:checked) {
         border-color: var(--primary-red);
-        background: #fff5f6;
+        background: #F5EFE1;
     }
 
     .checkbox-item:has(input[type="checkbox"]:checked) label {
@@ -523,19 +523,19 @@ permalink: "/recruiters-signup/"
     .submit-section {
         text-align: center;
         padding-top: 30px;
-        border-top: 1px solid #f1f5f9;
+        border-top: 1px solid #F4F0E7;
         margin-top: 35px;
     }
 
     .btn-submit {
-        background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+        background: var(--primary-red);
         color: #ffffff;
         border: none;
         padding: 16px 48px;
-        border-radius: 50px;
+        border-radius: 6px;
         font-size: 1.1rem;
         font-weight: 700;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         box-shadow: 0 10px 24px -4px var(--primary-red-glow);
         cursor: pointer;
         display: inline-flex;
@@ -559,9 +559,9 @@ permalink: "/recruiters-signup/"
     }
 
     .btn-submit:hover {
-        background: linear-gradient(135deg, #c4263f 0%, var(--primary-red) 100%);
+        background: #790D16;
         transform: translateY(-2px);
-        box-shadow: 0 14px 28px -4px rgba(169, 32, 54, 0.4);
+        box-shadow: 0 14px 28px -4px rgba(31, 42, 51, 0.12);
     }
 
     .btn-submit:hover::before {
@@ -1181,7 +1181,7 @@ permalink: "/recruiters-signup/"
 
                     if (fileLabel) {
                         fileLabel.textContent = file.name;
-                        fileLabel.style.color = '#A92036';
+                        fileLabel.style.color = '#790D16';
                     }
                     if (fileUploadContainer) {
                         fileUploadContainer.classList.add('has-preview');

@@ -16,13 +16,13 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
 {% block styles %}
 <style>
     :root {
-        --primary-blue: #2563eb;
-        --primary-orange: #ff6600;
-        --dark-blue: #1e40af;
+        --primary-blue: #3D5568;
+        --primary-orange: #790D16;
+        --dark-blue: #2C4050;
         --text-dark: #1f2937;
         --text-gray: #6b7280;
-        --border-color: #e5e7eb;
-        --bg-light: #f8fafc;
+        --border-color: #E7E1D5;
+        --bg-light: #FBF9F4;
         --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
         --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
@@ -34,7 +34,7 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
     .job-detail-container {
         min-height: 100vh;
         padding: 32px 0 120px;
-        background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+        background: var(--bg-light);
     }
 
     /* Full-width centered wrapper with appropriate margins */
@@ -106,7 +106,7 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
 
     .job-title-section h1 {
         font-size: 1.8rem;
-        font-weight: 800;
+        font-weight: 700;
         color: #1f2937;
         line-height: 1.25;
         margin: 0;
@@ -127,10 +127,10 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
         gap: 8px;
         margin-top: 14px;
         padding: 8px 16px;
-        background: #eff6ff;
+        background: #E8EFF4;
         color: var(--primary-blue);
-        border: 1px solid #bfdbfe;
-        border-radius: 30px;
+        border: 1px solid #AEC4D4;
+        border-radius: 6px;
         font-size: 0.9rem;
         font-weight: 600;
         cursor: pointer;
@@ -232,7 +232,7 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
 
     .job-badge {
         padding: 7px 15px;
-        border-radius: 20px;
+        border-radius: 6px;
         font-size: 0.8rem;
         font-weight: 600;
         text-transform: uppercase;
@@ -261,7 +261,7 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
         background: var(--primary-orange);
         color: white;
         padding: 16px 32px;
-        border-radius: 12px;
+        border-radius: 6px;
         text-decoration: none;
         font-weight: 700;
         font-size: 1.05rem;
@@ -445,7 +445,7 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
         background: #fff;
         width: 100%;
         max-width: 560px;
-        border-radius: 20px 20px 0 0;
+        border-radius: 12px 12px 0 0;
         padding: 24px;
         max-height: 85vh;
         overflow-y: auto;
@@ -533,7 +533,7 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
         background: var(--primary-orange);
         color: #fff;
         padding: 15px;
-        border-radius: 12px;
+        border-radius: 6px;
         font-weight: 700;
         font-size: 1.05rem;
         text-decoration: none;
@@ -544,11 +544,11 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/"
     }
 
     .mobile-apply-bar .btn-summary-mobile {
-        background: #eff6ff;
+        background: #E8EFF4;
         color: var(--primary-blue);
-        border: 1px solid #bfdbfe;
+        border: 1px solid #AEC4D4;
         padding: 15px 18px;
-        border-radius: 12px;
+        border-radius: 6px;
         font-weight: 600;
         cursor: pointer;
         display: flex;

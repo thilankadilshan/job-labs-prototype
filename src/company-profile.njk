@@ -23,18 +23,18 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
 {% block og_image %}{{ ('/upload/' ~ company.company_logo) if company.company_logo else '/assets/front/images/hr/job_logo.png' }}{% endblock %}
 {% block styles %}
 <style>
-    /* Page-scoped theme (matches site: red #A92036 + navy #080159) */
+    /* Page-scoped theme (matches site: red #790D16 + navy #1F2A33) */
     .cp-crumb, .cp-hero, .cp-body {
-        --cp-red: #A92036;
-        --cp-red-dark: #8e1a2c;
-        --cp-red-soft: #fdecef;
-        --cp-navy: #080159;
-        --cp-navy-dark: #050138;
-        --cp-navy-soft: #eeedfb;
+        --cp-red: #790D16;
+        --cp-red-dark: #5E0A11;
+        --cp-red-soft: #F5EFE1;
+        --cp-navy: #1F2A33;
+        --cp-navy-dark: #141C22;
+        --cp-navy-soft: #E8EFF4;
         --text-dark: #2d3748;
         --text-gray: #718096;
-        --border-color: #e2e8f0;
-        --bg-light: #f8f9ff;
+        --border-color: #E7E1D5;
+        --bg-light: #FAF7EF;
         --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08);
         --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
         --shadow-xl: 0 20px 35px -10px rgb(8 1 89 / 0.22);
@@ -55,15 +55,15 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
     /* ---------------- Hero ---------------- */
     .cp-hero {
         position: relative; overflow: hidden;
-        background: linear-gradient(135deg, #5a0f1c 0%, var(--cp-red-dark) 45%, var(--cp-red) 100%);
+        background: #1F2A33;
         padding: 56px 0 96px; color: #fff;
     }
     .cp-hero::before, .cp-hero::after {
         content: ''; position: absolute; border-radius: 50%; pointer-events: none;
-        background: radial-gradient(circle, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 70%);
+        background: none;
     }
     .cp-hero::before { width: 420px; height: 420px; top: -160px; right: -80px; animation: cpFloat 9s ease-in-out infinite; }
-    .cp-hero::after  { width: 300px; height: 300px; bottom: -150px; left: -60px; background: radial-gradient(circle, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 70%); animation: cpFloat 11s ease-in-out infinite reverse; }
+    .cp-hero::after  { width: 300px; height: 300px; bottom: -150px; left: -60px; background: none; animation: cpFloat 11s ease-in-out infinite reverse; }
     .cp-hero-grid { position: relative; z-index: 1; display: flex; align-items: center; gap: 32px; }
 
     .cp-logo-box {
@@ -76,7 +76,7 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
     /* shimmer skeleton while the logo is loading */
     .cp-logo-box.is-loading::after {
         content: ''; position: absolute; inset: 0;
-        background: linear-gradient(100deg, #f1f5f9 30%, #e2e8f0 50%, #f1f5f9 70%);
+        background: #F4F0E7;
         background-size: 200% 100%; animation: cpShimmer 1.2s linear infinite;
     }
     .cp-logo-box img { width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .5s ease; }
@@ -84,8 +84,8 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
     .cp-logo-initial {
         width: 100%; height: 100%; border-radius: 16px;
         display: flex; align-items: center; justify-content: center;
-        background: linear-gradient(135deg, var(--cp-red), #d13a52);
-        color: #fff; font-family: 'Poppins', sans-serif; font-size: 56px; font-weight: 700;
+        background: var(--cp-red);
+        color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 56px; font-weight: 700;
     }
 
     .cp-hero-text { min-width: 0; animation: cpRise .7s ease both .25s; }
@@ -93,24 +93,24 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
         display: inline-flex; align-items: center; gap: 8px;
         font-size: 13px; font-weight: 600; letter-spacing: .4px; text-transform: uppercase;
         background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
-        padding: 6px 14px; border-radius: 999px; margin-bottom: 14px; backdrop-filter: blur(6px);
+        padding: 6px 14px; border-radius: 6px; margin-bottom: 14px; backdrop-filter: blur(6px);
     }
     .cp-name {
         margin: 0 0 14px; color: #fff;
-        font-family: 'Poppins', sans-serif; font-size: 40px; font-weight: 700; line-height: 1.2; word-break: break-word;
+        font-family: 'Plus Jakarta Sans', sans-serif; font-size: 40px; font-weight: 700; line-height: 1.2; word-break: break-word;
     }
     .cp-hero-meta { display: flex; flex-wrap: wrap; gap: 10px 20px; font-size: 15px; color: rgba(255,255,255,.9); }
     .cp-hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
     .cp-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
     .cp-btn {
         display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
-        padding: 12px 22px; border-radius: 12px; font-weight: 600; font-size: 15px;
+        padding: 12px 22px; border-radius: 6px; font-weight: 600; font-size: 15px;
         text-decoration: none; border: 2px solid transparent;
         transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
     }
     .cp-btn:hover { transform: translateY(-2px); text-decoration: none; }
-    .cp-btn-primary { background: var(--cp-red); color: #fff; box-shadow: 0 10px 22px -8px rgba(169,32,54,.7); }
-    .cp-btn-primary:hover { background: var(--cp-red-dark); color: #fff; box-shadow: 0 14px 28px -8px rgba(169,32,54,.8); }
+    .cp-btn-primary { background: var(--cp-red); color: #fff; box-shadow: 0 10px 22px -8px rgba(31, 42, 51, .7); }
+    .cp-btn-primary:hover { background: var(--cp-red-dark); color: #fff; box-shadow: 0 14px 28px -8px rgba(31, 42, 51, .8); }
     .cp-hero .cp-btn-primary { background: #fff; color: var(--cp-red); box-shadow: 0 10px 22px -8px rgba(0,0,0,.35); }
     .cp-hero .cp-btn-primary:hover { background: #fff; color: var(--cp-red-dark); }
     .cp-btn-ghost { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.4); }
@@ -136,20 +136,20 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
     .cp-stat:nth-child(2) .cp-stat-icon { background: var(--cp-red-soft); color: var(--cp-red-dark); }
     .cp-stat:nth-child(3) .cp-stat-icon { background: #ecfdf5; color: var(--success-color); }
     .cp-stat:nth-child(4) .cp-stat-icon { background: #fffbeb; color: var(--warning-color); }
-    .cp-stat-num { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; color: var(--text-dark); line-height: 1.1; }
+    .cp-stat-num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; font-weight: 700; color: var(--text-dark); line-height: 1.1; }
     .cp-stat-label { font-size: 13px; color: var(--text-gray); margin-top: 2px; }
 
     /* ---------------- Layout ---------------- */
-    .cp-body { background: linear-gradient(180deg, var(--bg-light) 0%, #ffffff 100%); padding: 0 0 90px; }
+    .cp-body { background: var(--bg-light); padding: 0 0 90px; }
     .cp-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 28px; margin-top: 32px; align-items: start; }
 
     .cp-card-section {
-        background: #fff; border: 1px solid var(--border-color); border-radius: 18px;
+        background: #fff; border: 1px solid var(--border-color); border-radius: 12px;
         padding: 30px; box-shadow: var(--shadow-md); margin-bottom: 28px;
     }
     .cp-section-title {
         display: flex; align-items: center; gap: 12px; margin: 0 0 18px;
-        font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-dark);
+        font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-dark);
     }
     .cp-section-title i {
         width: 40px; height: 40px; border-radius: 10px; font-size: 17px;
@@ -182,7 +182,7 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
         border: 1px solid var(--border-color); background: var(--bg-light); font-size: 14px;
         transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
     }
-    .cp-search input:focus { outline: none; border-color: var(--cp-red); background: #fff; box-shadow: 0 0 0 4px rgba(169,32,54,.12); }
+    .cp-search input:focus { outline: none; border-color: var(--cp-red); background: #fff; box-shadow: 0 0 0 4px rgba(121, 13, 22, .12); }
 
     /* Job cards */
     .cp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
@@ -195,16 +195,16 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
     }
     .cp-job::before {
         content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-        background: linear-gradient(90deg, var(--cp-red-dark), var(--cp-red));
+        background: var(--cp-red-dark);
         transform: scaleX(0); transform-origin: left; transition: transform .4s ease;
     }
-    .cp-job.is-visible:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); border-color: #f1c3cb; }
+    .cp-job.is-visible:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); border-color: #E5D3AF; }
     .cp-job:hover { color: inherit; text-decoration: none; }
     .cp-job:hover::before { transform: scaleX(1); }
     .cp-job-title { margin: 0; font-size: 17px; font-weight: 700; color: var(--text-dark); line-height: 1.4; transition: color .25s ease; }
     .cp-job:hover .cp-job-title { color: var(--cp-red); }
     .cp-badges { display: flex; flex-wrap: wrap; gap: 6px; }
-    .cp-badge { font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
+    .cp-badge { font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 6px; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
     .cp-badge-top { background: #fef3c7; color: #b45309; }
     .cp-badge-new { background: #dcfce7; color: #15803d; }
     .cp-job-meta { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -256,12 +256,12 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
     /* ---------------- Sidebar ---------------- */
     .cp-side { position: sticky; top: 90px; }
     .cp-side-card {
-        background: #fff; border: 1px solid var(--border-color); border-radius: 18px;
+        background: #fff; border: 1px solid var(--border-color); border-radius: 12px;
         padding: 24px; box-shadow: var(--shadow-md); margin-bottom: 22px;
     }
-    .cp-side-card h4 { margin: 0 0 16px; font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; color: var(--text-dark); }
+    .cp-side-card h4 { margin: 0 0 16px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700; color: var(--text-dark); }
     .cp-glance { list-style: none; margin: 0; padding: 0; }
-    .cp-glance li { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 14px; color: #475569; }
+    .cp-glance li { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F4F0E7; font-size: 14px; color: #475569; }
     .cp-glance li:last-child { border-bottom: none; padding-bottom: 0; }
     .cp-glance i { width: 18px; color: var(--cp-red); margin-top: 3px; }
     .cp-glance strong { display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 2px; }
@@ -278,7 +278,7 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
     .cp-share .s-in:hover { background: #0a66c2; }
     .cp-share .s-copy:hover { background: var(--cp-red); }
     .cp-copied { display: none; margin-top: 10px; font-size: 13px; color: var(--success-color); font-weight: 600; }
-    .cp-cta-card { background: linear-gradient(135deg, var(--cp-red), var(--cp-red-dark)); color: #fff; border: none; }
+    .cp-cta-card { background: #1F2A33; color: #fff; border: none; }
     .cp-cta-card h4 { color: #fff; }
     .cp-cta-card p { color: rgba(255,255,255,.85); font-size: 14px; margin: 0 0 16px; line-height: 1.6; }
     .cp-cta-card .cp-btn { width: 100%; justify-content: center; background: #fff; color: var(--cp-red); box-shadow: none; }
@@ -346,7 +346,7 @@ permalink: "/company/{{ entry.company.company_id }}/{{ entry.company.slug }}/"
         .cp-hero-meta { justify-content: flex-start; gap: 4px 14px; font-size: 13px; }
         .cp-hero-meta span { gap: 6px; }
         .cp-hero-actions { justify-content: flex-start; margin-top: 12px; }
-        .cp-hero-actions .cp-btn { flex: 0 0 auto; padding: 8px 16px; font-size: 13.5px; border-radius: 10px; gap: 8px; }
+        .cp-hero-actions .cp-btn { flex: 0 0 auto; padding: 8px 16px; font-size: 13.5px; border-radius: 6px; gap: 8px; }
 
         .cp-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: -46px; }
         .cp-stat { flex-direction: column; text-align: center; gap: 6px; padding: 10px 4px; border-radius: 12px; }
