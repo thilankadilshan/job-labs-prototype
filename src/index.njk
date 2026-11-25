@@ -859,6 +859,25 @@ permalink: "/"
             animation: fadeInUp 1s ease-out 0.4s forwards;
         }
 
+        .hero-free-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: -24px auto 28px;
+            padding: 7px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: #ffffff;
+            font-size: 0.92rem;
+            font-weight: 600;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+        .hero-free-badge i { color: #4ade80; }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -965,6 +984,15 @@ permalink: "/"
                 margin-bottom: 25px; 
             }
 
+            .hero-free-badge {
+                margin: -12px auto 18px;
+                font-size: 0.78rem;
+                padding: 6px 12px;
+                text-align: left;
+            }
+
+            .hero-free-more { display: none; }
+
             .search-bar {
                 flex-direction: column;
                 background: transparent;
@@ -1029,6 +1057,7 @@ permalink: "/"
         <div class="hero-content">
             <h1>Find Your Dream Job</h1>
             <p>"Real Jobs for Real People"</p>
+            <div class="hero-free-badge"><i class="fas fa-check-circle" aria-hidden="true"></i> 100% free for job seekers<span class="hero-free-more"> - no registration, application or placement fees</span></div>
 
             <form class="search-bar" method="GET" action="/">
                 

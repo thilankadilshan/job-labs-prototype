@@ -1547,14 +1547,14 @@ permalink: "/services/"
                 </div>
                 <h3 class="service-title">Dedicated Recruitment Support</h3>
                 <p class="service-description">
-                    Every employer is assigned a dedicated Job Labs account manager who looks after your vacancies and supports you through every hire.
+                    Every employer is assigned a Job Labs account manager for general account support. On the Standard, Premium and Enterprise plans, you also get dedicated recruitment consultation, with a consultant working hands-on on your hiring.
                 </p>
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i> <span>A named account manager for your company</span></li>
-                    <li><i class="fas fa-check"></i> <span>Vacancy review and approval before going live</span></li>
-                    <li><i class="fas fa-check"></i> <span>Manual CV screening and shortlisting</span></li>
-                    <li><i class="fas fa-check"></i> <span>Support tickets answered by your consultant</span></li>
-                    <li><i class="fas fa-check"></i> <span>Quick help on WhatsApp and email</span></li>
+                    <li><i class="fas fa-check"></i> <span><strong>All plans:</strong> a named account manager for your company</span></li>
+                    <li><i class="fas fa-check"></i> <span><strong>All plans:</strong> vacancy review and approval before going live</span></li>
+                    <li><i class="fas fa-check"></i> <span><strong>All plans:</strong> quick help on WhatsApp and email</span></li>
+                    <li><i class="fas fa-check"></i> <span><strong>Standard, Premium &amp; Enterprise:</strong> dedicated recruitment consultation, including manual CV screening and shortlisting</span></li>
+                    <li><i class="fas fa-check"></i> <span><a href="#pricing-plans" style="color: var(--primary-red, #A92036); text-decoration: underline;">Compare what each plan includes</a></span></li>
                 </ul>
             </div>
 
@@ -1822,7 +1822,7 @@ permalink: "/services/"
 
                         <!-- 15. Dedicated recruitment consultation -->
                         <tr>
-                            <td class="col-feature-title">Dedicated recruitment consultation</td>
+                            <td class="col-feature-title">Dedicated recruitment consultation <small class="text-muted">(hands-on consultant)</small></td>
                             <td class="col-plan"><span class="dash">—</span></td>
                             <td class="col-plan"><span class="dash">—</span></td>
                             <td class="col-plan col-popular"><span class="check-yes"><i class="fas fa-check"></i></span></td>
@@ -1849,6 +1849,7 @@ permalink: "/services/"
                     <i class="fas fa-info-circle text-danger"></i> 
                     Starter, Growth, Standard and Premium are one-time purchases; Enterprise is billed monthly. 
                     Manual screening and shortlisting is delivered through the dedicated recruitment consultation.
+                    Every plan includes general support from your Job Labs account manager.
                 </p>
             </div>
         </div>
@@ -1887,10 +1888,33 @@ permalink: "/services/"
                 </div>
             </div>
         </div>
+
+        <!-- Got Questions? (links to the Employers & Recruiters FAQ) -->
+        <div class="pricing-questions animate-on-scroll">
+            <a href="/faq#employers" class="pricing-questions-btn">
+                <i class="fas fa-question-circle" aria-hidden="true"></i> Got Questions?
+            </a>
+        </div>
     </div>
 </section>
 
 <style>
+    /* ---------------- Got Questions? ---------------- */
+    .pricing-questions { text-align: center; margin-top: 32px; }
+    .pricing-questions-btn {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 13px 28px; border-radius: 999px;
+        border: 2px solid #A92036; color: #A92036; background: #fff;
+        font-weight: 700; font-size: 1rem; text-decoration: none;
+        transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    .pricing-questions-btn:hover,
+    .pricing-questions-btn:focus-visible { background: #A92036; color: #fff; transform: translateY(-2px); text-decoration: none; }
+    @media (max-width: 575px) {
+        .pricing-questions { margin-top: 24px; }
+        .pricing-questions-btn { width: 100%; justify-content: center; }
+    }
+
     /* ---------------- Add-ons ---------------- */
     .pricing-addons { margin-top: 36px; }
     .addons-header { text-align: center; margin-bottom: 22px; }
@@ -2338,6 +2362,7 @@ permalink: "/services/"
     </div>
 </section>
 
+{% include "partials/whatsapp-float.njk" %}
 {% include "partials/footer.njk" %}
 {% endblock %}
 {% block scripts %}

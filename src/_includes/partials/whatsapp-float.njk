@@ -1,0 +1,44 @@
+{# Always-visible WhatsApp button for employer pages (official Job Labs number). #}
+<style>
+    .jl-wa-float {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 9990;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #25D366;
+        color: #fff !important;
+        text-decoration: none !important;
+        font-weight: 600;
+        font-size: 0.92rem;
+        padding: 12px 18px 12px 14px;
+        border-radius: 999px;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .jl-wa-float i { font-size: 1.45rem; line-height: 1; }
+    .jl-wa-float:hover,
+    .jl-wa-float:focus-visible {
+        background: #1ebe5b;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+        color: #fff;
+    }
+    @media (max-width: 575px) {
+        .jl-wa-float { right: 14px; bottom: 14px; padding: 13px; }
+        .jl-wa-float span { display: none; }
+        .jl-wa-float i { font-size: 1.6rem; }
+    }
+    @media print { .jl-wa-float { display: none; } }
+</style>
+<a href="https://wa.me/94715515252?text=Hello+Job+Labs%2C+I+would+like+to+speak+to+your+recruitment+team."
+   class="jl-wa-float"
+   target="_blank"
+   rel="noopener"
+   aria-label="Chat with our recruitment team on WhatsApp"
+   title="Chat with our recruitment team on WhatsApp">
+    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    <span>Chat with us</span>
+</a>
