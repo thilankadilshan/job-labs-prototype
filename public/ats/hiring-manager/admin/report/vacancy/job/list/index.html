@@ -1,0 +1,2847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow"><script>window.__ATS_ROLE="hiring-manager";window.__ATS_ROLE_LABEL="Hiring Manager";window.__ATS_BASE="/ats/hiring-manager";</script><script src="/js/ats-mock-data-hiring-manager.js"></script><script src="/js/ats-mock.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="csrf-token" content="ZNM3xvi19NB2RoKJoM2AV4yHkDulPCwGcV5MKo7u">
+<!-- SEO Meta Tags -->
+<meta name="description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta name="keywords" content="ATS, recruitment, job management, admin panel, dashboard">
+<meta name="author" content="Job Labs">
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="ATS Dashboard - Job Labs">
+<meta property="og:description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta property="og:url" content="/admin/report/vacancy/job/list">
+<meta property="og:image" content="/assets/images/job_logo.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Job Labs ATS">
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ATS Dashboard - Job Labs">
+<meta name="twitter:description" content="Advanced ATS Dashboard for efficient recruitment management">
+<meta name="twitter:image" content="/assets/images/job_logo.png">
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<title>ATS Dashboard - Job Labs</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<style>
+:root {
+--primary-color: #4f46e5;
+--primary-dark: #4338ca;
+--secondary-color: #6b7280;
+--success-color: #10b981;
+--warning-color: #f59e0b;
+--danger-color: #ef4444;
+--info-color: #3b82f6;
+--light-bg: #f8fafc;
+--dark-bg: #1e293b;
+--sidebar-bg: #ffffff;
+--sidebar-width: 260px;
+--header-height: 70px;
+--border-color: #e2e8f0;
+--text-primary: #1e293b;
+--text-secondary: #64748b;
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+--border-radius: 8px;
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--light-bg);
+color: var(--text-primary);
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+width: 6px;
+}
+::-webkit-scrollbar-track {
+background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+background: #cbd5e1;
+border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #94a3b8;
+}
+/* Layout Structure */
+.admin-wrapper {
+display: flex;
+min-height: 100vh;
+}
+.main-content {
+flex: 1;
+margin-left: var(--sidebar-width);
+transition: var(--transition);
+background-color: var(--light-bg);
+}
+.content-wrapper {
+padding: 2rem;
+min-height: calc(100vh - var(--header-height));
+margin-top: var(--header-height);
+}
+/* Responsive Design */
+@media (max-width: 992px) {
+.main-content {
+margin-left: 0;
+}
+.content-wrapper {
+padding: 1rem;
+}
+}
+/* Custom Components */
+.card {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+box-shadow: var(--shadow-sm);
+transition: var(--transition);
+background: white;
+}
+.card:hover {
+box-shadow: var(--shadow-md);
+}
+.btn {
+border-radius: var(--border-radius);
+font-weight: 500;
+transition: var(--transition);
+border: none;
+padding: 0.75rem 1.5rem;
+}
+.btn-primary {
+background-color: var(--primary-color);
+color: white;
+}
+.btn-primary:hover {
+background-color: var(--primary-dark);
+transform: translateY(-1px);
+box-shadow: var(--shadow-md);
+}
+.form-control {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+padding: 0.75rem;
+transition: var(--transition);
+}
+.form-control:focus {
+border-color: var(--primary-color);
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+/* Utility Classes */
+.text-primary-custom {
+color: var(--primary-color) !important;
+}
+.bg-primary-custom {
+background-color: var(--primary-color) !important;
+}
+.border-primary-custom {
+border-color: var(--primary-color) !important;
+}
+/* Animation Classes */
+.fade-in {
+animation: fadeIn 0.5s ease-in;
+}
+@keyframes  fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.slide-in {
+animation: slideIn 0.3s ease-out;
+}
+@keyframes  slideIn {
+from { transform: translateX(-100%); }
+to { transform: translateX(0); }
+}
+/* Loading States */
+.loading {
+opacity: 0.6;
+pointer-events: none;
+}
+.spinner {
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 3px solid rgba(255, 255, 255, 0.3);
+border-radius: 50%;
+border-top-color: #fff;
+animation: spin 1s ease-in-out infinite;
+}
+@keyframes  spin {
+to { transform: rotate(360deg); }
+}
+/* ---------- Mobile & tablet (added for the ATS audit) ----------
+Desktop layout is unchanged: everything below only applies under 992px. */
+/* The content column is a flex item: without min-width:0 it grows to the
+width of its widest table and pushes the whole page off the screen. */
+.main-content { min-width: 0; }
+.content-wrapper { min-width: 0; max-width: 100%; }
+.jl-table-scroll { width: 100%; }
+@media (max-width: 991.98px) {
+.jl-table-scroll,
+.content-wrapper .dataTables_wrapper {
+overflow-x: auto;
+-webkit-overflow-scrolling: touch;
+}
+.content-wrapper .jl-table-scroll > table { min-width: 640px; }
+/* Safety net: nothing inside a page can push the page sideways */
+.content-wrapper { overflow-x: hidden; }
+/* Some page headers use negative margins sized for the desktop padding */
+.content-wrapper .page-header-modern { margin-left: 0 !important; margin-right: 0 !important; margin-top: 0 !important; }
+.content-wrapper img,
+.content-wrapper canvas,
+.content-wrapper iframe,
+.content-wrapper video { max-width: 100%; }
+.content-wrapper .modal-dialog { max-width: calc(100vw - 1.5rem); margin-left: auto; margin-right: auto; }
+.content-wrapper .row { --bs-gutter-x: 1rem; }
+.content-wrapper .dataTables_wrapper .dataTables_filter,
+.content-wrapper .dataTables_wrapper .dataTables_length { float: none; text-align: left; }
+.content-wrapper .dataTables_wrapper .dataTables_filter input { width: 100%; max-width: 260px; margin-left: 0; }
+}
+@media (max-width: 575.98px) {
+.content-wrapper { padding: .75rem .6rem; }
+/* 16px stops iPhones zooming into form fields */
+.content-wrapper input.form-control,
+.content-wrapper select.form-control,
+.content-wrapper select.form-select,
+.content-wrapper textarea.form-control { font-size: 16px; }
+.content-wrapper .btn-lg { padding: .6rem 1rem; font-size: 1rem; }
+}
+</style>
+<script>
+// Wrap any wide table that is not already inside a scroll container so it
+// scrolls sideways on phones/tablets instead of breaking the page.
+// Runs before page scripts (DataTables etc.) initialise the tables.
+document.addEventListener('DOMContentLoaded', function () {
+document.querySelectorAll('.content-wrapper table').forEach(function (table) {
+if (table.closest('.table-responsive, .jl-table-scroll, .dataTables_wrapper, .modal, .ql-editor, .fc')) { return; }
+if (table.parentElement && table.parentElement.tagName === 'TD') { return; } // nested layout tables
+var wrap = document.createElement('div');
+wrap.className = 'jl-table-scroll';
+table.parentNode.insertBefore(wrap, table);
+wrap.appendChild(table);
+});
+});
+</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--primary-color: #667eea;
+--primary-hover: #5a6fd8;
+--secondary-color: #764ba2;
+--success-color: #48bb78;
+--warning-color: #ed8936;
+--danger-color: #f56565;
+--info-color: #4299e1;
+--light-bg: #f8fafc;
+--border-color: #e2e8f0;
+--text-primary: #2d3748;
+--text-secondary: #718096;
+--white: #ffffff;
+--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+--shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+--border-radius: 12px;
+--border-radius-lg: 16px;
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+background: var(--white);
+min-height: 100vh;
+color: var(--text-primary);
+line-height: 1.6;
+}
+.modern-container {
+max-width: 1400px;
+margin: 0 auto;
+padding: 20px;
+background: var(--white);
+}
+.page-header {
+background: var(--primary-color);
+color: white;
+padding: 30px 0;
+margin: -20px -20px 30px -20px;
+border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+box-shadow: var(--shadow-lg);
+}
+.page-header-content {
+max-width: 1400px;
+margin: 0 auto;
+padding: 0 20px;
+}
+.page-title {
+font-size: 2.5rem;
+font-weight: 700;
+margin-bottom: 10px;
+text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.breadcrumb {
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 0.95rem;
+opacity: 0.9;
+}
+.breadcrumb a {
+color: white;
+text-decoration: none;
+transition: opacity 0.3s ease;
+}
+.breadcrumb a:hover {
+opacity: 0.8;
+}
+.breadcrumb-separator {
+color: rgba(255,255,255,0.7);
+}
+.report-card {
+background: var(--white);
+border-radius: var(--border-radius-lg);
+box-shadow: var(--shadow-md);
+overflow: hidden;
+margin-bottom: 30px;
+border: 1px solid var(--border-color);
+}
+.card-header {
+background: var(--white);
+padding: 25px 30px;
+color: var(--text-primary);
+border-bottom: 1px solid var(--border-color);
+}
+.card-title {
+font-size: 1.4rem;
+font-weight: 600;
+margin: 0;
+color: var(--text-primary);
+}
+.card-body {
+padding: 35px 30px;
+background: var(--white);
+}
+.filter-section {
+margin-bottom: 35px;
+}
+.form-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 25px;
+}
+@media (min-width: 768px) {
+.form-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+@media (min-width: 1200px) {
+.form-grid {
+grid-template-columns: repeat(3, 1fr);
+}
+}
+.form-group {
+position: relative;
+}
+.form-label {
+display: block;
+font-weight: 500;
+color: var(--text-primary);
+margin-bottom: 8px;
+font-size: 0.95rem;
+}
+.form-control {
+width: 100%;
+padding: 14px 16px;
+border: 2px solid var(--border-color);
+border-radius: var(--border-radius);
+font-size: 0.95rem;
+transition: all 0.3s ease;
+background: var(--white);
+color: var(--text-primary);
+}
+.form-control:focus {
+outline: none;
+border-color: var(--primary-color);
+background: var(--white);
+box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+transform: translateY(-1px);
+}
+.form-control:read-only {
+background: var(--light-bg);
+color: var(--text-secondary);
+}
+.company-search {
+position: relative;
+}
+.search-icon {
+position: absolute;
+right: 16px;
+top: 50%;
+transform: translateY(-50%);
+color: var(--text-secondary);
+pointer-events: none;
+}
+.date-inputs {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+}
+/* Radio Button Styles */
+.status-filters {
+grid-column: 1 / -1;
+margin-top: 20px;
+}
+.status-title {
+font-weight: 600;
+color: var(--text-primary);
+margin-bottom: 15px;
+font-size: 1.05rem;
+}
+.radio-group {
+display: flex;
+flex-wrap: wrap;
+gap: 1.5rem;
+margin: 1.5rem 0;
+padding: 1.5rem;
+background: var(--light-bg);
+border-radius: var(--border-radius);
+border: 1px solid var(--border-color);
+}
+.radio-item {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+position: relative;
+}
+.radio-input {
+width: 18px;
+height: 18px;
+accent-color: var(--primary-color);
+cursor: pointer;
+}
+.radio-label {
+font-weight: 500;
+color: var(--text-primary);
+cursor: pointer;
+font-size: 0.875rem;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.action-buttons {
+display: flex;
+justify-content: center;
+margin-top: 30px;
+gap: 15px;
+}
+.btn {
+padding: 14px 28px;
+border: none;
+border-radius: var(--border-radius);
+font-size: 0.95rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+position: relative;
+overflow: hidden;
+}
+.btn-primary {
+background: var(--primary-color);
+color: white;
+box-shadow: var(--shadow-md);
+}
+.btn-primary:hover {
+background: var(--primary-hover);
+transform: translateY(-2px);
+box-shadow: var(--shadow-lg);
+}
+.btn-primary:active {
+transform: translateY(0);
+}
+/* Table Container and Styling */
+.table-container {
+background: var(--white);
+border-radius: var(--border-radius-lg);
+overflow: hidden;
+box-shadow: var(--shadow-md);
+border: 1px solid var(--border-color);
+}
+.table-header {
+background: var(--white);
+color: var(--text-primary);
+padding: 20px 25px;
+border-bottom: 1px solid var(--border-color);
+}
+.table-title {
+font-size: 1.2rem;
+font-weight: 600;
+margin: 0;
+color: var(--text-primary);
+}
+.table-responsive {
+overflow-x: auto;
+background: var(--white);
+}
+.modern-table {
+width: 100%;
+border-collapse: separate;
+border-spacing: 0;
+font-size: 0.9rem;
+background: var(--white);
+}
+.modern-table thead th {
+background: var(--light-bg);
+color: var(--text-primary);
+font-weight: 600;
+padding: 16px 12px;
+text-align: left;
+border-bottom: 2px solid var(--border-color);
+position: sticky;
+top: 0;
+z-index: 10;
+white-space: nowrap;
+font-size: 0.85rem;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.modern-table tbody td {
+padding: 14px 12px;
+border-bottom: 1px solid var(--border-color);
+vertical-align: middle;
+transition: all 0.2s ease;
+background: var(--white);
+color: var(--text-primary);
+font-size: 0.875rem;
+}
+.modern-table tbody tr:hover {
+background: var(--light-bg);
+}
+.modern-table tbody tr:hover td {
+color: var(--text-primary);
+background: var(--light-bg);
+}
+/* Status Badge Improvements */
+.status-badge {
+display: inline-flex;
+align-items: center;
+padding: 6px 12px;
+border-radius: 20px;
+font-size: 0.75rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.3px;
+white-space: nowrap;
+}
+.status-approved {
+background: var(--success-color);
+color: white;
+}
+.status-hold {
+background: var(--warning-color);
+color: white;
+}
+.status-progress {
+background: var(--info-color);
+color: white;
+}
+.status-reject {
+background: var(--danger-color);
+color: white;
+}
+.status-closed {
+background: var(--text-secondary);
+color: white;
+}
+.loading-overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(255, 255, 255, 0.9);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 9999;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+.loading-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+.loading-spinner {
+width: 50px;
+height: 50px;
+border: 4px solid var(--border-color);
+border-top: 4px solid var(--primary-color);
+border-radius: 50%;
+animation: spin 1s linear infinite;
+}
+@keyframes  spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+.export-buttons {
+display: flex;
+gap: 10px;
+margin: 20px 0;
+flex-wrap: wrap;
+padding: 0 25px;
+}
+.btn-export {
+padding: 10px 16px;
+background: var(--success-color);
+color: white;
+border: none;
+border-radius: var(--border-radius);
+font-size: 0.85rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.3s ease;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.btn-export:hover {
+transform: translateY(-1px);
+box-shadow: var(--shadow-md);
+background: #38a169;
+}
+.alert {
+padding: 16px 20px;
+border-radius: var(--border-radius);
+margin-bottom: 20px;
+border: none;
+font-weight: 500;
+}
+.alert-warning {
+background: #fef5e7;
+color: #c05621;
+border-left: 4px solid var(--warning-color);
+}
+.alert-success {
+background: #f0fff4;
+color: #2f855a;
+border-left: 4px solid var(--success-color);
+}
+.alert-error {
+background: #fed7d7;
+color: #c53030;
+border-left: 4px solid var(--danger-color);
+}
+/* DataTables Custom Styling */
+.dataTables_wrapper {
+padding: 0 25px 25px 25px;
+background: var(--white);
+}
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+margin: 15px 0;
+color: var(--text-primary);
+}
+.dataTables_wrapper .dataTables_length select {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+padding: 6px 10px;
+background: var(--white);
+color: var(--text-primary);
+}
+.dataTables_wrapper .dataTables_filter input {
+border: 2px solid var(--border-color);
+border-radius: var(--border-radius);
+padding: 8px 12px;
+margin-left: 8px;
+background: var(--white);
+color: var(--text-primary);
+}
+.dataTables_wrapper .dataTables_filter input:focus {
+border-color: var(--primary-color);
+outline: none;
+box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+padding: 8px 12px;
+margin: 0 2px;
+border-radius: var(--border-radius);
+border: 1px solid var(--border-color);
+background: var(--white);
+color: var(--text-primary);
+transition: all 0.2s ease;
+text-decoration: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+background: var(--primary-color);
+color: white;
+border-color: var(--primary-color);
+text-decoration: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+background: var(--primary-color);
+color: white;
+border-color: var(--primary-color);
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+color: var(--text-secondary);
+background: var(--light-bg);
+border-color: var(--border-color);
+}
+/* Autocomplete Styling */
+.ui-autocomplete {
+background: var(--white);
+border: 2px solid var(--border-color);
+border-radius: var(--border-radius);
+box-shadow: var(--shadow-lg);
+z-index: 1000;
+max-height: 200px;
+overflow-y: auto;
+}
+.ui-autocomplete .ui-menu-item {
+padding: 12px 16px;
+border-bottom: 1px solid var(--border-color);
+cursor: pointer;
+transition: background 0.2s ease;
+color: var(--text-primary);
+}
+.ui-autocomplete .ui-menu-item:hover,
+.ui-autocomplete .ui-menu-item.ui-state-focus {
+background: var(--light-bg);
+color: var(--text-primary);
+}
+.ui-autocomplete .ui-menu-item:last-child {
+border-bottom: none;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+.modern-container {
+padding: 15px;
+}
+.page-title {
+font-size: 2rem;
+}
+.card-body {
+padding: 25px 20px;
+}
+.form-grid {
+grid-template-columns: 1fr;
+}
+.date-inputs {
+grid-template-columns: 1fr;
+}
+.radio-group {
+flex-direction: column;
+gap: 1rem;
+}
+.action-buttons {
+flex-direction: column;
+}
+.btn {
+width: 100%;
+}
+.modern-table {
+font-size: 0.8rem;
+}
+.modern-table thead th,
+.modern-table tbody td {
+padding: 10px 8px;
+}
+.export-buttons {
+justify-content: center;
+}
+.dataTables_wrapper {
+padding: 0 15px 20px 15px;
+}
+}
+@media (max-width: 480px) {
+.page-header {
+margin: -20px -15px 20px -15px;
+}
+.card-body {
+padding: 20px 15px;
+}
+.modern-table thead th,
+.modern-table tbody td {
+padding: 8px 6px;
+font-size: 0.75rem;
+}
+.status-badge {
+font-size: 0.7rem;
+padding: 4px 8px;
+}
+}
+/* Animation Classes */
+.fade-in {
+animation: fadeIn 0.5s ease-in;
+}
+@keyframes  fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.slide-up {
+animation: slideUp 0.6s ease-out;
+}
+@keyframes  slideUp {
+from { opacity: 0; transform: translateY(30px); }
+to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<div class="admin-wrapper">
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<div class="brand-logo">
+<img src="/assets/front/images/hr/job_logo.png" alt="Job Labs" class="logo-img">
+<span class="brand-text">Job Labs</span>
+</div>
+<button class="sidebar-close d-lg-none" data-sidebar-toggle>
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="sidebar-user">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-indicator online"></div>
+</div>
+<div class="user-info">
+<h6 class="user-name">Dilan</h6>
+<span class="user-role">Hiring Manager</span>
+</div>
+</div>
+<nav class="sidebar-nav">
+<div class="nav-section">
+<ul class="nav-list">
+<li class="nav-item">
+<a href="/ats/hiring-manager/dashboard" class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-home"></i>
+</div>
+<span class="nav-text">Dashboard</span>
+</a>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#jobsMenu">
+<div class="nav-icon">
+<i class="fas fa-clipboard-list"></i>
+</div>
+<span class="nav-text">Job Management</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="jobsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/hiring-manager/admin/job/create" class="submenu-link">
+<i class="fas fa-plus-circle"></i>
+Post New Vacancy
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/hiring-manager/admin/job/list" class="submenu-link ">
+<i class="fas fa-edit"></i>
+Manage Vacancies
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item">
+<a href="/ats/hiring-manager/my-tickets"
+class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-headset"></i>
+</div>
+<span class="nav-text">My Support Tickets</span>
+</a>
+</li>
+<li class="nav-item has-submenu active">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#reportsMenu">
+<div class="nav-icon">
+<i class="fas fa-chart-bar"></i>
+</div>
+<span class="nav-text">Reports & Analytics</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu show" id="reportsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/hiring-manager/admin/report/vacancy/job/list" class="submenu-link active">
+<i class="fas fa-clipboard-check"></i>
+Vacancy Status
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/hiring-manager/admin/report/applicant/list" class="submenu-link ">
+<i class="fas fa-users"></i>
+Candidates by Company
+</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</nav>
+<div class="sidebar-footer">
+<div class="footer-actions">
+<a href="/login" class="logout-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign Out">
+<i class="fas fa-sign-out-alt"></i>
+<span>Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<div class="sidebar-overlay d-lg-none" data-sidebar-toggle></div>
+<style>
+.sidebar {
+position: fixed;
+top: 0;
+left: 0;
+width: var(--sidebar-width);
+height: 100vh;
+background: var(--sidebar-bg);
+border-right: 1px solid var(--border-color);
+z-index: 1050;
+display: flex;
+flex-direction: column;
+box-shadow: var(--shadow-lg);
+transition: var(--transition);
+}
+.sidebar-header {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+justify-content: space-between;
+min-height: var(--header-height);
+}
+.brand-logo {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+.logo-img {
+width: 40px;
+height: 40px;
+object-fit: contain;
+border-radius: 8px;
+}
+.brand-text {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-color);
+letter-spacing: -0.5px;
+}
+.sidebar-close {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 6px;
+transition: var(--transition);
+}
+.sidebar-close:hover {
+background: rgba(0, 0, 0, 0.1);
+color: var(--text-primary);
+}
+.sidebar-user {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.user-avatar {
+position: relative;
+width: 50px;
+height: 50px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-indicator {
+position: absolute;
+bottom: 2px;
+right: 2px;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-indicator.online {
+background: var(--success-color);
+}
+.user-info {
+flex: 1;
+min-width: 0;
+}
+.user-name {
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.user-role {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.sidebar-nav {
+flex: 1;
+padding: 1rem 0;
+overflow-y: auto;
+}
+.nav-list {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.nav-item {
+margin-bottom: 0.25rem;
+}
+.nav-link {
+display: flex;
+align-items: center;
+padding: 0.75rem 1.5rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+position: relative;
+border-radius: 0;
+}
+.nav-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.nav-link.active {
+background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+color: white;
+box-shadow: var(--shadow-md);
+}
+.nav-link.active::before {
+content: '';
+position: absolute;
+left: 0;
+top: 0;
+height: 100%;
+width: 4px;
+background: white;
+}
+.nav-icon {
+width: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 0.75rem;
+}
+.nav-text {
+font-size: 0.9rem;
+font-weight: 500;
+flex: 1;
+}
+.nav-arrow {
+margin-left: auto;
+transition: var(--transition);
+}
+.has-submenu .nav-arrow i {
+transform: rotate(0deg);
+transition: var(--transition);
+}
+.has-submenu.active .nav-arrow i {
+transform: rotate(90deg);
+}
+.submenu {
+background: rgba(0, 0, 0, 0.03);
+border-left: 2px solid var(--border-color);
+margin-left: 1.5rem;
+}
+.submenu-list {
+list-style: none;
+margin: 0;
+padding: 0.5rem 0;
+}
+.submenu-item {
+margin-bottom: 0.1rem;
+}
+.submenu-link {
+display: flex;
+align-items: center;
+padding: 0.6rem 1rem 0.6rem 2rem;
+color: var(--text-secondary);
+text-decoration: none;
+font-size: 0.85rem;
+transition: var(--transition);
+border-radius: 6px;
+margin: 0 1rem;
+}
+.submenu-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.submenu-link.active {
+background: var(--primary-color);
+color: white;
+}
+.submenu-link i {
+margin-right: 0.5rem;
+font-size: 0.8rem;
+}
+.sidebar-footer {
+padding: 1.5rem;
+border-top: 1px solid var(--border-color);
+margin-top: auto;
+}
+.logout-btn {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.75rem 1rem;
+color: var(--text-secondary);
+text-decoration: none;
+border-radius: 8px;
+transition: var(--transition);
+width: 100%;
+font-size: 0.9rem;
+}
+.logout-btn:hover {
+background: rgba(239, 68, 68, 0.1);
+color: var(--danger-color);
+}
+.sidebar-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1040;
+opacity: 0;
+visibility: hidden;
+transition: var(--transition);
+}
+.sidebar-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.sidebar {
+transform: translateX(-100%);
+}
+.sidebar.active {
+transform: translateX(0);
+}
+.sidebar-overlay.active {
+display: block;
+}
+}
+/* Submenu Animation */
+.submenu {
+transition: all 0.3s ease;
+}
+.submenu:not(.show) {
+max-height: 0;
+overflow: hidden;
+}
+.submenu.show {
+max-height: 500px;
+}
+/* Hover Effects */
+@media (hover: hover) {
+.nav-link:hover .nav-icon i {
+transform: scale(1.1);
+}
+.submenu-link:hover {
+transform: translateX(4px);
+}
+}
+</style>
+<script>
+(function loadUnreadBadge() {
+fetch('/unread-count', {
+headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+})
+.then(r => r.json())
+.then(data => {
+const badge = document.getElementById('unreadTicketBadge');
+if (badge && data.count > 0) {
+badge.textContent = data.count;
+badge.style.display = 'inline';
+}
+})
+.catch(() => {});
+})();
+</script>
+<div class="main-content">
+<header class="main-header">
+<div class="header-content">
+<div class="header-left">
+<button class="sidebar-toggle d-lg-none" data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</button>
+<div class="page-title">
+<h1 class="title">Dashboard</h1>
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+</nav>
+</div>
+</div>
+<div class="header-right">
+<!-- Search Bar -->
+<div class="search-container d-none d-md-flex">
+<!-- <div class="search-input-wrapper">
+<i class="fas fa-search search-icon"></i>
+<input type="text" class="search-input" placeholder="Search jobs, candidates, companies...">
+<div class="search-dropdown" id="searchDropdown">
+</div>
+</div> -->
+</div>
+<!-- Notifications -->
+<div class="header-actions">
+<!-- <div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-bell"></i>
+<span class="notification-badge">3</span>
+</button>
+<div class="dropdown-menu notification-dropdown">
+<div class="dropdown-header">
+<h6>Notifications</h6>
+<span class="badge bg-primary">3 New</span>
+</div>
+<div class="notification-list">
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-user-plus text-success"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">New Application Received</p>
+<p class="notification-text">John Doe applied for Senior Developer position</p>
+<span class="notification-time">2 minutes ago</span>
+</div>
+</div>
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-briefcase text-info"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Job Posted Successfully</p>
+<p class="notification-text">Frontend Developer position is now live</p>
+<span class="notification-time">1 hour ago</span>
+</div>
+</div>
+<div class="notification-item">
+<div class="notification-icon">
+<i class="fas fa-chart-line text-warning"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Weekly Report Ready</p>
+<p class="notification-text">Your recruitment analytics report is available</p>
+<span class="notification-time">3 hours ago</span>
+</div>
+</div>
+</div>
+<div class="dropdown-footer">
+<a href="#" class="view-all-btn">View All Notifications</a>
+</div>
+</div>
+</div> -->
+<!-- Quick Actions -->
+<div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-plus"></i>
+</button>
+<div class="dropdown-menu quick-actions-dropdown">
+<div class="dropdown-header">
+<h6>Quick Actions</h6>
+</div>
+<a href="/ats/hiring-manager/admin/job/create" class="dropdown-item">
+<i class="fas fa-plus-circle text-primary"></i>
+Post New Job
+</a>
+<!--  -->
+<div class="dropdown-divider"></div>
+<a href="/ats/hiring-manager/admin/report/vacancy/job/list" class="dropdown-item">
+<i class="fas fa-chart-bar text-warning"></i>
+View Reports
+</a>
+</div>
+</div>
+<!-- User Profile Dropdown -->
+<div class="action-item dropdown user-dropdown">
+<button class="user-profile-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-dot online"></div>
+</div>
+<div class="user-info d-none d-md-block">
+<span class="user-name">Dilan</span>
+<span class="user-role">Hiring Manager</span>
+</div>
+<i class="fas fa-chevron-down dropdown-arrow"></i>
+</button>
+<div class="dropdown-menu user-dropdown-menu">
+<div class="dropdown-header user-header">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar" class="user-avatar-large">
+<div>
+<h6>Dilan</h6>
+<p>Hiring Manager</p>
+</div>
+</div>
+<div class="dropdown-divider"></div>
+<!-- <a href="#" class="dropdown-item">
+<i class="fas fa-user-circle"></i>
+My Profile
+</a>
+<a href="#" class="dropdown-item">
+<i class="fas fa-cog"></i>
+Settings
+</a> -->
+<div class="dropdown-divider"></div>
+<a href="/login" class="dropdown-item logout-item">
+<i class="fas fa-sign-out-alt"></i>
+Sign Out
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<style>
+.main-header {
+position: fixed;
+top: 0;
+right: 0;
+left: var(--sidebar-width);
+height: var(--header-height);
+background: white;
+border-bottom: 1px solid var(--border-color);
+z-index: 1030;
+transition: var(--transition);
+box-shadow: var(--shadow-sm);
+}
+.header-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 100%;
+padding: 0 2rem;
+}
+.header-left {
+display: flex;
+align-items: center;
+gap: 1rem;
+flex: 1;
+}
+.sidebar-toggle {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 8px;
+transition: var(--transition);
+}
+.sidebar-toggle:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.page-title .title {
+font-size: 1.5rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+line-height: 1.2;
+}
+.breadcrumb-nav {
+margin-top: 0.25rem;
+}
+.breadcrumb {
+margin: 0;
+background: none;
+padding: 0;
+font-size: 0.85rem;
+}
+.breadcrumb-item {
+color: var(--text-secondary);
+}
+.breadcrumb-item.active {
+color: var(--primary-color);
+font-weight: 500;
+}
+.breadcrumb-item a {
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+}
+.breadcrumb-item a:hover {
+color: var(--primary-color);
+}
+.header-right {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.search-container {
+position: relative;
+}
+.search-input-wrapper {
+position: relative;
+width: 350px;
+}
+.search-input {
+width: 100%;
+padding: 0.75rem 1rem 0.75rem 2.5rem;
+border: 1px solid var(--border-color);
+border-radius: 25px;
+background: var(--light-bg);
+color: var(--text-primary);
+font-size: 0.9rem;
+transition: var(--transition);
+}
+.search-input:focus {
+outline: none;
+border-color: var(--primary-color);
+background: white;
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+.search-icon {
+position: absolute;
+left: 1rem;
+top: 50%;
+transform: translateY(-50%);
+color: var(--text-secondary);
+font-size: 0.9rem;
+}
+.search-dropdown {
+position: absolute;
+top: 100%;
+left: 0;
+right: 0;
+background: white;
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+max-height: 300px;
+overflow-y: auto;
+z-index: 1050;
+display: none;
+}
+.header-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.action-item {
+position: relative;
+}
+.action-btn {
+position: relative;
+background: none;
+border: none;
+width: 44px;
+height: 44px;
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--text-secondary);
+transition: var(--transition);
+font-size: 1.1rem;
+}
+.action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.notification-badge {
+position: absolute;
+top: 8px;
+right: 8px;
+background: var(--danger-color);
+color: white;
+font-size: 0.7rem;
+padding: 0.2rem 0.4rem;
+border-radius: 10px;
+min-width: 18px;
+height: 18px;
+display: flex;
+align-items: center;
+justify-content: center;
+line-height: 1;
+}
+.user-profile-btn {
+background: none;
+border: none;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.5rem;
+border-radius: 12px;
+transition: var(--transition);
+color: var(--text-primary);
+}
+.user-profile-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+}
+.user-avatar {
+position: relative;
+width: 36px;
+height: 36px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-dot {
+position: absolute;
+bottom: 0;
+right: 0;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-dot.online {
+background: var(--success-color);
+}
+.user-info {
+text-align: left;
+}
+.user-name {
+display: block;
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+line-height: 1.2;
+}
+.user-role {
+display: block;
+font-size: 0.75rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.dropdown-arrow {
+font-size: 0.8rem;
+transition: var(--transition);
+}
+.dropdown.show .dropdown-arrow {
+transform: rotate(180deg);
+}
+/* Dropdown Menus */
+.dropdown-menu {
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+padding: 0;
+min-width: 280px;
+margin-top: 0.5rem;
+}
+.dropdown-header {
+padding: 1rem 1.5rem 0.5rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid var(--border-color);
+}
+.dropdown-header h6 {
+margin: 0;
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.dropdown-item {
+padding: 0.75rem 1.5rem;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+border: none;
+background: none;
+width: 100%;
+}
+.dropdown-item:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.dropdown-item i {
+width: 16px;
+text-align: center;
+}
+.logout-item {
+color: var(--danger-color) !important;
+border-top: 1px solid var(--border-color);
+}
+.logout-item:hover {
+background: rgba(239, 68, 68, 0.1) !important;
+}
+/* Notification Dropdown */
+.notification-dropdown {
+min-width: 380px;
+max-height: 400px;
+overflow: hidden;
+}
+.notification-list {
+max-height: 300px;
+overflow-y: auto;
+}
+.notification-item {
+padding: 1rem 1.5rem;
+display: flex;
+gap: 1rem;
+border-bottom: 1px solid var(--border-color);
+transition: var(--transition);
+}
+.notification-item:last-child {
+border-bottom: none;
+}
+.notification-item:hover {
+background: var(--light-bg);
+}
+.notification-item.unread {
+background: rgba(79, 70, 229, 0.05);
+}
+.notification-icon {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+background: var(--light-bg);
+flex-shrink: 0;
+}
+.notification-content {
+flex: 1;
+min-width: 0;
+}
+.notification-title {
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+margin: 0 0 0.25rem 0;
+}
+.notification-text {
+font-size: 0.8rem;
+color: var(--text-secondary);
+margin: 0 0 0.5rem 0;
+line-height: 1.4;
+}
+.notification-time {
+font-size: 0.75rem;
+color: var(--text-secondary);
+}
+.dropdown-footer {
+padding: 0.75rem 1.5rem;
+border-top: 1px solid var(--border-color);
+text-align: center;
+}
+.view-all-btn {
+color: var(--primary-color);
+text-decoration: none;
+font-size: 0.9rem;
+font-weight: 500;
+}
+/* Quick Actions Dropdown */
+.quick-actions-dropdown {
+min-width: 220px;
+}
+/* User Dropdown */
+.user-dropdown-menu {
+min-width: 250px;
+}
+.user-header {
+display: flex;
+align-items: center;
+gap: 1rem;
+padding: 1.5rem;
+}
+.user-avatar-large {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.user-header h6 {
+margin: 0;
+font-size: 1rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.user-header p {
+margin: 0;
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.main-header {
+left: 0;
+}
+.header-content {
+padding: 0 1rem;
+}
+.search-container {
+display: none !important;
+}
+.page-title .title {
+font-size: 1.25rem;
+}
+}
+@media (max-width: 576px) {
+.header-actions {
+gap: 0.25rem;
+}
+.action-btn {
+width: 38px;
+height: 38px;
+}
+.notification-dropdown,
+.quick-actions-dropdown,
+.user-dropdown-menu {
+min-width: 280px;
+max-width: calc(100vw - 2rem);
+}
+}
+</style>
+<div class="content-wrapper fade-in">
+<div class="loading-overlay" id="loadingOverlay">
+<div class="loading-spinner"></div>
+</div>
+<div class="modern-container">
+<div class="page-header">
+<div class="page-header-content">
+<h1 class="page-title">
+Vacancy Status Report
+</h1>
+<nav class="breadcrumb">
+<a href="/ats/hiring-manager/dashboard">
+<i class="fas fa-home" style="margin-right: 5px;"></i>
+Home
+</a>
+<span class="breadcrumb-separator">
+<i class="fas fa-chevron-right"></i>
+</span>
+<span>Vacancy Status Report</span>
+</nav>
+</div>
+</div>
+<div class="report-card fade-in">
+<div class="card-header">
+<h2 class="card-title">
+<i class="fas fa-filter" style="margin-right: 10px;"></i>
+Filter Options
+</h2>
+</div>
+<div class="card-body">
+<form id="vacancyReportForm" class="filter-section">
+<input type="hidden" name="_token" value="ZNM3xvi19NB2RoKJoM2AV4yHkDulPCwGcV5MKo7u">                <div class="form-grid">
+<!-- Company Search -->
+<div class="form-group company-search">
+<label class="form-label">
+<i class="fas fa-building" style="margin-right: 8px; color: var(--primary-color);"></i>
+Company
+</label>
+<select id="companyId" name="companyId" class="form-control">
+<option value="all">All my companies</option>
+<option value="101">Galle Coast Retail</option>
+<option value="104">Nuwara Digital Labs</option>
+</select>
+</div>
+<!-- Date Range -->
+<div class="form-group">
+<label class="form-label">
+<i class="fas fa-calendar-alt" style="margin-right: 8px; color: var(--primary-color);"></i>
+Date Range
+</label>
+<div class="date-inputs">
+<input type="date"
+name="fromDate"
+id="fromDate"
+class="form-control"
+placeholder="From Date"/>
+<input type="date"
+name="toDate"
+id="toDate"
+class="form-control"
+placeholder="To Date"/>
+</div>
+</div>
+<!-- Status Filters -->
+<div class="status-filters">
+<div class="status-title">
+<i class="fas fa-tags" style="margin-right: 8px; color: var(--primary-color);"></i>
+Job Status
+</div>
+<div class="radio-group">
+<div class="radio-item">
+<input type="radio" id="published" name="jobState" value="PUBLISHED" class="radio-input">
+<label for="published" class="radio-label">
+<i class="fas fa-plus-circle"></i>
+Posted/Created Jobs
+</label>
+</div>
+<div class="radio-item">
+<input type="radio" id="approved" name="jobState" value="APPROVED" class="radio-input">
+<label for="approved" class="radio-label">
+<i class="fas fa-check-circle"></i>
+Live Jobs
+</label>
+</div>
+<div class="radio-item">
+<input type="radio" id="closed" name="jobState" value="CLOSED" class="radio-input">
+<label for="closed" class="radio-label">
+<i class="fas fa-times-circle"></i>
+Closed Jobs
+</label>
+</div>
+<div class="radio-item">
+<input type="radio" id="archived" name="jobState" value="ARCHIVED" class="radio-input">
+<label for="archived" class="radio-label">
+<i class="fas fa-archive"></i>
+Archived Jobs
+</label>
+</div>
+<div class="radio-item">
+<input type="radio" id="hold" name="jobState" value="HOLD" class="radio-input">
+<label for="hold" class="radio-label">
+<i class="fas fa-pause-circle"></i>
+On Hold Jobs
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="action-buttons">
+<button type="button" class="btn btn-primary" id="generateReport">
+<i class="fas fa-chart-bar" style="margin-right: 8px;"></i>
+Generate Report
+</button>
+</div>
+</form>
+</div>
+</div>
+<div class="report-card slide-up" id="resultsSection" style="display: none;">
+<div class="table-container">
+<div class="table-header">
+<h3 class="table-title">
+<i class="fas fa-table" style="margin-right: 10px;"></i>
+Vacancy Status Results
+</h3>
+</div>
+<div class="export-buttons">
+<button class="btn-export" id="exportCSV">
+<i class="fas fa-file-csv"></i>
+Export CSV
+</button>
+<button class="btn-export" id="exportExcel">
+<i class="fas fa-file-excel"></i>
+Export Excel
+</button>
+</div>
+<div class="table-responsive">
+<table id="vacancyStatusTable" class="modern-table">
+<thead>
+<tr>
+<th>Job Ref</th>
+<th>Title</th>
+<th>Location</th>
+<th>Industry</th>
+<th>Job Type</th>
+<th>Work Type</th>
+<th>Salary</th>
+<th>Proposed Live Date</th>
+<th>Expected Closing Date</th>
+<th id="dynamicDateHeader">Actual Created Date</th>
+<th>Total Vacancies</th>
+<th>Candidate Count</th>
+<th>Status</th>
+<th>Job Created</th>
+<th>Last Modified</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="footer-content">
+<div class="footer-left">
+<p class="copyright">
+© 2026 <strong>Job Labs</strong> ATS. All rights reserved.
+</p>
+<div class="footer-links">
+<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+<a href="/terms-of-service" class="footer-link">Terms of Service</a>
+<a href="/cookie-policy" class="footer-link">Support</a>
+</div>
+</div>
+<div class="footer-right">
+<div class="system-status">
+<div class="status-indicator online"></div>
+<span class="status-text">All systems operational</span>
+</div>
+<div class="footer-actions">
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Help & Support">
+<i class="fas fa-question-circle"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Feedback">
+<i class="fas fa-comment-alt"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Keyboard Shortcuts">
+<i class="fas fa-keyboard"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Version and Environment Info (for development) -->
+<!--     <div class="debug-info">
+<small class="text-muted">
+Version 2.0.1 | PHP 8.3.6 | Laravel 8.83.29
+</small>
+</div>
+-->
+</footer>
+<style>
+.main-footer {
+background: white;
+border-top: 1px solid var(--border-color);
+padding: 1rem 2rem;
+margin-top: auto;
+min-height: 60px;
+position: relative;
+}
+.footer-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 2rem;
+}
+.footer-left {
+display: flex;
+align-items: center;
+gap: 2rem;
+flex: 1;
+}
+.copyright {
+margin: 0;
+font-size: 0.85rem;
+color: var(--text-secondary);
+}
+.copyright strong {
+color: var(--primary-color);
+font-weight: 600;
+}
+.footer-links {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.footer-link {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+padding: 0.25rem 0;
+position: relative;
+}
+.footer-link:hover {
+color: var(--primary-color);
+}
+.footer-link::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--primary-color);
+transition: var(--transition);
+}
+.footer-link:hover::after {
+width: 100%;
+}
+.footer-right {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.system-status {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.5rem 1rem;
+background: rgba(16, 185, 129, 0.1);
+border-radius: 20px;
+border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.status-indicator {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+}
+.status-indicator.online {
+background: var(--success-color);
+box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+animation: pulse 2s infinite;
+}
+.status-indicator.warning {
+background: var(--warning-color);
+box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+}
+.status-indicator.offline {
+background: var(--danger-color);
+box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+}
+.status-text {
+font-size: 0.8rem;
+color: var(--success-color);
+font-weight: 500;
+}
+@keyframes  pulse {
+0% {
+transform: scale(1);
+}
+50% {
+transform: scale(1.1);
+}
+100% {
+transform: scale(1);
+}
+}
+.footer-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.footer-action-btn {
+width: 32px;
+height: 32px;
+border: none;
+background: rgba(107, 114, 128, 0.1);
+color: var(--text-secondary);
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(--transition);
+font-size: 0.9rem;
+}
+.footer-action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+transform: translateY(-1px);
+}
+.debug-info {
+position: absolute;
+bottom: 0;
+right: 2rem;
+transform: translateY(100%);
+background: rgba(0, 0, 0, 0.8);
+color: white;
+padding: 0.25rem 0.75rem;
+border-radius: 0 0 8px 8px;
+font-family: 'Courier New', monospace;
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.main-footer {
+padding: 1rem;
+}
+.footer-content {
+flex-direction: column;
+gap: 1rem;
+text-align: center;
+}
+.footer-left {
+flex-direction: column;
+gap: 1rem;
+align-items: center;
+}
+.footer-links {
+justify-content: center;
+}
+.footer-right {
+justify-content: center;
+}
+.system-status {
+order: -1;
+}
+}
+@media (max-width: 576px) {
+.footer-links {
+flex-wrap: wrap;
+gap: 1rem;
+}
+.footer-actions {
+gap: 0.25rem;
+}
+.footer-action-btn {
+width: 28px;
+height: 28px;
+font-size: 0.8rem;
+}
+}
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+.main-footer {
+background: var(--sidebar-bg);
+border-color: var(--border-color);
+}
+.debug-info {
+background: rgba(255, 255, 255, 0.1);
+color: var(--text-primary);
+}
+}
+/* Print styles */
+@media  print {
+.main-footer {
+display: none;
+}
+}
+/* High contrast mode */
+@media (prefers-contrast: high) {
+.footer-link {
+text-decoration: underline;
+}
+.status-indicator {
+border: 2px solid currentColor;
+}
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+.status-indicator.online {
+animation: none;
+}
+.footer-action-btn:hover {
+transform: none;
+}
+.footer-link::after {
+transition: none;
+}
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// System status simulation (replace with real API call)
+function updateSystemStatus() {
+const statusIndicator = document.querySelector('.status-indicator');
+const statusText = document.querySelector('.status-text');
+if (!statusIndicator || !statusText) return;
+// Simulate API call to check system status
+// Replace this with actual system health check
+const systemHealth = {
+database: true,
+cache: true,
+mail: true,
+storage: true
+};
+const allSystemsUp = Object.values(systemHealth).every(status => status);
+if (allSystemsUp) {
+statusIndicator.className = 'status-indicator online';
+statusText.textContent = 'All systems operational';
+statusText.style.color = 'var(--success-color)';
+} else {
+statusIndicator.className = 'status-indicator warning';
+statusText.textContent = 'Some services degraded';
+statusText.style.color = 'var(--warning-color)';
+}
+}
+// Update status every 30 seconds
+updateSystemStatus();
+setInterval(updateSystemStatus, 30000);
+// Keyboard shortcuts handler
+const keyboardBtn = document.querySelector('.footer-action-btn:last-child');
+if (keyboardBtn) {
+keyboardBtn.addEventListener('click', function() {
+showKeyboardShortcuts();
+});
+}
+// Help and support handler
+const helpBtn = document.querySelector('.footer-action-btn:first-child');
+if (helpBtn) {
+helpBtn.addEventListener('click', function() {
+// You can integrate with your help system here
+window.open('#', '_blank');
+});
+}
+// Feedback handler
+const feedbackBtn = document.querySelector('.footer-action-btn:nth-child(2)');
+if (feedbackBtn) {
+feedbackBtn.addEventListener('click', function() {
+// You can integrate with your feedback system here
+showFeedbackModal();
+});
+}
+});
+function showKeyboardShortcuts() {
+// Create modal for keyboard shortcuts
+const shortcuts = [
+{ key: 'Ctrl + /', description: 'Show keyboard shortcuts' },
+{ key: 'Ctrl + N', description: 'Create new job posting' },
+{ key: 'Ctrl + S', description: 'Save current form' },
+{ key: 'Esc', description: 'Close modal or cancel action' },
+{ key: 'Tab', description: 'Navigate between form fields' }
+];
+let shortcutsHtml = '<div class="keyboard-shortcuts-modal">';
+shortcutsHtml += '<h5>Keyboard Shortcuts</h5>';
+shortcutsHtml += '<div class="shortcuts-list">';
+shortcuts.forEach(shortcut => {
+shortcutsHtml += `
+<div class="shortcut-item">
+<kbd>${shortcut.key}</kbd>
+<span>${shortcut.description}</span>
+</div>
+`;
+});
+shortcutsHtml += '</div></div>';
+// You can implement modal display logic here
+console.log('Keyboard shortcuts:', shortcuts);
+}
+function showFeedbackModal() {
+// Implement feedback modal
+console.log('Show feedback modal');
+}
+</script>        </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery (if needed) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Custom JS -->
+<script>
+// Global JavaScript utilities
+document.addEventListener('DOMContentLoaded', function() {
+// Initialize tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+// Initialize popovers
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+return new bootstrap.Popover(popoverTriggerEl);
+});
+// Mobile sidebar toggle - the header menu button, the sidebar close
+// button and the dark overlay all open/close the sidebar.
+// (Before, only the FIRST [data-sidebar-toggle] - the hidden close
+// button inside the sidebar - was wired, so the menu button on
+// phones/tablets did nothing.)
+const sidebar = document.querySelector('.sidebar');
+const sidebarOverlay = document.querySelector('.sidebar-overlay');
+if (sidebar) {
+document.querySelectorAll('[data-sidebar-toggle]').forEach(function (btn) {
+btn.addEventListener('click', function (e) {
+e.preventDefault();
+const open = !sidebar.classList.contains('active');
+sidebar.classList.toggle('active', open);
+if (sidebarOverlay) { sidebarOverlay.classList.toggle('active', open); }
+});
+});
+}
+// Auto-hide alerts
+setTimeout(function() {
+const alerts = document.querySelectorAll('.alert');
+alerts.forEach(function(alert) {
+const bsAlert = new bootstrap.Alert(alert);
+bsAlert.close();
+});
+}, 5000);
+});
+// CSRF token setup for AJAX requests
+if (typeof $ !== 'undefined') {
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+}
+// Security features
+document.addEventListener('contextmenu', function(e) {
+e.preventDefault();
+});
+document.addEventListener('keydown', function(e) {
+// Disable F12
+if (e.keyCode === 123) {
+return false;
+}
+// Disable Ctrl+Shift+I
+if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+return false;
+}
+// Disable Ctrl+Shift+J
+if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+return false;
+}
+// Disable Ctrl+U
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+});
+</script>
+<!-- jQuery first -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<!-- DataTables Core -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<!-- DataTables Extensions -->
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+<!-- XLSX for Excel export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<!-- Notifications -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script>
+$(document).ready(function() {
+const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+let dataTable;
+let reportData = [];
+// Initialize DataTable
+function initializeDataTable() {
+if (dataTable) {
+dataTable.destroy();
+}
+dataTable = $('#vacancyStatusTable').DataTable({
+responsive: true,
+processing: true,
+pageLength: 10,
+lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
+language: {
+search: "Search records:",
+lengthMenu: "Show _MENU_ entries per page",
+info: "Showing _START_ to _END_ of _TOTAL_ entries",
+infoEmpty: "No entries available",
+emptyTable: "No data available",
+zeroRecords: "No matching records found",
+paginate: {
+first: "First",
+last: "Last",
+next: "Next",
+previous: "Previous"
+}
+},
+columnDefs: [
+{ width: "8%", targets: 0 },
+{ width: "15%", targets: 1 },
+{ width: "10%", targets: 2 },
+{ width: "12%", targets: 12 }
+],
+order: [[0, 'desc']]
+});
+}
+// Show loading overlay
+function showLoading() {
+$('#loadingOverlay').addClass('active');
+}
+// Hide loading overlay
+function hideLoading() {
+$('#loadingOverlay').removeClass('active');
+}
+// Show alert message
+function showAlert(message, type = 'warning') {
+const alertClass = `alert-${type}`;
+const alertHtml = `
+<div class="alert ${alertClass}" style="margin: 20px 0;">
+<i class="fas fa-${type === 'warning' ? 'exclamation-triangle' : type === 'success' ? 'check-circle' : 'times-circle'}" style="margin-right: 10px;"></i>
+${message}
+</div>
+`;
+// Remove existing alerts
+$('.alert').remove();
+// Add new alert
+$('#resultsSection').before(alertHtml);
+// Auto-hide after 5 seconds
+setTimeout(() => {
+$('.alert').fadeOut(300, function() {
+$(this).remove();
+});
+}, 5000);
+}
+// Format status badge
+function getStatusBadge(status, statusCode) {
+let badgeClass = 'status-badge ';
+switch(statusCode) {
+case 1:
+badgeClass += 'status-approved';
+break;
+case 0:
+badgeClass += 'status-hold';
+break;
+case 2:
+badgeClass += 'status-progress';
+break;
+case 3:
+badgeClass += 'status-reject';
+break;
+case 4:
+badgeClass += 'status-closed';
+break;
+default:
+badgeClass += 'status-progress';
+}
+return `<span class="${badgeClass}">${status}</span>`;
+}
+// Format currency
+function formatCurrency(amount, payroll) {
+let suffix = '';
+switch(payroll) {
+case 'perannum':
+suffix = ' / Annum';
+break;
+case 'permonth':
+suffix = ' / Month';
+break;
+case 'perday':
+suffix = ' / Day';
+break;
+case 'perhour':
+suffix = ' / Hour';
+break;
+default:
+suffix = '';
+}
+return `£${amount}${suffix}`;
+}
+// Format date
+function formatDate(dateString) {
+if (!dateString) return 'N/A';
+const date = new Date(dateString);
+return date.toLocaleDateString("en-GB");
+}
+// Format datetime
+function formatDateTime(dateString) {
+if (!dateString) return 'N/A';
+const date = new Date(dateString);
+const formattedDate = date.toLocaleDateString("en-GB");
+const formattedTime = date.toLocaleTimeString("en-GB", {
+hour12: false,
+hour: '2-digit',
+minute: '2-digit',
+second: '2-digit'
+});
+return `${formattedDate} ${formattedTime}`;
+}
+// Update dynamic header based on job state
+function updateDynamicHeader(jobState) {
+let headerText = 'Actual Created Date';
+switch(jobState) {
+case 'PUBLISHED':
+headerText = 'Job Created On';
+break;
+case 'CLOSED':
+headerText = 'Job Closed On';
+break;
+case 'ARCHIVED':
+headerText = 'Job Archived On';
+break;
+case 'APPROVED':
+headerText = 'Job Published On';
+break;
+case 'HOLD':
+headerText = 'Job Held On';
+break;
+}
+$('#dynamicDateHeader').text(headerText);
+}
+// Company autocomplete
+$("#company_search").autocomplete({
+source: function(request, response) {
+$.ajax({
+url: 'company/list',
+type: 'post',
+dataType: "json",
+data: {
+_token: CSRF_TOKEN,
+search: request.term
+},
+success: function(data) {
+response(data);
+},
+error: function() {
+showAlert('Error fetching company data. Please try again.', 'error');
+}
+});
+},
+select: function(event, ui) {
+$('#company_search').val(ui.item.label);
+$('#companyId').val(ui.item.value);
+return false;
+},
+minLength: 2,
+delay: 300
+});
+// Generate report
+$("#generateReport").click(function() {
+const formData = {
+fromDate: $("#fromDate").val(),
+toDate: $("#toDate").val(),
+companyId: $("#companyId").val(),
+jobState: $("input[name='jobState']:checked").val()
+};
+// Validation
+if (!formData.fromDate || !formData.toDate || !formData.companyId || !formData.jobState) {
+showAlert('Please fill in all required fields before generating the report.', 'warning');
+return;
+}
+if (new Date(formData.fromDate) > new Date(formData.toDate)) {
+showAlert('From Date cannot be later than To Date.', 'warning');
+return;
+}
+showLoading();
+updateDynamicHeader(formData.jobState);
+// Clear existing table data
+if (dataTable) {
+dataTable.clear().draw();
+}
+$.ajax({
+url: "/admin/report/vacancy/list/bydate",
+type: 'post',
+dataType: "json",
+data: {
+_token: CSRF_TOKEN,
+formDate: formData.fromDate,
+toDate: formData.toDate,
+companyId: formData.companyId,
+jobState: formData.jobState
+},
+success: function(response) {
+hideLoading();
+if (!response || response.length === 0) {
+showAlert('No data found for the selected criteria.', 'warning');
+$('#resultsSection').hide();
+return;
+}
+// Store data for export
+reportData = response;
+// Initialize DataTable if not already done
+if (!dataTable) {
+initializeDataTable();
+}
+// Clear and populate table
+dataTable.clear();
+response.forEach(function(job) {
+// Determine status
+let jobStatus = '';
+switch(parseInt(job.job_adv_status)) {
+case 1:
+jobStatus = 'Approved';
+break;
+case 0:
+jobStatus = 'On Hold';
+break;
+case 2:
+jobStatus = 'On Progress';
+break;
+case 3:
+jobStatus = 'Reject';
+break;
+case 4:
+jobStatus = 'Closed';
+break;
+default:
+jobStatus = 'Unknown';
+}
+// Format salary
+const salary = formatCurrency(job.job_adv_salary || 0, job.job_payroll);
+// Format dates
+const liveDate = formatDate(job.job_adv_livedate);
+const closeDate = formatDate(job.job_adv_closingdate);
+const createDateTime = formatDateTime(job.create_at);
+const modifyDateTime = formatDateTime(job.modify_at);
+// Determine actual date based on job state
+let actualDate = '';
+switch(formData.jobState) {
+case 'PUBLISHED':
+actualDate = formatDate(job.create_at);
+break;
+case 'CLOSED':
+case 'ARCHIVED':
+case 'APPROVED':
+case 'HOLD':
+actualDate = formatDate(job.modify_at);
+break;
+default:
+actualDate = formatDate(job.create_at);
+}
+// Add row to DataTable
+dataTable.row.add([
+job.job_refno || 'N/A',
+job.job_title || 'N/A',
+job.location || 'N/A',
+job.industrysector || 'N/A',
+job.jobtype || 'N/A',
+job.worktype || 'N/A',
+salary,
+liveDate,
+closeDate,
+actualDate,
+job.job_adv_total_vacancies || '0',
+job.jobcount || '0',
+getStatusBadge(jobStatus, parseInt(job.job_adv_status)),
+createDateTime,
+modifyDateTime
+]);
+});
+dataTable.draw();
+$('#resultsSection').show();
+showAlert(`Successfully loaded ${response.length} records.`, 'success');
+// Scroll to results
+$('html, body').animate({
+scrollTop: $("#resultsSection").offset().top - 100
+}, 800);
+},
+error: function(xhr, status, error) {
+hideLoading();
+console.error('Error:', error);
+showAlert('Error fetching data. Please try again or contact administrator.', 'error');
+}
+});
+});
+// Export to CSV
+$("#exportCSV").click(function() {
+if (!reportData || reportData.length === 0) {
+showAlert('No data available to export.', 'warning');
+return;
+}
+const csvContent = convertToCSV(reportData);
+downloadFile(csvContent, 'vacancy_status_report.csv', 'text/csv');
+showAlert('CSV file downloaded successfully.', 'success');
+});
+// Export to Excel
+$("#exportExcel").click(function() {
+if (!reportData || reportData.length === 0) {
+showAlert('No data available to export.', 'warning');
+return;
+}
+const worksheet = XLSX.utils.json_to_sheet(prepareExportData(reportData));
+const workbook = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(workbook, worksheet, "Vacancy Status Report");
+// Set column widths
+const colWidths = [
+{wch: 12}, {wch: 25}, {wch: 15}, {wch: 15}, {wch: 12},
+{wch: 12}, {wch: 15}, {wch: 15}, {wch: 18}, {wch: 18},
+{wch: 12}, {wch: 12}, {wch: 12}, {wch: 20}, {wch: 20}
+];
+worksheet['!cols'] = colWidths;
+XLSX.writeFile(workbook, 'vacancy_status_report.xlsx');
+showAlert('Excel file downloaded successfully.', 'success');
+});
+// Convert data to CSV format
+function convertToCSV(data) {
+const headers = [
+'Job Ref', 'Title', 'Location', 'Industry', 'Job Type', 'Work Type',
+'Salary', 'Proposed Live Date', 'Expected Closing Date', 'Actual Date',
+'Total Vacancies', 'Candidate Count', 'Status', 'Job Created', 'Last Modified'
+];
+const csvRows = [];
+csvRows.push(headers.join(','));
+data.forEach(job => {
+// Get job state for actual date determination
+const jobState = $("input[name='jobState']:checked").val();
+let actualDate = '';
+switch(jobState) {
+case 'PUBLISHED':
+actualDate = formatDate(job.create_at);
+break;
+case 'CLOSED':
+case 'ARCHIVED':
+case 'APPROVED':
+case 'HOLD':
+actualDate = formatDate(job.modify_at);
+break;
+default:
+actualDate = formatDate(job.create_at);
+}
+let jobStatus = '';
+switch(parseInt(job.job_adv_status)) {
+case 1: jobStatus = 'Approved'; break;
+case 0: jobStatus = 'On Hold'; break;
+case 2: jobStatus = 'On Progress'; break;
+case 3: jobStatus = 'Reject'; break;
+case 4: jobStatus = 'Closed'; break;
+default: jobStatus = 'Unknown';
+}
+const row = [
+`"${job.job_refno || 'N/A'}"`,
+`"${job.job_title || 'N/A'}"`,
+`"${job.location || 'N/A'}"`,
+`"${job.industrysector || 'N/A'}"`,
+`"${job.jobtype || 'N/A'}"`,
+`"${job.worktype || 'N/A'}"`,
+`"${formatCurrency(job.job_adv_salary || 0, job.job_payroll)}"`,
+`"${formatDate(job.job_adv_livedate)}"`,
+`"${formatDate(job.job_adv_closingdate)}"`,
+`"${actualDate}"`,
+`"${job.job_adv_total_vacancies || '0'}"`,
+`"${job.jobcount || '0'}"`,
+`"${jobStatus}"`,
+`"${formatDateTime(job.create_at)}"`,
+`"${formatDateTime(job.modify_at)}"`
+];
+csvRows.push(row.join(','));
+});
+return csvRows.join('\n');
+}
+// Prepare data for Excel export
+function prepareExportData(data) {
+const jobState = $("input[name='jobState']:checked").val();
+return data.map(job => {
+let actualDate = '';
+switch(jobState) {
+case 'PUBLISHED':
+actualDate = formatDate(job.create_at);
+break;
+case 'CLOSED':
+case 'ARCHIVED':
+case 'APPROVED':
+case 'HOLD':
+actualDate = formatDate(job.modify_at);
+break;
+default:
+actualDate = formatDate(job.create_at);
+}
+let jobStatus = '';
+switch(parseInt(job.job_adv_status)) {
+case 1: jobStatus = 'Approved'; break;
+case 0: jobStatus = 'On Hold'; break;
+case 2: jobStatus = 'On Progress'; break;
+case 3: jobStatus = 'Reject'; break;
+case 4: jobStatus = 'Closed'; break;
+default: jobStatus = 'Unknown';
+}
+return {
+'Job Ref': job.job_refno || 'N/A',
+'Title': job.job_title || 'N/A',
+'Location': job.location || 'N/A',
+'Industry': job.industrysector || 'N/A',
+'Job Type': job.jobtype || 'N/A',
+'Work Type': job.worktype || 'N/A',
+'Salary': formatCurrency(job.job_adv_salary || 0, job.job_payroll),
+'Proposed Live Date': formatDate(job.job_adv_livedate),
+'Expected Closing Date': formatDate(job.job_adv_closingdate),
+'Actual Date': actualDate,
+'Total Vacancies': job.job_adv_total_vacancies || '0',
+'Candidate Count': job.jobcount || '0',
+'Status': jobStatus,
+'Job Created': formatDateTime(job.create_at),
+'Last Modified': formatDateTime(job.modify_at)
+};
+});
+}
+// Download file helper
+function downloadFile(content, fileName, contentType) {
+const blob = new Blob([content], { type: contentType });
+const url = window.URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.style.display = 'none';
+a.href = url;
+a.download = fileName;
+document.body.appendChild(a);
+a.click();
+window.URL.revokeObjectURL(url);
+document.body.removeChild(a);
+}
+// Set default dates (last 30 days)
+function setDefaultDates() {
+const today = new Date();
+const thirtyDaysAgo = new Date();
+thirtyDaysAgo.setDate(today.getDate() - 30);
+$('#toDate').val(today.toISOString().split('T')[0]);
+$('#fromDate').val(thirtyDaysAgo.toISOString().split('T')[0]);
+}
+// Initialize default dates
+setDefaultDates();
+// Form validation on input change
+$('#vacancyReportForm input').on('change', function() {
+$('.alert').fadeOut(300, function() {
+$(this).remove();
+});
+});
+// Smooth scrolling for internal links
+$('a[href^="#"]').on('click', function(event) {
+const target = $(this.getAttribute('href'));
+if (target.length) {
+event.preventDefault();
+$('html, body').stop().animate({
+scrollTop: target.offset().top - 100
+}, 800);
+}
+});
+// Add loading states to buttons
+$('.btn, .btn-export').on('click', function() {
+const $btn = $(this);
+const originalText = $btn.html();
+$btn.html('<i class="fas fa-spinner fa-spin"></i> Processing...')
+.prop('disabled', true);
+setTimeout(() => {
+$btn.html(originalText).prop('disabled', false);
+}, 2000);
+});
+// Initialize tooltips for status badges
+$(document).on('mouseenter', '.status-badge', function() {
+const $this = $(this);
+const status = $this.text();
+$this.attr('title', `Current Status: ${status}`);
+});
+console.log('Vacancy Status Report initialized successfully');
+});
+</script>
+</body>
+</html>

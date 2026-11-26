@@ -1,0 +1,4243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow"><script>window.__ATS_ROLE="superadmin";window.__ATS_ROLE_LABEL="Super Admin";window.__ATS_BASE="/ats/superadmin";</script><script src="/js/ats-mock-data-superadmin.js"></script><script src="/js/ats-mock.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="csrf-token" content="SipSLFU3azKtlCiJrKrO6qqtjsG02toF1pIcOKnZ">
+<!-- SEO Meta Tags -->
+<meta name="description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta name="keywords" content="ATS, recruitment, job management, admin panel, dashboard">
+<meta name="author" content="Job Labs">
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="ATS Dashboard - Job Labs">
+<meta property="og:description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta property="og:url" content="/admin/job/admin/list">
+<meta property="og:image" content="/assets/images/job_logo.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Job Labs ATS">
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ATS Dashboard - Job Labs">
+<meta name="twitter:description" content="Advanced ATS Dashboard for efficient recruitment management">
+<meta name="twitter:image" content="/assets/images/job_logo.png">
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<title>ATS Dashboard - Job Labs</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<style>
+:root {
+--primary-color: #4f46e5;
+--primary-dark: #4338ca;
+--secondary-color: #6b7280;
+--success-color: #10b981;
+--warning-color: #f59e0b;
+--danger-color: #ef4444;
+--info-color: #3b82f6;
+--light-bg: #f8fafc;
+--dark-bg: #1e293b;
+--sidebar-bg: #ffffff;
+--sidebar-width: 260px;
+--header-height: 70px;
+--border-color: #e2e8f0;
+--text-primary: #1e293b;
+--text-secondary: #64748b;
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+--border-radius: 8px;
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--light-bg);
+color: var(--text-primary);
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+width: 6px;
+}
+::-webkit-scrollbar-track {
+background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+background: #cbd5e1;
+border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #94a3b8;
+}
+/* Layout Structure */
+.admin-wrapper {
+display: flex;
+min-height: 100vh;
+}
+.main-content {
+flex: 1;
+margin-left: var(--sidebar-width);
+transition: var(--transition);
+background-color: var(--light-bg);
+}
+.content-wrapper {
+padding: 2rem;
+min-height: calc(100vh - var(--header-height));
+margin-top: var(--header-height);
+}
+/* Responsive Design */
+@media (max-width: 992px) {
+.main-content {
+margin-left: 0;
+}
+.content-wrapper {
+padding: 1rem;
+}
+}
+/* Custom Components */
+.card {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+box-shadow: var(--shadow-sm);
+transition: var(--transition);
+background: white;
+}
+.card:hover {
+box-shadow: var(--shadow-md);
+}
+.btn {
+border-radius: var(--border-radius);
+font-weight: 500;
+transition: var(--transition);
+border: none;
+padding: 0.75rem 1.5rem;
+}
+.btn-primary {
+background-color: var(--primary-color);
+color: white;
+}
+.btn-primary:hover {
+background-color: var(--primary-dark);
+transform: translateY(-1px);
+box-shadow: var(--shadow-md);
+}
+.form-control {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+padding: 0.75rem;
+transition: var(--transition);
+}
+.form-control:focus {
+border-color: var(--primary-color);
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+/* Utility Classes */
+.text-primary-custom {
+color: var(--primary-color) !important;
+}
+.bg-primary-custom {
+background-color: var(--primary-color) !important;
+}
+.border-primary-custom {
+border-color: var(--primary-color) !important;
+}
+/* Animation Classes */
+.fade-in {
+animation: fadeIn 0.5s ease-in;
+}
+@keyframes  fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.slide-in {
+animation: slideIn 0.3s ease-out;
+}
+@keyframes  slideIn {
+from { transform: translateX(-100%); }
+to { transform: translateX(0); }
+}
+/* Loading States */
+.loading {
+opacity: 0.6;
+pointer-events: none;
+}
+.spinner {
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 3px solid rgba(255, 255, 255, 0.3);
+border-radius: 50%;
+border-top-color: #fff;
+animation: spin 1s ease-in-out infinite;
+}
+@keyframes  spin {
+to { transform: rotate(360deg); }
+}
+/* ---------- Mobile & tablet (added for the ATS audit) ----------
+Desktop layout is unchanged: everything below only applies under 992px. */
+/* The content column is a flex item: without min-width:0 it grows to the
+width of its widest table and pushes the whole page off the screen. */
+.main-content { min-width: 0; }
+.content-wrapper { min-width: 0; max-width: 100%; }
+.jl-table-scroll { width: 100%; }
+@media (max-width: 991.98px) {
+.jl-table-scroll,
+.content-wrapper .dataTables_wrapper {
+overflow-x: auto;
+-webkit-overflow-scrolling: touch;
+}
+.content-wrapper .jl-table-scroll > table { min-width: 640px; }
+/* Safety net: nothing inside a page can push the page sideways */
+.content-wrapper { overflow-x: hidden; }
+/* Some page headers use negative margins sized for the desktop padding */
+.content-wrapper .page-header-modern { margin-left: 0 !important; margin-right: 0 !important; margin-top: 0 !important; }
+.content-wrapper img,
+.content-wrapper canvas,
+.content-wrapper iframe,
+.content-wrapper video { max-width: 100%; }
+.content-wrapper .modal-dialog { max-width: calc(100vw - 1.5rem); margin-left: auto; margin-right: auto; }
+.content-wrapper .row { --bs-gutter-x: 1rem; }
+.content-wrapper .dataTables_wrapper .dataTables_filter,
+.content-wrapper .dataTables_wrapper .dataTables_length { float: none; text-align: left; }
+.content-wrapper .dataTables_wrapper .dataTables_filter input { width: 100%; max-width: 260px; margin-left: 0; }
+}
+@media (max-width: 575.98px) {
+.content-wrapper { padding: .75rem .6rem; }
+/* 16px stops iPhones zooming into form fields */
+.content-wrapper input.form-control,
+.content-wrapper select.form-control,
+.content-wrapper select.form-select,
+.content-wrapper textarea.form-control { font-size: 16px; }
+.content-wrapper .btn-lg { padding: .6rem 1rem; font-size: 1rem; }
+}
+</style>
+<script>
+// Wrap any wide table that is not already inside a scroll container so it
+// scrolls sideways on phones/tablets instead of breaking the page.
+// Runs before page scripts (DataTables etc.) initialise the tables.
+document.addEventListener('DOMContentLoaded', function () {
+document.querySelectorAll('.content-wrapper table').forEach(function (table) {
+if (table.closest('.table-responsive, .jl-table-scroll, .dataTables_wrapper, .modal, .ql-editor, .fc')) { return; }
+if (table.parentElement && table.parentElement.tagName === 'TD') { return; } // nested layout tables
+var wrap = document.createElement('div');
+wrap.className = 'jl-table-scroll';
+table.parentNode.insertBefore(wrap, table);
+wrap.appendChild(table);
+});
+});
+</script>
+<style>
+/* Reset and Base Styles */
+.track-vacancy-container {
+padding: 0;
+margin: 0;
+width: 100%;
+background: #ffffff;
+}
+/* Page Header Section */
+.page-header-modern {
+background: #ffffff;
+padding: 2.5rem 2rem;
+margin-bottom: 2rem;
+border-radius: 0;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+.page-header-content {
+max-width: 1400px;
+margin: 0 auto;
+}
+.page-title-modern {
+font-size: 2rem;
+font-weight: 700;
+color: #292626ff;
+margin: 0 0 0.75rem 0;
+letter-spacing: -0.5px;
+}
+.breadcrumb-modern {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+list-style: none;
+padding: 0;
+margin: 0;
+font-size: 0.9rem;
+}
+.breadcrumb-modern li {
+color: rgba(60, 54, 54, 0.9);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.breadcrumb-modern li a {
+color: rgba(46, 43, 43, 0.9);
+text-decoration: none;
+transition: color 0.3s ease;
+}
+.breadcrumb-modern li a:hover {
+color: #3529e0ff;
+}
+.breadcrumb-separator {
+color: rgba(255, 255, 255, 0.6);
+}
+/* Main Content Area */
+.content-area {
+max-width: 1400px;
+margin: 0 auto;
+padding: 0 2rem 2rem;
+}
+/* Card Styling */
+.card-modern {
+background: #ffffff;
+border-radius: 12px;
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+overflow: hidden;
+transition: box-shadow 0.3s ease;
+}
+.card-modern:hover {
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+/* Table Controls */
+.table-controls {
+padding: 1.5rem;
+border-bottom: 1px solid #f0f0f0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 1rem;
+}
+.search-box {
+position: relative;
+flex: 1;
+min-width: 250px;
+max-width: 400px;
+}
+.search-box input {
+width: 100%;
+padding: 0.75rem 1rem 0.75rem 2.75rem;
+border: 2px solid #e5e7eb;
+border-radius: 8px;
+font-size: 0.95rem;
+transition: all 0.3s ease;
+outline: none;
+}
+.search-box input:focus {
+border-color: #667eea;
+box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+.search-icon {
+position: absolute;
+left: 1rem;
+top: 50%;
+transform: translateY(-50%);
+color: #9ca3af;
+pointer-events: none;
+}
+.export-buttons {
+display: flex;
+gap: 0.75rem;
+flex-wrap: wrap;
+}
+.btn-export {
+padding: 0.75rem 1.5rem;
+border: none;
+border-radius: 8px;
+font-size: 0.9rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+}
+.btn-export-csv {
+background: #10b981;
+color: white;
+}
+.btn-export-csv:hover {
+background: #059669;
+transform: translateY(-1px);
+box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+.btn-export-pdf {
+background: #ef4444;
+color: white;
+}
+.btn-export-pdf:hover {
+background: #dc2626;
+transform: translateY(-1px);
+box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+.btn-export-print {
+background: #6b7280;
+color: white;
+}
+.btn-export-print:hover {
+background: #4b5563;
+transform: translateY(-1px);
+box-shadow: 0 4px 8px rgba(107, 114, 128, 0.3);
+}
+/* Table Styling */
+.table-container {
+overflow-x: auto;
+padding: 1.5rem;
+}
+.modern-table {
+width: 100%;
+border-collapse: separate;
+border-spacing: 0;
+}
+.modern-table thead {
+background: #f9fafb;
+position: sticky;
+top: 0;
+z-index: 10;
+}
+.modern-table thead th {
+padding: 1rem 1.25rem;
+text-align: left;
+font-size: 0.875rem;
+font-weight: 700;
+color: #374151;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+border-bottom: 2px solid #e5e7eb;
+white-space: nowrap;
+}
+.modern-table tbody tr {
+transition: all 0.2s ease;
+border-bottom: 1px solid #f3f4f6;
+}
+.modern-table tbody tr:hover {
+background: #f9fafb;
+transform: scale(1.001);
+}
+.modern-table tbody td {
+padding: 1.25rem 1.25rem;
+font-size: 0.9rem;
+color: #4b5563;
+vertical-align: middle;
+}
+/* Status Badges */
+.status-badge {
+display: inline-flex;
+align-items: center;
+padding: 0.4rem 0.9rem;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.3px;
+white-space: nowrap;
+}
+.status-approved {
+background: #d1fae5;
+color: #065f46;
+}
+.status-hold {
+background: #dbeafe;
+color: #1e40af;
+}
+.status-progress {
+background: #e0e7ff;
+color: #4338ca;
+}
+.status-rejected {
+background: #fee2e2;
+color: #991b1b;
+}
+.status-closed {
+background: #f3f4f6;
+color: #4b5563;
+}
+/* Action Button */
+.btn-view {
+padding: 0.6rem 1.5rem;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+border: none;
+border-radius: 8px;
+font-size: 0.875rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+text-decoration: none;
+display: inline-block;
+}
+.btn-view:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+color: white;
+}
+/* Empty State */
+.empty-state {
+text-align: center;
+padding: 4rem 2rem;
+}
+.empty-state-icon {
+font-size: 4rem;
+color: #d1d5db;
+margin-bottom: 1rem;
+}
+.empty-state-title {
+font-size: 1.25rem;
+font-weight: 600;
+color: #374151;
+margin-bottom: 0.5rem;
+}
+.empty-state-text {
+color: #6b7280;
+font-size: 0.95rem;
+}
+/* Pagination */
+.pagination-container {
+padding: 1.5rem;
+border-top: 1px solid #f0f0f0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 1rem;
+}
+.pagination-info {
+color: #6b7280;
+font-size: 0.9rem;
+}
+.pagination-controls {
+display: flex;
+gap: 0.5rem;
+}
+.pagination-btn {
+padding: 0.5rem 1rem;
+border: 1px solid #e5e7eb;
+background: white;
+border-radius: 6px;
+cursor: pointer;
+transition: all 0.2s ease;
+color: #374151;
+font-size: 0.875rem;
+font-weight: 500;
+}
+.pagination-btn:hover:not(:disabled) {
+background: #f9fafb;
+border-color: #667eea;
+color: #667eea;
+}
+.pagination-btn:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}
+.pagination-btn.active {
+background: #667eea;
+color: white;
+border-color: #667eea;
+}
+/* Responsive Design */
+@media (max-width: 1024px) {
+.table-controls {
+flex-direction: column;
+align-items: stretch;
+}
+.search-box {
+max-width: 100%;
+}
+.export-buttons {
+justify-content: flex-start;
+}
+}
+@media (max-width: 768px) {
+.page-header-modern {
+padding: 2rem 1rem;
+}
+.page-title-modern {
+font-size: 1.5rem;
+}
+.content-area {
+padding: 0 1rem 1rem;
+}
+.table-container {
+padding: 0.5rem;
+}
+.modern-table thead th,
+.modern-table tbody td {
+padding: 0.75rem 0.5rem;
+font-size: 0.8rem;
+}
+.btn-view {
+padding: 0.5rem 1rem;
+font-size: 0.8rem;
+}
+.export-buttons {
+width: 100%;
+}
+.btn-export {
+flex: 1;
+justify-content: center;
+}
+}
+@media (max-width: 640px) {
+/* Mobile: Stack table cells */
+.modern-table thead {
+display: none;
+}
+.modern-table tbody tr {
+display: block;
+margin-bottom: 1rem;
+border: 1px solid #e5e7eb;
+border-radius: 8px;
+overflow: hidden;
+}
+.modern-table tbody td {
+display: flex;
+justify-content: space-between;
+padding: 0.75rem 1rem;
+border-bottom: 1px solid #f3f4f6;
+}
+.modern-table tbody td:last-child {
+border-bottom: none;
+}
+.modern-table tbody td::before {
+content: attr(data-label);
+font-weight: 600;
+color: #374151;
+margin-right: 1rem;
+}
+.pagination-container {
+flex-direction: column;
+text-align: center;
+}
+}
+/* Loading Spinner */
+.loading-spinner {
+display: none;
+justify-content: center;
+align-items: center;
+padding: 3rem;
+}
+.spinner {
+border: 3px solid #f3f4f6;
+border-top: 3px solid #667eea;
+border-radius: 50%;
+width: 40px;
+height: 40px;
+animation: spin 1s linear infinite;
+}
+@keyframes  spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+/* Salary Column */
+.salary-info {
+font-weight: 600;
+color: #059669;
+}
+/* Reference Number */
+.ref-number {
+font-family: 'Courier New', monospace;
+font-weight: 600;
+color: #4f46e5;
+}
+/* Hover Effects */
+.table-row-hover {
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="admin-wrapper">
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<div class="brand-logo">
+<img src="/assets/front/images/hr/job_logo.png" alt="Job Labs" class="logo-img">
+<span class="brand-text">Job Labs</span>
+</div>
+<button class="sidebar-close d-lg-none" data-sidebar-toggle>
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="sidebar-user">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-indicator online"></div>
+</div>
+<div class="user-info">
+<h6 class="user-name">Piyumi</h6>
+<span class="user-role">Super Admin</span>
+</div>
+</div>
+<nav class="sidebar-nav">
+<div class="nav-section">
+<ul class="nav-list">
+<li class="nav-item">
+<a href="/ats/superadmin/dashboard" class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-home"></i>
+</div>
+<span class="nav-text">Dashboard</span>
+</a>
+</li>
+<li class="nav-item">
+<a href="/ats/superadmin/leads" class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-headset"></i>
+</div>
+<span class="nav-text">Leads</span>
+</a>
+</li>
+<li class="nav-item">
+<a href="/ats/superadmin/admin/service-payments/index"
+class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-file-invoice-dollar"></i>
+</div>
+<span class="nav-text">Service Payments</span>
+</a>
+</li>
+<li class="nav-item">
+<a href="/ats/superadmin/tickets"
+class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-ticket-alt"></i>
+</div>
+<span class="nav-text">
+Support Tickets
+<span id="unreadTicketBadge"
+style="display:none;background:var(--danger-color);color:white;border-radius:20px;padding:1px 7px;font-size:0.7rem;font-weight:700;margin-left:6px;">
+</span>
+</span>
+</a>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#usersMenu">
+<div class="nav-icon">
+<i class="fas fa-users"></i>
+</div>
+<span class="nav-text">User Management</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="usersMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/company/list" class="submenu-link ">
+<i class="fas fa-building"></i>
+Companies
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/user/list" class="submenu-link ">
+<i class="fas fa-user-circle"></i>
+User Accounts
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/roles/index" class="submenu-link ">
+<i class="fas fa-shield-alt"></i>
+Roles & Permissions
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#categoriesMenu">
+<div class="nav-icon">
+<i class="fas fa-tags"></i>
+</div>
+<span class="nav-text">Job Categories</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="categoriesMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/category/list" class="submenu-link ">
+<i class="fas fa-list"></i>
+Main Categories
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/label/list/4" class="submenu-link">
+<i class="fas fa-industry"></i>
+Industry Sectors
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/label/list/5" class="submenu-link">
+<i class="fas fa-briefcase"></i>
+Job Sectors
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/label/list/3" class="submenu-link">
+<i class="fas fa-map-marker-alt"></i>
+Locations
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu active">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#jobsMenu">
+<div class="nav-icon">
+<i class="fas fa-clipboard-list"></i>
+</div>
+<span class="nav-text">Job Management</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu show" id="jobsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/job/create" class="submenu-link">
+<i class="fas fa-plus-circle"></i>
+Post New Vacancy
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/job/list" class="submenu-link ">
+<i class="fas fa-edit"></i>
+Manage Vacancies
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/job/admin/list" class="submenu-link active">
+<i class="fas fa-cog"></i>
+Admin Actions
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#reportsMenu">
+<div class="nav-icon">
+<i class="fas fa-chart-bar"></i>
+</div>
+<span class="nav-text">Reports & Analytics</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="reportsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/report/vacancy/job/list" class="submenu-link ">
+<i class="fas fa-clipboard-check"></i>
+Vacancy Status
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/report/applicant/list" class="submenu-link ">
+<i class="fas fa-users"></i>
+Candidates by Company
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/report/candidate/list" class="submenu-link ">
+<i class="fas fa-user-tie"></i>
+Candidate Information
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/logactivity" class="submenu-link ">
+<i class="fas fa-eye"></i>
+User Activity Tracking
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#auditMenu">
+<div class="nav-icon">
+<i class="fas fa-shield-alt"></i>
+</div>
+<span class="nav-text">Audit Trail</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="auditMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/audit/email-logs" class="submenu-link ">
+<i class="fas fa-envelope-open-text"></i>
+Email Audit Log
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/audit/vacancy-logs" class="submenu-link ">
+<i class="fas fa-history"></i>
+Vacancy Audit Log
+</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</nav>
+<div class="sidebar-footer">
+<div class="footer-actions">
+<a href="/login" class="logout-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign Out">
+<i class="fas fa-sign-out-alt"></i>
+<span>Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<div class="sidebar-overlay d-lg-none" data-sidebar-toggle></div>
+<style>
+.sidebar {
+position: fixed;
+top: 0;
+left: 0;
+width: var(--sidebar-width);
+height: 100vh;
+background: var(--sidebar-bg);
+border-right: 1px solid var(--border-color);
+z-index: 1050;
+display: flex;
+flex-direction: column;
+box-shadow: var(--shadow-lg);
+transition: var(--transition);
+}
+.sidebar-header {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+justify-content: space-between;
+min-height: var(--header-height);
+}
+.brand-logo {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+.logo-img {
+width: 40px;
+height: 40px;
+object-fit: contain;
+border-radius: 8px;
+}
+.brand-text {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-color);
+letter-spacing: -0.5px;
+}
+.sidebar-close {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 6px;
+transition: var(--transition);
+}
+.sidebar-close:hover {
+background: rgba(0, 0, 0, 0.1);
+color: var(--text-primary);
+}
+.sidebar-user {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.user-avatar {
+position: relative;
+width: 50px;
+height: 50px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-indicator {
+position: absolute;
+bottom: 2px;
+right: 2px;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-indicator.online {
+background: var(--success-color);
+}
+.user-info {
+flex: 1;
+min-width: 0;
+}
+.user-name {
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.user-role {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.sidebar-nav {
+flex: 1;
+padding: 1rem 0;
+overflow-y: auto;
+}
+.nav-list {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.nav-item {
+margin-bottom: 0.25rem;
+}
+.nav-link {
+display: flex;
+align-items: center;
+padding: 0.75rem 1.5rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+position: relative;
+border-radius: 0;
+}
+.nav-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.nav-link.active {
+background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+color: white;
+box-shadow: var(--shadow-md);
+}
+.nav-link.active::before {
+content: '';
+position: absolute;
+left: 0;
+top: 0;
+height: 100%;
+width: 4px;
+background: white;
+}
+.nav-icon {
+width: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 0.75rem;
+}
+.nav-text {
+font-size: 0.9rem;
+font-weight: 500;
+flex: 1;
+}
+.nav-arrow {
+margin-left: auto;
+transition: var(--transition);
+}
+.has-submenu .nav-arrow i {
+transform: rotate(0deg);
+transition: var(--transition);
+}
+.has-submenu.active .nav-arrow i {
+transform: rotate(90deg);
+}
+.submenu {
+background: rgba(0, 0, 0, 0.03);
+border-left: 2px solid var(--border-color);
+margin-left: 1.5rem;
+}
+.submenu-list {
+list-style: none;
+margin: 0;
+padding: 0.5rem 0;
+}
+.submenu-item {
+margin-bottom: 0.1rem;
+}
+.submenu-link {
+display: flex;
+align-items: center;
+padding: 0.6rem 1rem 0.6rem 2rem;
+color: var(--text-secondary);
+text-decoration: none;
+font-size: 0.85rem;
+transition: var(--transition);
+border-radius: 6px;
+margin: 0 1rem;
+}
+.submenu-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.submenu-link.active {
+background: var(--primary-color);
+color: white;
+}
+.submenu-link i {
+margin-right: 0.5rem;
+font-size: 0.8rem;
+}
+.sidebar-footer {
+padding: 1.5rem;
+border-top: 1px solid var(--border-color);
+margin-top: auto;
+}
+.logout-btn {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.75rem 1rem;
+color: var(--text-secondary);
+text-decoration: none;
+border-radius: 8px;
+transition: var(--transition);
+width: 100%;
+font-size: 0.9rem;
+}
+.logout-btn:hover {
+background: rgba(239, 68, 68, 0.1);
+color: var(--danger-color);
+}
+.sidebar-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1040;
+opacity: 0;
+visibility: hidden;
+transition: var(--transition);
+}
+.sidebar-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.sidebar {
+transform: translateX(-100%);
+}
+.sidebar.active {
+transform: translateX(0);
+}
+.sidebar-overlay.active {
+display: block;
+}
+}
+/* Submenu Animation */
+.submenu {
+transition: all 0.3s ease;
+}
+.submenu:not(.show) {
+max-height: 0;
+overflow: hidden;
+}
+.submenu.show {
+max-height: 500px;
+}
+/* Hover Effects */
+@media (hover: hover) {
+.nav-link:hover .nav-icon i {
+transform: scale(1.1);
+}
+.submenu-link:hover {
+transform: translateX(4px);
+}
+}
+</style>
+<script>
+(function loadUnreadBadge() {
+fetch('/unread-count', {
+headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+})
+.then(r => r.json())
+.then(data => {
+const badge = document.getElementById('unreadTicketBadge');
+if (badge && data.count > 0) {
+badge.textContent = data.count;
+badge.style.display = 'inline';
+}
+})
+.catch(() => {});
+})();
+</script>
+<div class="main-content">
+<header class="main-header">
+<div class="header-content">
+<div class="header-left">
+<button class="sidebar-toggle d-lg-none" data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</button>
+<div class="page-title">
+<h1 class="title">Dashboard</h1>
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+</nav>
+</div>
+</div>
+<div class="header-right">
+<!-- Search Bar -->
+<div class="search-container d-none d-md-flex">
+<!-- <div class="search-input-wrapper">
+<i class="fas fa-search search-icon"></i>
+<input type="text" class="search-input" placeholder="Search jobs, candidates, companies...">
+<div class="search-dropdown" id="searchDropdown">
+</div>
+</div> -->
+</div>
+<!-- Notifications -->
+<div class="header-actions">
+<!-- <div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-bell"></i>
+<span class="notification-badge">3</span>
+</button>
+<div class="dropdown-menu notification-dropdown">
+<div class="dropdown-header">
+<h6>Notifications</h6>
+<span class="badge bg-primary">3 New</span>
+</div>
+<div class="notification-list">
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-user-plus text-success"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">New Application Received</p>
+<p class="notification-text">John Doe applied for Senior Developer position</p>
+<span class="notification-time">2 minutes ago</span>
+</div>
+</div>
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-briefcase text-info"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Job Posted Successfully</p>
+<p class="notification-text">Frontend Developer position is now live</p>
+<span class="notification-time">1 hour ago</span>
+</div>
+</div>
+<div class="notification-item">
+<div class="notification-icon">
+<i class="fas fa-chart-line text-warning"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Weekly Report Ready</p>
+<p class="notification-text">Your recruitment analytics report is available</p>
+<span class="notification-time">3 hours ago</span>
+</div>
+</div>
+</div>
+<div class="dropdown-footer">
+<a href="#" class="view-all-btn">View All Notifications</a>
+</div>
+</div>
+</div> -->
+<!-- Quick Actions -->
+<div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-plus"></i>
+</button>
+<div class="dropdown-menu quick-actions-dropdown">
+<div class="dropdown-header">
+<h6>Quick Actions</h6>
+</div>
+<a href="/ats/superadmin/admin/job/create" class="dropdown-item">
+<i class="fas fa-plus-circle text-primary"></i>
+Post New Job
+</a>
+<!--                         <a href="#" data-mock-href="/admin/company/create" class="dropdown-item">
+<i class="fas fa-building text-success"></i>
+Add Company
+</a>
+<a href="#" data-mock-href="/admin/user/create" class="dropdown-item">
+<i class="fas fa-user-plus text-info"></i>
+Create User
+</a>
+-->
+<div class="dropdown-divider"></div>
+<a href="/ats/superadmin/admin/report/vacancy/job/list" class="dropdown-item">
+<i class="fas fa-chart-bar text-warning"></i>
+View Reports
+</a>
+</div>
+</div>
+<!-- User Profile Dropdown -->
+<div class="action-item dropdown user-dropdown">
+<button class="user-profile-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-dot online"></div>
+</div>
+<div class="user-info d-none d-md-block">
+<span class="user-name">Piyumi</span>
+<span class="user-role">Super Admin</span>
+</div>
+<i class="fas fa-chevron-down dropdown-arrow"></i>
+</button>
+<div class="dropdown-menu user-dropdown-menu">
+<div class="dropdown-header user-header">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar" class="user-avatar-large">
+<div>
+<h6>Piyumi</h6>
+<p>Super Admin</p>
+</div>
+</div>
+<div class="dropdown-divider"></div>
+<!-- <a href="#" class="dropdown-item">
+<i class="fas fa-user-circle"></i>
+My Profile
+</a>
+<a href="#" class="dropdown-item">
+<i class="fas fa-cog"></i>
+Settings
+</a> -->
+<a href="/ats/superadmin/logactivity" class="dropdown-item">
+<i class="fas fa-history"></i>
+Activity Log
+</a>
+<div class="dropdown-divider"></div>
+<a href="/login" class="dropdown-item logout-item">
+<i class="fas fa-sign-out-alt"></i>
+Sign Out
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<style>
+.main-header {
+position: fixed;
+top: 0;
+right: 0;
+left: var(--sidebar-width);
+height: var(--header-height);
+background: white;
+border-bottom: 1px solid var(--border-color);
+z-index: 1030;
+transition: var(--transition);
+box-shadow: var(--shadow-sm);
+}
+.header-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 100%;
+padding: 0 2rem;
+}
+.header-left {
+display: flex;
+align-items: center;
+gap: 1rem;
+flex: 1;
+}
+.sidebar-toggle {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 8px;
+transition: var(--transition);
+}
+.sidebar-toggle:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.page-title .title {
+font-size: 1.5rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+line-height: 1.2;
+}
+.breadcrumb-nav {
+margin-top: 0.25rem;
+}
+.breadcrumb {
+margin: 0;
+background: none;
+padding: 0;
+font-size: 0.85rem;
+}
+.breadcrumb-item {
+color: var(--text-secondary);
+}
+.breadcrumb-item.active {
+color: var(--primary-color);
+font-weight: 500;
+}
+.breadcrumb-item a {
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+}
+.breadcrumb-item a:hover {
+color: var(--primary-color);
+}
+.header-right {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.search-container {
+position: relative;
+}
+.search-input-wrapper {
+position: relative;
+width: 350px;
+}
+.search-input {
+width: 100%;
+padding: 0.75rem 1rem 0.75rem 2.5rem;
+border: 1px solid var(--border-color);
+border-radius: 25px;
+background: var(--light-bg);
+color: var(--text-primary);
+font-size: 0.9rem;
+transition: var(--transition);
+}
+.search-input:focus {
+outline: none;
+border-color: var(--primary-color);
+background: white;
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+.search-icon {
+position: absolute;
+left: 1rem;
+top: 50%;
+transform: translateY(-50%);
+color: var(--text-secondary);
+font-size: 0.9rem;
+}
+.search-dropdown {
+position: absolute;
+top: 100%;
+left: 0;
+right: 0;
+background: white;
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+max-height: 300px;
+overflow-y: auto;
+z-index: 1050;
+display: none;
+}
+.header-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.action-item {
+position: relative;
+}
+.action-btn {
+position: relative;
+background: none;
+border: none;
+width: 44px;
+height: 44px;
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--text-secondary);
+transition: var(--transition);
+font-size: 1.1rem;
+}
+.action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.notification-badge {
+position: absolute;
+top: 8px;
+right: 8px;
+background: var(--danger-color);
+color: white;
+font-size: 0.7rem;
+padding: 0.2rem 0.4rem;
+border-radius: 10px;
+min-width: 18px;
+height: 18px;
+display: flex;
+align-items: center;
+justify-content: center;
+line-height: 1;
+}
+.user-profile-btn {
+background: none;
+border: none;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.5rem;
+border-radius: 12px;
+transition: var(--transition);
+color: var(--text-primary);
+}
+.user-profile-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+}
+.user-avatar {
+position: relative;
+width: 36px;
+height: 36px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-dot {
+position: absolute;
+bottom: 0;
+right: 0;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-dot.online {
+background: var(--success-color);
+}
+.user-info {
+text-align: left;
+}
+.user-name {
+display: block;
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+line-height: 1.2;
+}
+.user-role {
+display: block;
+font-size: 0.75rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.dropdown-arrow {
+font-size: 0.8rem;
+transition: var(--transition);
+}
+.dropdown.show .dropdown-arrow {
+transform: rotate(180deg);
+}
+/* Dropdown Menus */
+.dropdown-menu {
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+padding: 0;
+min-width: 280px;
+margin-top: 0.5rem;
+}
+.dropdown-header {
+padding: 1rem 1.5rem 0.5rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid var(--border-color);
+}
+.dropdown-header h6 {
+margin: 0;
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.dropdown-item {
+padding: 0.75rem 1.5rem;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+border: none;
+background: none;
+width: 100%;
+}
+.dropdown-item:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.dropdown-item i {
+width: 16px;
+text-align: center;
+}
+.logout-item {
+color: var(--danger-color) !important;
+border-top: 1px solid var(--border-color);
+}
+.logout-item:hover {
+background: rgba(239, 68, 68, 0.1) !important;
+}
+/* Notification Dropdown */
+.notification-dropdown {
+min-width: 380px;
+max-height: 400px;
+overflow: hidden;
+}
+.notification-list {
+max-height: 300px;
+overflow-y: auto;
+}
+.notification-item {
+padding: 1rem 1.5rem;
+display: flex;
+gap: 1rem;
+border-bottom: 1px solid var(--border-color);
+transition: var(--transition);
+}
+.notification-item:last-child {
+border-bottom: none;
+}
+.notification-item:hover {
+background: var(--light-bg);
+}
+.notification-item.unread {
+background: rgba(79, 70, 229, 0.05);
+}
+.notification-icon {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+background: var(--light-bg);
+flex-shrink: 0;
+}
+.notification-content {
+flex: 1;
+min-width: 0;
+}
+.notification-title {
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+margin: 0 0 0.25rem 0;
+}
+.notification-text {
+font-size: 0.8rem;
+color: var(--text-secondary);
+margin: 0 0 0.5rem 0;
+line-height: 1.4;
+}
+.notification-time {
+font-size: 0.75rem;
+color: var(--text-secondary);
+}
+.dropdown-footer {
+padding: 0.75rem 1.5rem;
+border-top: 1px solid var(--border-color);
+text-align: center;
+}
+.view-all-btn {
+color: var(--primary-color);
+text-decoration: none;
+font-size: 0.9rem;
+font-weight: 500;
+}
+/* Quick Actions Dropdown */
+.quick-actions-dropdown {
+min-width: 220px;
+}
+/* User Dropdown */
+.user-dropdown-menu {
+min-width: 250px;
+}
+.user-header {
+display: flex;
+align-items: center;
+gap: 1rem;
+padding: 1.5rem;
+}
+.user-avatar-large {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.user-header h6 {
+margin: 0;
+font-size: 1rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.user-header p {
+margin: 0;
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.main-header {
+left: 0;
+}
+.header-content {
+padding: 0 1rem;
+}
+.search-container {
+display: none !important;
+}
+.page-title .title {
+font-size: 1.25rem;
+}
+}
+@media (max-width: 576px) {
+.header-actions {
+gap: 0.25rem;
+}
+.action-btn {
+width: 38px;
+height: 38px;
+}
+.notification-dropdown,
+.quick-actions-dropdown,
+.user-dropdown-menu {
+min-width: 280px;
+max-width: calc(100vw - 2rem);
+}
+}
+</style>
+<div class="content-wrapper fade-in">
+<div class="track-vacancy-container">
+<!-- Page Header -->
+<div class="page-header-modern">
+<div class="page-header-content">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+<h3 class="page-title-modern">Track Vacancies</h3>
+<a href="/ats/superadmin/admin/job/admin/archived/list" style="padding:0.6rem 1.4rem;background:#6b7280;color:white;border-radius:8px;font-size:0.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem;">
+<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/></svg>
+View Archives
+</a>
+</div>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb-modern">
+<li><a href="/ats/superadmin/dashboard">Home</a></li>
+<li class="breadcrumb-separator">›</li>
+<li aria-current="page">Vacancies</li>
+</ol>
+</nav>
+</div>
+</div>
+<!-- Main Content -->
+<div class="content-area">
+<div class="card-modern">
+<!-- Table Controls -->
+<div class="table-controls">
+<div class="search-box">
+<svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19 19L14.65 14.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<input type="text" id="searchInput" placeholder="Search vacancies...">
+</div>
+<div class="export-buttons">
+<button class="btn-export btn-export-csv" id="exportCSV">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+<polyline points="7 10 12 15 17 10"></polyline>
+<line x1="12" y1="15" x2="12" y2="3"></line>
+</svg>
+CSV
+</button>
+<button class="btn-export btn-export-pdf" id="exportPDF">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+</svg>
+PDF
+</button>
+<button class="btn-export btn-export-print" id="exportPrint">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<polyline points="6 9 6 2 18 2 18 9"></polyline>
+<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+<rect x="6" y="14" width="12" height="8"></rect>
+</svg>
+Print
+</button>
+</div>
+</div>
+<!-- Loading Spinner -->
+<div class="loading-spinner" id="loadingSpinner">
+<div class="spinner"></div>
+</div>
+<!-- Table -->
+<div class="table-container">
+<table class="modern-table" id="vacancyTable">
+<thead>
+<tr>
+<th>Vacancy Ref</th>
+<th>Title</th>
+<th>Location</th>
+<th>Industry</th>
+<th>Job Type</th>
+<th>Salary</th>
+<th>Live Date</th>
+<th>Closing Date</th>
+<th>Total Vacancies</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000300</span>
+</td>
+<td data-label="Title">Junior Laravel Developer</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR350000-450000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">27/11/2026</td>
+<td data-label="Closing Date">26/12/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-hold">Hold</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/2000" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2000" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000303</span>
+</td>
+<td data-label="Title">Night Shift Security Supervisor</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Security</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR55000-65000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">27/11/2026</td>
+<td data-label="Closing Date">26/12/2026</td>
+<td data-label="Total Vacancies">10</td>
+<td data-label="Status">
+<span class="status-badge status-hold">Hold</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/2003" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2003" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000301</span>
+</td>
+<td data-label="Title">Store Supervisor</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR50000-60000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">26/11/2026</td>
+<td data-label="Closing Date">26/12/2026</td>
+<td data-label="Total Vacancies">4</td>
+<td data-label="Status">
+<span class="status-badge status-hold">Hold</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/2001" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2001" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000207</span>
+</td>
+<td data-label="Title">Security Officer</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Security</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR55000-65000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">25/11/2026</td>
+<td data-label="Closing Date">16/12/2026</td>
+<td data-label="Total Vacancies">10</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1006" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1006" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000213</span>
+</td>
+<td data-label="Title">Delivery Driver</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Casual</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR40000-60000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">25/11/2026</td>
+<td data-label="Closing Date">08/12/2026</td>
+<td data-label="Total Vacancies">8</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1012" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1012" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000203</span>
+</td>
+<td data-label="Title">Cashier</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Temporary</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR35000-40000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">25/11/2026</td>
+<td data-label="Closing Date">10/12/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1002" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1002" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000302</span>
+</td>
+<td data-label="Title">Ward Assistant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR90000-110000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">25/11/2026</td>
+<td data-label="Closing Date">26/12/2026</td>
+<td data-label="Total Vacancies">6</td>
+<td data-label="Status">
+<span class="status-badge status-hold">Hold</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/2002" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2002" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000224</span>
+</td>
+<td data-label="Title">Store Supervisor</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR70000-80000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">24/11/2026</td>
+<td data-label="Closing Date">06/12/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1023" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1023" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000201</span>
+</td>
+<td data-label="Title">Sales Assistant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR50000-60000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">24/11/2026</td>
+<td data-label="Closing Date">24/12/2026</td>
+<td data-label="Total Vacancies">4</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1000" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1000" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000217</span>
+</td>
+<td data-label="Title">Customer Service Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR55000-65000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">24/11/2026</td>
+<td data-label="Closing Date">13/12/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1016" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1016" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000209</span>
+</td>
+<td data-label="Title">Senior Laravel Developer</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR350000-450000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">24/11/2026</td>
+<td data-label="Closing Date">31/12/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1008" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1008" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000212</span>
+</td>
+<td data-label="Title">Cyber Security Analyst</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR250000-320000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">23/11/2026</td>
+<td data-label="Closing Date">23/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1011" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1011" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000204</span>
+</td>
+<td data-label="Title">Registered Nurse</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR90000-110000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">23/11/2026</td>
+<td data-label="Closing Date">26/12/2026</td>
+<td data-label="Total Vacancies">6</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1003" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1003" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000219</span>
+</td>
+<td data-label="Title">Hotel Receptionist</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR50000-60000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">23/11/2026</td>
+<td data-label="Closing Date">19/12/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1018" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1018" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000202</span>
+</td>
+<td data-label="Title">Showroom Manager</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR120000-150000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">22/11/2026</td>
+<td data-label="Closing Date">17/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1001" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1001" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000220</span>
+</td>
+<td data-label="Title">Restaurant Supervisor</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Temporary</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR70000-85000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">22/11/2026</td>
+<td data-label="Closing Date">09/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1019" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1019" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000208</span>
+</td>
+<td data-label="Title">CCTV Control Room Operator</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Security</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR60000-70000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">21/11/2026</td>
+<td data-label="Closing Date">12/12/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1007" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1007" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000222</span>
+</td>
+<td data-label="Title">Receptionist / Office Administrator</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR40000-50000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">21/11/2026</td>
+<td data-label="Closing Date">07/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1021" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1021" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000223</span>
+</td>
+<td data-label="Title">Project Manager</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR300000-380000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">20/11/2026</td>
+<td data-label="Closing Date">29/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1022" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1022" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000216</span>
+</td>
+<td data-label="Title">Branch Accountant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR110000-140000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">20/11/2026</td>
+<td data-label="Closing Date">22/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1015" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1015" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000205</span>
+</td>
+<td data-label="Title">Medical Receptionist</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR45000-55000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">20/11/2026</td>
+<td data-label="Closing Date">14/12/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1004" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1004" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000210</span>
+</td>
+<td data-label="Title">Front-End Developer (React)</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR200000-280000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">19/11/2026</td>
+<td data-label="Closing Date">20/12/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1009" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1009" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000214</span>
+</td>
+<td data-label="Title">Heavy Vehicle Driver</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR75000-90000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">18/11/2026</td>
+<td data-label="Closing Date">18/12/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1013" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1013" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000304</span>
+</td>
+<td data-label="Title">Pharmacy Assistant (duplicate post)</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR130000-160000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">18/11/2026</td>
+<td data-label="Closing Date">16/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-rejected">Rejected</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/2004" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2004" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000206</span>
+</td>
+<td data-label="Title">Pharmacist</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR130000-160000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">17/11/2026</td>
+<td data-label="Closing Date">21/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1005" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1005" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000215</span>
+</td>
+<td data-label="Title">Corporate Chauffeur</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR65000-75000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">16/11/2026</td>
+<td data-label="Closing Date">11/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1014" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1014" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000218</span>
+</td>
+<td data-label="Title">Marketing Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR90000-120000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">15/11/2026</td>
+<td data-label="Closing Date">25/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1017" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1017" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000211</span>
+</td>
+<td data-label="Title">QA Engineer</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">14/11/2026</td>
+<td data-label="Closing Date">15/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1010" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1010" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000221</span>
+</td>
+<td data-label="Title">HR Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR80000-100000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">12/11/2026</td>
+<td data-label="Closing Date">27/12/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-approved">Approved</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/1020" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/1020" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000348</span>
+</td>
+<td data-label="Title">Front Office Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Temporary</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR35000-40000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">26/10/2026</td>
+<td data-label="Closing Date">22/11/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2048" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2048" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000345</span>
+</td>
+<td data-label="Title">Accounts Assistant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Security</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR55000-65000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">26/10/2026</td>
+<td data-label="Closing Date">22/11/2026</td>
+<td data-label="Total Vacancies">10</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2045" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2045" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000347</span>
+</td>
+<td data-label="Title">Customer Service Agent</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR70000-80000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">16/10/2026</td>
+<td data-label="Closing Date">12/11/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2047" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2047" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000343</span>
+</td>
+<td data-label="Title">Branch Officer</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR40000-50000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">12/10/2026</td>
+<td data-label="Closing Date">08/11/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2043" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2043" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000349</span>
+</td>
+<td data-label="Title">Staff Nurse</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Temporary</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR35000-40000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">09/10/2026</td>
+<td data-label="Closing Date">05/11/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2049" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2049" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000344</span>
+</td>
+<td data-label="Title">Software Engineer</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR120000-150000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">07/10/2026</td>
+<td data-label="Closing Date">03/11/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2044" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2044" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000346</span>
+</td>
+<td data-label="Title">Staff Nurse</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR75000-90000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">02/10/2026</td>
+<td data-label="Closing Date">29/10/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2046" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2046" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000337</span>
+</td>
+<td data-label="Title">Customer Service Agent</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">26/09/2026</td>
+<td data-label="Closing Date">23/10/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2037" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2037" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000339</span>
+</td>
+<td data-label="Title">Receptionist</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR130000-160000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">25/09/2026</td>
+<td data-label="Closing Date">22/10/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2039" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2039" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000338</span>
+</td>
+<td data-label="Title">Software Engineer</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR110000-140000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">17/09/2026</td>
+<td data-label="Closing Date">14/10/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2038" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2038" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000342</span>
+</td>
+<td data-label="Title">Front Office Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Temporary</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR35000-40000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">15/09/2026</td>
+<td data-label="Closing Date">12/10/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2042" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2042" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000340</span>
+</td>
+<td data-label="Title">Store Keeper</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR300000-380000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">09/09/2026</td>
+<td data-label="Closing Date">06/10/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2040" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2040" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000341</span>
+</td>
+<td data-label="Title">Software Engineer</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR70000-80000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">06/09/2026</td>
+<td data-label="Closing Date">03/10/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2041" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2041" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000334</span>
+</td>
+<td data-label="Title">Accounts Assistant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR50000-60000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">25/08/2026</td>
+<td data-label="Closing Date">21/09/2026</td>
+<td data-label="Total Vacancies">4</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2034" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2034" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000336</span>
+</td>
+<td data-label="Title">HR Assistant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR90000-120000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">24/08/2026</td>
+<td data-label="Closing Date">20/09/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2036" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2036" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000331</span>
+</td>
+<td data-label="Title">Sales Executive</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR300000-380000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">24/08/2026</td>
+<td data-label="Closing Date">20/09/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2031" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2031" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000335</span>
+</td>
+<td data-label="Title">Sales Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR110000-140000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">19/08/2026</td>
+<td data-label="Closing Date">15/09/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2035" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2035" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000332</span>
+</td>
+<td data-label="Title">Marketing Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR65000-75000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">06/08/2026</td>
+<td data-label="Closing Date">02/09/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2032" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2032" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000333</span>
+</td>
+<td data-label="Title">Receptionist</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR350000-450000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">02/08/2026</td>
+<td data-label="Closing Date">29/08/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2033" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2033" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000330</span>
+</td>
+<td data-label="Title">Sales Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Temporary</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR35000-40000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">20/07/2026</td>
+<td data-label="Closing Date">16/08/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2030" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2030" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000327</span>
+</td>
+<td data-label="Title">Store Keeper</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR90000-110000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">20/07/2026</td>
+<td data-label="Closing Date">16/08/2026</td>
+<td data-label="Total Vacancies">6</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2027" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2027" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000329</span>
+</td>
+<td data-label="Title">Accounts Assistant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR90000-110000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">11/07/2026</td>
+<td data-label="Closing Date">07/08/2026</td>
+<td data-label="Total Vacancies">6</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2029" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2029" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000326</span>
+</td>
+<td data-label="Title">Front Office Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR50000-60000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">09/07/2026</td>
+<td data-label="Closing Date">05/08/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2026" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2026" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000328</span>
+</td>
+<td data-label="Title">Branch Officer</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR65000-75000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">02/07/2026</td>
+<td data-label="Closing Date">29/07/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2028" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2028" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000321</span>
+</td>
+<td data-label="Title">HR Assistant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Temporary</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR35000-40000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">23/06/2026</td>
+<td data-label="Closing Date">20/07/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2021" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2021" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000324</span>
+</td>
+<td data-label="Title">Store Keeper</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Security</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR60000-70000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">22/06/2026</td>
+<td data-label="Closing Date">19/07/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2024" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2024" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000325</span>
+</td>
+<td data-label="Title">Sales Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">05/06/2026</td>
+<td data-label="Closing Date">02/07/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2025" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2025" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000322</span>
+</td>
+<td data-label="Title">Store Keeper</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">04/06/2026</td>
+<td data-label="Closing Date">01/07/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2022" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2022" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000323</span>
+</td>
+<td data-label="Title">Marketing Executive</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR350000-450000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">03/06/2026</td>
+<td data-label="Closing Date">30/06/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2023" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2023" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000319</span>
+</td>
+<td data-label="Title">Receptionist</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR40000-50000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">24/05/2026</td>
+<td data-label="Closing Date">20/06/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2019" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2019" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000320</span>
+</td>
+<td data-label="Title">Customer Service Agent</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR45000-55000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">23/05/2026</td>
+<td data-label="Closing Date">19/06/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2020" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2020" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000317</span>
+</td>
+<td data-label="Title">Marketing Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR90000-110000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">20/05/2026</td>
+<td data-label="Closing Date">16/06/2026</td>
+<td data-label="Total Vacancies">6</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2017" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2017" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000318</span>
+</td>
+<td data-label="Title">Store Keeper</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR120000-150000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">12/05/2026</td>
+<td data-label="Closing Date">08/06/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2018" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2018" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000315</span>
+</td>
+<td data-label="Title">Receptionist</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR350000-450000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">23/04/2026</td>
+<td data-label="Closing Date">20/05/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2015" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2015" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000314</span>
+</td>
+<td data-label="Title">Receptionist</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR45000-55000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">22/04/2026</td>
+<td data-label="Closing Date">19/05/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2014" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2014" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000313</span>
+</td>
+<td data-label="Title">HR Assistant</td>
+<td data-label="Location">Remote</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Fixed Term</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR300000-380000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">16/04/2026</td>
+<td data-label="Closing Date">13/05/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2013" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2013" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000316</span>
+</td>
+<td data-label="Title">Security Guard</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR50000-60000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">02/04/2026</td>
+<td data-label="Closing Date">29/04/2026</td>
+<td data-label="Total Vacancies">4</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2016" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2016" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000311</span>
+</td>
+<td data-label="Title">Marketing Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Professional</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR55000-65000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">16/03/2026</td>
+<td data-label="Closing Date">12/04/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2011" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2011" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000312</span>
+</td>
+<td data-label="Title">Front Office Executive</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Drivers &amp; Receptionists</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR50000-60000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">08/03/2026</td>
+<td data-label="Closing Date">04/04/2026</td>
+<td data-label="Total Vacancies">2</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2012" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2012" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000309</span>
+</td>
+<td data-label="Title">Accounts Assistant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Temporary</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR70000-85000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">22/02/2026</td>
+<td data-label="Closing Date">21/03/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="#" data-mock-href="/admin/job/admin/edit/2009" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2009" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000308</span>
+</td>
+<td data-label="Title">Software Engineer</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Retail</td>
+<td data-label="Job Type">Temporary</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR35000-40000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">22/02/2026</td>
+<td data-label="Closing Date">21/03/2026</td>
+<td data-label="Total Vacancies">3</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/2008" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2008" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td data-label="Vacancy Ref">
+<span class="ref-number">JBS000306</span>
+</td>
+<td data-label="Title">Accounts Assistant</td>
+<td data-label="Location">Sri Lanka</td>
+<td data-label="Industry">Health Care</td>
+<td data-label="Job Type">Permanent</td>
+<td data-label="Salary">
+<span class="salary-info">
+LKR130000-160000
+</span>
+/
+Month
+</td>
+<td data-label="Live Date">13/01/2026</td>
+<td data-label="Closing Date">09/02/2026</td>
+<td data-label="Total Vacancies">1</td>
+<td data-label="Status">
+<span class="status-badge status-closed">Closed</span>
+</td>
+<td data-label="Actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+<a href="/ats/superadmin/admin/job/admin/edit/2006" class="btn-view">View</a>
+<a href="#" data-mock-href="/admin/job/delete/2006" style="padding:0.5rem 1rem;background:#ef4444;color:white;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;" onclick="return confirm('Are you sure you want to archive this vacancy?')">Archive</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="pagination-container">
+<div class="pagination-info">
+Showing <span id="showingCount">71</span> entries
+</div>
+<div class="pagination-controls" id="paginationControls">
+<!-- Pagination will be generated by JavaScript -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="footer-content">
+<div class="footer-left">
+<p class="copyright">
+© 2026 <strong>Job Labs</strong> ATS. All rights reserved.
+</p>
+<div class="footer-links">
+<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+<a href="/terms-of-service" class="footer-link">Terms of Service</a>
+<a href="/cookie-policy" class="footer-link">Support</a>
+</div>
+</div>
+<div class="footer-right">
+<div class="system-status">
+<div class="status-indicator online"></div>
+<span class="status-text">All systems operational</span>
+</div>
+<div class="footer-actions">
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Help & Support">
+<i class="fas fa-question-circle"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Feedback">
+<i class="fas fa-comment-alt"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Keyboard Shortcuts">
+<i class="fas fa-keyboard"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Version and Environment Info (for development) -->
+<!--     <div class="debug-info">
+<small class="text-muted">
+Version 2.0.1 | PHP 8.3.6 | Laravel 8.83.29
+</small>
+</div>
+-->
+</footer>
+<style>
+.main-footer {
+background: white;
+border-top: 1px solid var(--border-color);
+padding: 1rem 2rem;
+margin-top: auto;
+min-height: 60px;
+position: relative;
+}
+.footer-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 2rem;
+}
+.footer-left {
+display: flex;
+align-items: center;
+gap: 2rem;
+flex: 1;
+}
+.copyright {
+margin: 0;
+font-size: 0.85rem;
+color: var(--text-secondary);
+}
+.copyright strong {
+color: var(--primary-color);
+font-weight: 600;
+}
+.footer-links {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.footer-link {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+padding: 0.25rem 0;
+position: relative;
+}
+.footer-link:hover {
+color: var(--primary-color);
+}
+.footer-link::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--primary-color);
+transition: var(--transition);
+}
+.footer-link:hover::after {
+width: 100%;
+}
+.footer-right {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.system-status {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.5rem 1rem;
+background: rgba(16, 185, 129, 0.1);
+border-radius: 20px;
+border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.status-indicator {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+}
+.status-indicator.online {
+background: var(--success-color);
+box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+animation: pulse 2s infinite;
+}
+.status-indicator.warning {
+background: var(--warning-color);
+box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+}
+.status-indicator.offline {
+background: var(--danger-color);
+box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+}
+.status-text {
+font-size: 0.8rem;
+color: var(--success-color);
+font-weight: 500;
+}
+@keyframes  pulse {
+0% {
+transform: scale(1);
+}
+50% {
+transform: scale(1.1);
+}
+100% {
+transform: scale(1);
+}
+}
+.footer-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.footer-action-btn {
+width: 32px;
+height: 32px;
+border: none;
+background: rgba(107, 114, 128, 0.1);
+color: var(--text-secondary);
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(--transition);
+font-size: 0.9rem;
+}
+.footer-action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+transform: translateY(-1px);
+}
+.debug-info {
+position: absolute;
+bottom: 0;
+right: 2rem;
+transform: translateY(100%);
+background: rgba(0, 0, 0, 0.8);
+color: white;
+padding: 0.25rem 0.75rem;
+border-radius: 0 0 8px 8px;
+font-family: 'Courier New', monospace;
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.main-footer {
+padding: 1rem;
+}
+.footer-content {
+flex-direction: column;
+gap: 1rem;
+text-align: center;
+}
+.footer-left {
+flex-direction: column;
+gap: 1rem;
+align-items: center;
+}
+.footer-links {
+justify-content: center;
+}
+.footer-right {
+justify-content: center;
+}
+.system-status {
+order: -1;
+}
+}
+@media (max-width: 576px) {
+.footer-links {
+flex-wrap: wrap;
+gap: 1rem;
+}
+.footer-actions {
+gap: 0.25rem;
+}
+.footer-action-btn {
+width: 28px;
+height: 28px;
+font-size: 0.8rem;
+}
+}
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+.main-footer {
+background: var(--sidebar-bg);
+border-color: var(--border-color);
+}
+.debug-info {
+background: rgba(255, 255, 255, 0.1);
+color: var(--text-primary);
+}
+}
+/* Print styles */
+@media  print {
+.main-footer {
+display: none;
+}
+}
+/* High contrast mode */
+@media (prefers-contrast: high) {
+.footer-link {
+text-decoration: underline;
+}
+.status-indicator {
+border: 2px solid currentColor;
+}
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+.status-indicator.online {
+animation: none;
+}
+.footer-action-btn:hover {
+transform: none;
+}
+.footer-link::after {
+transition: none;
+}
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// System status simulation (replace with real API call)
+function updateSystemStatus() {
+const statusIndicator = document.querySelector('.status-indicator');
+const statusText = document.querySelector('.status-text');
+if (!statusIndicator || !statusText) return;
+// Simulate API call to check system status
+// Replace this with actual system health check
+const systemHealth = {
+database: true,
+cache: true,
+mail: true,
+storage: true
+};
+const allSystemsUp = Object.values(systemHealth).every(status => status);
+if (allSystemsUp) {
+statusIndicator.className = 'status-indicator online';
+statusText.textContent = 'All systems operational';
+statusText.style.color = 'var(--success-color)';
+} else {
+statusIndicator.className = 'status-indicator warning';
+statusText.textContent = 'Some services degraded';
+statusText.style.color = 'var(--warning-color)';
+}
+}
+// Update status every 30 seconds
+updateSystemStatus();
+setInterval(updateSystemStatus, 30000);
+// Keyboard shortcuts handler
+const keyboardBtn = document.querySelector('.footer-action-btn:last-child');
+if (keyboardBtn) {
+keyboardBtn.addEventListener('click', function() {
+showKeyboardShortcuts();
+});
+}
+// Help and support handler
+const helpBtn = document.querySelector('.footer-action-btn:first-child');
+if (helpBtn) {
+helpBtn.addEventListener('click', function() {
+// You can integrate with your help system here
+window.open('#', '_blank');
+});
+}
+// Feedback handler
+const feedbackBtn = document.querySelector('.footer-action-btn:nth-child(2)');
+if (feedbackBtn) {
+feedbackBtn.addEventListener('click', function() {
+// You can integrate with your feedback system here
+showFeedbackModal();
+});
+}
+});
+function showKeyboardShortcuts() {
+// Create modal for keyboard shortcuts
+const shortcuts = [
+{ key: 'Ctrl + /', description: 'Show keyboard shortcuts' },
+{ key: 'Ctrl + N', description: 'Create new job posting' },
+{ key: 'Ctrl + S', description: 'Save current form' },
+{ key: 'Esc', description: 'Close modal or cancel action' },
+{ key: 'Tab', description: 'Navigate between form fields' }
+];
+let shortcutsHtml = '<div class="keyboard-shortcuts-modal">';
+shortcutsHtml += '<h5>Keyboard Shortcuts</h5>';
+shortcutsHtml += '<div class="shortcuts-list">';
+shortcuts.forEach(shortcut => {
+shortcutsHtml += `
+<div class="shortcut-item">
+<kbd>${shortcut.key}</kbd>
+<span>${shortcut.description}</span>
+</div>
+`;
+});
+shortcutsHtml += '</div></div>';
+// You can implement modal display logic here
+console.log('Keyboard shortcuts:', shortcuts);
+}
+function showFeedbackModal() {
+// Implement feedback modal
+console.log('Show feedback modal');
+}
+</script>        </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery (if needed) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Custom JS -->
+<script>
+// Global JavaScript utilities
+document.addEventListener('DOMContentLoaded', function() {
+// Initialize tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+// Initialize popovers
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+return new bootstrap.Popover(popoverTriggerEl);
+});
+// Mobile sidebar toggle - the header menu button, the sidebar close
+// button and the dark overlay all open/close the sidebar.
+// (Before, only the FIRST [data-sidebar-toggle] - the hidden close
+// button inside the sidebar - was wired, so the menu button on
+// phones/tablets did nothing.)
+const sidebar = document.querySelector('.sidebar');
+const sidebarOverlay = document.querySelector('.sidebar-overlay');
+if (sidebar) {
+document.querySelectorAll('[data-sidebar-toggle]').forEach(function (btn) {
+btn.addEventListener('click', function (e) {
+e.preventDefault();
+const open = !sidebar.classList.contains('active');
+sidebar.classList.toggle('active', open);
+if (sidebarOverlay) { sidebarOverlay.classList.toggle('active', open); }
+});
+});
+}
+// Auto-hide alerts
+setTimeout(function() {
+const alerts = document.querySelectorAll('.alert');
+alerts.forEach(function(alert) {
+const bsAlert = new bootstrap.Alert(alert);
+bsAlert.close();
+});
+}, 5000);
+});
+// CSRF token setup for AJAX requests
+if (typeof $ !== 'undefined') {
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+}
+// Security features
+document.addEventListener('contextmenu', function(e) {
+e.preventDefault();
+});
+document.addEventListener('keydown', function(e) {
+// Disable F12
+if (e.keyCode === 123) {
+return false;
+}
+// Disable Ctrl+Shift+I
+if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+return false;
+}
+// Disable Ctrl+Shift+J
+if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+return false;
+}
+// Disable Ctrl+U
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const searchInput = document.getElementById('searchInput');
+const table = document.getElementById('vacancyTable');
+const exportCSVBtn = document.getElementById('exportCSV');
+const exportPDFBtn = document.getElementById('exportPDF');
+const exportPrintBtn = document.getElementById('exportPrint');
+// Search Functionality
+if (searchInput && table) {
+searchInput.addEventListener('keyup', function() {
+const searchTerm = this.value.toLowerCase();
+const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+let visibleCount = 0;
+Array.from(rows).forEach(function(row) {
+const text = row.textContent.toLowerCase();
+if (text.includes(searchTerm)) {
+row.style.display = '';
+visibleCount++;
+} else {
+row.style.display = 'none';
+}
+});
+// Update showing count
+const showingCount = document.getElementById('showingCount');
+if (showingCount) {
+showingCount.textContent = visibleCount;
+}
+});
+}
+// Export to CSV
+if (exportCSVBtn) {
+exportCSVBtn.addEventListener('click', function() {
+if (!table) return;
+let csv = [];
+const rows = table.querySelectorAll('tr');
+rows.forEach(function(row) {
+const cols = row.querySelectorAll('td, th');
+const csvRow = [];
+cols.forEach(function(col, index) {
+// Skip the last column (Actions)
+if (index !== cols.length - 1) {
+csvRow.push('"' + col.textContent.trim().replace(/"/g, '""') + '"');
+}
+});
+csv.push(csvRow.join(','));
+});
+const csvContent = csv.join('\n');
+const blob = new Blob([csvContent], { type: 'text/csv' });
+const url = window.URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'vacancies_' + new Date().toISOString().slice(0, 10) + '.csv';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+window.URL.revokeObjectURL(url);
+});
+}
+// Export to PDF (using print dialog)
+if (exportPDFBtn) {
+exportPDFBtn.addEventListener('click', function() {
+window.print();
+});
+}
+// Print Functionality
+if (exportPrintBtn) {
+exportPrintBtn.addEventListener('click', function() {
+window.print();
+});
+}
+// Add row click handler for better UX
+if (table) {
+const rows = table.querySelectorAll('tbody tr');
+rows.forEach(function(row) {
+row.addEventListener('click', function(e) {
+// Don't trigger if clicking on the action button
+if (e.target.closest('.btn-view')) return;
+const viewBtn = this.querySelector('.btn-view');
+if (viewBtn) {
+window.location.href = viewBtn.href;
+}
+});
+});
+}
+// Animate table rows on load
+if (table) {
+const rows = table.querySelectorAll('tbody tr');
+rows.forEach(function(row, index) {
+row.style.opacity = '0';
+row.style.transform = 'translateY(20px)';
+setTimeout(function() {
+row.style.transition = 'all 0.3s ease';
+row.style.opacity = '1';
+row.style.transform = 'translateY(0)';
+}, index * 50);
+});
+}
+});
+// Print styles
+const style = document.createElement('style');
+style.textContent = `
+@media  print {
+body * {
+visibility: hidden;
+}
+.track-vacancy-container,
+.track-vacancy-container * {
+visibility: visible;
+}
+.track-vacancy-container {
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+}
+.table-controls,
+.pagination-container,
+.btn-view,
+.page-header-modern {
+display: none !important;
+}
+.modern-table {
+border: 1px solid #000;
+}
+.modern-table th,
+.modern-table td {
+border: 1px solid #000;
+padding: 8px;
+}
+}
+`;
+document.head.appendChild(style);
+</script>
+</body>
+</html>

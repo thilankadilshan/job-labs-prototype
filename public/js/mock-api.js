@@ -107,10 +107,10 @@
       } },
     { test: /^\/signup\/verify-otp\/?$/, go: function () { return '/signup/thankyou'; } },
     { test: /^\/signup\/resend-otp\/?$/, go: function () { return '/signup/verify-otp'; } },
-    // Auth\LoginController: the ATS dashboard is not part of the prototype
-    { test: /^\/(ats|login)\/?$/, go: function () {
-        alert('Prototype: signing in is disabled — the ATS / dashboard is not part of this prototype.');
-        return null;
+    // Auth\LoginController -> the ATS snapshot for the role picked on the login page
+    { test: /^\/(ats|login)\/?$/, go: function (form) {
+        var role = (form.elements.proto_role && form.elements.proto_role.value) || 'superadmin';
+        return '/ats/' + role + '/dashboard';
       } }
   ];
   window.addEventListener('submit', function (e) {

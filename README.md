@@ -1,6 +1,6 @@
 # Job Labs — Front-end Prototype
 
-A static, front-end-only copy of the **public** Job Labs website (`job-labs` Laravel app),
+A static, front-end-only copy of the Job Labs website (`job-labs` Laravel app) — the **public site and the ATS / dashboard** —
 running entirely on **mock data**. No database, no PHP, no API — safe to host on Vercel.
 
 ## Tech stack
@@ -58,10 +58,32 @@ After editing templates or mock data, re-run `docker compose up -d --build`.
 | `/company/{id}/{slug}` — company profile | `sl-jobs/company-profile` |
 | `/cv-builder` — Resume Builder | `sl-jobs/cv-builder` |
 | `/recruiters-signup` → `/signup/verify-otp` → `/signup/thankyou` | `hrportal/*` |
-| `/login` — ATS sign-in screen (sign-in itself is disabled) | `auth/login` |
+| `/login` — ATS sign-in with a **role picker** (Super Admin / Account Manager / Hiring Manager) | `auth/login` |
+| `/ats/{role}/...` — the ATS / dashboard for that role (see below) | all dashboard views |
 | `404` | `errors/404` |
 
-Dashboard / admin / candidate-account pages are intentionally **not** included.
+## ATS / dashboard (`/ats/{role}/...`)
+
+On `/login` pick **Super Admin**, **Account Manager** or **Hiring Manager** and click *Sign In*
+(the demo e-mail and password are filled in). You land on `/ats/{role}/dashboard`.
+
+- Roles: `superadmin` (everything), `account-manager` (staff, no role management),
+  `hiring-manager` (Dilan Jayasuriya — Nuwara Digital Labs + Galle Coast Retail; only their vacancies).
+- Pages: dashboard, Job Management (create / edit with **Preview**, my vacancies, archives),
+  Track Vacancies + approval screen, applicants per vacancy (export to CSV/Excel), applicant edit,
+  companies, users, roles, categories / labels, leads, support tickets, service payments, reports,
+  activity log, Email & Vacancy audit logs — about 700 static pages in `public/ats/`.
+- They are **snapshots of the real ATS views** rendered with the same mock companies and vacancies as
+  the public site (plus mock candidates, applications, leads and audit history). See `tools/ats-snapshot/`.
+- `public/js/ats-mock.js` fakes the back-end: saving a form shows "Saved — prototype only" and goes to the
+  right list, AJAX calls get recorded/mock answers, delete/restore/export show a notice, and the vacancy
+  **Preview** button shows the unsaved form on the real job page design.
+- A "Prototype · {role} · Switch role" badge sits bottom-right on every ATS page.
+- Limitations: search/filters don't filter, only the first 3 applicants per vacancy can be opened,
+  closed vacancies from earlier in the year are listed but not all can be opened, and the snapshot
+  dates are fixed (26 Nov 2026) — regenerate with the scripts in `tools/ats-snapshot/` when the ATS changes.
+
+Candidate-account pages are not included.
 
 ## Mock data
 
@@ -88,7 +110,7 @@ Dashboard / admin / candidate-account pages are intentionally **not** included.
 - reCAPTCHA removed from the recruiter sign-up form.
 - "Resume Builder" links go to the live https://resume-builder.job-labs.lk/ (same as the live site).
   The old in-repo `/cv-builder` page is still included; its downloads produce a simple placeholder file.
-- ATS sign-in, password reset and candidate accounts are not part of the prototype.
+- ATS sign-in is a role picker (no passwords are checked); password reset and candidate accounts are not part of the prototype.
 
 ## Notes
 

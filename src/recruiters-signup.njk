@@ -810,14 +810,15 @@ permalink: "/recruiters-signup/"
                                 id="user_postion"
                                 name="user_postion"
                                 class="form-control"
-                                pattern="[a-zA-Z][a-zA-Z ]{4,}"
+                                maxlength="100"
+                                pattern="^\s*[A-Za-z0-9][A-Za-z0-9 &\/.,\(\)'+\-]{0,99}$"
                                 required
                                 placeholder="e.g. HR Director, Hiring Manager">
                             <div class="valid-feedback validation-message">
                                 <i class="fas fa-check-circle"></i> Looks good!
                             </div>
                             <div class="invalid-feedback validation-message">
-                                <i class="fas fa-exclamation-circle"></i> Please enter your position
+                                <i class="fas fa-exclamation-circle"></i> Please enter your position (e.g. HR, HR Manager, Director)
                             </div>
                         </div>
                     </div>
@@ -826,10 +827,10 @@ permalink: "/recruiters-signup/"
                     <div class="form-group">
                         <label for="user_clogo" class="form-label">Company Logo <span style="font-weight: 400; color: #94a3b8;">(Optional)</span></label>
                         <div class="file-upload">
-                            <input type="file" id="user_clogo" name="user_clogo" accept="image/*">
+                            <input type="file" id="user_clogo" name="user_clogo" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
                             <label for="user_clogo" class="file-upload-label">
                                 <i class="fas fa-cloud-arrow-up file-upload-icon"></i>
-                                <span>Choose company logo or drag & drop here (Max 2MB)</span>
+                                <span>Choose company logo (JPG, JPEG or PNG, max 2MB) or drag & drop here</span>
                             </label>
                         </div>
                         <div id="logo-preview" class="logo-preview" style="display: none;">
@@ -868,7 +869,7 @@ permalink: "/recruiters-signup/"
 
                         <div class="form-group">
                             <label for="user_officeno" class="form-label">
-                                Office / Landline Number <span style="color: #64748b; font-weight: 400;">(Optional)</span>
+                                Office / Landline Number <span class="required-star">*</span>
                             </label>
                             <input type="tel"
                                 id="user_officeno"
@@ -876,6 +877,7 @@ permalink: "/recruiters-signup/"
                                 class="form-control"
                                 maxlength="12"
                                 pattern="^[0-9]+\s?[0-9]+\s?[0-9]+$"
+                                required
                                 placeholder="011 234 5678">
                             <div class="valid-feedback validation-message">
                                 <i class="fas fa-check-circle"></i> Looks good!
@@ -1167,7 +1169,7 @@ permalink: "/recruiters-signup/"
                 const file = e.target.files[0];
 
                 if (file) {
-                    if (!file.type.startsWith('image/')) {
+                    if (!/\.(jpe?g|png)$/i.test(file.name) || ['image/jpeg', 'image/png', 'image/pjpeg'].indexOf(file.type) === -1) {
                         alert('Please select a valid image file');
                         fileInput.value = '';
                         return;
@@ -1208,7 +1210,7 @@ permalink: "/recruiters-signup/"
 
             function resetFileUpload() {
                 if (fileLabel) {
-                    fileLabel.textContent = 'Choose company logo or drag & drop here (Max 2MB)';
+                    fileLabel.textContent = 'Choose company logo (JPG, JPEG or PNG, max 2MB) or drag & drop here';
                     fileLabel.style.color = '';
                 }
                 if (logoPreview) logoPreview.style.display = 'none';

@@ -3,3 +3,7 @@ _site/
 .vercel/
 .DS_Store
 __pycache__/
+
+# local build/backup artifacts (prototype ATS work)
+tools/ats_static.tgz
+tools/_backup_before_ats/

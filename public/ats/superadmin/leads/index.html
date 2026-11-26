@@ -1,0 +1,4284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow"><script>window.__ATS_ROLE="superadmin";window.__ATS_ROLE_LABEL="Super Admin";window.__ATS_BASE="/ats/superadmin";</script><script src="/js/ats-mock-data-superadmin.js"></script><script src="/js/ats-mock.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="csrf-token" content="SipSLFU3azKtlCiJrKrO6qqtjsG02toF1pIcOKnZ">
+<!-- SEO Meta Tags -->
+<meta name="description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta name="keywords" content="ATS, recruitment, job management, admin panel, dashboard">
+<meta name="author" content="Job Labs">
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="ATS Dashboard - Job Labs">
+<meta property="og:description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta property="og:url" content="/leads">
+<meta property="og:image" content="/assets/images/job_logo.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Job Labs ATS">
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ATS Dashboard - Job Labs">
+<meta name="twitter:description" content="Advanced ATS Dashboard for efficient recruitment management">
+<meta name="twitter:image" content="/assets/images/job_logo.png">
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<title>ATS Dashboard - Job Labs</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<style>
+:root {
+--primary-color: #4f46e5;
+--primary-dark: #4338ca;
+--secondary-color: #6b7280;
+--success-color: #10b981;
+--warning-color: #f59e0b;
+--danger-color: #ef4444;
+--info-color: #3b82f6;
+--light-bg: #f8fafc;
+--dark-bg: #1e293b;
+--sidebar-bg: #ffffff;
+--sidebar-width: 260px;
+--header-height: 70px;
+--border-color: #e2e8f0;
+--text-primary: #1e293b;
+--text-secondary: #64748b;
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+--border-radius: 8px;
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--light-bg);
+color: var(--text-primary);
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+width: 6px;
+}
+::-webkit-scrollbar-track {
+background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+background: #cbd5e1;
+border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #94a3b8;
+}
+/* Layout Structure */
+.admin-wrapper {
+display: flex;
+min-height: 100vh;
+}
+.main-content {
+flex: 1;
+margin-left: var(--sidebar-width);
+transition: var(--transition);
+background-color: var(--light-bg);
+}
+.content-wrapper {
+padding: 2rem;
+min-height: calc(100vh - var(--header-height));
+margin-top: var(--header-height);
+}
+/* Responsive Design */
+@media (max-width: 992px) {
+.main-content {
+margin-left: 0;
+}
+.content-wrapper {
+padding: 1rem;
+}
+}
+/* Custom Components */
+.card {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+box-shadow: var(--shadow-sm);
+transition: var(--transition);
+background: white;
+}
+.card:hover {
+box-shadow: var(--shadow-md);
+}
+.btn {
+border-radius: var(--border-radius);
+font-weight: 500;
+transition: var(--transition);
+border: none;
+padding: 0.75rem 1.5rem;
+}
+.btn-primary {
+background-color: var(--primary-color);
+color: white;
+}
+.btn-primary:hover {
+background-color: var(--primary-dark);
+transform: translateY(-1px);
+box-shadow: var(--shadow-md);
+}
+.form-control {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+padding: 0.75rem;
+transition: var(--transition);
+}
+.form-control:focus {
+border-color: var(--primary-color);
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+/* Utility Classes */
+.text-primary-custom {
+color: var(--primary-color) !important;
+}
+.bg-primary-custom {
+background-color: var(--primary-color) !important;
+}
+.border-primary-custom {
+border-color: var(--primary-color) !important;
+}
+/* Animation Classes */
+.fade-in {
+animation: fadeIn 0.5s ease-in;
+}
+@keyframes  fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.slide-in {
+animation: slideIn 0.3s ease-out;
+}
+@keyframes  slideIn {
+from { transform: translateX(-100%); }
+to { transform: translateX(0); }
+}
+/* Loading States */
+.loading {
+opacity: 0.6;
+pointer-events: none;
+}
+.spinner {
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 3px solid rgba(255, 255, 255, 0.3);
+border-radius: 50%;
+border-top-color: #fff;
+animation: spin 1s ease-in-out infinite;
+}
+@keyframes  spin {
+to { transform: rotate(360deg); }
+}
+/* ---------- Mobile & tablet (added for the ATS audit) ----------
+Desktop layout is unchanged: everything below only applies under 992px. */
+/* The content column is a flex item: without min-width:0 it grows to the
+width of its widest table and pushes the whole page off the screen. */
+.main-content { min-width: 0; }
+.content-wrapper { min-width: 0; max-width: 100%; }
+.jl-table-scroll { width: 100%; }
+@media (max-width: 991.98px) {
+.jl-table-scroll,
+.content-wrapper .dataTables_wrapper {
+overflow-x: auto;
+-webkit-overflow-scrolling: touch;
+}
+.content-wrapper .jl-table-scroll > table { min-width: 640px; }
+/* Safety net: nothing inside a page can push the page sideways */
+.content-wrapper { overflow-x: hidden; }
+/* Some page headers use negative margins sized for the desktop padding */
+.content-wrapper .page-header-modern { margin-left: 0 !important; margin-right: 0 !important; margin-top: 0 !important; }
+.content-wrapper img,
+.content-wrapper canvas,
+.content-wrapper iframe,
+.content-wrapper video { max-width: 100%; }
+.content-wrapper .modal-dialog { max-width: calc(100vw - 1.5rem); margin-left: auto; margin-right: auto; }
+.content-wrapper .row { --bs-gutter-x: 1rem; }
+.content-wrapper .dataTables_wrapper .dataTables_filter,
+.content-wrapper .dataTables_wrapper .dataTables_length { float: none; text-align: left; }
+.content-wrapper .dataTables_wrapper .dataTables_filter input { width: 100%; max-width: 260px; margin-left: 0; }
+}
+@media (max-width: 575.98px) {
+.content-wrapper { padding: .75rem .6rem; }
+/* 16px stops iPhones zooming into form fields */
+.content-wrapper input.form-control,
+.content-wrapper select.form-control,
+.content-wrapper select.form-select,
+.content-wrapper textarea.form-control { font-size: 16px; }
+.content-wrapper .btn-lg { padding: .6rem 1rem; font-size: 1rem; }
+}
+</style>
+<script>
+// Wrap any wide table that is not already inside a scroll container so it
+// scrolls sideways on phones/tablets instead of breaking the page.
+// Runs before page scripts (DataTables etc.) initialise the tables.
+document.addEventListener('DOMContentLoaded', function () {
+document.querySelectorAll('.content-wrapper table').forEach(function (table) {
+if (table.closest('.table-responsive, .jl-table-scroll, .dataTables_wrapper, .modal, .ql-editor, .fc')) { return; }
+if (table.parentElement && table.parentElement.tagName === 'TD') { return; } // nested layout tables
+var wrap = document.createElement('div');
+wrap.className = 'jl-table-scroll';
+table.parentNode.insertBefore(wrap, table);
+wrap.appendChild(table);
+});
+});
+</script>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+:root {
+--primary: #6366f1;
+--primary-dark: #4f46e5;
+--primary-light: #818cf8;
+--success: #10b981;
+--warning: #f59e0b;
+--danger: #ef4444;
+--info: #3b82f6;
+--gray-50: #f9fafb;
+--gray-100: #f3f4f6;
+--gray-200: #e5e7eb;
+--gray-300: #d1d5db;
+--gray-400: #9ca3af;
+--gray-500: #6b7280;
+--gray-600: #4b5563;
+--gray-700: #374151;
+--gray-800: #1f2937;
+--gray-900: #111827;
+--white: #ffffff;
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+--shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+--radius: 12px;
+--radius-sm: 8px;
+--radius-lg: 16px;
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body {
+background: var(--white);
+color: var(--gray-900);
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+/* Dashboard Container */
+.lead-dashboard {
+padding: 2rem;
+max-width: 1920px;
+margin: 0 auto;
+}
+/* Page Header */
+.page-header {
+margin-bottom: 2rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 1.5rem;
+}
+.header-content h1 {
+font-size: 2rem;
+font-weight: 700;
+color: var(--gray-900);
+margin-bottom: 0.5rem;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+.header-icon {
+width: 40px;
+height: 40px;
+background: linear-gradient(135deg, var(--primary), var(--primary-light));
+border-radius: var(--radius-sm);
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--white);
+font-size: 1.25rem;
+}
+.header-subtitle {
+color: var(--gray-600);
+font-size: 0.95rem;
+}
+.header-actions {
+display: flex;
+gap: 0.75rem;
+flex-wrap: wrap;
+}
+/* Buttons */
+.btn {
+padding: 0.75rem 1.5rem;
+border-radius: var(--radius-sm);
+border: none;
+font-weight: 500;
+font-size: 0.95rem;
+cursor: pointer;
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+transition: var(--transition);
+text-decoration: none;
+position: relative;
+overflow: hidden;
+}
+.btn::before {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+width: 0;
+height: 0;
+border-radius: 50%;
+background: rgba(255, 255, 255, 0.3);
+transform: translate(-50%, -50%);
+transition: width 0.6s, height 0.6s;
+}
+.btn:hover::before {
+width: 300px;
+height: 300px;
+}
+.btn-primary {
+background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+color: var(--white);
+box-shadow: var(--shadow);
+}
+.btn-primary:hover {
+box-shadow: var(--shadow-md);
+transform: translateY(-2px);
+}
+.btn-success {
+background: linear-gradient(135deg, var(--success), #059669);
+color: var(--white);
+box-shadow: var(--shadow);
+}
+.btn-success:hover {
+box-shadow: var(--shadow-md);
+transform: translateY(-2px);
+}
+.btn-info {
+background: linear-gradient(135deg, var(--info), #2563eb);
+color: var(--white);
+box-shadow: var(--shadow);
+}
+.btn-info:hover {
+box-shadow: var(--shadow-md);
+transform: translateY(-2px);
+}
+/* Stats Grid */
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 1.5rem;
+margin-bottom: 2rem;
+}
+.stat-card {
+background: var(--white);
+padding: 1.75rem;
+border-radius: var(--radius);
+box-shadow: var(--shadow);
+border: 1px solid var(--gray-100);
+transition: var(--transition);
+position: relative;
+overflow: hidden;
+}
+.stat-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 4px;
+background: linear-gradient(90deg, var(--primary), var(--primary-light));
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.3s ease;
+}
+.stat-card:hover {
+transform: translateY(-4px);
+box-shadow: var(--shadow-lg);
+}
+.stat-card:hover::before {
+transform: scaleX(1);
+}
+.stat-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 1rem;
+}
+.stat-icon {
+width: 56px;
+height: 56px;
+border-radius: var(--radius);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.5rem;
+color: var(--white);
+}
+.stat-icon.primary { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
+.stat-icon.success { background: linear-gradient(135deg, var(--success), #059669); }
+.stat-icon.warning { background: linear-gradient(135deg, var(--warning), #d97706); }
+.stat-icon.danger { background: linear-gradient(135deg, var(--danger), #dc2626); }
+.stat-value {
+font-size: 2.25rem;
+font-weight: 700;
+color: var(--gray-900);
+line-height: 1;
+margin-bottom: 0.5rem;
+}
+.stat-label {
+color: var(--gray-600);
+font-size: 0.9rem;
+font-weight: 500;
+}
+/* View Controls */
+.view-controls {
+background: var(--white);
+padding: 1.5rem;
+border-radius: var(--radius);
+box-shadow: var(--shadow);
+border: 1px solid var(--gray-100);
+margin-bottom: 2rem;
+}
+.controls-row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 1.5rem;
+flex-wrap: wrap;
+}
+.view-toggle {
+display: inline-flex;
+background: var(--gray-100);
+border-radius: var(--radius-sm);
+padding: 0.25rem;
+gap: 0.25rem;
+}
+.toggle-btn {
+padding: 0.625rem 1.25rem;
+border: none;
+background: transparent;
+color: var(--gray-600);
+font-weight: 500;
+font-size: 0.9rem;
+cursor: pointer;
+border-radius: var(--radius-sm);
+transition: var(--transition);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.toggle-btn.active {
+background: var(--white);
+color: var(--primary);
+box-shadow: var(--shadow-sm);
+}
+.search-filter-group {
+display: flex;
+gap: 1rem;
+flex: 1;
+min-width: 300px;
+flex-wrap: wrap;
+}
+.search-box {
+position: relative;
+flex: 1;
+min-width: 250px;
+}
+.search-box input {
+width: 100%;
+padding: 0.75rem 1rem 0.75rem 3rem;
+border: 1px solid var(--gray-200);
+border-radius: var(--radius-sm);
+font-size: 0.95rem;
+transition: var(--transition);
+background: var(--white);
+}
+.search-box input:focus {
+outline: none;
+border-color: var(--primary);
+box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+.search-icon {
+position: absolute;
+left: 1rem;
+top: 50%;
+transform: translateY(-50%);
+color: var(--gray-400);
+pointer-events: none;
+}
+.filter-tags {
+display: flex;
+gap: 0.5rem;
+flex-wrap: wrap;
+}
+.filter-tag {
+padding: 0.5rem 1rem;
+border-radius: 20px;
+border: 2px solid var(--gray-200);
+background: var(--white);
+color: var(--gray-700);
+font-size: 0.85rem;
+font-weight: 500;
+cursor: pointer;
+transition: var(--transition);
+}
+.filter-tag:hover,
+.filter-tag.active {
+border-color: var(--primary);
+background: var(--primary);
+color: var(--white);
+}
+/* Kanban Board */
+.kanban-board {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap: 1.5rem;
+margin-bottom: 2rem;
+}
+.kanban-column {
+background: var(--gray-50);
+border-radius: var(--radius);
+padding: 1.25rem;
+min-height: 600px;
+border: 1px solid var(--gray-200);
+}
+.column-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 1.25rem;
+padding-bottom: 1rem;
+border-bottom: 2px solid var(--gray-200);
+}
+.column-title {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+font-size: 1rem;
+font-weight: 600;
+color: var(--gray-800);
+}
+.column-icon {
+width: 32px;
+height: 32px;
+border-radius: var(--radius-sm);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.9rem;
+color: var(--white);
+}
+.column-count {
+background: var(--primary);
+color: var(--white);
+padding: 0.25rem 0.75rem;
+border-radius: 20px;
+font-size: 0.85rem;
+font-weight: 600;
+}
+.kanban-cards {
+display: flex;
+flex-direction: column;
+gap: 1rem;
+min-height: 200px;
+}
+/* Lead Card */
+.lead-card {
+background: var(--white);
+border-radius: var(--radius);
+padding: 1.25rem;
+box-shadow: var(--shadow);
+border: 1px solid var(--gray-200);
+border-left: 4px solid var(--primary);
+cursor: move;
+transition: var(--transition);
+position: relative;
+}
+.lead-card:hover {
+box-shadow: var(--shadow-md);
+transform: translateY(-2px);
+}
+.lead-card.dragging {
+opacity: 0.5;
+transform: rotate(2deg);
+}
+.card-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 1rem;
+gap: 1rem;
+}
+.lead-info-primary {
+flex: 1;
+}
+.lead-name {
+font-size: 1.05rem;
+font-weight: 600;
+color: var(--gray-900);
+margin-bottom: 0.25rem;
+}
+.lead-company {
+color: var(--gray-600);
+font-size: 0.9rem;
+}
+.card-menu {
+position: relative;
+}
+.menu-btn {
+width: 32px;
+height: 32px;
+border: none;
+background: var(--gray-100);
+border-radius: var(--radius-sm);
+color: var(--gray-600);
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(--transition);
+}
+.menu-btn:hover {
+background: var(--gray-200);
+color: var(--gray-900);
+}
+.dropdown-menu {
+position: absolute;
+top: 100%;
+right: 0;
+margin-top: 0.5rem;
+background: var(--white);
+border-radius: var(--radius-sm);
+box-shadow: var(--shadow-lg);
+border: 1px solid var(--gray-200);
+min-width: 160px;
+z-index: 100;
+opacity: 0;
+visibility: hidden;
+transform: translateY(-10px);
+transition: var(--transition);
+}
+.dropdown-menu.show {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+}
+.dropdown-item {
+padding: 0.75rem 1rem;
+border: none;
+background: none;
+width: 100%;
+text-align: left;
+color: var(--gray-700);
+font-size: 0.9rem;
+cursor: pointer;
+transition: var(--transition);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.dropdown-item:hover {
+background: var(--gray-50);
+}
+.dropdown-item.danger {
+color: var(--danger);
+}
+.dropdown-item.danger:hover {
+background: rgba(239, 68, 68, 0.1);
+}
+.lead-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
+margin-bottom: 1rem;
+}
+.tag {
+padding: 0.375rem 0.75rem;
+background: var(--gray-100);
+color: var(--gray-700);
+border-radius: 6px;
+font-size: 0.8rem;
+font-weight: 500;
+display: inline-flex;
+align-items: center;
+gap: 0.375rem;
+}
+.tag i {
+font-size: 0.75rem;
+}
+.card-footer {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding-top: 1rem;
+border-top: 1px solid var(--gray-200);
+color: var(--gray-500);
+font-size: 0.85rem;
+}
+/* Table View */
+.table-container {
+background: var(--white);
+border-radius: var(--radius);
+box-shadow: var(--shadow);
+border: 1px solid var(--gray-200);
+overflow: hidden;
+}
+.table-wrapper {
+overflow-x: auto;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+}
+thead {
+background: var(--gray-50);
+border-bottom: 2px solid var(--gray-200);
+}
+th {
+padding: 1rem;
+text-align: left;
+font-weight: 600;
+color: var(--gray-700);
+font-size: 0.9rem;
+white-space: nowrap;
+}
+td {
+padding: 1rem;
+border-bottom: 1px solid var(--gray-200);
+color: var(--gray-700);
+font-size: 0.9rem;
+}
+tbody tr {
+transition: var(--transition);
+}
+tbody tr:hover {
+background: var(--gray-50);
+}
+.badge {
+padding: 0.375rem 0.75rem;
+border-radius: 6px;
+font-size: 0.8rem;
+font-weight: 600;
+display: inline-block;
+}
+.badge.primary { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
+.badge.success { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+.badge.warning { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+.badge.danger { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+.badge.secondary { background: var(--gray-100); color: var(--gray-700); }
+.action-buttons {
+display: flex;
+gap: 0.5rem;
+}
+.btn-icon {
+width: 36px;
+height: 36px;
+border: none;
+border-radius: var(--radius-sm);
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+transition: var(--transition);
+font-size: 0.9rem;
+}
+.btn-icon.view {
+background: rgba(59, 130, 246, 0.1);
+color: var(--info);
+}
+.btn-icon.view:hover {
+background: var(--info);
+color: var(--white);
+}
+.btn-icon.edit {
+background: rgba(245, 158, 11, 0.1);
+color: var(--warning);
+}
+.btn-icon.edit:hover {
+background: var(--warning);
+color: var(--white);
+}
+.btn-icon.delete {
+background: rgba(239, 68, 68, 0.1);
+color: var(--danger);
+}
+.btn-icon.delete:hover {
+background: var(--danger);
+color: var(--white);
+}
+/* View States */
+.view-section {
+display: none;
+}
+.view-section.active {
+display: block;
+animation: fadeIn 0.3s ease;
+}
+/* Empty State */
+.empty-state {
+text-align: center;
+padding: 4rem 2rem;
+color: var(--gray-500);
+}
+.empty-icon {
+font-size: 4rem;
+color: var(--gray-300);
+margin-bottom: 1rem;
+}
+.empty-state h3 {
+font-size: 1.25rem;
+color: var(--gray-700);
+margin-bottom: 0.5rem;
+}
+/* Animations */
+@keyframes  fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+@keyframes  slideIn {
+from { transform: translateX(-100%); }
+to { transform: translateX(0); }
+}
+/* Toast Notification */
+.toast {
+position: fixed;
+top: 2rem;
+right: 2rem;
+background: var(--white);
+padding: 1rem 1.5rem;
+border-radius: var(--radius);
+box-shadow: var(--shadow-lg);
+border-left: 4px solid var(--success);
+z-index: 1000;
+display: flex;
+align-items: center;
+gap: 1rem;
+min-width: 300px;
+transform: translateX(400px);
+transition: transform 0.3s ease;
+}
+.toast.show {
+transform: translateX(0);
+}
+.toast.error {
+border-left-color: var(--danger);
+}
+.toast-icon {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.25rem;
+color: var(--white);
+background: var(--success);
+}
+.toast.error .toast-icon {
+background: var(--danger);
+}
+.toast-content {
+flex: 1;
+}
+.toast-title {
+font-weight: 600;
+color: var(--gray-900);
+margin-bottom: 0.25rem;
+}
+.toast-message {
+color: var(--gray-600);
+font-size: 0.9rem;
+}
+.toast-close {
+background: none;
+border: none;
+color: var(--gray-400);
+cursor: pointer;
+font-size: 1.25rem;
+padding: 0;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+transition: var(--transition);
+}
+.toast-close:hover {
+background: var(--gray-100);
+color: var(--gray-700);
+}
+/* Responsive Design */
+@media (max-width: 1200px) {
+.kanban-board {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+@media (max-width: 768px) {
+.lead-dashboard {
+padding: 1rem;
+}
+.page-header {
+flex-direction: column;
+align-items: flex-start;
+}
+.header-content h1 {
+font-size: 1.5rem;
+}
+.header-actions {
+width: 100%;
+}
+.btn {
+flex: 1;
+justify-content: center;
+}
+.stats-grid {
+grid-template-columns: 1fr;
+gap: 1rem;
+}
+.controls-row {
+flex-direction: column;
+align-items: stretch;
+}
+.view-toggle {
+width: 100%;
+justify-content: center;
+}
+.search-filter-group {
+flex-direction: column;
+width: 100%;
+}
+.search-box {
+min-width: 100%;
+}
+.kanban-board {
+grid-template-columns: 1fr;
+}
+.table-wrapper {
+overflow-x: scroll;
+}
+table {
+min-width: 800px;
+}
+.toast {
+right: 1rem;
+left: 1rem;
+min-width: auto;
+}
+}
+@media (max-width: 480px) {
+.header-content h1 {
+font-size: 1.25rem;
+}
+.header-icon {
+width: 36px;
+height: 36px;
+font-size: 1rem;
+}
+.stat-card {
+padding: 1.25rem;
+}
+.stat-value {
+font-size: 1.75rem;
+}
+.btn {
+padding: 0.625rem 1rem;
+font-size: 0.9rem;
+}
+}
+/* Print Styles */
+@media  print {
+.header-actions,
+.view-controls,
+.btn-icon,
+.menu-btn {
+display: none !important;
+}
+.lead-dashboard {
+padding: 0;
+}
+.stat-card,
+.lead-card,
+.table-container {
+box-shadow: none;
+border: 1px solid var(--gray-300);
+}
+}
+</style>
+</head>
+<body>
+<div class="admin-wrapper">
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<div class="brand-logo">
+<img src="/assets/front/images/hr/job_logo.png" alt="Job Labs" class="logo-img">
+<span class="brand-text">Job Labs</span>
+</div>
+<button class="sidebar-close d-lg-none" data-sidebar-toggle>
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="sidebar-user">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-indicator online"></div>
+</div>
+<div class="user-info">
+<h6 class="user-name">Piyumi</h6>
+<span class="user-role">Super Admin</span>
+</div>
+</div>
+<nav class="sidebar-nav">
+<div class="nav-section">
+<ul class="nav-list">
+<li class="nav-item">
+<a href="/ats/superadmin/dashboard" class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-home"></i>
+</div>
+<span class="nav-text">Dashboard</span>
+</a>
+</li>
+<li class="nav-item">
+<a href="/ats/superadmin/leads" class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-headset"></i>
+</div>
+<span class="nav-text">Leads</span>
+</a>
+</li>
+<li class="nav-item">
+<a href="/ats/superadmin/admin/service-payments/index"
+class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-file-invoice-dollar"></i>
+</div>
+<span class="nav-text">Service Payments</span>
+</a>
+</li>
+<li class="nav-item">
+<a href="/ats/superadmin/tickets"
+class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-ticket-alt"></i>
+</div>
+<span class="nav-text">
+Support Tickets
+<span id="unreadTicketBadge"
+style="display:none;background:var(--danger-color);color:white;border-radius:20px;padding:1px 7px;font-size:0.7rem;font-weight:700;margin-left:6px;">
+</span>
+</span>
+</a>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#usersMenu">
+<div class="nav-icon">
+<i class="fas fa-users"></i>
+</div>
+<span class="nav-text">User Management</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="usersMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/company/list" class="submenu-link ">
+<i class="fas fa-building"></i>
+Companies
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/user/list" class="submenu-link ">
+<i class="fas fa-user-circle"></i>
+User Accounts
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/roles/index" class="submenu-link ">
+<i class="fas fa-shield-alt"></i>
+Roles & Permissions
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#categoriesMenu">
+<div class="nav-icon">
+<i class="fas fa-tags"></i>
+</div>
+<span class="nav-text">Job Categories</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="categoriesMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/category/list" class="submenu-link ">
+<i class="fas fa-list"></i>
+Main Categories
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/label/list/4" class="submenu-link">
+<i class="fas fa-industry"></i>
+Industry Sectors
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/label/list/5" class="submenu-link">
+<i class="fas fa-briefcase"></i>
+Job Sectors
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/label/list/3" class="submenu-link">
+<i class="fas fa-map-marker-alt"></i>
+Locations
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#jobsMenu">
+<div class="nav-icon">
+<i class="fas fa-clipboard-list"></i>
+</div>
+<span class="nav-text">Job Management</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="jobsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/job/create" class="submenu-link">
+<i class="fas fa-plus-circle"></i>
+Post New Vacancy
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/job/list" class="submenu-link ">
+<i class="fas fa-edit"></i>
+Manage Vacancies
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/job/admin/list" class="submenu-link ">
+<i class="fas fa-cog"></i>
+Admin Actions
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#reportsMenu">
+<div class="nav-icon">
+<i class="fas fa-chart-bar"></i>
+</div>
+<span class="nav-text">Reports & Analytics</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="reportsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/report/vacancy/job/list" class="submenu-link ">
+<i class="fas fa-clipboard-check"></i>
+Vacancy Status
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/report/applicant/list" class="submenu-link ">
+<i class="fas fa-users"></i>
+Candidates by Company
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/report/candidate/list" class="submenu-link ">
+<i class="fas fa-user-tie"></i>
+Candidate Information
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/logactivity" class="submenu-link ">
+<i class="fas fa-eye"></i>
+User Activity Tracking
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#auditMenu">
+<div class="nav-icon">
+<i class="fas fa-shield-alt"></i>
+</div>
+<span class="nav-text">Audit Trail</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="auditMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/audit/email-logs" class="submenu-link ">
+<i class="fas fa-envelope-open-text"></i>
+Email Audit Log
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/superadmin/admin/audit/vacancy-logs" class="submenu-link ">
+<i class="fas fa-history"></i>
+Vacancy Audit Log
+</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</nav>
+<div class="sidebar-footer">
+<div class="footer-actions">
+<a href="/login" class="logout-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign Out">
+<i class="fas fa-sign-out-alt"></i>
+<span>Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<div class="sidebar-overlay d-lg-none" data-sidebar-toggle></div>
+<style>
+.sidebar {
+position: fixed;
+top: 0;
+left: 0;
+width: var(--sidebar-width);
+height: 100vh;
+background: var(--sidebar-bg);
+border-right: 1px solid var(--border-color);
+z-index: 1050;
+display: flex;
+flex-direction: column;
+box-shadow: var(--shadow-lg);
+transition: var(--transition);
+}
+.sidebar-header {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+justify-content: space-between;
+min-height: var(--header-height);
+}
+.brand-logo {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+.logo-img {
+width: 40px;
+height: 40px;
+object-fit: contain;
+border-radius: 8px;
+}
+.brand-text {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-color);
+letter-spacing: -0.5px;
+}
+.sidebar-close {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 6px;
+transition: var(--transition);
+}
+.sidebar-close:hover {
+background: rgba(0, 0, 0, 0.1);
+color: var(--text-primary);
+}
+.sidebar-user {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.user-avatar {
+position: relative;
+width: 50px;
+height: 50px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-indicator {
+position: absolute;
+bottom: 2px;
+right: 2px;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-indicator.online {
+background: var(--success-color);
+}
+.user-info {
+flex: 1;
+min-width: 0;
+}
+.user-name {
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.user-role {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.sidebar-nav {
+flex: 1;
+padding: 1rem 0;
+overflow-y: auto;
+}
+.nav-list {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.nav-item {
+margin-bottom: 0.25rem;
+}
+.nav-link {
+display: flex;
+align-items: center;
+padding: 0.75rem 1.5rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+position: relative;
+border-radius: 0;
+}
+.nav-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.nav-link.active {
+background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+color: white;
+box-shadow: var(--shadow-md);
+}
+.nav-link.active::before {
+content: '';
+position: absolute;
+left: 0;
+top: 0;
+height: 100%;
+width: 4px;
+background: white;
+}
+.nav-icon {
+width: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 0.75rem;
+}
+.nav-text {
+font-size: 0.9rem;
+font-weight: 500;
+flex: 1;
+}
+.nav-arrow {
+margin-left: auto;
+transition: var(--transition);
+}
+.has-submenu .nav-arrow i {
+transform: rotate(0deg);
+transition: var(--transition);
+}
+.has-submenu.active .nav-arrow i {
+transform: rotate(90deg);
+}
+.submenu {
+background: rgba(0, 0, 0, 0.03);
+border-left: 2px solid var(--border-color);
+margin-left: 1.5rem;
+}
+.submenu-list {
+list-style: none;
+margin: 0;
+padding: 0.5rem 0;
+}
+.submenu-item {
+margin-bottom: 0.1rem;
+}
+.submenu-link {
+display: flex;
+align-items: center;
+padding: 0.6rem 1rem 0.6rem 2rem;
+color: var(--text-secondary);
+text-decoration: none;
+font-size: 0.85rem;
+transition: var(--transition);
+border-radius: 6px;
+margin: 0 1rem;
+}
+.submenu-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.submenu-link.active {
+background: var(--primary-color);
+color: white;
+}
+.submenu-link i {
+margin-right: 0.5rem;
+font-size: 0.8rem;
+}
+.sidebar-footer {
+padding: 1.5rem;
+border-top: 1px solid var(--border-color);
+margin-top: auto;
+}
+.logout-btn {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.75rem 1rem;
+color: var(--text-secondary);
+text-decoration: none;
+border-radius: 8px;
+transition: var(--transition);
+width: 100%;
+font-size: 0.9rem;
+}
+.logout-btn:hover {
+background: rgba(239, 68, 68, 0.1);
+color: var(--danger-color);
+}
+.sidebar-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1040;
+opacity: 0;
+visibility: hidden;
+transition: var(--transition);
+}
+.sidebar-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.sidebar {
+transform: translateX(-100%);
+}
+.sidebar.active {
+transform: translateX(0);
+}
+.sidebar-overlay.active {
+display: block;
+}
+}
+/* Submenu Animation */
+.submenu {
+transition: all 0.3s ease;
+}
+.submenu:not(.show) {
+max-height: 0;
+overflow: hidden;
+}
+.submenu.show {
+max-height: 500px;
+}
+/* Hover Effects */
+@media (hover: hover) {
+.nav-link:hover .nav-icon i {
+transform: scale(1.1);
+}
+.submenu-link:hover {
+transform: translateX(4px);
+}
+}
+</style>
+<script>
+(function loadUnreadBadge() {
+fetch('/unread-count', {
+headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+})
+.then(r => r.json())
+.then(data => {
+const badge = document.getElementById('unreadTicketBadge');
+if (badge && data.count > 0) {
+badge.textContent = data.count;
+badge.style.display = 'inline';
+}
+})
+.catch(() => {});
+})();
+</script>
+<div class="main-content">
+<header class="main-header">
+<div class="header-content">
+<div class="header-left">
+<button class="sidebar-toggle d-lg-none" data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</button>
+<div class="page-title">
+<h1 class="title">Dashboard</h1>
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+</nav>
+</div>
+</div>
+<div class="header-right">
+<!-- Search Bar -->
+<div class="search-container d-none d-md-flex">
+<!-- <div class="search-input-wrapper">
+<i class="fas fa-search search-icon"></i>
+<input type="text" class="search-input" placeholder="Search jobs, candidates, companies...">
+<div class="search-dropdown" id="searchDropdown">
+</div>
+</div> -->
+</div>
+<!-- Notifications -->
+<div class="header-actions">
+<!-- <div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-bell"></i>
+<span class="notification-badge">3</span>
+</button>
+<div class="dropdown-menu notification-dropdown">
+<div class="dropdown-header">
+<h6>Notifications</h6>
+<span class="badge bg-primary">3 New</span>
+</div>
+<div class="notification-list">
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-user-plus text-success"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">New Application Received</p>
+<p class="notification-text">John Doe applied for Senior Developer position</p>
+<span class="notification-time">2 minutes ago</span>
+</div>
+</div>
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-briefcase text-info"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Job Posted Successfully</p>
+<p class="notification-text">Frontend Developer position is now live</p>
+<span class="notification-time">1 hour ago</span>
+</div>
+</div>
+<div class="notification-item">
+<div class="notification-icon">
+<i class="fas fa-chart-line text-warning"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Weekly Report Ready</p>
+<p class="notification-text">Your recruitment analytics report is available</p>
+<span class="notification-time">3 hours ago</span>
+</div>
+</div>
+</div>
+<div class="dropdown-footer">
+<a href="#" class="view-all-btn">View All Notifications</a>
+</div>
+</div>
+</div> -->
+<!-- Quick Actions -->
+<div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-plus"></i>
+</button>
+<div class="dropdown-menu quick-actions-dropdown">
+<div class="dropdown-header">
+<h6>Quick Actions</h6>
+</div>
+<a href="/ats/superadmin/admin/job/create" class="dropdown-item">
+<i class="fas fa-plus-circle text-primary"></i>
+Post New Job
+</a>
+<!--                         <a href="#" data-mock-href="/admin/company/create" class="dropdown-item">
+<i class="fas fa-building text-success"></i>
+Add Company
+</a>
+<a href="#" data-mock-href="/admin/user/create" class="dropdown-item">
+<i class="fas fa-user-plus text-info"></i>
+Create User
+</a>
+-->
+<div class="dropdown-divider"></div>
+<a href="/ats/superadmin/admin/report/vacancy/job/list" class="dropdown-item">
+<i class="fas fa-chart-bar text-warning"></i>
+View Reports
+</a>
+</div>
+</div>
+<!-- User Profile Dropdown -->
+<div class="action-item dropdown user-dropdown">
+<button class="user-profile-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-dot online"></div>
+</div>
+<div class="user-info d-none d-md-block">
+<span class="user-name">Piyumi</span>
+<span class="user-role">Super Admin</span>
+</div>
+<i class="fas fa-chevron-down dropdown-arrow"></i>
+</button>
+<div class="dropdown-menu user-dropdown-menu">
+<div class="dropdown-header user-header">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar" class="user-avatar-large">
+<div>
+<h6>Piyumi</h6>
+<p>Super Admin</p>
+</div>
+</div>
+<div class="dropdown-divider"></div>
+<!-- <a href="#" class="dropdown-item">
+<i class="fas fa-user-circle"></i>
+My Profile
+</a>
+<a href="#" class="dropdown-item">
+<i class="fas fa-cog"></i>
+Settings
+</a> -->
+<a href="/ats/superadmin/logactivity" class="dropdown-item">
+<i class="fas fa-history"></i>
+Activity Log
+</a>
+<div class="dropdown-divider"></div>
+<a href="/login" class="dropdown-item logout-item">
+<i class="fas fa-sign-out-alt"></i>
+Sign Out
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<style>
+.main-header {
+position: fixed;
+top: 0;
+right: 0;
+left: var(--sidebar-width);
+height: var(--header-height);
+background: white;
+border-bottom: 1px solid var(--border-color);
+z-index: 1030;
+transition: var(--transition);
+box-shadow: var(--shadow-sm);
+}
+.header-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 100%;
+padding: 0 2rem;
+}
+.header-left {
+display: flex;
+align-items: center;
+gap: 1rem;
+flex: 1;
+}
+.sidebar-toggle {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 8px;
+transition: var(--transition);
+}
+.sidebar-toggle:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.page-title .title {
+font-size: 1.5rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+line-height: 1.2;
+}
+.breadcrumb-nav {
+margin-top: 0.25rem;
+}
+.breadcrumb {
+margin: 0;
+background: none;
+padding: 0;
+font-size: 0.85rem;
+}
+.breadcrumb-item {
+color: var(--text-secondary);
+}
+.breadcrumb-item.active {
+color: var(--primary-color);
+font-weight: 500;
+}
+.breadcrumb-item a {
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+}
+.breadcrumb-item a:hover {
+color: var(--primary-color);
+}
+.header-right {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.search-container {
+position: relative;
+}
+.search-input-wrapper {
+position: relative;
+width: 350px;
+}
+.search-input {
+width: 100%;
+padding: 0.75rem 1rem 0.75rem 2.5rem;
+border: 1px solid var(--border-color);
+border-radius: 25px;
+background: var(--light-bg);
+color: var(--text-primary);
+font-size: 0.9rem;
+transition: var(--transition);
+}
+.search-input:focus {
+outline: none;
+border-color: var(--primary-color);
+background: white;
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+.search-icon {
+position: absolute;
+left: 1rem;
+top: 50%;
+transform: translateY(-50%);
+color: var(--text-secondary);
+font-size: 0.9rem;
+}
+.search-dropdown {
+position: absolute;
+top: 100%;
+left: 0;
+right: 0;
+background: white;
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+max-height: 300px;
+overflow-y: auto;
+z-index: 1050;
+display: none;
+}
+.header-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.action-item {
+position: relative;
+}
+.action-btn {
+position: relative;
+background: none;
+border: none;
+width: 44px;
+height: 44px;
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--text-secondary);
+transition: var(--transition);
+font-size: 1.1rem;
+}
+.action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.notification-badge {
+position: absolute;
+top: 8px;
+right: 8px;
+background: var(--danger-color);
+color: white;
+font-size: 0.7rem;
+padding: 0.2rem 0.4rem;
+border-radius: 10px;
+min-width: 18px;
+height: 18px;
+display: flex;
+align-items: center;
+justify-content: center;
+line-height: 1;
+}
+.user-profile-btn {
+background: none;
+border: none;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.5rem;
+border-radius: 12px;
+transition: var(--transition);
+color: var(--text-primary);
+}
+.user-profile-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+}
+.user-avatar {
+position: relative;
+width: 36px;
+height: 36px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-dot {
+position: absolute;
+bottom: 0;
+right: 0;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-dot.online {
+background: var(--success-color);
+}
+.user-info {
+text-align: left;
+}
+.user-name {
+display: block;
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+line-height: 1.2;
+}
+.user-role {
+display: block;
+font-size: 0.75rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.dropdown-arrow {
+font-size: 0.8rem;
+transition: var(--transition);
+}
+.dropdown.show .dropdown-arrow {
+transform: rotate(180deg);
+}
+/* Dropdown Menus */
+.dropdown-menu {
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+padding: 0;
+min-width: 280px;
+margin-top: 0.5rem;
+}
+.dropdown-header {
+padding: 1rem 1.5rem 0.5rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid var(--border-color);
+}
+.dropdown-header h6 {
+margin: 0;
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.dropdown-item {
+padding: 0.75rem 1.5rem;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+border: none;
+background: none;
+width: 100%;
+}
+.dropdown-item:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.dropdown-item i {
+width: 16px;
+text-align: center;
+}
+.logout-item {
+color: var(--danger-color) !important;
+border-top: 1px solid var(--border-color);
+}
+.logout-item:hover {
+background: rgba(239, 68, 68, 0.1) !important;
+}
+/* Notification Dropdown */
+.notification-dropdown {
+min-width: 380px;
+max-height: 400px;
+overflow: hidden;
+}
+.notification-list {
+max-height: 300px;
+overflow-y: auto;
+}
+.notification-item {
+padding: 1rem 1.5rem;
+display: flex;
+gap: 1rem;
+border-bottom: 1px solid var(--border-color);
+transition: var(--transition);
+}
+.notification-item:last-child {
+border-bottom: none;
+}
+.notification-item:hover {
+background: var(--light-bg);
+}
+.notification-item.unread {
+background: rgba(79, 70, 229, 0.05);
+}
+.notification-icon {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+background: var(--light-bg);
+flex-shrink: 0;
+}
+.notification-content {
+flex: 1;
+min-width: 0;
+}
+.notification-title {
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+margin: 0 0 0.25rem 0;
+}
+.notification-text {
+font-size: 0.8rem;
+color: var(--text-secondary);
+margin: 0 0 0.5rem 0;
+line-height: 1.4;
+}
+.notification-time {
+font-size: 0.75rem;
+color: var(--text-secondary);
+}
+.dropdown-footer {
+padding: 0.75rem 1.5rem;
+border-top: 1px solid var(--border-color);
+text-align: center;
+}
+.view-all-btn {
+color: var(--primary-color);
+text-decoration: none;
+font-size: 0.9rem;
+font-weight: 500;
+}
+/* Quick Actions Dropdown */
+.quick-actions-dropdown {
+min-width: 220px;
+}
+/* User Dropdown */
+.user-dropdown-menu {
+min-width: 250px;
+}
+.user-header {
+display: flex;
+align-items: center;
+gap: 1rem;
+padding: 1.5rem;
+}
+.user-avatar-large {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.user-header h6 {
+margin: 0;
+font-size: 1rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.user-header p {
+margin: 0;
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.main-header {
+left: 0;
+}
+.header-content {
+padding: 0 1rem;
+}
+.search-container {
+display: none !important;
+}
+.page-title .title {
+font-size: 1.25rem;
+}
+}
+@media (max-width: 576px) {
+.header-actions {
+gap: 0.25rem;
+}
+.action-btn {
+width: 38px;
+height: 38px;
+}
+.notification-dropdown,
+.quick-actions-dropdown,
+.user-dropdown-menu {
+min-width: 280px;
+max-width: calc(100vw - 2rem);
+}
+}
+</style>
+<div class="content-wrapper fade-in">
+<div class="lead-dashboard">
+<!-- Page Header -->
+<div class="page-header">
+<div class="header-content">
+<h1>
+<span class="header-icon">
+<i class="fas fa-chart-line"></i>
+</span>
+Lead Management Dashboard
+</h1>
+</div>
+<div class="header-actions">
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLeadModal">
+<i class="fas fa-plus"></i>
+Add Lead
+</button>
+<a href="/ats/superadmin/leads"
+class="btn btn-info">
+<i class="fas fa-user-slash"></i>
+Show Unverified
+</a>
+<a href="/ats/superadmin/leads"
+class="btn btn-primary"
+style="opacity: 0.75">
+<i class="fas fa-eye"></i>
+Show Converted
+</a>
+<!-- <button class="btn btn-success" data-modal="upload">
+<i class="fas fa-upload"></i>
+Import
+</button>
+<button class="btn btn-info" onclick="window.location.href='/ats/superadmin/campaigns'">
+<i class="fas fa-bullhorn"></i>
+Campaigns
+</button> -->
+</div>
+</div>
+<!-- Statistics Cards -->
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-header">
+<div class="stat-icon primary">
+<i class="fas fa-users"></i>
+</div>
+</div>
+<div class="stat-value">9</div>
+<div class="stat-label">Total Leads</div>
+</div>
+<div class="stat-card">
+<div class="stat-header">
+<div class="stat-icon success">
+<i class="fas fa-check-circle"></i>
+</div>
+</div>
+<div class="stat-value">1</div>
+<div class="stat-label">Converted</div>
+</div>
+<div class="stat-card">
+<div class="stat-header">
+<div class="stat-icon warning">
+<i class="fas fa-clock"></i>
+</div>
+</div>
+<div class="stat-value">3</div>
+<div class="stat-label">In Progress</div>
+</div>
+<div class="stat-card">
+<div class="stat-header">
+<div class="stat-icon danger">
+<i class="fas fa-inbox"></i>
+</div>
+</div>
+<div class="stat-value">4</div>
+<div class="stat-label">New Leads</div>
+</div>
+</div>
+<!-- View Controls -->
+<div class="view-controls">
+<div class="controls-row">
+<div class="view-toggle">
+<button class="toggle-btn active" data-view="kanban">
+<i class="fas fa-columns"></i>
+Kanban View
+</button>
+<button class="toggle-btn" data-view="table">
+<i class="fas fa-table"></i>
+Table View
+</button>
+</div>
+<div class="search-filter-group">
+<div class="search-box">
+<i class="fas fa-search search-icon"></i>
+<input type="text" id="searchInput" placeholder="Search leads by name, company, or email...">
+</div>
+</div>
+</div>
+<div class="controls-row" style="margin-top: 1rem;">
+<div class="filter-tags">
+<span class="filter-tag active" data-filter="all">All</span>
+<span class="filter-tag" data-filter="inbox">Inbox</span>
+<span class="filter-tag" data-filter="contact_made">Contact Made</span>
+<span class="filter-tag" data-filter="proposal_sent">Proposal Sent</span>
+<span class="filter-tag" data-filter="verified">Verified</span>
+</div>
+</div>
+</div>
+<!-- Kanban View -->
+<div class="view-section" id="kanbanView">
+<div class="kanban-board">
+<!-- Inbox Column -->
+<div class="kanban-column" data-stage="inbox">
+<div class="column-header">
+<div class="column-title">
+<span class="column-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+<i class="fas fa-inbox"></i>
+</span>
+Inbox
+</div>
+<span class="column-count">4</span>
+</div>
+<div class="kanban-cards" id="inbox-cards">
+<div class="lead-card" data-id="9" data-stage="inbox">
+<div class="card-header">
+<div class="lead-info-primary">
+<div class="lead-name">Isuru Wanigasekara</div>
+<div class="lead-company">Wani Engineering</div>
+</div>
+<div class="card-menu">
+<button class="menu-btn" onclick="toggleMenu(this)">
+<i class="fas fa-ellipsis-v"></i>
+</button>
+<div class="dropdown-menu">
+<button class="dropdown-item" onclick="viewLead(9)">
+<i class="fas fa-eye"></i> View
+</button>
+<button class="dropdown-item" onclick="editLead(9)">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="dropdown-item danger" onclick="deleteLead(9)">
+<i class="fas fa-trash"></i> Delete
+</button>
+</div>
+</div>
+</div>
+<div class="lead-tags">
+<span class="tag"><i class="fas fa-envelope"></i> isuru@waniengineering.lk</span>
+<span class="tag"><i class="fas fa-phone"></i> +94 777414823</span>
+<span class="tag"><i class="fas fa-building"></i> Health Care</span>
+</div>
+<div class="card-footer">
+<span><i class="fas fa-clock"></i> 4 hours ago</span>
+</div>
+</div>
+<div class="lead-card" data-id="2" data-stage="inbox">
+<div class="card-header">
+<div class="lead-info-primary">
+<div class="lead-name">Dinithi Abeysekara</div>
+<div class="lead-company">Blue Ocean Resorts</div>
+</div>
+<div class="card-menu">
+<button class="menu-btn" onclick="toggleMenu(this)">
+<i class="fas fa-ellipsis-v"></i>
+</button>
+<div class="dropdown-menu">
+<button class="dropdown-item" onclick="viewLead(2)">
+<i class="fas fa-eye"></i> View
+</button>
+<button class="dropdown-item" onclick="editLead(2)">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="dropdown-item danger" onclick="deleteLead(2)">
+<i class="fas fa-trash"></i> Delete
+</button>
+</div>
+</div>
+</div>
+<div class="lead-tags">
+<span class="tag"><i class="fas fa-envelope"></i> dinithi@blueoceanresorts.lk</span>
+<span class="tag"><i class="fas fa-phone"></i> +94 779245967</span>
+<span class="tag"><i class="fas fa-building"></i> Security</span>
+</div>
+<div class="card-footer">
+<span><i class="fas fa-clock"></i> 1 week ago</span>
+</div>
+</div>
+<div class="lead-card" data-id="7" data-stage="inbox">
+<div class="card-header">
+<div class="lead-info-primary">
+<div class="lead-name">Nuwan Karunaratne</div>
+<div class="lead-company">Island Fresh Foods</div>
+</div>
+<div class="card-menu">
+<button class="menu-btn" onclick="toggleMenu(this)">
+<i class="fas fa-ellipsis-v"></i>
+</button>
+<div class="dropdown-menu">
+<button class="dropdown-item" onclick="viewLead(7)">
+<i class="fas fa-eye"></i> View
+</button>
+<button class="dropdown-item" onclick="editLead(7)">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="dropdown-item danger" onclick="deleteLead(7)">
+<i class="fas fa-trash"></i> Delete
+</button>
+</div>
+</div>
+</div>
+<div class="lead-tags">
+<span class="tag"><i class="fas fa-envelope"></i> nuwan@islandfreshfoods.lk</span>
+<span class="tag"><i class="fas fa-phone"></i> +94 773701100</span>
+<span class="tag"><i class="fas fa-building"></i> Health Care</span>
+</div>
+<div class="card-footer">
+<span><i class="fas fa-clock"></i> 1 week ago</span>
+</div>
+</div>
+<div class="lead-card" data-id="1" data-stage="inbox">
+<div class="card-header">
+<div class="lead-info-primary">
+<div class="lead-name">Kamal Perera</div>
+<div class="lead-company">Ceylon Spice Exports</div>
+</div>
+<div class="card-menu">
+<button class="menu-btn" onclick="toggleMenu(this)">
+<i class="fas fa-ellipsis-v"></i>
+</button>
+<div class="dropdown-menu">
+<button class="dropdown-item" onclick="viewLead(1)">
+<i class="fas fa-eye"></i> View
+</button>
+<button class="dropdown-item" onclick="editLead(1)">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="dropdown-item danger" onclick="deleteLead(1)">
+<i class="fas fa-trash"></i> Delete
+</button>
+</div>
+</div>
+</div>
+<div class="lead-tags">
+<span class="tag"><i class="fas fa-envelope"></i> kamal@ceylonspiceexports.lk</span>
+<span class="tag"><i class="fas fa-phone"></i> +94 776754231</span>
+<span class="tag"><i class="fas fa-building"></i> Professional</span>
+</div>
+<div class="card-footer">
+<span><i class="fas fa-clock"></i> 3 weeks ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact Made Column -->
+<div class="kanban-column" data-stage="contact_made">
+<div class="column-header">
+<div class="column-title">
+<span class="column-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+<i class="fas fa-phone"></i>
+</span>
+Contact Made
+</div>
+<span class="column-count">3</span>
+</div>
+<div class="kanban-cards" id="contact-made-cards">
+<div class="lead-card" data-id="3" data-stage="contact_made">
+<div class="card-header">
+<div class="lead-info-primary">
+<div class="lead-name">Rohan Mendis</div>
+<div class="lead-company">Mendis Constructions</div>
+</div>
+<div class="card-menu">
+<button class="menu-btn" onclick="toggleMenu(this)">
+<i class="fas fa-ellipsis-v"></i>
+</button>
+<div class="dropdown-menu">
+<button class="dropdown-item" onclick="viewLead(3)">
+<i class="fas fa-eye"></i> View
+</button>
+<button class="dropdown-item" onclick="editLead(3)">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="dropdown-item danger" onclick="deleteLead(3)">
+<i class="fas fa-trash"></i> Delete
+</button>
+</div>
+</div>
+</div>
+<div class="lead-tags">
+<span class="tag"><i class="fas fa-envelope"></i> rohan@mendisconstructions.lk</span>
+<span class="tag"><i class="fas fa-phone"></i> +94 776386007</span>
+<span class="tag"><i class="fas fa-building"></i> Health Care</span>
+</div>
+<div class="card-footer">
+<span><i class="fas fa-clock"></i> 1 month ago</span>
+</div>
+</div>
+<div class="lead-card" data-id="10" data-stage="contact_made">
+<div class="card-header">
+<div class="lead-info-primary">
+<div class="lead-name">Rashmi De Silva</div>
+<div class="lead-company">De Silva Holdings</div>
+</div>
+<div class="card-menu">
+<button class="menu-btn" onclick="toggleMenu(this)">
+<i class="fas fa-ellipsis-v"></i>
+</button>
+<div class="dropdown-menu">
+<button class="dropdown-item" onclick="viewLead(10)">
+<i class="fas fa-eye"></i> View
+</button>
+<button class="dropdown-item" onclick="editLead(10)">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="dropdown-item danger" onclick="deleteLead(10)">
+<i class="fas fa-trash"></i> Delete
+</button>
+</div>
+</div>
+</div>
+<div class="lead-tags">
+<span class="tag"><i class="fas fa-envelope"></i> rashmi@desilvaholdings.lk</span>
+<span class="tag"><i class="fas fa-phone"></i> +94 774243235</span>
+<span class="tag"><i class="fas fa-building"></i> Professional</span>
+</div>
+<div class="card-footer">
+<span><i class="fas fa-clock"></i> 1 month ago</span>
+</div>
+</div>
+<div class="lead-card" data-id="4" data-stage="contact_made">
+<div class="card-header">
+<div class="lead-info-primary">
+<div class="lead-name">Shanika Peiris</div>
+<div class="lead-company">Peiris Pharma</div>
+</div>
+<div class="card-menu">
+<button class="menu-btn" onclick="toggleMenu(this)">
+<i class="fas fa-ellipsis-v"></i>
+</button>
+<div class="dropdown-menu">
+<button class="dropdown-item" onclick="viewLead(4)">
+<i class="fas fa-eye"></i> View
+</button>
+<button class="dropdown-item" onclick="editLead(4)">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="dropdown-item danger" onclick="deleteLead(4)">
+<i class="fas fa-trash"></i> Delete
+</button>
+</div>
+</div>
+</div>
+<div class="lead-tags">
+<span class="tag"><i class="fas fa-envelope"></i> shanika@peirispharma.lk</span>
+<span class="tag"><i class="fas fa-phone"></i> +94 771721488</span>
+<span class="tag"><i class="fas fa-building"></i> Security</span>
+</div>
+<div class="card-footer">
+<span><i class="fas fa-clock"></i> 1 month ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Proposal Sent Column -->
+<div class="kanban-column" data-stage="proposal_sent">
+<div class="column-header">
+<div class="column-title">
+<span class="column-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+<i class="fas fa-paper-plane"></i>
+</span>
+Proposal Sent
+</div>
+<span class="column-count">2</span>
+</div>
+<div class="kanban-cards" id="proposal-sent-cards">
+<div class="lead-card" data-id="5" data-stage="proposal_sent">
+<div class="card-header">
+<div class="lead-info-primary">
+<div class="lead-name">Asanka Liyanage</div>
+<div class="lead-company">Liyanage Motors</div>
+</div>
+<div class="card-menu">
+<button class="menu-btn" onclick="toggleMenu(this)">
+<i class="fas fa-ellipsis-v"></i>
+</button>
+<div class="dropdown-menu">
+<button class="dropdown-item" onclick="viewLead(5)">
+<i class="fas fa-eye"></i> View
+</button>
+<button class="dropdown-item" onclick="editLead(5)">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="dropdown-item danger" onclick="deleteLead(5)">
+<i class="fas fa-trash"></i> Delete
+</button>
+</div>
+</div>
+</div>
+<div class="lead-tags">
+<span class="tag"><i class="fas fa-envelope"></i> asanka@liyanagemotors.lk</span>
+<span class="tag"><i class="fas fa-phone"></i> +94 776263281</span>
+<span class="tag"><i class="fas fa-building"></i> Health Care</span>
+</div>
+<div class="card-footer">
+<span><i class="fas fa-clock"></i> 1 week ago</span>
+</div>
+</div>
+<div class="lead-card" data-id="6" data-stage="proposal_sent">
+<div class="card-header">
+<div class="lead-info-primary">
+<div class="lead-name">Hansi Wijesinghe</div>
+<div class="lead-company">Wijesinghe Textiles</div>
+</div>
+<div class="card-menu">
+<button class="menu-btn" onclick="toggleMenu(this)">
+<i class="fas fa-ellipsis-v"></i>
+</button>
+<div class="dropdown-menu">
+<button class="dropdown-item" onclick="viewLead(6)">
+<i class="fas fa-eye"></i> View
+</button>
+<button class="dropdown-item" onclick="editLead(6)">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="dropdown-item danger" onclick="deleteLead(6)">
+<i class="fas fa-trash"></i> Delete
+</button>
+</div>
+</div>
+</div>
+<div class="lead-tags">
+<span class="tag"><i class="fas fa-envelope"></i> hansi@wijesinghetextiles.lk</span>
+<span class="tag"><i class="fas fa-phone"></i> +94 772029254</span>
+<span class="tag"><i class="fas fa-building"></i> Retail</span>
+</div>
+<div class="card-footer">
+<span><i class="fas fa-clock"></i> 1 month ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Converted Column -->
+<div class="kanban-column" data-stage="converted">
+<div class="column-header">
+<div class="column-title">
+<span class="column-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+<i class="fas fa-check-circle"></i>
+</span>
+Converted
+</div>
+<span class="column-count">0</span>
+</div>
+<div class="kanban-cards" id="converted-cards">
+<div class="empty-state">
+<div class="empty-icon"><i class="fas fa-check-circle"></i></div>
+<p>No converted leads</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Table View -->
+<div class="view-section  active" id="tableView">
+<div class="table-container">
+<div class="table-wrapper">
+<table id="leadsTable">
+<thead>
+<tr>
+<th>Name</th>
+<th>Company</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Status</th>
+<th>Stage</th>
+<th>Verified</th>
+<th>Created</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr data-id="9">
+<td><strong>Isuru Wanigasekara</strong></td>
+<td>Wani Engineering</td>
+<td>isuru@waniengineering.lk</td>
+<td>+94 777414823</td>
+<td>
+<span class="badge primary">
+New
+</span>
+</td>
+<td>
+<span class="badge secondary">Inbox</span>
+</td>
+<td>
+<span class="badge success">
+<i class="fas fa-envelope"></i>
+Email
+</span>
+</td>
+<td>Nov 26, 2026</td>
+<td>
+<div class="action-buttons">
+<button class="btn-icon view" onclick="viewLead(9)" title="View Lead">
+<i class="fas fa-eye"></i>
+</button>
+<button class="btn-icon edit" onclick="editLead(9)" title="Edit Lead">
+<i class="fas fa-edit"></i>
+</button>
+<button class="btn-icon delete" onclick="deleteLead(9)" title="Delete Lead">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</td>
+</tr>
+<tr data-id="5">
+<td><strong>Asanka Liyanage</strong></td>
+<td>Liyanage Motors</td>
+<td>asanka@liyanagemotors.lk</td>
+<td>+94 776263281</td>
+<td>
+<span class="badge success">
+Interested
+</span>
+</td>
+<td>
+<span class="badge secondary">Proposal sent</span>
+</td>
+<td>
+<span class="badge success">
+<i class="fas fa-envelope"></i>
+Email
+</span>
+</td>
+<td>Nov 18, 2026</td>
+<td>
+<div class="action-buttons">
+<button class="btn-icon view" onclick="viewLead(5)" title="View Lead">
+<i class="fas fa-eye"></i>
+</button>
+<button class="btn-icon edit" onclick="editLead(5)" title="Edit Lead">
+<i class="fas fa-edit"></i>
+</button>
+<button class="btn-icon delete" onclick="deleteLead(5)" title="Delete Lead">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</td>
+</tr>
+<tr data-id="2">
+<td><strong>Dinithi Abeysekara</strong></td>
+<td>Blue Ocean Resorts</td>
+<td>dinithi@blueoceanresorts.lk</td>
+<td>+94 779245967</td>
+<td>
+<span class="badge primary">
+New
+</span>
+</td>
+<td>
+<span class="badge secondary">Inbox</span>
+</td>
+<td>
+<span class="badge success">
+<i class="fas fa-envelope"></i>
+Email
+</span>
+</td>
+<td>Nov 17, 2026</td>
+<td>
+<div class="action-buttons">
+<button class="btn-icon view" onclick="viewLead(2)" title="View Lead">
+<i class="fas fa-eye"></i>
+</button>
+<button class="btn-icon edit" onclick="editLead(2)" title="Edit Lead">
+<i class="fas fa-edit"></i>
+</button>
+<button class="btn-icon delete" onclick="deleteLead(2)" title="Delete Lead">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</td>
+</tr>
+<tr data-id="7">
+<td><strong>Nuwan Karunaratne</strong></td>
+<td>Island Fresh Foods</td>
+<td>nuwan@islandfreshfoods.lk</td>
+<td>+94 773701100</td>
+<td>
+<span class="badge primary">
+New
+</span>
+</td>
+<td>
+<span class="badge secondary">Inbox</span>
+</td>
+<td>
+<span class="badge success">
+<i class="fas fa-envelope"></i>
+Email
+</span>
+</td>
+<td>Nov 15, 2026</td>
+<td>
+<div class="action-buttons">
+<button class="btn-icon view" onclick="viewLead(7)" title="View Lead">
+<i class="fas fa-eye"></i>
+</button>
+<button class="btn-icon edit" onclick="editLead(7)" title="Edit Lead">
+<i class="fas fa-edit"></i>
+</button>
+<button class="btn-icon delete" onclick="deleteLead(7)" title="Delete Lead">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</td>
+</tr>
+<tr data-id="1">
+<td><strong>Kamal Perera</strong></td>
+<td>Ceylon Spice Exports</td>
+<td>kamal@ceylonspiceexports.lk</td>
+<td>+94 776754231</td>
+<td>
+<span class="badge primary">
+New
+</span>
+</td>
+<td>
+<span class="badge secondary">Inbox</span>
+</td>
+<td>
+<span class="badge success">
+<i class="fas fa-envelope"></i>
+Email
+</span>
+</td>
+<td>Oct 31, 2026</td>
+<td>
+<div class="action-buttons">
+<button class="btn-icon view" onclick="viewLead(1)" title="View Lead">
+<i class="fas fa-eye"></i>
+</button>
+<button class="btn-icon edit" onclick="editLead(1)" title="Edit Lead">
+<i class="fas fa-edit"></i>
+</button>
+<button class="btn-icon delete" onclick="deleteLead(1)" title="Delete Lead">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</td>
+</tr>
+<tr data-id="3">
+<td><strong>Rohan Mendis</strong></td>
+<td>Mendis Constructions</td>
+<td>rohan@mendisconstructions.lk</td>
+<td>+94 776386007</td>
+<td>
+<span class="badge warning">
+Contacted
+</span>
+</td>
+<td>
+<span class="badge secondary">Contact made</span>
+</td>
+<td>
+<span class="badge success">
+<i class="fas fa-envelope"></i>
+Email
+</span>
+</td>
+<td>Oct 24, 2026</td>
+<td>
+<div class="action-buttons">
+<button class="btn-icon view" onclick="viewLead(3)" title="View Lead">
+<i class="fas fa-eye"></i>
+</button>
+<button class="btn-icon edit" onclick="editLead(3)" title="Edit Lead">
+<i class="fas fa-edit"></i>
+</button>
+<button class="btn-icon delete" onclick="deleteLead(3)" title="Delete Lead">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</td>
+</tr>
+<tr data-id="10">
+<td><strong>Rashmi De Silva</strong></td>
+<td>De Silva Holdings</td>
+<td>rashmi@desilvaholdings.lk</td>
+<td>+94 774243235</td>
+<td>
+<span class="badge warning">
+Contacted
+</span>
+</td>
+<td>
+<span class="badge secondary">Contact made</span>
+</td>
+<td>
+<span class="badge success">
+<i class="fas fa-envelope"></i>
+Email
+</span>
+</td>
+<td>Oct 23, 2026</td>
+<td>
+<div class="action-buttons">
+<button class="btn-icon view" onclick="viewLead(10)" title="View Lead">
+<i class="fas fa-eye"></i>
+</button>
+<button class="btn-icon edit" onclick="editLead(10)" title="Edit Lead">
+<i class="fas fa-edit"></i>
+</button>
+<button class="btn-icon delete" onclick="deleteLead(10)" title="Delete Lead">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</td>
+</tr>
+<tr data-id="6">
+<td><strong>Hansi Wijesinghe</strong></td>
+<td>Wijesinghe Textiles</td>
+<td>hansi@wijesinghetextiles.lk</td>
+<td>+94 772029254</td>
+<td>
+<span class="badge success">
+Interested
+</span>
+</td>
+<td>
+<span class="badge secondary">Proposal sent</span>
+</td>
+<td>
+<span class="badge success">
+<i class="fas fa-envelope"></i>
+Email
+</span>
+</td>
+<td>Oct 20, 2026</td>
+<td>
+<div class="action-buttons">
+<button class="btn-icon view" onclick="viewLead(6)" title="View Lead">
+<i class="fas fa-eye"></i>
+</button>
+<button class="btn-icon edit" onclick="editLead(6)" title="Edit Lead">
+<i class="fas fa-edit"></i>
+</button>
+<button class="btn-icon delete" onclick="deleteLead(6)" title="Delete Lead">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</td>
+</tr>
+<tr data-id="4">
+<td><strong>Shanika Peiris</strong></td>
+<td>Peiris Pharma</td>
+<td>shanika@peirispharma.lk</td>
+<td>+94 771721488</td>
+<td>
+<span class="badge warning">
+Contacted
+</span>
+</td>
+<td>
+<span class="badge secondary">Contact made</span>
+</td>
+<td>
+<span class="badge success">
+<i class="fas fa-envelope"></i>
+Email
+</span>
+</td>
+<td>Oct 19, 2026</td>
+<td>
+<div class="action-buttons">
+<button class="btn-icon view" onclick="viewLead(4)" title="View Lead">
+<i class="fas fa-eye"></i>
+</button>
+<button class="btn-icon edit" onclick="editLead(4)" title="Edit Lead">
+<i class="fas fa-edit"></i>
+</button>
+<button class="btn-icon delete" onclick="deleteLead(4)" title="Delete Lead">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<style>
+/* Custom Modal Styles */
+.modal-dialog {
+max-width: 600px;
+margin: 2rem auto;
+}
+.modal-content {
+border: none;
+border-radius: 16px;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+overflow: hidden;
+}
+.modal-header {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+padding: 1.5rem 2rem;
+border-bottom: none;
+}
+.modal-header .modal-title {
+font-size: 1.4rem;
+font-weight: 600;
+margin: 0;
+}
+.modal-header .btn-close {
+filter: invert(1);
+opacity: 0.8;
+transition: opacity 0.3s ease;
+}
+.modal-header .btn-close:hover {
+opacity: 1;
+}
+.modal-body {
+padding: 2rem;
+background: #fafbfc;
+}
+.modal-footer {
+padding: 1.5rem 2rem;
+background: white;
+border-top: 1px solid #e9ecef;
+}
+/* Form Styling */
+.form-label {
+font-weight: 600;
+color: #495057;
+margin-bottom: 0.5rem;
+font-size: 0.9rem;
+}
+.form-control, .form-select {
+border: 2px solid #e9ecef;
+border-radius: 10px;
+padding: 0.75rem 1rem;
+font-size: 0.95rem;
+transition: all 0.3s ease;
+}
+.form-control:focus, .form-select:focus {
+border-color: #667eea;
+box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+}
+.form-control::placeholder {
+color: #adb5bd;
+font-style: italic;
+}
+/* Input Group Styling */
+.input-group {
+position: relative;
+}
+.input-icon {
+position: absolute;
+left: 15px;
+top: 50%;
+transform: translateY(-50%);
+color: #6c757d;
+z-index: 3;
+}
+.form-control.with-icon {
+padding-left: 45px;
+}
+/* Button Styling */
+.btn {
+border-radius: 8px;
+padding: 0.75rem 1.5rem;
+font-weight: 500;
+transition: all 0.3s ease;
+}
+.btn-primary {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+border: none;
+}
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+.btn-secondary {
+background: #6c757d;
+border: none;
+}
+.btn-secondary:hover {
+background: #5a6268;
+transform: translateY(-1px);
+}
+/* Status and Stage Badges */
+.status-badge {
+display: inline-block;
+padding: 0.4rem 0.8rem;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: 500;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.status-new { background: #e3f2fd; color: #1976d2; }
+.status-contacted { background: #fff3e0; color: #f57c00; }
+.status-interested { background: #e8f5e8; color: #388e3c; }
+.status-converted { background: #f3e5f5; color: #7b1fa2; }
+/* View Lead Modal Content */
+.lead-info-card {
+background: white;
+border-radius: 12px;
+padding: 1.5rem;
+margin-bottom: 1rem;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.info-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0.75rem 0;
+border-bottom: 1px solid #f8f9fa;
+}
+.info-row:last-child {
+border-bottom: none;
+}
+.info-label {
+font-weight: 600;
+color: #495057;
+display: flex;
+align-items: center;
+}
+.info-label i {
+margin-right: 0.5rem;
+color: #667eea;
+}
+.info-value {
+color: #6c757d;
+text-align: right;
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.modal-dialog {
+margin: 1rem;
+max-width: none;
+}
+.modal-body {
+padding: 1.5rem;
+}
+.modal-header {
+padding: 1rem 1.5rem;
+}
+.modal-footer {
+padding: 1rem 1.5rem;
+}
+.info-row {
+flex-direction: column;
+align-items: flex-start;
+}
+.info-value {
+text-align: left;
+margin-top: 0.25rem;
+}
+}
+@media (max-width: 576px) {
+.modal-dialog {
+margin: 0.5rem;
+}
+.modal-content {
+border-radius: 12px;
+}
+.row > .col-md-6 {
+margin-bottom: 0.5rem;
+}
+}
+/* Animation */
+.modal.fade .modal-dialog {
+transform: translateY(-50px);
+transition: transform 0.3s ease-out;
+}
+.modal.show .modal-dialog {
+transform: translateY(0);
+}
+/* Loading State */
+.loading-spinner {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 200px;
+}
+.spinner-border {
+color: #667eea;
+}
+</style>
+<!-- View Lead Modal -->
+<div class="modal fade" id="viewLeadModal" tabindex="-1" aria-labelledby="viewLeadModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="viewLeadModalLabel">
+<i class="fas fa-user-circle me-2"></i>
+Lead Details
+</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body" id="viewLeadContent">
+<!-- Demo Content - Replace with AJAX loaded content -->
+<div class="lead-info-card">
+<div class="info-row">
+<div class="info-label">
+<i class="fas fa-user"></i>
+Full Name
+</div>
+<div class="info-value">John Doe</div>
+</div>
+<div class="info-row">
+<div class="info-label">
+<i class="fas fa-envelope"></i>
+Email
+</div>
+<div class="info-value">john@example.com</div>
+</div>
+<div class="info-row">
+<div class="info-label">
+<i class="fas fa-building"></i>
+Company
+</div>
+<div class="info-value">Tech Solutions Inc.</div>
+</div>
+<div class="info-row">
+<div class="info-label">
+<i class="fas fa-phone"></i>
+Phone
+</div>
+<div class="info-value">+1 (555) 123-4567</div>
+</div>
+<div class="info-row">
+<div class="info-label">
+<i class="fas fa-briefcase"></i>
+Position
+</div>
+<div class="info-value">CEO</div>
+</div>
+<div class="info-row">
+<div class="info-label">
+<i class="fas fa-chart-line"></i>
+Status
+</div>
+<div class="info-value">
+<span class="status-badge status-interested">Interested</span>
+</div>
+</div>
+<div class="info-row">
+<div class="info-label">
+<i class="fas fa-tasks"></i>
+Stage
+</div>
+<div class="info-value">
+<span class="status-badge status-contacted">Contact Made</span>
+</div>
+</div>
+<div class="info-row">
+<div class="info-label">
+<i class="fas fa-industry"></i>
+Sector
+</div>
+<div class="info-value">Technology</div>
+</div>
+<div class="info-row">
+<div class="info-label">
+<i class="fas fa-sticky-note"></i>
+Notes
+</div>
+<div class="info-value">Initial contact made, very interested in our services.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Edit Lead Modal -->
+<div class="modal fade" id="editLeadModal" tabindex="-1" aria-labelledby="editLeadModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="editLeadModalLabel">
+<i class="fas fa-edit me-2"></i>
+Edit Lead
+</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+<form id="editLeadForm">
+<input type="hidden" id="editLeadId" name="lead_id">
+<div class="row">
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-user me-1"></i>
+First Name *
+</label>
+<div class="input-group">
+<input type="text" class="form-control with-icon" id="editFirstName" name="first_name" placeholder="Enter first name" required>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-user me-1"></i>
+Last Name *
+</label>
+<div class="input-group">
+<input type="text" class="form-control with-icon" id="editLastName" name="last_name" placeholder="Enter last name" required>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-envelope me-1"></i>
+Email *
+</label>
+<div class="input-group">
+<input type="email" class="form-control with-icon" id="editEmail" name="email" placeholder="Enter email address" required>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-building me-1"></i>
+Company *
+</label>
+<div class="input-group">
+<input type="text" class="form-control with-icon" id="editCompany" name="company_name" placeholder="Enter company name" required>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-phone me-1"></i>
+Phone
+</label>
+<div class="input-group">
+<input type="tel" class="form-control with-icon" id="editPhone" name="phone" placeholder="Enter phone number">
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-briefcase me-1"></i>
+Position
+</label>
+<div class="input-group">
+<input type="text" class="form-control with-icon" id="editPosition" name="position" placeholder="Enter position/title">
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-chart-line me-1"></i>
+Status
+</label>
+<select class="form-select" id="editStatus" name="status">
+<option value="new">New</option>
+<option value="contacted">Contacted</option>
+<option value="interested">Interested</option>
+<option value="converted">Converted</option>
+</select>
+</div>
+</div>
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-tasks me-1"></i>
+Stage
+</label>
+<select class="form-select" id="editStage" name="stage">
+<option value="inbox">Inbox</option>
+<option value="contact_made">Contact Made</option>
+<option value="proposal_sent">Proposal Sent</option>
+<option value="converted">Converted</option>
+</select>
+</div>
+</div>
+</div>
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-industry me-1"></i>
+Sector
+</label>
+<select class="form-select" id="editSector" name="sector">
+<option value="">Select Sector</option>
+<option value="technology">Technology</option>
+<option value="healthcare">Healthcare</option>
+<option value="finance">Finance</option>
+<option value="education">Education</option>
+<option value="retail">Retail</option>
+<option value="manufacturing">Manufacturing</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="mb-3">
+<label class="form-label">
+<i class="fas fa-sticky-note me-1"></i>
+Notes
+</label>
+<textarea class="form-control" id="editNotes" name="notes" rows="3" placeholder="Enter additional notes..."></textarea>
+</div>
+</form>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+<i class="fas fa-times me-1"></i>
+Cancel
+</button>
+<button type="button" class="btn btn-primary" onclick="updateLead()">
+<i class="fas fa-save me-1"></i>
+Update Lead
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Upload Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1">
+<div class="modal-dialog modal-md">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title">Import Leads</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body">
+<div class="upload-area" id="uploadArea">
+<div class="upload-icon">
+<i class="fas fa-cloud-upload-alt"></i>
+</div>
+<h4>Drag & Drop Files Here</h4>
+<p class="text-muted">or click to browse</p>
+<input type="file" id="fileInput" multiple accept=".csv,.xlsx,.xls" style="display: none;">
+<button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+Choose Files
+</button>
+</div>
+<div class="mt-3">
+<small class="text-muted">
+Supported formats: CSV, Excel (.xlsx, .xls)<br>
+Maximum file size: 10MB
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Lead Modal -->
+<div class="modal fade" id="addLeadModal" tabindex="-1">
+<div class="modal-dialog modal-md">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title">Add New Lead</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body">
+<form id="addLeadForm">
+<div class="row">
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">First Name *</label>
+<input type="text" class="form-control" name="first_name" required>
+</div>
+</div>
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">Last Name *</label>
+<input type="text" class="form-control" name="last_name" required>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">Email *</label>
+<input type="email" class="form-control" name="email" required>
+</div>
+</div>
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">Company *</label>
+<input type="text" class="form-control" name="company_name" required>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">Phone</label>
+<input type="tel" class="form-control" name="phone">
+</div>
+</div>
+<div class="col-md-6">
+<div class="mb-3">
+<label class="form-label">Position</label>
+<input type="text" class="form-control" name="position">
+</div>
+</div>
+</div>
+<div class="mb-3">
+<label class="form-label">Sector</label>
+<select class="form-select" name="sector">
+<option value="">Select Sector</option>
+<option value="technology">Technology</option>
+<option value="healthcare">Healthcare</option>
+<option value="finance">Finance</option>
+<option value="education">Education</option>
+<option value="retail">Retail</option>
+<option value="manufacturing">Manufacturing</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="mb-3">
+<label class="form-label">Notes</label>
+<textarea class="form-control" name="notes" rows="3"></textarea>
+</div>
+</form>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-primary" onclick="saveLead()">Save Lead</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="footer-content">
+<div class="footer-left">
+<p class="copyright">
+© 2026 <strong>Job Labs</strong> ATS. All rights reserved.
+</p>
+<div class="footer-links">
+<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+<a href="/terms-of-service" class="footer-link">Terms of Service</a>
+<a href="/cookie-policy" class="footer-link">Support</a>
+</div>
+</div>
+<div class="footer-right">
+<div class="system-status">
+<div class="status-indicator online"></div>
+<span class="status-text">All systems operational</span>
+</div>
+<div class="footer-actions">
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Help & Support">
+<i class="fas fa-question-circle"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Feedback">
+<i class="fas fa-comment-alt"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Keyboard Shortcuts">
+<i class="fas fa-keyboard"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Version and Environment Info (for development) -->
+<!--     <div class="debug-info">
+<small class="text-muted">
+Version 2.0.1 | PHP 8.3.6 | Laravel 8.83.29
+</small>
+</div>
+-->
+</footer>
+<style>
+.main-footer {
+background: white;
+border-top: 1px solid var(--border-color);
+padding: 1rem 2rem;
+margin-top: auto;
+min-height: 60px;
+position: relative;
+}
+.footer-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 2rem;
+}
+.footer-left {
+display: flex;
+align-items: center;
+gap: 2rem;
+flex: 1;
+}
+.copyright {
+margin: 0;
+font-size: 0.85rem;
+color: var(--text-secondary);
+}
+.copyright strong {
+color: var(--primary-color);
+font-weight: 600;
+}
+.footer-links {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.footer-link {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+padding: 0.25rem 0;
+position: relative;
+}
+.footer-link:hover {
+color: var(--primary-color);
+}
+.footer-link::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--primary-color);
+transition: var(--transition);
+}
+.footer-link:hover::after {
+width: 100%;
+}
+.footer-right {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.system-status {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.5rem 1rem;
+background: rgba(16, 185, 129, 0.1);
+border-radius: 20px;
+border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.status-indicator {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+}
+.status-indicator.online {
+background: var(--success-color);
+box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+animation: pulse 2s infinite;
+}
+.status-indicator.warning {
+background: var(--warning-color);
+box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+}
+.status-indicator.offline {
+background: var(--danger-color);
+box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+}
+.status-text {
+font-size: 0.8rem;
+color: var(--success-color);
+font-weight: 500;
+}
+@keyframes  pulse {
+0% {
+transform: scale(1);
+}
+50% {
+transform: scale(1.1);
+}
+100% {
+transform: scale(1);
+}
+}
+.footer-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.footer-action-btn {
+width: 32px;
+height: 32px;
+border: none;
+background: rgba(107, 114, 128, 0.1);
+color: var(--text-secondary);
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(--transition);
+font-size: 0.9rem;
+}
+.footer-action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+transform: translateY(-1px);
+}
+.debug-info {
+position: absolute;
+bottom: 0;
+right: 2rem;
+transform: translateY(100%);
+background: rgba(0, 0, 0, 0.8);
+color: white;
+padding: 0.25rem 0.75rem;
+border-radius: 0 0 8px 8px;
+font-family: 'Courier New', monospace;
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.main-footer {
+padding: 1rem;
+}
+.footer-content {
+flex-direction: column;
+gap: 1rem;
+text-align: center;
+}
+.footer-left {
+flex-direction: column;
+gap: 1rem;
+align-items: center;
+}
+.footer-links {
+justify-content: center;
+}
+.footer-right {
+justify-content: center;
+}
+.system-status {
+order: -1;
+}
+}
+@media (max-width: 576px) {
+.footer-links {
+flex-wrap: wrap;
+gap: 1rem;
+}
+.footer-actions {
+gap: 0.25rem;
+}
+.footer-action-btn {
+width: 28px;
+height: 28px;
+font-size: 0.8rem;
+}
+}
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+.main-footer {
+background: var(--sidebar-bg);
+border-color: var(--border-color);
+}
+.debug-info {
+background: rgba(255, 255, 255, 0.1);
+color: var(--text-primary);
+}
+}
+/* Print styles */
+@media  print {
+.main-footer {
+display: none;
+}
+}
+/* High contrast mode */
+@media (prefers-contrast: high) {
+.footer-link {
+text-decoration: underline;
+}
+.status-indicator {
+border: 2px solid currentColor;
+}
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+.status-indicator.online {
+animation: none;
+}
+.footer-action-btn:hover {
+transform: none;
+}
+.footer-link::after {
+transition: none;
+}
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// System status simulation (replace with real API call)
+function updateSystemStatus() {
+const statusIndicator = document.querySelector('.status-indicator');
+const statusText = document.querySelector('.status-text');
+if (!statusIndicator || !statusText) return;
+// Simulate API call to check system status
+// Replace this with actual system health check
+const systemHealth = {
+database: true,
+cache: true,
+mail: true,
+storage: true
+};
+const allSystemsUp = Object.values(systemHealth).every(status => status);
+if (allSystemsUp) {
+statusIndicator.className = 'status-indicator online';
+statusText.textContent = 'All systems operational';
+statusText.style.color = 'var(--success-color)';
+} else {
+statusIndicator.className = 'status-indicator warning';
+statusText.textContent = 'Some services degraded';
+statusText.style.color = 'var(--warning-color)';
+}
+}
+// Update status every 30 seconds
+updateSystemStatus();
+setInterval(updateSystemStatus, 30000);
+// Keyboard shortcuts handler
+const keyboardBtn = document.querySelector('.footer-action-btn:last-child');
+if (keyboardBtn) {
+keyboardBtn.addEventListener('click', function() {
+showKeyboardShortcuts();
+});
+}
+// Help and support handler
+const helpBtn = document.querySelector('.footer-action-btn:first-child');
+if (helpBtn) {
+helpBtn.addEventListener('click', function() {
+// You can integrate with your help system here
+window.open('#', '_blank');
+});
+}
+// Feedback handler
+const feedbackBtn = document.querySelector('.footer-action-btn:nth-child(2)');
+if (feedbackBtn) {
+feedbackBtn.addEventListener('click', function() {
+// You can integrate with your feedback system here
+showFeedbackModal();
+});
+}
+});
+function showKeyboardShortcuts() {
+// Create modal for keyboard shortcuts
+const shortcuts = [
+{ key: 'Ctrl + /', description: 'Show keyboard shortcuts' },
+{ key: 'Ctrl + N', description: 'Create new job posting' },
+{ key: 'Ctrl + S', description: 'Save current form' },
+{ key: 'Esc', description: 'Close modal or cancel action' },
+{ key: 'Tab', description: 'Navigate between form fields' }
+];
+let shortcutsHtml = '<div class="keyboard-shortcuts-modal">';
+shortcutsHtml += '<h5>Keyboard Shortcuts</h5>';
+shortcutsHtml += '<div class="shortcuts-list">';
+shortcuts.forEach(shortcut => {
+shortcutsHtml += `
+<div class="shortcut-item">
+<kbd>${shortcut.key}</kbd>
+<span>${shortcut.description}</span>
+</div>
+`;
+});
+shortcutsHtml += '</div></div>';
+// You can implement modal display logic here
+console.log('Keyboard shortcuts:', shortcuts);
+}
+function showFeedbackModal() {
+// Implement feedback modal
+console.log('Show feedback modal');
+}
+</script>        </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery (if needed) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Custom JS -->
+<script>
+// Global JavaScript utilities
+document.addEventListener('DOMContentLoaded', function() {
+// Initialize tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+// Initialize popovers
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+return new bootstrap.Popover(popoverTriggerEl);
+});
+// Mobile sidebar toggle - the header menu button, the sidebar close
+// button and the dark overlay all open/close the sidebar.
+// (Before, only the FIRST [data-sidebar-toggle] - the hidden close
+// button inside the sidebar - was wired, so the menu button on
+// phones/tablets did nothing.)
+const sidebar = document.querySelector('.sidebar');
+const sidebarOverlay = document.querySelector('.sidebar-overlay');
+if (sidebar) {
+document.querySelectorAll('[data-sidebar-toggle]').forEach(function (btn) {
+btn.addEventListener('click', function (e) {
+e.preventDefault();
+const open = !sidebar.classList.contains('active');
+sidebar.classList.toggle('active', open);
+if (sidebarOverlay) { sidebarOverlay.classList.toggle('active', open); }
+});
+});
+}
+// Auto-hide alerts
+setTimeout(function() {
+const alerts = document.querySelectorAll('.alert');
+alerts.forEach(function(alert) {
+const bsAlert = new bootstrap.Alert(alert);
+bsAlert.close();
+});
+}, 5000);
+});
+// CSRF token setup for AJAX requests
+if (typeof $ !== 'undefined') {
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+}
+// Security features
+document.addEventListener('contextmenu', function(e) {
+e.preventDefault();
+});
+document.addEventListener('keydown', function(e) {
+// Disable F12
+if (e.keyCode === 123) {
+return false;
+}
+// Disable Ctrl+Shift+I
+if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+return false;
+}
+// Disable Ctrl+Shift+J
+if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+return false;
+}
+// Disable Ctrl+U
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+initializeViewToggle();
+initializeSearch();
+initializeFilters();
+initializeSortable();
+initializeMenus();
+// Auto-refresh lead counts every 30 seconds
+setInterval(updateLeadCounts, 30000);
+});
+// View Toggle Functionality
+function initializeViewToggle() {
+const toggleButtons = document.querySelectorAll('.toggle-btn');
+toggleButtons.forEach(button => {
+button.addEventListener('click', function() {
+const view = this.dataset.view;
+// Update button states
+toggleButtons.forEach(btn => btn.classList.remove('active'));
+this.classList.add('active');
+// Update view sections
+document.querySelectorAll('.view-section').forEach(section => {
+section.classList.remove('active');
+});
+if (view === 'kanban') {
+document.getElementById('kanbanView').classList.add('active');
+} else {
+document.getElementById('tableView').classList.add('active');
+}
+});
+});
+}
+// Search Functionality
+function initializeSearch() {
+const searchInput = document.getElementById('searchInput');
+let searchTimeout;
+searchInput.addEventListener('input', function() {
+clearTimeout(searchTimeout);
+searchTimeout = setTimeout(() => {
+const searchTerm = this.value.toLowerCase().trim();
+filterLeads(searchTerm);
+}, 300);
+});
+}
+function filterLeads(searchTerm) {
+// Filter Kanban cards
+document.querySelectorAll('.lead-card').forEach(card => {
+const text = card.textContent.toLowerCase();
+if (text.includes(searchTerm)) {
+card.style.display = '';
+} else {
+card.style.display = 'none';
+}
+});
+// Filter table rows
+document.querySelectorAll('#leadsTable tbody tr').forEach(row => {
+const text = row.textContent.toLowerCase();
+if (text.includes(searchTerm)) {
+row.style.display = '';
+} else {
+row.style.display = 'none';
+}
+});
+}
+// Filter Functionality
+function initializeFilters() {
+const filterTags = document.querySelectorAll('.filter-tag');
+filterTags.forEach(tag => {
+tag.addEventListener('click', function() {
+const filter = this.dataset.filter;
+// Update active state
+filterTags.forEach(t => t.classList.remove('active'));
+this.classList.add('active');
+// Apply filter
+if (filter === 'all') {
+document.querySelectorAll('.lead-card, #leadsTable tbody tr').forEach(el => {
+el.style.display = '';
+});
+} else if (filter === 'verified') {
+// Kanban cards don't carry verification data, hide all
+document.querySelectorAll('.lead-card').forEach(card => {
+card.style.display = 'none';
+});
+document.querySelectorAll('#leadsTable tbody tr').forEach(row => {
+const verifiedCell = row.querySelector('td:nth-child(7)');
+if (verifiedCell && verifiedCell.textContent.trim().toLowerCase() !== 'unverified') {
+row.style.display = '';
+} else {
+row.style.display = 'none';
+}
+});
+} else {
+document.querySelectorAll('.lead-card').forEach(card => {
+card.style.display = card.dataset.stage === filter ? '' : 'none';
+});
+document.querySelectorAll('#leadsTable tbody tr').forEach(row => {
+const stageCell = row.querySelector('td:nth-child(6)');
+if (stageCell && stageCell.textContent.toLowerCase().replace(/ /g, '_').trim() === filter) {
+row.style.display = '';
+} else {
+row.style.display = 'none';
+}
+});
+}
+});
+});
+}
+// Sortable Drag and Drop
+function initializeSortable() {
+const kanbanColumns = document.querySelectorAll('.kanban-cards');
+kanbanColumns.forEach(column => {
+Sortable.create(column, {
+group: 'kanban',
+animation: 200,
+ghostClass: 'dragging',
+dragClass: 'dragging',
+onEnd: function(evt) {
+const leadId = evt.item.dataset.id;
+const newStage = evt.to.closest('.kanban-column').dataset.stage;
+updateLeadStage(leadId, newStage);
+}
+});
+});
+}
+// Update Lead Stage via AJAX
+// function updateLeadStage(leadId, newStage) {
+//     fetch(`/leads/${leadId}/stage`, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+//         },
+//         body: JSON.stringify({ stage: newStage })
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.success) {
+//             updateLeadCounts();
+//             showToast('Lead stage updated successfully!', 'success');
+//         } else {
+//             showToast('Error updating lead stage', 'error');
+//         }
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//         showToast('Error updating lead stage', 'error');
+//     });
+// }
+function updateLeadStage(leadId, newStage) {
+fetch(`/leads/${leadId}/stage`, {
+method: 'PUT',
+headers: {
+'Content-Type': 'application/json',
+'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+},
+body: JSON.stringify({ stage: newStage })
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+updateLeadCounts();
+if (newStage === 'converted' && data.data) {
+showToast('Lead converted successfully! User and company created. Credentials sent via email.', 'success');
+} else {
+showToast('Lead stage updated successfully!', 'success');
+}
+} else {
+showToast(data.message || 'Error updating lead stage', 'error');
+}
+})
+.catch(error => {
+console.error('Error:', error);
+showToast('Error updating lead stage', 'error');
+});
+}
+// Update Lead Counts
+function updateLeadCounts() {
+fetch('/leads/counts')
+.then(response => response.json())
+.then(data => {
+// Update column counts
+document.querySelectorAll('.kanban-column').forEach(column => {
+const stage = column.dataset.stage;
+const countEl = column.querySelector('.column-count');
+if (countEl && data[stage] !== undefined) {
+countEl.textContent = data[stage];
+}
+});
+// Update stat cards
+const statValues = document.querySelectorAll('.stat-value');
+if (statValues[0]) statValues[0].textContent = data.total || 0;
+if (statValues[1]) statValues[1].textContent = data.converted || 0;
+if (statValues[2]) statValues[2].textContent = data.contact_made || 0;
+if (statValues[3]) statValues[3].textContent = data.inbox || 0;
+})
+.catch(error => console.error('Error updating counts:', error));
+}
+// Menu Toggle
+function initializeMenus() {
+document.addEventListener('click', function(e) {
+if (!e.target.closest('.card-menu')) {
+document.querySelectorAll('.dropdown-menu').forEach(menu => {
+menu.classList.remove('show');
+});
+}
+});
+}
+function toggleMenu(button) {
+const menu = button.nextElementSibling;
+const allMenus = document.querySelectorAll('.dropdown-menu');
+allMenus.forEach(m => {
+if (m !== menu) m.classList.remove('show');
+});
+menu.classList.toggle('show');
+}
+// Lead Actions
+// View Lead Function
+function viewLead(id) {
+$.ajax({
+url: '/leads/' + id,
+method: 'GET',
+success: function(response) {
+console.log(response);
+$('#viewLeadContent').html(response.html);
+$('#viewLeadModal').modal('show');
+},
+error: function(xhr) {
+console.log(xhr.responseText);
+showNotification('Error loading lead details', 'error');
+}
+});
+}
+function saveLead() {
+var formData = $('#addLeadForm').serialize();
+formData += '&_token=' + 'SipSLFU3azKtlCiJrKrO6qqtjsG02toF1pIcOKnZ';
+$.ajax({
+url: '/leads',
+method: 'POST',
+data: formData,
+success: function(response) {
+if (response.success) {
+$('#addLeadModal').modal('hide');
+showNotification('Lead added successfully!', 'success');
+location.reload(); // Refresh page to show new lead
+} else {
+showNotification('Error adding lead: ' + response.message, 'error');
+}
+},
+error: function(xhr) {
+var message = xhr.responseJSON ? xhr.responseJSON.message : 'Error adding lead';
+showNotification(message, 'error');
+}
+});
+}
+// function editLead(id) {
+//     window.location.href = `/leads/${id}/edit`;
+// }
+// Edit Lead Function
+function editLead(id) {
+$.ajax({
+url: '/leads/' + id + '/edit',
+method: 'GET',
+success: function(response) {
+var lead = response.lead;
+// Populate form fields
+$('#editLeadId').val(lead.id);
+$('#editFirstName').val(lead.first_name);
+$('#editLastName').val(lead.last_name);
+$('#editEmail').val(lead.email);
+$('#editCompany').val(lead.company_name);
+$('#editPhone').val(lead.phone);
+$('#editPosition').val(lead.position);
+$('#editStatus').val(lead.status);
+$('#editStage').val(lead.stage);
+$('#editSector').val(lead.sector);
+$('#editNotes').val(lead.notes);
+$('#editLeadModal').modal('show');
+},
+error: function() {
+showNotification('Error loading lead data', 'error');
+}
+});
+}
+// Update Lead Function
+function updateLead() {
+var formData = $('#editLeadForm').serialize();
+var leadId = $('#editLeadId').val();
+console.log("Lead ID:", leadId);
+console.log("Form Data:", formData);
+$.ajax({
+url: '/leads/' + leadId,
+method: 'PUT',
+data: formData + '&_token=' + 'SipSLFU3azKtlCiJrKrO6qqtjsG02toF1pIcOKnZ',
+success: function(response) {
+if (response.success) {
+$('#editLeadModal').modal('hide');
+showNotification('Lead updated successfully!', 'success');
+// Update the lead card in the UI
+updateLeadCard(response.lead);
+updateLeadCounts();
+} else {
+showNotification('Error updating lead: ' + response.message, 'error');
+}
+},
+error: function(xhr) {
+var message = xhr.responseJSON ? xhr.responseJSON.message : 'Error updating lead';
+showNotification(message, 'error');
+}
+});
+}
+function showNotification(message, type) {
+var alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+var notification = `
+<div class="alert ${alertClass} alert-dismissible fade show position-fixed"
+style="top: 20px; right: 20px; z-index: 9999;">
+${message}
+<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+`;
+$('body').append(notification);
+// Auto-dismiss after 5 seconds
+setTimeout(function() {
+$('.alert').alert('close');
+}, 5000);
+}
+function deleteLead(id) {
+if (confirm('Are you sure you want to delete this lead? This action cannot be undone.')) {
+fetch(`/leads/${id}`, {
+method: 'DELETE',
+headers: {
+'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+}
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+// Remove card from UI
+const card = document.querySelector(`.lead-card[data-id="${id}"]`);
+if (card) {
+card.style.animation = 'fadeOut 0.3s ease';
+setTimeout(() => card.remove(), 300);
+}
+// Remove row from table
+const row = document.querySelector(`#leadsTable tbody tr[data-id="${id}"]`);
+if (row) row.remove();
+updateLeadCounts();
+showToast('Lead deleted successfully!', 'success');
+} else {
+showToast('Error deleting lead', 'error');
+}
+})
+.catch(error => {
+console.error('Error:', error);
+showToast('Error deleting lead', 'error');
+});
+}
+}
+// Toast Notification
+function showToast(message, type = 'success') {
+const existingToast = document.querySelector('.toast');
+if (existingToast) existingToast.remove();
+const toast = document.createElement('div');
+toast.className = `toast ${type}`;
+toast.innerHTML = `
+<div class="toast-icon">
+<i class="fas fa-${type === 'success' ? 'check' : 'exclamation-circle'}"></i>
+</div>
+<div class="toast-content">
+<div class="toast-title">${type === 'success' ? 'Success' : 'Error'}</div>
+<div class="toast-message">${message}</div>
+</div>
+<button class="toast-close" onclick="this.parentElement.remove()">
+<i class="fas fa-times"></i>
+</button>
+`;
+document.body.appendChild(toast);
+setTimeout(() => toast.classList.add('show'), 100);
+setTimeout(() => {
+toast.classList.remove('show');
+setTimeout(() => toast.remove(), 300);
+}, 5000);
+}
+// Keyboard Shortcuts
+document.addEventListener('keydown', function(e) {
+// Ctrl/Cmd + K for search
+if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+e.preventDefault();
+document.getElementById('searchInput').focus();
+}
+// Escape to close menus
+if (e.key === 'Escape') {
+document.querySelectorAll('.dropdown-menu').forEach(menu => {
+menu.classList.remove('show');
+});
+}
+});
+// Add fade out animation
+const style = document.createElement('style');
+style.textContent = `
+@keyframes  fadeOut {
+from { opacity: 1; transform: scale(1); }
+to { opacity: 0; transform: scale(0.9); }
+}
+`;
+document.head.appendChild(style);
+</script>
+</body>
+</html>

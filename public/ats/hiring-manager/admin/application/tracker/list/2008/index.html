@@ -1,0 +1,3995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow"><script>window.__ATS_ROLE="hiring-manager";window.__ATS_ROLE_LABEL="Hiring Manager";window.__ATS_BASE="/ats/hiring-manager";</script><script src="/js/ats-mock-data-hiring-manager.js"></script><script src="/js/ats-mock.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="csrf-token" content="ZNM3xvi19NB2RoKJoM2AV4yHkDulPCwGcV5MKo7u">
+<!-- SEO Meta Tags -->
+<meta name="description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta name="keywords" content="ATS, recruitment, job management, admin panel, dashboard">
+<meta name="author" content="Job Labs">
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="ATS Dashboard - Job Labs">
+<meta property="og:description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta property="og:url" content="/admin/application/tracker/list/2008">
+<meta property="og:image" content="/assets/images/job_logo.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Job Labs ATS">
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ATS Dashboard - Job Labs">
+<meta name="twitter:description" content="Advanced ATS Dashboard for efficient recruitment management">
+<meta name="twitter:image" content="/assets/images/job_logo.png">
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<title>ATS Dashboard - Job Labs</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<style>
+:root {
+--primary-color: #4f46e5;
+--primary-dark: #4338ca;
+--secondary-color: #6b7280;
+--success-color: #10b981;
+--warning-color: #f59e0b;
+--danger-color: #ef4444;
+--info-color: #3b82f6;
+--light-bg: #f8fafc;
+--dark-bg: #1e293b;
+--sidebar-bg: #ffffff;
+--sidebar-width: 260px;
+--header-height: 70px;
+--border-color: #e2e8f0;
+--text-primary: #1e293b;
+--text-secondary: #64748b;
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+--border-radius: 8px;
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--light-bg);
+color: var(--text-primary);
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+width: 6px;
+}
+::-webkit-scrollbar-track {
+background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+background: #cbd5e1;
+border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #94a3b8;
+}
+/* Layout Structure */
+.admin-wrapper {
+display: flex;
+min-height: 100vh;
+}
+.main-content {
+flex: 1;
+margin-left: var(--sidebar-width);
+transition: var(--transition);
+background-color: var(--light-bg);
+}
+.content-wrapper {
+padding: 2rem;
+min-height: calc(100vh - var(--header-height));
+margin-top: var(--header-height);
+}
+/* Responsive Design */
+@media (max-width: 992px) {
+.main-content {
+margin-left: 0;
+}
+.content-wrapper {
+padding: 1rem;
+}
+}
+/* Custom Components */
+.card {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+box-shadow: var(--shadow-sm);
+transition: var(--transition);
+background: white;
+}
+.card:hover {
+box-shadow: var(--shadow-md);
+}
+.btn {
+border-radius: var(--border-radius);
+font-weight: 500;
+transition: var(--transition);
+border: none;
+padding: 0.75rem 1.5rem;
+}
+.btn-primary {
+background-color: var(--primary-color);
+color: white;
+}
+.btn-primary:hover {
+background-color: var(--primary-dark);
+transform: translateY(-1px);
+box-shadow: var(--shadow-md);
+}
+.form-control {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+padding: 0.75rem;
+transition: var(--transition);
+}
+.form-control:focus {
+border-color: var(--primary-color);
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+/* Utility Classes */
+.text-primary-custom {
+color: var(--primary-color) !important;
+}
+.bg-primary-custom {
+background-color: var(--primary-color) !important;
+}
+.border-primary-custom {
+border-color: var(--primary-color) !important;
+}
+/* Animation Classes */
+.fade-in {
+animation: fadeIn 0.5s ease-in;
+}
+@keyframes  fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.slide-in {
+animation: slideIn 0.3s ease-out;
+}
+@keyframes  slideIn {
+from { transform: translateX(-100%); }
+to { transform: translateX(0); }
+}
+/* Loading States */
+.loading {
+opacity: 0.6;
+pointer-events: none;
+}
+.spinner {
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 3px solid rgba(255, 255, 255, 0.3);
+border-radius: 50%;
+border-top-color: #fff;
+animation: spin 1s ease-in-out infinite;
+}
+@keyframes  spin {
+to { transform: rotate(360deg); }
+}
+/* ---------- Mobile & tablet (added for the ATS audit) ----------
+Desktop layout is unchanged: everything below only applies under 992px. */
+/* The content column is a flex item: without min-width:0 it grows to the
+width of its widest table and pushes the whole page off the screen. */
+.main-content { min-width: 0; }
+.content-wrapper { min-width: 0; max-width: 100%; }
+.jl-table-scroll { width: 100%; }
+@media (max-width: 991.98px) {
+.jl-table-scroll,
+.content-wrapper .dataTables_wrapper {
+overflow-x: auto;
+-webkit-overflow-scrolling: touch;
+}
+.content-wrapper .jl-table-scroll > table { min-width: 640px; }
+/* Safety net: nothing inside a page can push the page sideways */
+.content-wrapper { overflow-x: hidden; }
+/* Some page headers use negative margins sized for the desktop padding */
+.content-wrapper .page-header-modern { margin-left: 0 !important; margin-right: 0 !important; margin-top: 0 !important; }
+.content-wrapper img,
+.content-wrapper canvas,
+.content-wrapper iframe,
+.content-wrapper video { max-width: 100%; }
+.content-wrapper .modal-dialog { max-width: calc(100vw - 1.5rem); margin-left: auto; margin-right: auto; }
+.content-wrapper .row { --bs-gutter-x: 1rem; }
+.content-wrapper .dataTables_wrapper .dataTables_filter,
+.content-wrapper .dataTables_wrapper .dataTables_length { float: none; text-align: left; }
+.content-wrapper .dataTables_wrapper .dataTables_filter input { width: 100%; max-width: 260px; margin-left: 0; }
+}
+@media (max-width: 575.98px) {
+.content-wrapper { padding: .75rem .6rem; }
+/* 16px stops iPhones zooming into form fields */
+.content-wrapper input.form-control,
+.content-wrapper select.form-control,
+.content-wrapper select.form-select,
+.content-wrapper textarea.form-control { font-size: 16px; }
+.content-wrapper .btn-lg { padding: .6rem 1rem; font-size: 1rem; }
+}
+</style>
+<script>
+// Wrap any wide table that is not already inside a scroll container so it
+// scrolls sideways on phones/tablets instead of breaking the page.
+// Runs before page scripts (DataTables etc.) initialise the tables.
+document.addEventListener('DOMContentLoaded', function () {
+document.querySelectorAll('.content-wrapper table').forEach(function (table) {
+if (table.closest('.table-responsive, .jl-table-scroll, .dataTables_wrapper, .modal, .ql-editor, .fc')) { return; }
+if (table.parentElement && table.parentElement.tagName === 'TD') { return; } // nested layout tables
+var wrap = document.createElement('div');
+wrap.className = 'jl-table-scroll';
+table.parentNode.insertBefore(wrap, table);
+wrap.appendChild(table);
+});
+});
+</script>
+<!-- Modern CDNs -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet">
+<style>
+/* Modern CSS Reset & Base Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+:root {
+--primary-color: #2563eb;
+--primary-dark: #1d4ed8;
+--secondary-color: #64748b;
+--success-color: #10b981;
+--warning-color: #f59e0b;
+--danger-color: #ef4444;
+--background-color: #ffffff;
+--surface-color: #f8fafc;
+--text-primary: #1e293b;
+--text-secondary: #64748b;
+--border-color: #e2e8f0;
+--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+--shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+--radius-sm: 0.375rem;
+--radius-md: 0.5rem;
+--radius-lg: 0.75rem;
+--radius-xl: 1rem;
+}
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+background-color: var(--background-color);
+color: var(--text-primary);
+line-height: 1.6;
+}
+/* Container & Layout */
+.ats-container {
+max-width: 1400px;
+margin: 0 auto;
+padding: 2rem 1rem;
+}
+/* Modern Header */
+.page-header {
+background: #ffffff;
+color: var(--primary-color);
+padding: 3rem 2rem;
+border-radius: var(--radius-xl);
+margin-bottom: 2rem;
+position: relative;
+overflow: hidden;
+box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+.page-header::before {
+content: '';
+position: absolute;
+top: 0;
+right: 0;
+width: 200px;
+height: 200px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 50%;
+transform: translate(50%, -50%);
+}
+.page-header h1 {
+font-size: 2.5rem;
+font-weight: 700;
+margin-bottom: 0.5rem;
+position: relative;
+z-index: 1;
+}
+.page-header p {
+font-size: 1.125rem;
+opacity: 0.9;
+position: relative;
+z-index: 1;
+}
+.breadcrumb {
+background: rgba(255, 255, 255, 0.1);
+padding: 0.75rem 1rem;
+border-radius: var(--radius-md);
+backdrop-filter: blur(10px);
+position: relative;
+z-index: 1;
+}
+.breadcrumb a {
+color: var(--primary-color);
+text-decoration: none;
+transition: color 0.2s ease;
+}
+.breadcrumb a:hover {
+color: #0c2f68ff;
+}
+.breadcrumb-separator {
+margin: 0 0.5rem;
+opacity: 0.6;
+}
+/* Modern Stats Cards */
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 1.5rem;
+margin-bottom: 2rem;
+}
+.stats-card {
+background: white;
+padding: 2rem;
+border-radius: var(--radius-xl);
+box-shadow: var(--shadow-md);
+border: 1px solid var(--border-color);
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+}
+.stats-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 4px;
+background: var(--gradient);
+}
+.stats-card:hover {
+transform: translateY(-4px);
+box-shadow: var(--shadow-xl);
+}
+.stats-card.primary::before { background: linear-gradient(90deg, var(--primary-color), var(--primary-dark)); }
+.stats-card.success::before { background: linear-gradient(90deg, var(--success-color), #059669); }
+.stats-card.warning::before { background: linear-gradient(90deg, var(--warning-color), #d97706); }
+.stats-card.info::before { background: linear-gradient(90deg, #06b6d4, #0891b2); }
+.stats-icon {
+width: 60px;
+height: 60px;
+border-radius: var(--radius-lg);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.5rem;
+color: white;
+margin-bottom: 1rem;
+}
+.stats-number {
+font-size: 2.5rem;
+font-weight: 700;
+color: var(--text-primary);
+margin-bottom: 0.5rem;
+}
+.stats-label {
+color: var(--text-secondary);
+font-weight: 500;
+}
+/* Modern Search & Filters */
+.search-section {
+background: white;
+padding: 2rem;
+border-radius: var(--radius-xl);
+box-shadow: var(--shadow-md);
+border: 1px solid var(--border-color);
+margin-bottom: 2rem;
+}
+.search-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 1.5rem;
+align-items: end;
+}
+.form-group {
+display: flex;
+flex-direction: column;
+}
+.form-label {
+font-weight: 600;
+color: var(--text-primary);
+margin-bottom: 0.5rem;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.form-control {
+padding: 0.875rem 1rem;
+border: 2px solid var(--border-color);
+border-radius: var(--radius-md);
+font-size: 1rem;
+transition: all 0.2s ease;
+background: white;
+}
+.form-control:focus {
+outline: none;
+border-color: var(--primary-color);
+box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+/* Searchable Location Combobox */
+.combobox {
+position: relative;
+}
+.combobox .form-control {
+width: 100%;
+padding-right: 2.5rem;
+cursor: text;
+}
+.combobox-caret {
+position: absolute;
+right: 1rem;
+top: 50%;
+transform: translateY(-50%);
+color: var(--text-secondary);
+pointer-events: none;
+transition: transform 0.2s ease;
+}
+.combobox.open .combobox-caret {
+transform: translateY(-50%) rotate(180deg);
+}
+.combobox-list {
+display: none;
+position: absolute;
+top: calc(100% + 4px);
+left: 0;
+right: 0;
+background: white;
+border: 1px solid var(--border-color);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-lg);
+max-height: 240px;
+overflow-y: auto;
+z-index: 200;
+}
+.combobox.open .combobox-list {
+display: block;
+}
+.combobox-option {
+padding: 0.7rem 1rem;
+cursor: pointer;
+font-size: 0.9rem;
+color: var(--text-primary);
+transition: background 0.15s ease;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.combobox-option:hover,
+.combobox-option.active {
+background: var(--surface-color);
+color: var(--primary-color);
+}
+.combobox-option.selected {
+background: rgba(37, 99, 235, 0.08);
+font-weight: 600;
+}
+.combobox-empty {
+padding: 0.75rem 1rem;
+font-size: 0.85rem;
+color: var(--text-secondary);
+font-style: italic;
+}
+/* Modern Buttons */
+.btn {
+padding: 0.875rem 1.5rem;
+border: none;
+border-radius: var(--radius-md);
+font-weight: 600;
+font-size: 0.875rem;
+cursor: pointer;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+text-decoration: none;
+justify-content: center;
+}
+.btn-primary {
+background: var(--primary-color);
+color: white;
+}
+.btn-primary:hover {
+background: var(--primary-dark);
+transform: translateY(-1px);
+box-shadow: var(--shadow-lg);
+}
+.btn-secondary {
+background: var(--secondary-color);
+color: white;
+}
+.btn-success {
+background: var(--success-color);
+color: white;
+}
+.btn-warning {
+background: var(--warning-color);
+color: white;
+}
+.btn-danger {
+background: var(--danger-color);
+color: white;
+}
+.btn-outline {
+background: transparent;
+border: 2px solid var(--border-color);
+color: var(--text-primary);
+}
+.btn-sm {
+padding: 0.5rem 1rem;
+font-size: 0.8rem;
+}
+/* Modern Calendar */
+.calendar-section {
+background: white;
+border-radius: var(--radius-xl);
+box-shadow: var(--shadow-md);
+border: 1px solid var(--border-color);
+margin-bottom: 2rem;
+overflow: hidden;
+}
+.calendar-header {
+background: var(--surface-color);
+padding: 1.5rem 2rem;
+border-bottom: 1px solid var(--border-color);
+}
+.calendar-title {
+font-size: 1.25rem;
+font-weight: 600;
+color: var(--text-primary);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+/* Modern Table */
+.table-section {
+background: white;
+border-radius: var(--radius-xl);
+box-shadow: var(--shadow-md);
+border: 1px solid var(--border-color);
+overflow: hidden;
+}
+.table-header {
+background: var(--surface-color);
+padding: 1.5rem 2rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 1rem;
+}
+.table-title {
+font-size: 1.25rem;
+font-weight: 600;
+color: var(--text-primary);
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.table-actions {
+display: flex;
+gap: 1rem;
+align-items: center;
+}
+/* DataTable Customization */
+.dataTables_wrapper {
+padding: 2rem;
+}
+.dataTables_length,
+.dataTables_filter {
+margin-bottom: 1rem;
+}
+.dataTables_filter input {
+padding: 0.5rem 1rem;
+border: 2px solid var(--border-color);
+border-radius: var(--radius-md);
+margin-left: 0.5rem;
+}
+table.dataTable {
+border-collapse: separate;
+border-spacing: 0;
+}
+table.dataTable thead th {
+background: var(--surface-color);
+border: none;
+border-bottom: 2px solid var(--border-color);
+padding: 1rem;
+font-weight: 600;
+color: var(--text-primary);
+text-transform: uppercase;
+font-size: 0.8rem;
+letter-spacing: 0.5px;
+}
+table.dataTable tbody td {
+padding: 1rem;
+border-bottom: 1px solid var(--border-color);
+vertical-align: middle;
+}
+table.dataTable tbody tr:hover {
+background: var(--surface-color);
+}
+/* Candidate Info */
+.candidate-info {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.candidate-avatar {
+width: 48px;
+height: 48px;
+border-radius: 50%;
+background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-weight: 600;
+font-size: 1rem;
+}
+.candidate-details h6 {
+font-weight: 600;
+color: var(--text-primary);
+margin-bottom: 0.25rem;
+}
+.candidate-details small {
+color: var(--text-secondary);
+}
+/* Status Badges */
+.status-badge {
+padding: 0.375rem 0.875rem;
+border-radius: 9999px;
+font-size: 0.75rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+display: inline-flex;
+align-items: center;
+gap: 0.375rem;
+}
+.status-eligible {
+background: rgba(16, 185, 129, 0.1);
+color: var(--success-color);
+}
+.status-not-eligible {
+background: rgba(239, 68, 68, 0.1);
+color: var(--danger-color);
+}
+/* Action Buttons */
+.action-buttons {
+display: flex;
+gap: 0.5rem;
+flex-wrap: wrap;
+}
+.btn-action {
+padding: 0.5rem 0.875rem;
+border-radius: var(--radius-md);
+font-size: 0.75rem;
+font-weight: 600;
+border: none;
+cursor: pointer;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+gap: 0.375rem;
+text-decoration: none;
+}
+.btn-download {
+background: var(--primary-color);
+color: white;
+}
+.btn-view {
+background: var(--secondary-color);
+color: white;
+}
+.btn-edit {
+background: var(--warning-color);
+color: white;
+}
+.btn-schedule {
+background: var(--success-color);
+color: white;
+}
+.btn-action:hover {
+transform: translateY(-1px);
+box-shadow: var(--shadow-md);
+}
+/* Modern Modal */
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+backdrop-filter: blur(4px);
+z-index: 1000;
+align-items: center;
+justify-content: center;
+padding: 1rem;
+pointer-events: none;
+}
+.modal.show {
+display: flex;
+pointer-events: auto;
+}
+.modal-dialog {
+background: white;
+border-radius: var(--radius-xl);
+box-shadow: var(--shadow-xl);
+max-width: 600px;
+width: 100%;
+max-height: 90vh;
+overflow-y: auto;
+pointer-events: auto;
+}
+.modal-header {
+background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+color: white;
+padding: 1.5rem 2rem;
+border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.modal-title {
+font-size: 1.25rem;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.modal-close {
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+padding: 0.5rem;
+border-radius: var(--radius-md);
+transition: background 0.2s ease;
+}
+.modal-close:hover {
+background: rgba(255, 255, 255, 0.1);
+}
+.modal-body {
+padding: 2rem;
+}
+.modal-footer {
+padding: 1.5rem 2rem;
+border-top: 1px solid var(--border-color);
+display: flex;
+justify-content: flex-end;
+gap: 1rem;
+}
+/* Experience Items */
+.experience-item {
+background: var(--surface-color);
+padding: 1.5rem;
+border-radius: var(--radius-lg);
+margin-bottom: 1rem;
+border-left: 4px solid var(--primary-color);
+}
+.experience-label {
+font-weight: 600;
+color: var(--text-primary);
+margin-bottom: 0.5rem;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.experience-value {
+color: var(--text-secondary);
+line-height: 1.6;
+}
+/* Loading Spinner */
+.loading-spinner {
+display: none;
+text-align: center;
+padding: 3rem;
+}
+.spinner {
+width: 40px;
+height: 40px;
+border: 4px solid var(--border-color);
+border-top: 4px solid var(--primary-color);
+border-radius: 50%;
+animation: spin 1s linear infinite;
+margin: 0 auto 1rem;
+}
+@keyframes  spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+/* Export Menu */
+.export-menu {
+position: relative;
+display: inline-block;
+}
+.export-dropdown {
+display: none;
+position: absolute;
+right: 0;
+top: 100%;
+background: white;
+border: 1px solid var(--border-color);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-lg);
+z-index: 100;
+min-width: 160px;
+margin-top: 0.5rem;
+}
+.export-dropdown.show {
+display: block;
+}
+.export-option {
+padding: 0.75rem 1rem;
+cursor: pointer;
+transition: background 0.2s ease;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+border: none;
+background: none;
+width: 100%;
+text-align: left;
+color: var(--text-primary);
+}
+.export-option:hover {
+background: var(--surface-color);
+}
+.export-option:first-child {
+border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+.export-option:last-child {
+border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+.ats-container {
+padding: 1rem;
+}
+.page-header {
+padding: 2rem 1rem;
+text-align: center;
+}
+.page-header h1 {
+font-size: 2rem;
+}
+.stats-grid {
+grid-template-columns: 1fr;
+}
+.search-grid {
+grid-template-columns: 1fr;
+}
+.table-header {
+flex-direction: column;
+align-items: stretch;
+text-align: center;
+}
+.candidate-info {
+flex-direction: column;
+text-align: center;
+gap: 0.5rem;
+}
+.action-buttons {
+justify-content: center;
+}
+.modal-dialog {
+margin: 1rem;
+max-width: none;
+}
+.modal-header {
+padding: 1rem;
+}
+.modal-body {
+padding: 1rem;
+}
+.modal-footer {
+padding: 1rem;
+flex-direction: column;
+}
+}
+/* FullCalendar Customization */
+.fc {
+font-family: inherit;
+}
+.fc-toolbar {
+background: var(--surface-color);
+padding: 1rem;
+border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.fc-button-primary {
+background: var(--primary-color);
+border: none;
+border-radius: var(--radius-md);
+}
+.fc-button-primary:hover {
+background: var(--primary-dark);
+}
+.fc-event {
+border-radius: var(--radius-sm);
+border: none;
+background: var(--primary-color);
+}
+/* Animations */
+@keyframes  fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+animation: fadeIn 0.5s ease-out;
+}
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.fw-bold { font-weight: 600; }
+.text-muted { color: var(--text-secondary); }
+.d-flex { display: flex; }
+.align-items-center { align-items: center; }
+.justify-content-between { justify-content: space-between; }
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 1rem; }
+.w-100 { width: 100%; }
+</style>
+</head>
+<body>
+<div class="admin-wrapper">
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<div class="brand-logo">
+<img src="/assets/front/images/hr/job_logo.png" alt="Job Labs" class="logo-img">
+<span class="brand-text">Job Labs</span>
+</div>
+<button class="sidebar-close d-lg-none" data-sidebar-toggle>
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="sidebar-user">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-indicator online"></div>
+</div>
+<div class="user-info">
+<h6 class="user-name">Dilan</h6>
+<span class="user-role">Hiring Manager</span>
+</div>
+</div>
+<nav class="sidebar-nav">
+<div class="nav-section">
+<ul class="nav-list">
+<li class="nav-item">
+<a href="/ats/hiring-manager/dashboard" class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-home"></i>
+</div>
+<span class="nav-text">Dashboard</span>
+</a>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#jobsMenu">
+<div class="nav-icon">
+<i class="fas fa-clipboard-list"></i>
+</div>
+<span class="nav-text">Job Management</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="jobsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/hiring-manager/admin/job/create" class="submenu-link">
+<i class="fas fa-plus-circle"></i>
+Post New Vacancy
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/hiring-manager/admin/job/list" class="submenu-link ">
+<i class="fas fa-edit"></i>
+Manage Vacancies
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item">
+<a href="/ats/hiring-manager/my-tickets"
+class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-headset"></i>
+</div>
+<span class="nav-text">My Support Tickets</span>
+</a>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#reportsMenu">
+<div class="nav-icon">
+<i class="fas fa-chart-bar"></i>
+</div>
+<span class="nav-text">Reports & Analytics</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="reportsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/hiring-manager/admin/report/vacancy/job/list" class="submenu-link ">
+<i class="fas fa-clipboard-check"></i>
+Vacancy Status
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/hiring-manager/admin/report/applicant/list" class="submenu-link ">
+<i class="fas fa-users"></i>
+Candidates by Company
+</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</nav>
+<div class="sidebar-footer">
+<div class="footer-actions">
+<a href="/login" class="logout-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign Out">
+<i class="fas fa-sign-out-alt"></i>
+<span>Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<div class="sidebar-overlay d-lg-none" data-sidebar-toggle></div>
+<style>
+.sidebar {
+position: fixed;
+top: 0;
+left: 0;
+width: var(--sidebar-width);
+height: 100vh;
+background: var(--sidebar-bg);
+border-right: 1px solid var(--border-color);
+z-index: 1050;
+display: flex;
+flex-direction: column;
+box-shadow: var(--shadow-lg);
+transition: var(--transition);
+}
+.sidebar-header {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+justify-content: space-between;
+min-height: var(--header-height);
+}
+.brand-logo {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+.logo-img {
+width: 40px;
+height: 40px;
+object-fit: contain;
+border-radius: 8px;
+}
+.brand-text {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-color);
+letter-spacing: -0.5px;
+}
+.sidebar-close {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 6px;
+transition: var(--transition);
+}
+.sidebar-close:hover {
+background: rgba(0, 0, 0, 0.1);
+color: var(--text-primary);
+}
+.sidebar-user {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.user-avatar {
+position: relative;
+width: 50px;
+height: 50px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-indicator {
+position: absolute;
+bottom: 2px;
+right: 2px;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-indicator.online {
+background: var(--success-color);
+}
+.user-info {
+flex: 1;
+min-width: 0;
+}
+.user-name {
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.user-role {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.sidebar-nav {
+flex: 1;
+padding: 1rem 0;
+overflow-y: auto;
+}
+.nav-list {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.nav-item {
+margin-bottom: 0.25rem;
+}
+.nav-link {
+display: flex;
+align-items: center;
+padding: 0.75rem 1.5rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+position: relative;
+border-radius: 0;
+}
+.nav-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.nav-link.active {
+background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+color: white;
+box-shadow: var(--shadow-md);
+}
+.nav-link.active::before {
+content: '';
+position: absolute;
+left: 0;
+top: 0;
+height: 100%;
+width: 4px;
+background: white;
+}
+.nav-icon {
+width: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 0.75rem;
+}
+.nav-text {
+font-size: 0.9rem;
+font-weight: 500;
+flex: 1;
+}
+.nav-arrow {
+margin-left: auto;
+transition: var(--transition);
+}
+.has-submenu .nav-arrow i {
+transform: rotate(0deg);
+transition: var(--transition);
+}
+.has-submenu.active .nav-arrow i {
+transform: rotate(90deg);
+}
+.submenu {
+background: rgba(0, 0, 0, 0.03);
+border-left: 2px solid var(--border-color);
+margin-left: 1.5rem;
+}
+.submenu-list {
+list-style: none;
+margin: 0;
+padding: 0.5rem 0;
+}
+.submenu-item {
+margin-bottom: 0.1rem;
+}
+.submenu-link {
+display: flex;
+align-items: center;
+padding: 0.6rem 1rem 0.6rem 2rem;
+color: var(--text-secondary);
+text-decoration: none;
+font-size: 0.85rem;
+transition: var(--transition);
+border-radius: 6px;
+margin: 0 1rem;
+}
+.submenu-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.submenu-link.active {
+background: var(--primary-color);
+color: white;
+}
+.submenu-link i {
+margin-right: 0.5rem;
+font-size: 0.8rem;
+}
+.sidebar-footer {
+padding: 1.5rem;
+border-top: 1px solid var(--border-color);
+margin-top: auto;
+}
+.logout-btn {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.75rem 1rem;
+color: var(--text-secondary);
+text-decoration: none;
+border-radius: 8px;
+transition: var(--transition);
+width: 100%;
+font-size: 0.9rem;
+}
+.logout-btn:hover {
+background: rgba(239, 68, 68, 0.1);
+color: var(--danger-color);
+}
+.sidebar-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1040;
+opacity: 0;
+visibility: hidden;
+transition: var(--transition);
+}
+.sidebar-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.sidebar {
+transform: translateX(-100%);
+}
+.sidebar.active {
+transform: translateX(0);
+}
+.sidebar-overlay.active {
+display: block;
+}
+}
+/* Submenu Animation */
+.submenu {
+transition: all 0.3s ease;
+}
+.submenu:not(.show) {
+max-height: 0;
+overflow: hidden;
+}
+.submenu.show {
+max-height: 500px;
+}
+/* Hover Effects */
+@media (hover: hover) {
+.nav-link:hover .nav-icon i {
+transform: scale(1.1);
+}
+.submenu-link:hover {
+transform: translateX(4px);
+}
+}
+</style>
+<script>
+(function loadUnreadBadge() {
+fetch('/unread-count', {
+headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+})
+.then(r => r.json())
+.then(data => {
+const badge = document.getElementById('unreadTicketBadge');
+if (badge && data.count > 0) {
+badge.textContent = data.count;
+badge.style.display = 'inline';
+}
+})
+.catch(() => {});
+})();
+</script>
+<div class="main-content">
+<header class="main-header">
+<div class="header-content">
+<div class="header-left">
+<button class="sidebar-toggle d-lg-none" data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</button>
+<div class="page-title">
+<h1 class="title">Dashboard</h1>
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+</nav>
+</div>
+</div>
+<div class="header-right">
+<!-- Search Bar -->
+<div class="search-container d-none d-md-flex">
+<!-- <div class="search-input-wrapper">
+<i class="fas fa-search search-icon"></i>
+<input type="text" class="search-input" placeholder="Search jobs, candidates, companies...">
+<div class="search-dropdown" id="searchDropdown">
+</div>
+</div> -->
+</div>
+<!-- Notifications -->
+<div class="header-actions">
+<!-- <div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-bell"></i>
+<span class="notification-badge">3</span>
+</button>
+<div class="dropdown-menu notification-dropdown">
+<div class="dropdown-header">
+<h6>Notifications</h6>
+<span class="badge bg-primary">3 New</span>
+</div>
+<div class="notification-list">
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-user-plus text-success"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">New Application Received</p>
+<p class="notification-text">John Doe applied for Senior Developer position</p>
+<span class="notification-time">2 minutes ago</span>
+</div>
+</div>
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-briefcase text-info"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Job Posted Successfully</p>
+<p class="notification-text">Frontend Developer position is now live</p>
+<span class="notification-time">1 hour ago</span>
+</div>
+</div>
+<div class="notification-item">
+<div class="notification-icon">
+<i class="fas fa-chart-line text-warning"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Weekly Report Ready</p>
+<p class="notification-text">Your recruitment analytics report is available</p>
+<span class="notification-time">3 hours ago</span>
+</div>
+</div>
+</div>
+<div class="dropdown-footer">
+<a href="#" class="view-all-btn">View All Notifications</a>
+</div>
+</div>
+</div> -->
+<!-- Quick Actions -->
+<div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-plus"></i>
+</button>
+<div class="dropdown-menu quick-actions-dropdown">
+<div class="dropdown-header">
+<h6>Quick Actions</h6>
+</div>
+<a href="/ats/hiring-manager/admin/job/create" class="dropdown-item">
+<i class="fas fa-plus-circle text-primary"></i>
+Post New Job
+</a>
+<!--  -->
+<div class="dropdown-divider"></div>
+<a href="/ats/hiring-manager/admin/report/vacancy/job/list" class="dropdown-item">
+<i class="fas fa-chart-bar text-warning"></i>
+View Reports
+</a>
+</div>
+</div>
+<!-- User Profile Dropdown -->
+<div class="action-item dropdown user-dropdown">
+<button class="user-profile-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-dot online"></div>
+</div>
+<div class="user-info d-none d-md-block">
+<span class="user-name">Dilan</span>
+<span class="user-role">Hiring Manager</span>
+</div>
+<i class="fas fa-chevron-down dropdown-arrow"></i>
+</button>
+<div class="dropdown-menu user-dropdown-menu">
+<div class="dropdown-header user-header">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar" class="user-avatar-large">
+<div>
+<h6>Dilan</h6>
+<p>Hiring Manager</p>
+</div>
+</div>
+<div class="dropdown-divider"></div>
+<!-- <a href="#" class="dropdown-item">
+<i class="fas fa-user-circle"></i>
+My Profile
+</a>
+<a href="#" class="dropdown-item">
+<i class="fas fa-cog"></i>
+Settings
+</a> -->
+<div class="dropdown-divider"></div>
+<a href="/login" class="dropdown-item logout-item">
+<i class="fas fa-sign-out-alt"></i>
+Sign Out
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<style>
+.main-header {
+position: fixed;
+top: 0;
+right: 0;
+left: var(--sidebar-width);
+height: var(--header-height);
+background: white;
+border-bottom: 1px solid var(--border-color);
+z-index: 1030;
+transition: var(--transition);
+box-shadow: var(--shadow-sm);
+}
+.header-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 100%;
+padding: 0 2rem;
+}
+.header-left {
+display: flex;
+align-items: center;
+gap: 1rem;
+flex: 1;
+}
+.sidebar-toggle {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 8px;
+transition: var(--transition);
+}
+.sidebar-toggle:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.page-title .title {
+font-size: 1.5rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+line-height: 1.2;
+}
+.breadcrumb-nav {
+margin-top: 0.25rem;
+}
+.breadcrumb {
+margin: 0;
+background: none;
+padding: 0;
+font-size: 0.85rem;
+}
+.breadcrumb-item {
+color: var(--text-secondary);
+}
+.breadcrumb-item.active {
+color: var(--primary-color);
+font-weight: 500;
+}
+.breadcrumb-item a {
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+}
+.breadcrumb-item a:hover {
+color: var(--primary-color);
+}
+.header-right {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.search-container {
+position: relative;
+}
+.search-input-wrapper {
+position: relative;
+width: 350px;
+}
+.search-input {
+width: 100%;
+padding: 0.75rem 1rem 0.75rem 2.5rem;
+border: 1px solid var(--border-color);
+border-radius: 25px;
+background: var(--light-bg);
+color: var(--text-primary);
+font-size: 0.9rem;
+transition: var(--transition);
+}
+.search-input:focus {
+outline: none;
+border-color: var(--primary-color);
+background: white;
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+.search-icon {
+position: absolute;
+left: 1rem;
+top: 50%;
+transform: translateY(-50%);
+color: var(--text-secondary);
+font-size: 0.9rem;
+}
+.search-dropdown {
+position: absolute;
+top: 100%;
+left: 0;
+right: 0;
+background: white;
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+max-height: 300px;
+overflow-y: auto;
+z-index: 1050;
+display: none;
+}
+.header-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.action-item {
+position: relative;
+}
+.action-btn {
+position: relative;
+background: none;
+border: none;
+width: 44px;
+height: 44px;
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--text-secondary);
+transition: var(--transition);
+font-size: 1.1rem;
+}
+.action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.notification-badge {
+position: absolute;
+top: 8px;
+right: 8px;
+background: var(--danger-color);
+color: white;
+font-size: 0.7rem;
+padding: 0.2rem 0.4rem;
+border-radius: 10px;
+min-width: 18px;
+height: 18px;
+display: flex;
+align-items: center;
+justify-content: center;
+line-height: 1;
+}
+.user-profile-btn {
+background: none;
+border: none;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.5rem;
+border-radius: 12px;
+transition: var(--transition);
+color: var(--text-primary);
+}
+.user-profile-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+}
+.user-avatar {
+position: relative;
+width: 36px;
+height: 36px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-dot {
+position: absolute;
+bottom: 0;
+right: 0;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-dot.online {
+background: var(--success-color);
+}
+.user-info {
+text-align: left;
+}
+.user-name {
+display: block;
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+line-height: 1.2;
+}
+.user-role {
+display: block;
+font-size: 0.75rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.dropdown-arrow {
+font-size: 0.8rem;
+transition: var(--transition);
+}
+.dropdown.show .dropdown-arrow {
+transform: rotate(180deg);
+}
+/* Dropdown Menus */
+.dropdown-menu {
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+padding: 0;
+min-width: 280px;
+margin-top: 0.5rem;
+}
+.dropdown-header {
+padding: 1rem 1.5rem 0.5rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid var(--border-color);
+}
+.dropdown-header h6 {
+margin: 0;
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.dropdown-item {
+padding: 0.75rem 1.5rem;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+border: none;
+background: none;
+width: 100%;
+}
+.dropdown-item:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.dropdown-item i {
+width: 16px;
+text-align: center;
+}
+.logout-item {
+color: var(--danger-color) !important;
+border-top: 1px solid var(--border-color);
+}
+.logout-item:hover {
+background: rgba(239, 68, 68, 0.1) !important;
+}
+/* Notification Dropdown */
+.notification-dropdown {
+min-width: 380px;
+max-height: 400px;
+overflow: hidden;
+}
+.notification-list {
+max-height: 300px;
+overflow-y: auto;
+}
+.notification-item {
+padding: 1rem 1.5rem;
+display: flex;
+gap: 1rem;
+border-bottom: 1px solid var(--border-color);
+transition: var(--transition);
+}
+.notification-item:last-child {
+border-bottom: none;
+}
+.notification-item:hover {
+background: var(--light-bg);
+}
+.notification-item.unread {
+background: rgba(79, 70, 229, 0.05);
+}
+.notification-icon {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+background: var(--light-bg);
+flex-shrink: 0;
+}
+.notification-content {
+flex: 1;
+min-width: 0;
+}
+.notification-title {
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+margin: 0 0 0.25rem 0;
+}
+.notification-text {
+font-size: 0.8rem;
+color: var(--text-secondary);
+margin: 0 0 0.5rem 0;
+line-height: 1.4;
+}
+.notification-time {
+font-size: 0.75rem;
+color: var(--text-secondary);
+}
+.dropdown-footer {
+padding: 0.75rem 1.5rem;
+border-top: 1px solid var(--border-color);
+text-align: center;
+}
+.view-all-btn {
+color: var(--primary-color);
+text-decoration: none;
+font-size: 0.9rem;
+font-weight: 500;
+}
+/* Quick Actions Dropdown */
+.quick-actions-dropdown {
+min-width: 220px;
+}
+/* User Dropdown */
+.user-dropdown-menu {
+min-width: 250px;
+}
+.user-header {
+display: flex;
+align-items: center;
+gap: 1rem;
+padding: 1.5rem;
+}
+.user-avatar-large {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.user-header h6 {
+margin: 0;
+font-size: 1rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.user-header p {
+margin: 0;
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.main-header {
+left: 0;
+}
+.header-content {
+padding: 0 1rem;
+}
+.search-container {
+display: none !important;
+}
+.page-title .title {
+font-size: 1.25rem;
+}
+}
+@media (max-width: 576px) {
+.header-actions {
+gap: 0.25rem;
+}
+.action-btn {
+width: 38px;
+height: 38px;
+}
+.notification-dropdown,
+.quick-actions-dropdown,
+.user-dropdown-menu {
+min-width: 280px;
+max-width: calc(100vw - 2rem);
+}
+}
+</style>
+<div class="content-wrapper fade-in">
+<div class="ats-container">
+<!-- Modern Page Header -->
+<div class="page-header fade-in">
+<div class="d-flex justify-content-between align-items-center mb-3">
+<div>
+<h1>Applicant Management</h1>
+<p>Manage and track job applications efficiently with advanced analytics</p>
+</div>
+<div class="breadcrumb">
+<a href="#"><i class="fas fa-home"></i> Dashboard</a>
+<span class="breadcrumb-separator">/</span>
+<a href="#">Applications</a>
+<span class="breadcrumb-separator">/</span>
+<span>Applicant List</span>
+</div>
+</div>
+</div>
+<!-- Modern Statistics Cards -->
+<div class="stats-grid fade-in">
+<div class="stats-card primary">
+<div class="stats-icon" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));">
+<i class="fas fa-user-plus"></i>
+</div>
+<div class="stats-number">8</div>
+<div class="stats-label">Total Applications</div>
+</div>
+<!-- <div class="stats-card success">
+<div class="stats-icon" style="background: linear-gradient(135deg, var(--success-color), #059669);">
+<i class="fas fa-clock"></i>
+</div>
+<div class="stats-number">0</div>
+<div class="stats-label">This Week</div>
+</div>
+<div class="stats-card warning">
+<div class="stats-icon" style="background: linear-gradient(135deg, var(--warning-color), #d97706);">
+<i class="fas fa-check-circle"></i>
+</div>
+<div class="stats-number">0</div>
+<div class="stats-label">Eligible to Work</div>
+</div> -->
+<div class="stats-card info">
+<div class="stats-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+<i class="fas fa-calendar-check"></i>
+</div>
+<div class="stats-number">0</div>
+<div class="stats-label">Scheduled Interviews</div>
+</div>
+</div>
+<!-- Modern Search & Filters -->
+<div class="search-section fade-in">
+<div class="search-grid">
+<div class="form-group">
+<label class="form-label">
+<i class="fas fa-search"></i>Search Candidates
+</label>
+<input type="text" class="form-control" id="searchInput" placeholder="Search by name, email, or phone...">
+</div>
+<div class="form-group">
+<label class="form-label">
+<i class="fas fa-map-marker-alt"></i>Location
+</label>
+<div class="combobox" id="locationCombo">
+<input type="text" class="form-control" id="locationInput"
+placeholder="Search or select a location..." autocomplete="off"
+role="combobox" aria-expanded="false" aria-controls="locationList">
+<i class="fas fa-chevron-down combobox-caret"></i>
+<div class="combobox-list" id="locationList" role="listbox">
+<div class="combobox-option selected" data-value="">All Locations</div>
+<div class="combobox-option" data-value="Colombo">Colombo</div>
+<div class="combobox-option" data-value="Kandy">Kandy</div>
+<div class="combobox-option" data-value="Kesbewa">Kesbewa</div>
+<div class="combobox-option" data-value="Kurunegala">Kurunegala</div>
+<div class="combobox-option" data-value="Panadura">Panadura</div>
+<div class="combobox-option" data-value="Ratnapura">Ratnapura</div>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">
+<i class="fas fa-calendar"></i>Application Date
+</label>
+<input type="date" class="form-control" id="dateFilter">
+</div>
+<div class="form-group">
+<button class="btn btn-outline w-100" id="clearFilters">
+<i class="fas fa-times"></i>Clear Filters
+</button>
+</div>
+</div>
+</div>
+<!-- Modern Calendar Section -->
+<!-- <div class="calendar-section fade-in">
+<div class="calendar-header">
+<h3 class="calendar-title">
+<i class="fas fa-calendar-alt"></i>Interview Schedule
+</h3>
+</div>
+<div id="calendar"></div>
+</div> -->
+<!-- Modern Applicants Table -->
+<div class="table-section fade-in">
+<div class="table-header">
+<div>
+<h3 class="table-title">
+<i class="fas fa-list"></i>Applicant List
+</h3>
+<small class="text-muted">Manage and review job applications</small>
+</div>
+<div class="table-actions">
+<div class="export-menu">
+<button class="btn btn-primary" id="exportBtn">
+<i class="fas fa-download"></i>Export Data
+<i class="fas fa-chevron-down"></i>
+</button>
+<div class="export-dropdown" id="exportDropdown">
+<button class="export-option" data-format="csv">
+<i class="fas fa-file-csv"></i>Export as CSV
+</button>
+<button class="export-option" data-format="excel">
+<i class="fas fa-file-excel"></i>Export as Excel
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="table-responsive">
+<table id="applicantsTable" class="display" style="width:100%">
+<thead>
+<tr>
+<th><i class="fas fa-user"></i> Candidate</th>
+<th><i class="fas fa-envelope"></i> Contact</th>
+<th><i class="fas fa-map-marker-alt"></i> Location</th>
+<!-- <th><i class="fas fa-check-circle"></i> Work Status</th> -->
+<th><i class="fas fa-clock"></i> Applied</th>
+<th><i class="fas fa-file-pdf"></i> CV</th>
+<!-- <th><i class="fas fa-briefcase"></i> Experience</th> -->
+<th><i class="fas fa-cogs"></i> Actions</th>
+<th>Email</th>
+<th>Contact Number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<div class="candidate-info">
+<div class="candidate-details">
+<h6>Mrs Hasini Wickramasinghe</h6>
+</div>
+</div>
+</td>
+<td>
+<div>
+<div class="mb-1">
+<i class="fas fa-envelope text-muted"></i>
+<small>hasiniwickramasinghe503@gmail.com</small>
+</div>
+<div>
+<i class="fas fa-phone text-muted"></i>
+<small>94-0765729903</small>
+</div>
+</div>
+</td>
+<td>
+<i class="fas fa-map-marker-alt text-muted"></i>
+Kesbewa
+</td>
+<!-- <td>
+<span class="status-badge status-not-eligible">
+<i class="fas fa-times"></i>
+Not Eligible
+</span>
+</td> -->
+<td data-date="2026-02-26" data-order="2026-02-26 12:22:00">
+<div>
+<div class="fw-bold">Feb 26, 2026</div>
+<small class="text-muted">12:22:00</small>
+</div>
+</td>
+<td>
+<a href="https://www.job-labs.lk/storage/cvs/sample-cv.pdf"
+class="btn-action btn-download" target="_blank">
+<i class="fas fa-download"></i>Download
+</a>
+</td>
+<!-- <td>
+<button class="btn-action btn-view"
+onclick="showExperienceModal('398')">
+<i class="fas fa-eye"></i>View
+</button>
+</td> -->
+<td>
+<div class="action-buttons">
+<a href="/ats/hiring-manager/admin/application/tracker/edit/398"
+class="btn-action btn-edit">
+<i class="fas fa-edit"></i>
+</a>
+<!-- <button class="btn-action btn-schedule"
+onclick="showScheduleModal('307', '2008')">
+<i class="fas fa-calendar-plus"></i>
+</button> -->
+</div>
+</td>
+<td>hasiniwickramasinghe503@gmail.com</td>
+<td>94-0765729903</td>
+</tr>
+<!-- Experience Modal -->
+<div class="modal" id="experienceModal_398">
+<div class="modal-dialog">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-user-tie"></i>
+Mrs Hasini Wickramasinghe's Profile
+</h5>
+<button type="button" class="modal-close" onclick="hideModal('experienceModal_398')">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Status
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Document Type
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Visa Category
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Customer Service Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Cash Handling Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Client Facing Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+</div>
+</div>
+</div>
+<tr>
+<td>
+<div class="candidate-info">
+<div class="candidate-details">
+<h6>Mrs Janith Perera</h6>
+</div>
+</div>
+</td>
+<td>
+<div>
+<div class="mb-1">
+<i class="fas fa-envelope text-muted"></i>
+<small>janithperera666@gmail.com</small>
+</div>
+<div>
+<i class="fas fa-phone text-muted"></i>
+<small>94-0793308837</small>
+</div>
+</div>
+</td>
+<td>
+<i class="fas fa-map-marker-alt text-muted"></i>
+Colombo
+</td>
+<!-- <td>
+<span class="status-badge status-not-eligible">
+<i class="fas fa-times"></i>
+Not Eligible
+</span>
+</td> -->
+<td data-date="2026-02-28" data-order="2026-02-28 01:19:24">
+<div>
+<div class="fw-bold">Feb 28, 2026</div>
+<small class="text-muted">01:19:24</small>
+</div>
+</td>
+<td>
+<a href="https://www.job-labs.lk/storage/cvs/sample-cv.pdf"
+class="btn-action btn-download" target="_blank">
+<i class="fas fa-download"></i>Download
+</a>
+</td>
+<!-- <td>
+<button class="btn-action btn-view"
+onclick="showExperienceModal('399')">
+<i class="fas fa-eye"></i>View
+</button>
+</td> -->
+<td>
+<div class="action-buttons">
+<a href="/ats/hiring-manager/admin/application/tracker/edit/399"
+class="btn-action btn-edit">
+<i class="fas fa-edit"></i>
+</a>
+<!-- <button class="btn-action btn-schedule"
+onclick="showScheduleModal('308', '2008')">
+<i class="fas fa-calendar-plus"></i>
+</button> -->
+</div>
+</td>
+<td>janithperera666@gmail.com</td>
+<td>94-0793308837</td>
+</tr>
+<!-- Experience Modal -->
+<div class="modal" id="experienceModal_399">
+<div class="modal-dialog">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-user-tie"></i>
+Mrs Janith Perera's Profile
+</h5>
+<button type="button" class="modal-close" onclick="hideModal('experienceModal_399')">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Status
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Document Type
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Visa Category
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Customer Service Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Cash Handling Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Client Facing Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+</div>
+</div>
+</div>
+<tr>
+<td>
+<div class="candidate-info">
+<div class="candidate-details">
+<h6>Mr Chalaka Rizvi</h6>
+</div>
+</div>
+</td>
+<td>
+<div>
+<div class="mb-1">
+<i class="fas fa-envelope text-muted"></i>
+<small>chalakarizvi494@gmail.com</small>
+</div>
+<div>
+<i class="fas fa-phone text-muted"></i>
+<small>94-0767632188</small>
+</div>
+</div>
+</td>
+<td>
+<i class="fas fa-map-marker-alt text-muted"></i>
+Colombo
+</td>
+<!-- <td>
+<span class="status-badge status-not-eligible">
+<i class="fas fa-times"></i>
+Not Eligible
+</span>
+</td> -->
+<td data-date="2026-03-19" data-order="2026-03-19 19:36:19">
+<div>
+<div class="fw-bold">Mar 19, 2026</div>
+<small class="text-muted">19:36:19</small>
+</div>
+</td>
+<td>
+<a href="https://www.job-labs.lk/storage/cvs/sample-cv.pdf"
+class="btn-action btn-download" target="_blank">
+<i class="fas fa-download"></i>Download
+</a>
+</td>
+<!-- <td>
+<button class="btn-action btn-view"
+onclick="showExperienceModal('400')">
+<i class="fas fa-eye"></i>View
+</button>
+</td> -->
+<td>
+<div class="action-buttons">
+<a href="/ats/hiring-manager/admin/application/tracker/edit/400"
+class="btn-action btn-edit">
+<i class="fas fa-edit"></i>
+</a>
+<!-- <button class="btn-action btn-schedule"
+onclick="showScheduleModal('157', '2008')">
+<i class="fas fa-calendar-plus"></i>
+</button> -->
+</div>
+</td>
+<td>chalakarizvi494@gmail.com</td>
+<td>94-0767632188</td>
+</tr>
+<!-- Experience Modal -->
+<div class="modal" id="experienceModal_400">
+<div class="modal-dialog">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-user-tie"></i>
+Mr Chalaka Rizvi's Profile
+</h5>
+<button type="button" class="modal-close" onclick="hideModal('experienceModal_400')">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Status
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Document Type
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Visa Category
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Customer Service Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Cash Handling Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Client Facing Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+</div>
+</div>
+</div>
+<tr>
+<td>
+<div class="candidate-info">
+<div class="candidate-details">
+<h6>Ms Ruvini Rizvi</h6>
+</div>
+</div>
+</td>
+<td>
+<div>
+<div class="mb-1">
+<i class="fas fa-envelope text-muted"></i>
+<small>ruvinirizvi387@gmail.com</small>
+</div>
+<div>
+<i class="fas fa-phone text-muted"></i>
+<small>94-0764128001</small>
+</div>
+</div>
+</td>
+<td>
+<i class="fas fa-map-marker-alt text-muted"></i>
+Panadura
+</td>
+<!-- <td>
+<span class="status-badge status-not-eligible">
+<i class="fas fa-times"></i>
+Not Eligible
+</span>
+</td> -->
+<td data-date="2026-03-03" data-order="2026-03-03 18:39:04">
+<div>
+<div class="fw-bold">Mar 03, 2026</div>
+<small class="text-muted">18:39:04</small>
+</div>
+</td>
+<td>
+<a href="https://www.job-labs.lk/storage/cvs/sample-cv.pdf"
+class="btn-action btn-download" target="_blank">
+<i class="fas fa-download"></i>Download
+</a>
+</td>
+<!-- <td>
+<button class="btn-action btn-view"
+onclick="showExperienceModal('401')">
+<i class="fas fa-eye"></i>View
+</button>
+</td> -->
+<td>
+<div class="action-buttons">
+<a href="#" data-mock-href="/admin/application/tracker/edit/401"
+class="btn-action btn-edit">
+<i class="fas fa-edit"></i>
+</a>
+<!-- <button class="btn-action btn-schedule"
+onclick="showScheduleModal('309', '2008')">
+<i class="fas fa-calendar-plus"></i>
+</button> -->
+</div>
+</td>
+<td>ruvinirizvi387@gmail.com</td>
+<td>94-0764128001</td>
+</tr>
+<!-- Experience Modal -->
+<div class="modal" id="experienceModal_401">
+<div class="modal-dialog">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-user-tie"></i>
+Ms Ruvini Rizvi's Profile
+</h5>
+<button type="button" class="modal-close" onclick="hideModal('experienceModal_401')">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Status
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Document Type
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Visa Category
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Customer Service Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Cash Handling Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Client Facing Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+</div>
+</div>
+</div>
+<tr>
+<td>
+<div class="candidate-info">
+<div class="candidate-details">
+<h6>Ms Saliha Kumara</h6>
+</div>
+</div>
+</td>
+<td>
+<div>
+<div class="mb-1">
+<i class="fas fa-envelope text-muted"></i>
+<small>salihakumara401@gmail.com</small>
+</div>
+<div>
+<i class="fas fa-phone text-muted"></i>
+<small>94-0794732473</small>
+</div>
+</div>
+</td>
+<td>
+<i class="fas fa-map-marker-alt text-muted"></i>
+Kandy
+</td>
+<!-- <td>
+<span class="status-badge status-not-eligible">
+<i class="fas fa-times"></i>
+Not Eligible
+</span>
+</td> -->
+<td data-date="2026-03-13" data-order="2026-03-13 07:49:44">
+<div>
+<div class="fw-bold">Mar 13, 2026</div>
+<small class="text-muted">07:49:44</small>
+</div>
+</td>
+<td>
+<a href="https://www.job-labs.lk/storage/cvs/sample-cv.pdf"
+class="btn-action btn-download" target="_blank">
+<i class="fas fa-download"></i>Download
+</a>
+</td>
+<!-- <td>
+<button class="btn-action btn-view"
+onclick="showExperienceModal('402')">
+<i class="fas fa-eye"></i>View
+</button>
+</td> -->
+<td>
+<div class="action-buttons">
+<a href="#" data-mock-href="/admin/application/tracker/edit/402"
+class="btn-action btn-edit">
+<i class="fas fa-edit"></i>
+</a>
+<!-- <button class="btn-action btn-schedule"
+onclick="showScheduleModal('50', '2008')">
+<i class="fas fa-calendar-plus"></i>
+</button> -->
+</div>
+</td>
+<td>salihakumara401@gmail.com</td>
+<td>94-0794732473</td>
+</tr>
+<!-- Experience Modal -->
+<div class="modal" id="experienceModal_402">
+<div class="modal-dialog">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-user-tie"></i>
+Ms Saliha Kumara's Profile
+</h5>
+<button type="button" class="modal-close" onclick="hideModal('experienceModal_402')">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Status
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Document Type
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Visa Category
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Customer Service Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Cash Handling Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Client Facing Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+</div>
+</div>
+</div>
+<tr>
+<td>
+<div class="candidate-info">
+<div class="candidate-details">
+<h6>Ms Dinuka Herath</h6>
+</div>
+</div>
+</td>
+<td>
+<div>
+<div class="mb-1">
+<i class="fas fa-envelope text-muted"></i>
+<small>dinukaherath627@gmail.com</small>
+</div>
+<div>
+<i class="fas fa-phone text-muted"></i>
+<small>94-0746759498</small>
+</div>
+</div>
+</td>
+<td>
+<i class="fas fa-map-marker-alt text-muted"></i>
+Ratnapura
+</td>
+<!-- <td>
+<span class="status-badge status-not-eligible">
+<i class="fas fa-times"></i>
+Not Eligible
+</span>
+</td> -->
+<td data-date="2026-03-20" data-order="2026-03-20 00:39:10">
+<div>
+<div class="fw-bold">Mar 20, 2026</div>
+<small class="text-muted">00:39:10</small>
+</div>
+</td>
+<td>
+<a href="https://www.job-labs.lk/storage/cvs/sample-cv.pdf"
+class="btn-action btn-download" target="_blank">
+<i class="fas fa-download"></i>Download
+</a>
+</td>
+<!-- <td>
+<button class="btn-action btn-view"
+onclick="showExperienceModal('403')">
+<i class="fas fa-eye"></i>View
+</button>
+</td> -->
+<td>
+<div class="action-buttons">
+<a href="#" data-mock-href="/admin/application/tracker/edit/403"
+class="btn-action btn-edit">
+<i class="fas fa-edit"></i>
+</a>
+<!-- <button class="btn-action btn-schedule"
+onclick="showScheduleModal('310', '2008')">
+<i class="fas fa-calendar-plus"></i>
+</button> -->
+</div>
+</td>
+<td>dinukaherath627@gmail.com</td>
+<td>94-0746759498</td>
+</tr>
+<!-- Experience Modal -->
+<div class="modal" id="experienceModal_403">
+<div class="modal-dialog">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-user-tie"></i>
+Ms Dinuka Herath's Profile
+</h5>
+<button type="button" class="modal-close" onclick="hideModal('experienceModal_403')">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Status
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Document Type
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Visa Category
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Customer Service Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Cash Handling Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Client Facing Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+</div>
+</div>
+</div>
+<tr>
+<td>
+<div class="candidate-info">
+<div class="candidate-details">
+<h6>Ms Priya Weerasinghe</h6>
+</div>
+</div>
+</td>
+<td>
+<div>
+<div class="mb-1">
+<i class="fas fa-envelope text-muted"></i>
+<small>priyaweerasinghe504@gmail.com</small>
+</div>
+<div>
+<i class="fas fa-phone text-muted"></i>
+<small>94-0778306790</small>
+</div>
+</div>
+</td>
+<td>
+<i class="fas fa-map-marker-alt text-muted"></i>
+Kurunegala
+</td>
+<!-- <td>
+<span class="status-badge status-not-eligible">
+<i class="fas fa-times"></i>
+Not Eligible
+</span>
+</td> -->
+<td data-date="2026-03-16" data-order="2026-03-16 01:32:31">
+<div>
+<div class="fw-bold">Mar 16, 2026</div>
+<small class="text-muted">01:32:31</small>
+</div>
+</td>
+<td>
+<a href="https://www.job-labs.lk/storage/cvs/sample-cv.pdf"
+class="btn-action btn-download" target="_blank">
+<i class="fas fa-download"></i>Download
+</a>
+</td>
+<!-- <td>
+<button class="btn-action btn-view"
+onclick="showExperienceModal('404')">
+<i class="fas fa-eye"></i>View
+</button>
+</td> -->
+<td>
+<div class="action-buttons">
+<a href="#" data-mock-href="/admin/application/tracker/edit/404"
+class="btn-action btn-edit">
+<i class="fas fa-edit"></i>
+</a>
+<!-- <button class="btn-action btn-schedule"
+onclick="showScheduleModal('165', '2008')">
+<i class="fas fa-calendar-plus"></i>
+</button> -->
+</div>
+</td>
+<td>priyaweerasinghe504@gmail.com</td>
+<td>94-0778306790</td>
+</tr>
+<!-- Experience Modal -->
+<div class="modal" id="experienceModal_404">
+<div class="modal-dialog">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-user-tie"></i>
+Ms Priya Weerasinghe's Profile
+</h5>
+<button type="button" class="modal-close" onclick="hideModal('experienceModal_404')">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Status
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Document Type
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Visa Category
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Customer Service Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Cash Handling Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Client Facing Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+</div>
+</div>
+</div>
+<tr>
+<td>
+<div class="candidate-info">
+<div class="candidate-details">
+<h6>Ms Shehani Abeysekara</h6>
+</div>
+</div>
+</td>
+<td>
+<div>
+<div class="mb-1">
+<i class="fas fa-envelope text-muted"></i>
+<small>shehaniabeysekara29@gmail.com</small>
+</div>
+<div>
+<i class="fas fa-phone text-muted"></i>
+<small>94-0720134444</small>
+</div>
+</div>
+</td>
+<td>
+<i class="fas fa-map-marker-alt text-muted"></i>
+Ratnapura
+</td>
+<!-- <td>
+<span class="status-badge status-not-eligible">
+<i class="fas fa-times"></i>
+Not Eligible
+</span>
+</td> -->
+<td data-date="2026-03-08" data-order="2026-03-08 05:45:33">
+<div>
+<div class="fw-bold">Mar 08, 2026</div>
+<small class="text-muted">05:45:33</small>
+</div>
+</td>
+<td>
+<a href="https://www.job-labs.lk/storage/cvs/sample-cv.pdf"
+class="btn-action btn-download" target="_blank">
+<i class="fas fa-download"></i>Download
+</a>
+</td>
+<!-- <td>
+<button class="btn-action btn-view"
+onclick="showExperienceModal('405')">
+<i class="fas fa-eye"></i>View
+</button>
+</td> -->
+<td>
+<div class="action-buttons">
+<a href="#" data-mock-href="/admin/application/tracker/edit/405"
+class="btn-action btn-edit">
+<i class="fas fa-edit"></i>
+</a>
+<!-- <button class="btn-action btn-schedule"
+onclick="showScheduleModal('311', '2008')">
+<i class="fas fa-calendar-plus"></i>
+</button> -->
+</div>
+</td>
+<td>shehaniabeysekara29@gmail.com</td>
+<td>94-0720134444</td>
+</tr>
+<!-- Experience Modal -->
+<div class="modal" id="experienceModal_405">
+<div class="modal-dialog">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-user-tie"></i>
+Ms Shehani Abeysekara's Profile
+</h5>
+<button type="button" class="modal-close" onclick="hideModal('experienceModal_405')">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Status
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Right To Work Document Type
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Visa Category
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Customer Service Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Cash Handling Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-label">
+<i class="fas fa-info-circle"></i>Years of Client Facing Experience
+</div>
+<div class="experience-value">
+Not Applicable
+</div>
+</div>
+</div>
+</div>
+</div>
+</tbody>
+</table>
+</div>
+<!-- Loading Spinner -->
+<div class="loading-spinner" id="loadingSpinner">
+<div class="spinner"></div>
+<p>Loading applicants...</p>
+</div>
+</div>
+</div>
+<!-- Schedule Modal -->
+<div class="modal" id="scheduleModal">
+<div class="modal-dialog">
+<form id="scheduleForm">
+<input type="hidden" name="_token" value="ZNM3xvi19NB2RoKJoM2AV4yHkDulPCwGcV5MKo7u">            <input type="hidden" name="candidate_id" id="modal_candidate_id">
+<input type="hidden" name="job_id" id="modal_job_id">
+<input type="hidden" name="meeting_id" id="modal_meeting_id">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-calendar-plus"></i>Schedule Interview
+</h5>
+<button type="button" class="modal-close" onclick="hideModal('scheduleModal')">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="search-grid">
+<div class="form-group">
+<label class="form-label">
+<i class="fas fa-video"></i>Platform
+</label>
+<select name="platform" class="form-control">
+<option value="zoom">Zoom Meeting</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label">
+<i class="fas fa-clock"></i>Date & Time
+</label>
+<input type="datetime-local" name="start_time" class="form-control" required>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">
+<i class="fas fa-sticky-note"></i>Notes
+</label>
+<textarea name="notes" class="form-control" rows="4" placeholder="Add any additional notes for the interview..."></textarea>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" onclick="hideModal('scheduleModal')">
+<i class="fas fa-times"></i>Cancel
+</button>
+<button type="button" class="btn btn-primary" id="scheduleBtn">
+<i class="fas fa-calendar-check"></i>Schedule Interview
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="footer-content">
+<div class="footer-left">
+<p class="copyright">
+© 2026 <strong>Job Labs</strong> ATS. All rights reserved.
+</p>
+<div class="footer-links">
+<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+<a href="/terms-of-service" class="footer-link">Terms of Service</a>
+<a href="/cookie-policy" class="footer-link">Support</a>
+</div>
+</div>
+<div class="footer-right">
+<div class="system-status">
+<div class="status-indicator online"></div>
+<span class="status-text">All systems operational</span>
+</div>
+<div class="footer-actions">
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Help & Support">
+<i class="fas fa-question-circle"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Feedback">
+<i class="fas fa-comment-alt"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Keyboard Shortcuts">
+<i class="fas fa-keyboard"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Version and Environment Info (for development) -->
+<!--     <div class="debug-info">
+<small class="text-muted">
+Version 2.0.1 | PHP 8.3.6 | Laravel 8.83.29
+</small>
+</div>
+-->
+</footer>
+<style>
+.main-footer {
+background: white;
+border-top: 1px solid var(--border-color);
+padding: 1rem 2rem;
+margin-top: auto;
+min-height: 60px;
+position: relative;
+}
+.footer-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 2rem;
+}
+.footer-left {
+display: flex;
+align-items: center;
+gap: 2rem;
+flex: 1;
+}
+.copyright {
+margin: 0;
+font-size: 0.85rem;
+color: var(--text-secondary);
+}
+.copyright strong {
+color: var(--primary-color);
+font-weight: 600;
+}
+.footer-links {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.footer-link {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+padding: 0.25rem 0;
+position: relative;
+}
+.footer-link:hover {
+color: var(--primary-color);
+}
+.footer-link::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--primary-color);
+transition: var(--transition);
+}
+.footer-link:hover::after {
+width: 100%;
+}
+.footer-right {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.system-status {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.5rem 1rem;
+background: rgba(16, 185, 129, 0.1);
+border-radius: 20px;
+border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.status-indicator {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+}
+.status-indicator.online {
+background: var(--success-color);
+box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+animation: pulse 2s infinite;
+}
+.status-indicator.warning {
+background: var(--warning-color);
+box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+}
+.status-indicator.offline {
+background: var(--danger-color);
+box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+}
+.status-text {
+font-size: 0.8rem;
+color: var(--success-color);
+font-weight: 500;
+}
+@keyframes  pulse {
+0% {
+transform: scale(1);
+}
+50% {
+transform: scale(1.1);
+}
+100% {
+transform: scale(1);
+}
+}
+.footer-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.footer-action-btn {
+width: 32px;
+height: 32px;
+border: none;
+background: rgba(107, 114, 128, 0.1);
+color: var(--text-secondary);
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(--transition);
+font-size: 0.9rem;
+}
+.footer-action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+transform: translateY(-1px);
+}
+.debug-info {
+position: absolute;
+bottom: 0;
+right: 2rem;
+transform: translateY(100%);
+background: rgba(0, 0, 0, 0.8);
+color: white;
+padding: 0.25rem 0.75rem;
+border-radius: 0 0 8px 8px;
+font-family: 'Courier New', monospace;
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.main-footer {
+padding: 1rem;
+}
+.footer-content {
+flex-direction: column;
+gap: 1rem;
+text-align: center;
+}
+.footer-left {
+flex-direction: column;
+gap: 1rem;
+align-items: center;
+}
+.footer-links {
+justify-content: center;
+}
+.footer-right {
+justify-content: center;
+}
+.system-status {
+order: -1;
+}
+}
+@media (max-width: 576px) {
+.footer-links {
+flex-wrap: wrap;
+gap: 1rem;
+}
+.footer-actions {
+gap: 0.25rem;
+}
+.footer-action-btn {
+width: 28px;
+height: 28px;
+font-size: 0.8rem;
+}
+}
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+.main-footer {
+background: var(--sidebar-bg);
+border-color: var(--border-color);
+}
+.debug-info {
+background: rgba(255, 255, 255, 0.1);
+color: var(--text-primary);
+}
+}
+/* Print styles */
+@media  print {
+.main-footer {
+display: none;
+}
+}
+/* High contrast mode */
+@media (prefers-contrast: high) {
+.footer-link {
+text-decoration: underline;
+}
+.status-indicator {
+border: 2px solid currentColor;
+}
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+.status-indicator.online {
+animation: none;
+}
+.footer-action-btn:hover {
+transform: none;
+}
+.footer-link::after {
+transition: none;
+}
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// System status simulation (replace with real API call)
+function updateSystemStatus() {
+const statusIndicator = document.querySelector('.status-indicator');
+const statusText = document.querySelector('.status-text');
+if (!statusIndicator || !statusText) return;
+// Simulate API call to check system status
+// Replace this with actual system health check
+const systemHealth = {
+database: true,
+cache: true,
+mail: true,
+storage: true
+};
+const allSystemsUp = Object.values(systemHealth).every(status => status);
+if (allSystemsUp) {
+statusIndicator.className = 'status-indicator online';
+statusText.textContent = 'All systems operational';
+statusText.style.color = 'var(--success-color)';
+} else {
+statusIndicator.className = 'status-indicator warning';
+statusText.textContent = 'Some services degraded';
+statusText.style.color = 'var(--warning-color)';
+}
+}
+// Update status every 30 seconds
+updateSystemStatus();
+setInterval(updateSystemStatus, 30000);
+// Keyboard shortcuts handler
+const keyboardBtn = document.querySelector('.footer-action-btn:last-child');
+if (keyboardBtn) {
+keyboardBtn.addEventListener('click', function() {
+showKeyboardShortcuts();
+});
+}
+// Help and support handler
+const helpBtn = document.querySelector('.footer-action-btn:first-child');
+if (helpBtn) {
+helpBtn.addEventListener('click', function() {
+// You can integrate with your help system here
+window.open('#', '_blank');
+});
+}
+// Feedback handler
+const feedbackBtn = document.querySelector('.footer-action-btn:nth-child(2)');
+if (feedbackBtn) {
+feedbackBtn.addEventListener('click', function() {
+// You can integrate with your feedback system here
+showFeedbackModal();
+});
+}
+});
+function showKeyboardShortcuts() {
+// Create modal for keyboard shortcuts
+const shortcuts = [
+{ key: 'Ctrl + /', description: 'Show keyboard shortcuts' },
+{ key: 'Ctrl + N', description: 'Create new job posting' },
+{ key: 'Ctrl + S', description: 'Save current form' },
+{ key: 'Esc', description: 'Close modal or cancel action' },
+{ key: 'Tab', description: 'Navigate between form fields' }
+];
+let shortcutsHtml = '<div class="keyboard-shortcuts-modal">';
+shortcutsHtml += '<h5>Keyboard Shortcuts</h5>';
+shortcutsHtml += '<div class="shortcuts-list">';
+shortcuts.forEach(shortcut => {
+shortcutsHtml += `
+<div class="shortcut-item">
+<kbd>${shortcut.key}</kbd>
+<span>${shortcut.description}</span>
+</div>
+`;
+});
+shortcutsHtml += '</div></div>';
+// You can implement modal display logic here
+console.log('Keyboard shortcuts:', shortcuts);
+}
+function showFeedbackModal() {
+// Implement feedback modal
+console.log('Show feedback modal');
+}
+</script>        </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery (if needed) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Custom JS -->
+<script>
+// Global JavaScript utilities
+document.addEventListener('DOMContentLoaded', function() {
+// Initialize tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+// Initialize popovers
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+return new bootstrap.Popover(popoverTriggerEl);
+});
+// Mobile sidebar toggle - the header menu button, the sidebar close
+// button and the dark overlay all open/close the sidebar.
+// (Before, only the FIRST [data-sidebar-toggle] - the hidden close
+// button inside the sidebar - was wired, so the menu button on
+// phones/tablets did nothing.)
+const sidebar = document.querySelector('.sidebar');
+const sidebarOverlay = document.querySelector('.sidebar-overlay');
+if (sidebar) {
+document.querySelectorAll('[data-sidebar-toggle]').forEach(function (btn) {
+btn.addEventListener('click', function (e) {
+e.preventDefault();
+const open = !sidebar.classList.contains('active');
+sidebar.classList.toggle('active', open);
+if (sidebarOverlay) { sidebarOverlay.classList.toggle('active', open); }
+});
+});
+}
+// Auto-hide alerts
+setTimeout(function() {
+const alerts = document.querySelectorAll('.alert');
+alerts.forEach(function(alert) {
+const bsAlert = new bootstrap.Alert(alert);
+bsAlert.close();
+});
+}, 5000);
+});
+// CSRF token setup for AJAX requests
+if (typeof $ !== 'undefined') {
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+}
+// Security features
+document.addEventListener('contextmenu', function(e) {
+e.preventDefault();
+});
+document.addEventListener('keydown', function(e) {
+// Disable F12
+if (e.keyCode === 123) {
+return false;
+}
+// Disable Ctrl+Shift+I
+if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+return false;
+}
+// Disable Ctrl+Shift+J
+if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+return false;
+}
+// Disable Ctrl+U
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+});
+</script>
+<!-- Modern CDN Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+<script>
+// Modern JavaScript Implementation
+class ApplicantTracker {
+constructor() {
+this.table = null;
+this.calendar = null;
+this.init();
+}
+init() {
+this.initDataTable();
+this.initCalendar();
+this.initEventListeners();
+this.initFilters();
+this.setupCSRF();
+}
+initDataTable() {
+this.table = $('#applicantsTable').DataTable({
+responsive: true,
+pageLength: 25,
+lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+dom: 'Bfrtip',
+buttons: [
+{
+extend: 'csvHtml5',
+text: '<i class="fas fa-file-csv"></i> CSV',
+className: 'btn btn-primary btn-sm',
+exportOptions: {
+// Candidate, Email, Contact Number, Location, Applied
+columns: [0, 6, 7, 2, 3]
+},
+filename: 'applicants_' + new Date().toISOString().split('T')[0]
+},
+{
+extend: 'excelHtml5',
+text: '<i class="fas fa-file-excel"></i> Excel',
+className: 'btn btn-success btn-sm',
+exportOptions: {
+// Candidate, Email, Contact Number, Location, Applied
+columns: [0, 6, 7, 2, 3]
+},
+filename: 'applicants_' + new Date().toISOString().split('T')[0]
+}
+],
+language: {
+search: "Search applicants:",
+lengthMenu: "Show _MENU_ applicants per page",
+info: "Showing _START_ to _END_ of _TOTAL_ applicants",
+paginate: {
+first: "First",
+last: "Last",
+next: "Next",
+previous: "Previous"
+}
+},
+columnDefs: [
+// { orderable: false, targets: [6, 7] },
+// { className: "text-center", targets: [4, 5, 6, 7] }
+{ orderable: false, targets: [4, 5] },
+{ className: "text-center", targets: [3, 4, 5] },
+// Email + Contact Number: hidden on screen, included in exports
+{ visible: false, targets: [6, 7] }
+],
+// Newest applications first
+order: [[3, 'desc']],
+drawCallback: () => {
+this.hideLoading();
+}
+});
+// Hide DataTables buttons (we'll use custom ones)
+$('.dt-buttons').hide();
+}
+initCalendar() {
+const calendarEl = document.getElementById('calendar');
+if (calendarEl) {
+this.calendar = new FullCalendar.Calendar(calendarEl, {
+initialView: 'dayGridMonth',
+height: 'auto',
+headerToolbar: {
+left: 'prev,next today',
+center: 'title',
+right: 'dayGridMonth,timeGridWeek,listWeek'
+},
+buttonText: {
+today: 'Today',
+month: 'Month',
+week: 'Week',
+list: 'List'
+},
+events: '/interview/meetings',
+eventDisplay: 'block',
+eventColor: 'var(--primary-color)',
+eventTextColor: '#ffffff',
+eventClick: (info) => {
+this.handleCalendarEventClick(info);
+},
+loading: (bool) => {
+if (bool) {
+this.showLoading();
+} else {
+this.hideLoading();
+}
+}
+});
+this.calendar.render();
+}
+}
+initEventListeners() {
+// Search functionality
+$('#searchInput').on('keyup', (e) => {
+this.table.search(e.target.value).draw();
+});
+// Eligibility filter
+// $('#eligibilityFilter').on('change', (e) => {
+//     const value = e.target.value;
+//     if (value) {
+//         this.table.column(3).search(value).draw();
+//     } else {
+//         this.table.column(3).search('').draw();
+//     }
+// });
+// Date filter (always redraw so clearing the date also resets it)
+$('#dateFilter').on('change', () => {
+this.table.draw();
+});
+// Clear filters
+$('#clearFilters').on('click', () => {
+$('#searchInput').val('');
+// $('#eligibilityFilter').val('');
+$('#dateFilter').val('');
+this.setLocation('', 'All Locations');
+this.closeLocationList();
+this.table.search('').columns().search('').draw();
+});
+// Export dropdown
+$('#exportBtn').on('click', (e) => {
+e.stopPropagation();
+$('#exportDropdown').toggleClass('show');
+});
+// Export options
+$('.export-option').on('click', (e) => {
+const format = e.currentTarget.dataset.format;
+if (format === 'csv') {
+this.table.button('.buttons-csv').trigger();
+} else if (format === 'excel') {
+this.table.button('.buttons-excel').trigger();
+}
+$('#exportDropdown').removeClass('show');
+});
+// Schedule button
+$('#scheduleBtn').on('click', () => {
+this.handleScheduleSubmit();
+});
+// Close dropdowns when clicking outside
+$(document).on('click', (e) => {
+if (!$(e.target).closest('.export-menu').length) {
+$('#exportDropdown').removeClass('show');
+}
+});
+// Modal close on background click
+$('.modal').on('click', function(e) {
+if (e.target === this) {
+window.atsApp.hideModal(this.id);
+}
+});
+}
+setupCSRF() {
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+}
+initFilters() {
+// ---- Application date filter (compares the data-date attr on column 3) ----
+$.fn.dataTable.ext.search.push((settings, rowData, dataIndex) => {
+if (settings.nTable.id !== 'applicantsTable') return true;
+const selected = $('#dateFilter').val();
+if (!selected) return true;
+const cells = settings.aoData[dataIndex].anCells;
+const cellNode = cells ? cells[3] : null;
+const rowDate = cellNode ? cellNode.getAttribute('data-date') : '';
+return rowDate === selected;
+});
+// ---- Location searchable combobox ----
+this.locationValue = '';
+const combo = $('#locationCombo');
+const input = $('#locationInput');
+const list = $('#locationList');
+// Open the dropdown on focus / click
+input.on('focus click', () => this.openLocationList());
+combo.find('.combobox-caret').on('click', (e) => {
+e.stopPropagation();
+if (combo.hasClass('open')) {
+this.closeLocationList();
+} else {
+this.openLocationList();
+}
+input.focus();
+});
+// Typing filters both the option list and the table (live "search by typing")
+input.on('input', () => {
+const term = input.val().toLowerCase().trim();
+this.openLocationList();
+let visible = 0;
+list.find('.combobox-option').each(function () {
+const opt = $(this);
+if (String(opt.data('value')) === '') { opt.hide(); return; } // hide "All" while typing
+const match = opt.text().toLowerCase().indexOf(term) !== -1;
+opt.toggle(match);
+if (match) visible++;
+});
+list.find('.combobox-empty').remove();
+if (visible === 0) {
+list.append('<div class="combobox-empty">No matching locations</div>');
+}
+this.locationValue = input.val().trim();
+this.applyLocationFilter(this.locationValue);
+});
+// Pick an option from the dropdown
+list.on('click', '.combobox-option', (e) => {
+const opt = $(e.currentTarget);
+const value = String(opt.data('value'));
+this.setLocation(value, opt.text());
+this.closeLocationList();
+});
+// Escape closes the dropdown
+input.on('keydown', (e) => {
+if (e.key === 'Escape') this.closeLocationList();
+});
+// Close when clicking outside the combobox
+$(document).on('click', (e) => {
+if (!$(e.target).closest('#locationCombo').length) {
+this.closeLocationList();
+}
+});
+}
+openLocationList() {
+$('#locationCombo').addClass('open');
+$('#locationInput').attr('aria-expanded', 'true');
+}
+closeLocationList() {
+$('#locationCombo').removeClass('open');
+$('#locationInput').attr('aria-expanded', 'false');
+// restore the full option list for the next time it opens
+$('#locationList .combobox-empty').remove();
+$('#locationList .combobox-option').show();
+}
+setLocation(value, text) {
+this.locationValue = value;
+$('#locationInput').val(value === '' ? '' : text);
+const options = $('#locationList .combobox-option').removeClass('selected');
+options.filter(function () {
+return String($(this).data('value')) === String(value);
+}).addClass('selected');
+this.applyLocationFilter(value);
+}
+applyLocationFilter(value) {
+// Smart "contains" match on the Location column (index 2)
+this.table.column(2).search(value ? value : '', false, true).draw();
+}
+showExperienceModal(applicationId) {
+this.showModal(`experienceModal_${applicationId}`);
+}
+showScheduleModal(candidateId, jobId) {
+$('#modal_candidate_id').val(candidateId);
+$('#modal_job_id').val(jobId);
+$('#scheduleForm')[0].reset();
+$('#modal_meeting_id').val('');
+$('#scheduleBtn').html('<i class="fas fa-calendar-check"></i> Schedule Interview');
+this.showModal('scheduleModal');
+}
+showModal(modalId) {
+$(`#${modalId}`).addClass('show');
+document.body.style.overflow = 'hidden';
+}
+hideModal(modalId) {
+$(`#${modalId}`).removeClass('show');
+document.body.style.overflow = 'auto';
+}
+handleCalendarEventClick(info) {
+const meeting = info.event.extendedProps;
+const start = new Date(info.event.start).toISOString().slice(0, 16);
+$('#modal_candidate_id').val(meeting.candidate_id);
+$('#modal_job_id').val(meeting.job_id);
+$('#modal_meeting_id').val(meeting.id);
+$('select[name="platform"]').val(meeting.platform);
+$('input[name="start_time"]').val(start);
+$('textarea[name="notes"]').val(meeting.notes || '');
+$('#scheduleBtn').html('<i class="fas fa-edit"></i> Update Interview');
+if (meeting.host_link) {
+const startMeetingBtn = `
+<button type="button" class="btn btn-success" onclick="window.open('${meeting.host_link}', '_blank')">
+<i class="fas fa-video"></i> Start Meeting
+</button>
+`;
+$('#scheduleBtn').before(startMeetingBtn);
+}
+this.showModal('scheduleModal');
+}
+handleScheduleSubmit() {
+const form = $('#scheduleForm');
+const button = $('#scheduleBtn');
+const formData = {
+candidate_id: $('#modal_candidate_id').val(),
+job_id: $('#modal_job_id').val(),
+platform: form.find('select[name="platform"]').val(),
+start_time: form.find('input[name="start_time"]').val(),
+notes: form.find('textarea[name="notes"]').val()
+};
+if (!formData.start_time) {
+this.showNotification('Please select a date and time for the interview.', 'error');
+return;
+}
+const meetingId = $('#modal_meeting_id').val();
+const url = meetingId ? `/interview/schedule/${meetingId}` : '/interview/schedule';
+const method = meetingId ? 'PUT' : 'POST';
+button.prop('disabled', true).html(
+'<div class="spinner"></div>' + (meetingId ? 'Updating...' : 'Scheduling...')
+);
+$.ajax({
+url: url,
+type: method,
+data: formData,
+success: (response) => {
+this.hideModal('scheduleModal');
+this.showNotification(
+meetingId ? 'Interview updated successfully!' : 'Interview scheduled successfully!',
+'success'
+);
+if (this.calendar) {
+this.calendar.refetchEvents();
+}
+form[0].reset();
+$('#modal_meeting_id').val('');
+},
+error: (xhr) => {
+let errorMessage = 'Error scheduling interview:\n';
+if (xhr.responseJSON && xhr.responseJSON.errors) {
+const errors = xhr.responseJSON.errors;
+for (let field in errors) {
+errorMessage += errors[field][0] + '\n';
+}
+} else {
+errorMessage += 'An unexpected error occurred. Please try again.';
+}
+this.showNotification(errorMessage, 'error');
+},
+complete: () => {
+button.prop('disabled', false).html('<i class="fas fa-calendar-check"></i> Schedule Interview');
+}
+});
+}
+showNotification(message, type = 'info') {
+const notification = document.createElement('div');
+notification.className = `notification notification-${type}`;
+notification.innerHTML = `
+<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+${message}
+<button class="notification-close" onclick="this.parentElement.remove()">
+<i class="fas fa-times"></i>
+</button>
+`;
+document.body.appendChild(notification);
+setTimeout(() => {
+notification.remove();
+}, 5000);
+}
+showLoading() {
+$('#loadingSpinner').show();
+}
+hideLoading() {
+$('#loadingSpinner').hide();
+}
+}
+// Global functions for onclick handlers
+function showExperienceModal(applicationId) {
+window.atsApp.showExperienceModal(applicationId);
+}
+function showScheduleModal(candidateId, jobId) {
+window.atsApp.showScheduleModal(candidateId, jobId);
+}
+function hideModal(modalId) {
+window.atsApp.hideModal(modalId);
+}
+// Initialize the application
+$(document).ready(() => {
+window.atsApp = new ApplicantTracker();
+});
+// Add notification styles
+const notificationStyles = `
+<style>
+.notification {
+position: fixed;
+top: 20px;
+right: 20px;
+background: white;
+padding: 1rem 1.5rem;
+border-radius: var(--radius-lg);
+box-shadow: var(--shadow-xl);
+border-left: 4px solid var(--primary-color);
+z-index: 10000;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+max-width: 400px;
+animation: slideIn 0.3s ease-out;
+}
+.notification-success {
+border-left-color: var(--success-color);
+color: var(--success-color);
+}
+.notification-error {
+border-left-color: var(--danger-color);
+color: var(--danger-color);
+}
+.notification-close {
+background: none;
+border: none;
+cursor: pointer;
+padding: 0.25rem;
+margin-left: auto;
+opacity: 0.6;
+transition: opacity 0.2s ease;
+}
+.notification-close:hover {
+opacity: 1;
+}
+@keyframes  slideIn {
+from {
+transform: translateX(100%);
+opacity: 0;
+}
+to {
+transform: translateX(0);
+opacity: 1;
+}
+}
+</style>
+`;
+document.head.insertAdjacentHTML('beforeend', notificationStyles);
+</script>
+</body>
+</html>

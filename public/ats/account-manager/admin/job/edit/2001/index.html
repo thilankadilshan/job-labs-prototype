@@ -1,0 +1,3116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow"><script>window.__ATS_ROLE="account-manager";window.__ATS_ROLE_LABEL="Account Manager";window.__ATS_BASE="/ats/account-manager";</script><script src="/js/ats-mock-data-account-manager.js"></script><script src="/js/ats-mock.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="csrf-token" content="mDqX7nAfvAk2yIMrL0PVDp9WuYmE0LGCQ5FhQgvF">
+<!-- SEO Meta Tags -->
+<meta name="description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta name="keywords" content="ATS, recruitment, job management, admin panel, dashboard">
+<meta name="author" content="Job Labs">
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="ATS Dashboard - Job Labs">
+<meta property="og:description" content="Advanced ATS Dashboard - Manage job postings, applications, and recruitment processes efficiently">
+<meta property="og:url" content="/admin/job/edit/2001">
+<meta property="og:image" content="/assets/images/job_logo.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Job Labs ATS">
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ATS Dashboard - Job Labs">
+<meta name="twitter:description" content="Advanced ATS Dashboard for efficient recruitment management">
+<meta name="twitter:image" content="/assets/images/job_logo.png">
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<title>ATS Dashboard - Job Labs</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<style>
+:root {
+--primary-color: #4f46e5;
+--primary-dark: #4338ca;
+--secondary-color: #6b7280;
+--success-color: #10b981;
+--warning-color: #f59e0b;
+--danger-color: #ef4444;
+--info-color: #3b82f6;
+--light-bg: #f8fafc;
+--dark-bg: #1e293b;
+--sidebar-bg: #ffffff;
+--sidebar-width: 260px;
+--header-height: 70px;
+--border-color: #e2e8f0;
+--text-primary: #1e293b;
+--text-secondary: #64748b;
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+--border-radius: 8px;
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--light-bg);
+color: var(--text-primary);
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+width: 6px;
+}
+::-webkit-scrollbar-track {
+background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+background: #cbd5e1;
+border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #94a3b8;
+}
+/* Layout Structure */
+.admin-wrapper {
+display: flex;
+min-height: 100vh;
+}
+.main-content {
+flex: 1;
+margin-left: var(--sidebar-width);
+transition: var(--transition);
+background-color: var(--light-bg);
+}
+.content-wrapper {
+padding: 2rem;
+min-height: calc(100vh - var(--header-height));
+margin-top: var(--header-height);
+}
+/* Responsive Design */
+@media (max-width: 992px) {
+.main-content {
+margin-left: 0;
+}
+.content-wrapper {
+padding: 1rem;
+}
+}
+/* Custom Components */
+.card {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+box-shadow: var(--shadow-sm);
+transition: var(--transition);
+background: white;
+}
+.card:hover {
+box-shadow: var(--shadow-md);
+}
+.btn {
+border-radius: var(--border-radius);
+font-weight: 500;
+transition: var(--transition);
+border: none;
+padding: 0.75rem 1.5rem;
+}
+.btn-primary {
+background-color: var(--primary-color);
+color: white;
+}
+.btn-primary:hover {
+background-color: var(--primary-dark);
+transform: translateY(-1px);
+box-shadow: var(--shadow-md);
+}
+.form-control {
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+padding: 0.75rem;
+transition: var(--transition);
+}
+.form-control:focus {
+border-color: var(--primary-color);
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+/* Utility Classes */
+.text-primary-custom {
+color: var(--primary-color) !important;
+}
+.bg-primary-custom {
+background-color: var(--primary-color) !important;
+}
+.border-primary-custom {
+border-color: var(--primary-color) !important;
+}
+/* Animation Classes */
+.fade-in {
+animation: fadeIn 0.5s ease-in;
+}
+@keyframes  fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.slide-in {
+animation: slideIn 0.3s ease-out;
+}
+@keyframes  slideIn {
+from { transform: translateX(-100%); }
+to { transform: translateX(0); }
+}
+/* Loading States */
+.loading {
+opacity: 0.6;
+pointer-events: none;
+}
+.spinner {
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 3px solid rgba(255, 255, 255, 0.3);
+border-radius: 50%;
+border-top-color: #fff;
+animation: spin 1s ease-in-out infinite;
+}
+@keyframes  spin {
+to { transform: rotate(360deg); }
+}
+/* ---------- Mobile & tablet (added for the ATS audit) ----------
+Desktop layout is unchanged: everything below only applies under 992px. */
+/* The content column is a flex item: without min-width:0 it grows to the
+width of its widest table and pushes the whole page off the screen. */
+.main-content { min-width: 0; }
+.content-wrapper { min-width: 0; max-width: 100%; }
+.jl-table-scroll { width: 100%; }
+@media (max-width: 991.98px) {
+.jl-table-scroll,
+.content-wrapper .dataTables_wrapper {
+overflow-x: auto;
+-webkit-overflow-scrolling: touch;
+}
+.content-wrapper .jl-table-scroll > table { min-width: 640px; }
+/* Safety net: nothing inside a page can push the page sideways */
+.content-wrapper { overflow-x: hidden; }
+/* Some page headers use negative margins sized for the desktop padding */
+.content-wrapper .page-header-modern { margin-left: 0 !important; margin-right: 0 !important; margin-top: 0 !important; }
+.content-wrapper img,
+.content-wrapper canvas,
+.content-wrapper iframe,
+.content-wrapper video { max-width: 100%; }
+.content-wrapper .modal-dialog { max-width: calc(100vw - 1.5rem); margin-left: auto; margin-right: auto; }
+.content-wrapper .row { --bs-gutter-x: 1rem; }
+.content-wrapper .dataTables_wrapper .dataTables_filter,
+.content-wrapper .dataTables_wrapper .dataTables_length { float: none; text-align: left; }
+.content-wrapper .dataTables_wrapper .dataTables_filter input { width: 100%; max-width: 260px; margin-left: 0; }
+}
+@media (max-width: 575.98px) {
+.content-wrapper { padding: .75rem .6rem; }
+/* 16px stops iPhones zooming into form fields */
+.content-wrapper input.form-control,
+.content-wrapper select.form-control,
+.content-wrapper select.form-select,
+.content-wrapper textarea.form-control { font-size: 16px; }
+.content-wrapper .btn-lg { padding: .6rem 1rem; font-size: 1rem; }
+}
+</style>
+<script>
+// Wrap any wide table that is not already inside a scroll container so it
+// scrolls sideways on phones/tablets instead of breaking the page.
+// Runs before page scripts (DataTables etc.) initialise the tables.
+document.addEventListener('DOMContentLoaded', function () {
+document.querySelectorAll('.content-wrapper table').forEach(function (table) {
+if (table.closest('.table-responsive, .jl-table-scroll, .dataTables_wrapper, .modal, .ql-editor, .fc')) { return; }
+if (table.parentElement && table.parentElement.tagName === 'TD') { return; } // nested layout tables
+var wrap = document.createElement('div');
+wrap.className = 'jl-table-scroll';
+table.parentNode.insertBefore(wrap, table);
+wrap.appendChild(table);
+});
+});
+</script>
+<!-- Modern CDN Links -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+<style>
+/* Modern CSS Reset and Base Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+background: #ffffff;
+color: #1a202c;
+line-height: 1.6;
+}
+/* Container and Layout */
+.edit-vacancy-container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 2rem 1rem;
+min-height: 100vh;
+}
+/* Header Section */
+.page-header {
+text-align: center;
+margin-bottom: 3rem;
+padding: 2rem 0;
+background: #ffffff;
+border-radius: 20px;
+color: var(--primary-color);
+box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+}
+.page-title {
+font-size: 2.5rem;
+font-weight: 700;
+margin-bottom: 0.5rem;
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.page-subtitle {
+font-size: 1.1rem;
+opacity: 0.9;
+font-weight: 300;
+}
+/* Breadcrumb */
+.breadcrumb-nav {
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 2rem;
+font-size: 0.9rem;
+}
+.breadcrumb-nav a {
+color: #667eea;
+text-decoration: none;
+transition: color 0.2s;
+}
+.breadcrumb-nav a:hover {
+color: #764ba2;
+}
+.breadcrumb-separator {
+margin: 0 0.5rem;
+color: #a0aec0;
+}
+/* Step Progress Bar */
+.step-progress {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 3rem;
+position: relative;
+}
+.step-progress::before {
+content: '';
+position: absolute;
+top: 50%;
+left: 0;
+right: 0;
+height: 2px;
+background: #e2e8f0;
+z-index: 1;
+}
+.step-progress-line {
+position: absolute;
+top: 50%;
+left: 0;
+height: 2px;
+background: var(--primary-color);
+transition: width 0.3s ease;
+z-index: 2;
+}
+.step-item {
+display: flex;
+flex-direction: column;
+align-items: center;
+position: relative;
+z-index: 3;
+background: white;
+padding: 0 1rem;
+}
+.step-circle {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 600;
+color: #a0aec0;
+background: #f7fafc;
+border: 3px solid #e2e8f0;
+transition: all 0.3s ease;
+margin-bottom: 0.5rem;
+}
+.step-circle.active {
+background: var(--primary-color);
+color: white;
+border-color: var(--primary-color);
+transform: scale(1.1);
+box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+.step-circle.completed {
+background: #48bb78;
+color: white;
+border-color: #48bb78;
+}
+.step-label {
+font-size: 0.85rem;
+font-weight: 500;
+color: #718096;
+text-align: center;
+}
+.step-label.active {
+color: #667eea;
+font-weight: 600;
+}
+/* Form Container */
+.form-container {
+background: white;
+border-radius: 24px;
+box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+overflow: hidden;
+border: 1px solid #f1f5f9;
+}
+/* Step Content */
+.step-content {
+display: none;
+padding: 3rem;
+animation: fadeIn 0.5s ease-in-out;
+}
+.step-content.active {
+display: block;
+}
+.step-header {
+text-align: center;
+margin-bottom: 3rem;
+}
+.step-title {
+font-size: 2rem;
+font-weight: 700;
+color: #2d3748;
+margin-bottom: 0.5rem;
+}
+.step-description {
+font-size: 1.1rem;
+color: #718096;
+font-weight: 400;
+}
+/* Form Sections */
+.form-section {
+margin-bottom: 2rem;
+}
+.section-title {
+display: flex;
+align-items: center;
+font-size: 1.3rem;
+font-weight: 600;
+color: #2d3748;
+margin-bottom: 2rem;
+padding-bottom: 1rem;
+border-bottom: 2px solid #f1f5f9;
+}
+.section-title i {
+margin-right: 0.75rem;
+color: #667eea;
+font-size: 1.2rem;
+}
+/* Form Groups and Rows */
+.form-row {
+display: grid;
+gap: 1.5rem;
+margin-bottom: 2rem;
+}
+.form-row.two-columns {
+grid-template-columns: 1fr 1fr;
+}
+.form-row.three-columns {
+grid-template-columns: 1fr 1fr 1fr;
+}
+.form-group {
+margin-bottom: 1.5rem;
+}
+/* Form Labels */
+.form-label {
+display: block;
+font-weight: 600;
+font-size: 0.9rem;
+color: #374151;
+margin-bottom: 0.5rem;
+}
+.form-label.required::after {
+content: ' *';
+color: #e53e3e;
+font-weight: 700;
+}
+/* Form Controls */
+.form-control {
+width: 100%;
+padding: 0.875rem 1rem;
+border: 2px solid #e2e8f0;
+border-radius: 12px;
+font-size: 0.95rem;
+font-weight: 400;
+background: #ffffff;
+transition: all 0.3s ease;
+outline: none;
+font-family: inherit;
+}
+.form-control:focus {
+border-color: #667eea;
+box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+transform: translateY(-1px);
+}
+.form-control:disabled,
+.form-control[readonly] {
+background-color: #f8fafc;
+color: #718096;
+cursor: not-allowed;
+}
+.form-control.is-invalid {
+border-color: #e53e3e;
+box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+.form-control.is-valid {
+border-color: #48bb78;
+box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+}
+/* Special Input Styles */
+.readonly-field {
+position: relative;
+}
+.readonly-badge {
+position: absolute;
+top: -8px;
+right: 12px;
+background: #718096;
+color: white;
+font-size: 0.7rem;
+padding: 2px 8px;
+border-radius: 12px;
+font-weight: 500;
+}
+.salary-input-container {
+position: relative;
+}
+.salary-currency {
+position: absolute;
+left: 15px;
+top: 50%;
+transform: translateY(-50%);
+font-weight: 600;
+color: #667eea;
+z-index: 2;
+}
+.salary-input {
+padding-left: 3rem !important;
+}
+/* Rich Text Editor */
+.editor-container {
+border: 2px solid #e2e8f0;
+border-radius: 12px;
+overflow: hidden;
+transition: all 0.3s ease;
+}
+.editor-container:focus-within {
+border-color: #667eea;
+box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+.ql-toolbar {
+border: none !important;
+border-bottom: 1px solid #e2e8f0 !important;
+background: #f8fafc;
+padding: 1rem !important;
+}
+.ql-container {
+border: none !important;
+font-size: 0.95rem;
+min-height: 150px;
+}
+/* Feedback Messages */
+.invalid-feedback {
+display: block;
+font-size: 0.875rem;
+color: #e53e3e;
+margin-top: 0.5rem;
+font-weight: 500;
+}
+.valid-feedback {
+display: block;
+font-size: 0.875rem;
+color: #48bb78;
+margin-top: 0.5rem;
+font-weight: 500;
+}
+.form-hint {
+font-size: 0.8rem;
+color: #718096;
+margin-top: 0.25rem;
+font-style: italic;
+}
+/* Navigation Buttons */
+.step-navigation {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 3rem;
+padding-top: 2rem;
+border-top: 1px solid #f1f5f9;
+}
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 0.875rem 2rem;
+font-size: 0.95rem;
+font-weight: 600;
+text-decoration: none;
+border-radius: 12px;
+border: none;
+cursor: pointer;
+transition: all 0.3s ease;
+font-family: inherit;
+gap: 0.5rem;
+min-height: 48px;
+}
+.btn-primary {
+background: linear-gradient(135deg, #667eea, #764ba2);
+color: white;
+box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+.btn-secondary {
+background: #f7fafc;
+color: #4a5568;
+border: 2px solid #e2e8f0;
+}
+.btn-secondary:hover {
+background: #edf2f7;
+transform: translateY(-1px);
+}
+.btn:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none !important;
+}
+/* Contact Section */
+.contact-section {
+background: #f8fafc;
+border-radius: 16px;
+padding: 2rem;
+margin-top: 1rem;
+border: 1px solid #e2e8f0;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+.edit-vacancy-container {
+padding: 1rem 0.5rem;
+}
+.page-title {
+font-size: 2rem;
+}
+.step-content {
+padding: 2rem 1.5rem;
+}
+.step-progress {
+overflow-x: auto;
+padding-bottom: 1rem;
+}
+.form-row.two-columns,
+.form-row.three-columns {
+grid-template-columns: 1fr;
+gap: 1rem;
+}
+.step-navigation {
+flex-direction: column;
+gap: 1rem;
+}
+.btn {
+width: 100%;
+}
+.step-circle {
+width: 40px;
+height: 40px;
+font-size: 0.9rem;
+}
+.step-label {
+font-size: 0.75rem;
+}
+}
+/* Animations */
+@keyframes  fadeIn {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+@keyframes  slideIn {
+from {
+opacity: 0;
+transform: translateX(-20px);
+}
+to {
+opacity: 1;
+transform: translateX(0);
+}
+}
+.animate-slide-in {
+animation: slideIn 0.3s ease-out;
+}
+/* Success/Error Alerts */
+.alert {
+padding: 1rem 1.5rem;
+border-radius: 12px;
+margin-bottom: 1.5rem;
+display: flex;
+align-items: center;
+font-weight: 500;
+}
+.alert-success {
+background: #f0fff4;
+color: #2f855a;
+border: 1px solid #9ae6b4;
+}
+.alert-danger {
+background: #fed7d7;
+color: #c53030;
+border: 1px solid #feb2b2;
+}
+.alert i {
+margin-right: 0.5rem;
+font-size: 1.1rem;
+}
+/* Loading States */
+.loading {
+position: relative;
+pointer-events: none;
+}
+.loading::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+width: 20px;
+height: 20px;
+margin: -10px 0 0 -10px;
+border: 2px solid #e2e8f0;
+border-top: 2px solid #667eea;
+border-radius: 50%;
+animation: spin 1s linear infinite;
+}
+@keyframes  spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+<div class="admin-wrapper">
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<div class="brand-logo">
+<img src="/assets/front/images/hr/job_logo.png" alt="Job Labs" class="logo-img">
+<span class="brand-text">Job Labs</span>
+</div>
+<button class="sidebar-close d-lg-none" data-sidebar-toggle>
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="sidebar-user">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-indicator online"></div>
+</div>
+<div class="user-info">
+<h6 class="user-name">Nimesha</h6>
+<span class="user-role">Account Manager</span>
+</div>
+</div>
+<nav class="sidebar-nav">
+<div class="nav-section">
+<ul class="nav-list">
+<li class="nav-item">
+<a href="/ats/account-manager/dashboard" class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-home"></i>
+</div>
+<span class="nav-text">Dashboard</span>
+</a>
+</li>
+<li class="nav-item">
+<a href="/ats/account-manager/leads" class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-headset"></i>
+</div>
+<span class="nav-text">Leads</span>
+</a>
+</li>
+<li class="nav-item">
+<a href="/ats/account-manager/admin/service-payments/index"
+class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-file-invoice-dollar"></i>
+</div>
+<span class="nav-text">Service Payments</span>
+</a>
+</li>
+<li class="nav-item">
+<a href="/ats/account-manager/tickets"
+class="nav-link ">
+<div class="nav-icon">
+<i class="fas fa-ticket-alt"></i>
+</div>
+<span class="nav-text">
+Support Tickets
+<span id="unreadTicketBadge"
+style="display:none;background:var(--danger-color);color:white;border-radius:20px;padding:1px 7px;font-size:0.7rem;font-weight:700;margin-left:6px;">
+</span>
+</span>
+</a>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#usersMenu">
+<div class="nav-icon">
+<i class="fas fa-users"></i>
+</div>
+<span class="nav-text">User Management</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="usersMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/company/list" class="submenu-link ">
+<i class="fas fa-building"></i>
+Companies
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/user/list" class="submenu-link ">
+<i class="fas fa-user-circle"></i>
+User Accounts
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu active">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#jobsMenu">
+<div class="nav-icon">
+<i class="fas fa-clipboard-list"></i>
+</div>
+<span class="nav-text">Job Management</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu show" id="jobsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/job/create" class="submenu-link">
+<i class="fas fa-plus-circle"></i>
+Post New Vacancy
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/job/list" class="submenu-link ">
+<i class="fas fa-edit"></i>
+Manage Vacancies
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/job/admin/list" class="submenu-link ">
+<i class="fas fa-cog"></i>
+Admin Actions
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#reportsMenu">
+<div class="nav-icon">
+<i class="fas fa-chart-bar"></i>
+</div>
+<span class="nav-text">Reports & Analytics</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="reportsMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/report/vacancy/job/list" class="submenu-link ">
+<i class="fas fa-clipboard-check"></i>
+Vacancy Status
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/report/applicant/list" class="submenu-link ">
+<i class="fas fa-users"></i>
+Candidates by Company
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/report/candidate/list" class="submenu-link ">
+<i class="fas fa-user-tie"></i>
+Candidate Information
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item has-submenu ">
+<a href="#" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#auditMenu">
+<div class="nav-icon">
+<i class="fas fa-shield-alt"></i>
+</div>
+<span class="nav-text">Audit Trail</span>
+<div class="nav-arrow">
+<i class="fas fa-chevron-right"></i>
+</div>
+</a>
+<div class="collapse submenu " id="auditMenu">
+<ul class="submenu-list">
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/audit/email-logs" class="submenu-link ">
+<i class="fas fa-envelope-open-text"></i>
+Email Audit Log
+</a>
+</li>
+<li class="submenu-item">
+<a href="/ats/account-manager/admin/audit/vacancy-logs" class="submenu-link ">
+<i class="fas fa-history"></i>
+Vacancy Audit Log
+</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</nav>
+<div class="sidebar-footer">
+<div class="footer-actions">
+<a href="/login" class="logout-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign Out">
+<i class="fas fa-sign-out-alt"></i>
+<span>Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<div class="sidebar-overlay d-lg-none" data-sidebar-toggle></div>
+<style>
+.sidebar {
+position: fixed;
+top: 0;
+left: 0;
+width: var(--sidebar-width);
+height: 100vh;
+background: var(--sidebar-bg);
+border-right: 1px solid var(--border-color);
+z-index: 1050;
+display: flex;
+flex-direction: column;
+box-shadow: var(--shadow-lg);
+transition: var(--transition);
+}
+.sidebar-header {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+justify-content: space-between;
+min-height: var(--header-height);
+}
+.brand-logo {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+.logo-img {
+width: 40px;
+height: 40px;
+object-fit: contain;
+border-radius: 8px;
+}
+.brand-text {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-color);
+letter-spacing: -0.5px;
+}
+.sidebar-close {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 6px;
+transition: var(--transition);
+}
+.sidebar-close:hover {
+background: rgba(0, 0, 0, 0.1);
+color: var(--text-primary);
+}
+.sidebar-user {
+padding: 1.5rem;
+border-bottom: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.user-avatar {
+position: relative;
+width: 50px;
+height: 50px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-indicator {
+position: absolute;
+bottom: 2px;
+right: 2px;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-indicator.online {
+background: var(--success-color);
+}
+.user-info {
+flex: 1;
+min-width: 0;
+}
+.user-name {
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.user-role {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.sidebar-nav {
+flex: 1;
+padding: 1rem 0;
+overflow-y: auto;
+}
+.nav-list {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.nav-item {
+margin-bottom: 0.25rem;
+}
+.nav-link {
+display: flex;
+align-items: center;
+padding: 0.75rem 1.5rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+position: relative;
+border-radius: 0;
+}
+.nav-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.nav-link.active {
+background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+color: white;
+box-shadow: var(--shadow-md);
+}
+.nav-link.active::before {
+content: '';
+position: absolute;
+left: 0;
+top: 0;
+height: 100%;
+width: 4px;
+background: white;
+}
+.nav-icon {
+width: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 0.75rem;
+}
+.nav-text {
+font-size: 0.9rem;
+font-weight: 500;
+flex: 1;
+}
+.nav-arrow {
+margin-left: auto;
+transition: var(--transition);
+}
+.has-submenu .nav-arrow i {
+transform: rotate(0deg);
+transition: var(--transition);
+}
+.has-submenu.active .nav-arrow i {
+transform: rotate(90deg);
+}
+.submenu {
+background: rgba(0, 0, 0, 0.03);
+border-left: 2px solid var(--border-color);
+margin-left: 1.5rem;
+}
+.submenu-list {
+list-style: none;
+margin: 0;
+padding: 0.5rem 0;
+}
+.submenu-item {
+margin-bottom: 0.1rem;
+}
+.submenu-link {
+display: flex;
+align-items: center;
+padding: 0.6rem 1rem 0.6rem 2rem;
+color: var(--text-secondary);
+text-decoration: none;
+font-size: 0.85rem;
+transition: var(--transition);
+border-radius: 6px;
+margin: 0 1rem;
+}
+.submenu-link:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.submenu-link.active {
+background: var(--primary-color);
+color: white;
+}
+.submenu-link i {
+margin-right: 0.5rem;
+font-size: 0.8rem;
+}
+.sidebar-footer {
+padding: 1.5rem;
+border-top: 1px solid var(--border-color);
+margin-top: auto;
+}
+.logout-btn {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.75rem 1rem;
+color: var(--text-secondary);
+text-decoration: none;
+border-radius: 8px;
+transition: var(--transition);
+width: 100%;
+font-size: 0.9rem;
+}
+.logout-btn:hover {
+background: rgba(239, 68, 68, 0.1);
+color: var(--danger-color);
+}
+.sidebar-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1040;
+opacity: 0;
+visibility: hidden;
+transition: var(--transition);
+}
+.sidebar-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.sidebar {
+transform: translateX(-100%);
+}
+.sidebar.active {
+transform: translateX(0);
+}
+.sidebar-overlay.active {
+display: block;
+}
+}
+/* Submenu Animation */
+.submenu {
+transition: all 0.3s ease;
+}
+.submenu:not(.show) {
+max-height: 0;
+overflow: hidden;
+}
+.submenu.show {
+max-height: 500px;
+}
+/* Hover Effects */
+@media (hover: hover) {
+.nav-link:hover .nav-icon i {
+transform: scale(1.1);
+}
+.submenu-link:hover {
+transform: translateX(4px);
+}
+}
+</style>
+<script>
+(function loadUnreadBadge() {
+fetch('/unread-count', {
+headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+})
+.then(r => r.json())
+.then(data => {
+const badge = document.getElementById('unreadTicketBadge');
+if (badge && data.count > 0) {
+badge.textContent = data.count;
+badge.style.display = 'inline';
+}
+})
+.catch(() => {});
+})();
+</script>
+<div class="main-content">
+<header class="main-header">
+<div class="header-content">
+<div class="header-left">
+<button class="sidebar-toggle d-lg-none" data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</button>
+<div class="page-title">
+<h1 class="title">Dashboard</h1>
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+</nav>
+</div>
+</div>
+<div class="header-right">
+<!-- Search Bar -->
+<div class="search-container d-none d-md-flex">
+<!-- <div class="search-input-wrapper">
+<i class="fas fa-search search-icon"></i>
+<input type="text" class="search-input" placeholder="Search jobs, candidates, companies...">
+<div class="search-dropdown" id="searchDropdown">
+</div>
+</div> -->
+</div>
+<!-- Notifications -->
+<div class="header-actions">
+<!-- <div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-bell"></i>
+<span class="notification-badge">3</span>
+</button>
+<div class="dropdown-menu notification-dropdown">
+<div class="dropdown-header">
+<h6>Notifications</h6>
+<span class="badge bg-primary">3 New</span>
+</div>
+<div class="notification-list">
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-user-plus text-success"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">New Application Received</p>
+<p class="notification-text">John Doe applied for Senior Developer position</p>
+<span class="notification-time">2 minutes ago</span>
+</div>
+</div>
+<div class="notification-item unread">
+<div class="notification-icon">
+<i class="fas fa-briefcase text-info"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Job Posted Successfully</p>
+<p class="notification-text">Frontend Developer position is now live</p>
+<span class="notification-time">1 hour ago</span>
+</div>
+</div>
+<div class="notification-item">
+<div class="notification-icon">
+<i class="fas fa-chart-line text-warning"></i>
+</div>
+<div class="notification-content">
+<p class="notification-title">Weekly Report Ready</p>
+<p class="notification-text">Your recruitment analytics report is available</p>
+<span class="notification-time">3 hours ago</span>
+</div>
+</div>
+</div>
+<div class="dropdown-footer">
+<a href="#" class="view-all-btn">View All Notifications</a>
+</div>
+</div>
+</div> -->
+<!-- Quick Actions -->
+<div class="action-item dropdown">
+<button class="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<i class="fas fa-plus"></i>
+</button>
+<div class="dropdown-menu quick-actions-dropdown">
+<div class="dropdown-header">
+<h6>Quick Actions</h6>
+</div>
+<a href="/ats/account-manager/admin/job/create" class="dropdown-item">
+<i class="fas fa-plus-circle text-primary"></i>
+Post New Job
+</a>
+<!--  -->
+<div class="dropdown-divider"></div>
+<a href="/ats/account-manager/admin/report/vacancy/job/list" class="dropdown-item">
+<i class="fas fa-chart-bar text-warning"></i>
+View Reports
+</a>
+</div>
+</div>
+<!-- User Profile Dropdown -->
+<div class="action-item dropdown user-dropdown">
+<button class="user-profile-btn" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="user-avatar">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar">
+<div class="status-dot online"></div>
+</div>
+<div class="user-info d-none d-md-block">
+<span class="user-name">Nimesha</span>
+<span class="user-role">Account Manager</span>
+</div>
+<i class="fas fa-chevron-down dropdown-arrow"></i>
+</button>
+<div class="dropdown-menu user-dropdown-menu">
+<div class="dropdown-header user-header">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="User Avatar" class="user-avatar-large">
+<div>
+<h6>Nimesha</h6>
+<p>Account Manager</p>
+</div>
+</div>
+<div class="dropdown-divider"></div>
+<!-- <a href="#" class="dropdown-item">
+<i class="fas fa-user-circle"></i>
+My Profile
+</a>
+<a href="#" class="dropdown-item">
+<i class="fas fa-cog"></i>
+Settings
+</a> -->
+<div class="dropdown-divider"></div>
+<a href="/login" class="dropdown-item logout-item">
+<i class="fas fa-sign-out-alt"></i>
+Sign Out
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<style>
+.main-header {
+position: fixed;
+top: 0;
+right: 0;
+left: var(--sidebar-width);
+height: var(--header-height);
+background: white;
+border-bottom: 1px solid var(--border-color);
+z-index: 1030;
+transition: var(--transition);
+box-shadow: var(--shadow-sm);
+}
+.header-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 100%;
+padding: 0 2rem;
+}
+.header-left {
+display: flex;
+align-items: center;
+gap: 1rem;
+flex: 1;
+}
+.sidebar-toggle {
+background: none;
+border: none;
+color: var(--text-secondary);
+font-size: 1.25rem;
+padding: 0.5rem;
+border-radius: 8px;
+transition: var(--transition);
+}
+.sidebar-toggle:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.page-title .title {
+font-size: 1.5rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0;
+line-height: 1.2;
+}
+.breadcrumb-nav {
+margin-top: 0.25rem;
+}
+.breadcrumb {
+margin: 0;
+background: none;
+padding: 0;
+font-size: 0.85rem;
+}
+.breadcrumb-item {
+color: var(--text-secondary);
+}
+.breadcrumb-item.active {
+color: var(--primary-color);
+font-weight: 500;
+}
+.breadcrumb-item a {
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+}
+.breadcrumb-item a:hover {
+color: var(--primary-color);
+}
+.header-right {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.search-container {
+position: relative;
+}
+.search-input-wrapper {
+position: relative;
+width: 350px;
+}
+.search-input {
+width: 100%;
+padding: 0.75rem 1rem 0.75rem 2.5rem;
+border: 1px solid var(--border-color);
+border-radius: 25px;
+background: var(--light-bg);
+color: var(--text-primary);
+font-size: 0.9rem;
+transition: var(--transition);
+}
+.search-input:focus {
+outline: none;
+border-color: var(--primary-color);
+background: white;
+box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+.search-icon {
+position: absolute;
+left: 1rem;
+top: 50%;
+transform: translateY(-50%);
+color: var(--text-secondary);
+font-size: 0.9rem;
+}
+.search-dropdown {
+position: absolute;
+top: 100%;
+left: 0;
+right: 0;
+background: white;
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+max-height: 300px;
+overflow-y: auto;
+z-index: 1050;
+display: none;
+}
+.header-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.action-item {
+position: relative;
+}
+.action-btn {
+position: relative;
+background: none;
+border: none;
+width: 44px;
+height: 44px;
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--text-secondary);
+transition: var(--transition);
+font-size: 1.1rem;
+}
+.action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.notification-badge {
+position: absolute;
+top: 8px;
+right: 8px;
+background: var(--danger-color);
+color: white;
+font-size: 0.7rem;
+padding: 0.2rem 0.4rem;
+border-radius: 10px;
+min-width: 18px;
+height: 18px;
+display: flex;
+align-items: center;
+justify-content: center;
+line-height: 1;
+}
+.user-profile-btn {
+background: none;
+border: none;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.5rem;
+border-radius: 12px;
+transition: var(--transition);
+color: var(--text-primary);
+}
+.user-profile-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+}
+.user-avatar {
+position: relative;
+width: 36px;
+height: 36px;
+}
+.user-avatar img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.status-dot {
+position: absolute;
+bottom: 0;
+right: 0;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+border: 2px solid white;
+}
+.status-dot.online {
+background: var(--success-color);
+}
+.user-info {
+text-align: left;
+}
+.user-name {
+display: block;
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+line-height: 1.2;
+}
+.user-role {
+display: block;
+font-size: 0.75rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.dropdown-arrow {
+font-size: 0.8rem;
+transition: var(--transition);
+}
+.dropdown.show .dropdown-arrow {
+transform: rotate(180deg);
+}
+/* Dropdown Menus */
+.dropdown-menu {
+border: 1px solid var(--border-color);
+border-radius: 12px;
+box-shadow: var(--shadow-lg);
+padding: 0;
+min-width: 280px;
+margin-top: 0.5rem;
+}
+.dropdown-header {
+padding: 1rem 1.5rem 0.5rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid var(--border-color);
+}
+.dropdown-header h6 {
+margin: 0;
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.dropdown-item {
+padding: 0.75rem 1.5rem;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+border: none;
+background: none;
+width: 100%;
+}
+.dropdown-item:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+}
+.dropdown-item i {
+width: 16px;
+text-align: center;
+}
+.logout-item {
+color: var(--danger-color) !important;
+border-top: 1px solid var(--border-color);
+}
+.logout-item:hover {
+background: rgba(239, 68, 68, 0.1) !important;
+}
+/* Notification Dropdown */
+.notification-dropdown {
+min-width: 380px;
+max-height: 400px;
+overflow: hidden;
+}
+.notification-list {
+max-height: 300px;
+overflow-y: auto;
+}
+.notification-item {
+padding: 1rem 1.5rem;
+display: flex;
+gap: 1rem;
+border-bottom: 1px solid var(--border-color);
+transition: var(--transition);
+}
+.notification-item:last-child {
+border-bottom: none;
+}
+.notification-item:hover {
+background: var(--light-bg);
+}
+.notification-item.unread {
+background: rgba(79, 70, 229, 0.05);
+}
+.notification-icon {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+background: var(--light-bg);
+flex-shrink: 0;
+}
+.notification-content {
+flex: 1;
+min-width: 0;
+}
+.notification-title {
+font-size: 0.9rem;
+font-weight: 500;
+color: var(--text-primary);
+margin: 0 0 0.25rem 0;
+}
+.notification-text {
+font-size: 0.8rem;
+color: var(--text-secondary);
+margin: 0 0 0.5rem 0;
+line-height: 1.4;
+}
+.notification-time {
+font-size: 0.75rem;
+color: var(--text-secondary);
+}
+.dropdown-footer {
+padding: 0.75rem 1.5rem;
+border-top: 1px solid var(--border-color);
+text-align: center;
+}
+.view-all-btn {
+color: var(--primary-color);
+text-decoration: none;
+font-size: 0.9rem;
+font-weight: 500;
+}
+/* Quick Actions Dropdown */
+.quick-actions-dropdown {
+min-width: 220px;
+}
+/* User Dropdown */
+.user-dropdown-menu {
+min-width: 250px;
+}
+.user-header {
+display: flex;
+align-items: center;
+gap: 1rem;
+padding: 1.5rem;
+}
+.user-avatar-large {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid var(--border-color);
+}
+.user-header h6 {
+margin: 0;
+font-size: 1rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+.user-header p {
+margin: 0;
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+/* Mobile Responsive */
+@media (max-width: 992px) {
+.main-header {
+left: 0;
+}
+.header-content {
+padding: 0 1rem;
+}
+.search-container {
+display: none !important;
+}
+.page-title .title {
+font-size: 1.25rem;
+}
+}
+@media (max-width: 576px) {
+.header-actions {
+gap: 0.25rem;
+}
+.action-btn {
+width: 38px;
+height: 38px;
+}
+.notification-dropdown,
+.quick-actions-dropdown,
+.user-dropdown-menu {
+min-width: 280px;
+max-width: calc(100vw - 2rem);
+}
+}
+</style>
+<div class="content-wrapper fade-in">
+<div class="edit-vacancy-container">
+<!-- Page Header -->
+<div class="page-header">
+<h1 class="page-title">Edit Job Vacancy</h1>
+<p class="page-subtitle">Update job details and requirements with ease</p>
+</div>
+<!-- Breadcrumb -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+<a href="/ats/account-manager/admin/job/list">Job Listings</a>
+<span class="breadcrumb-separator">
+<i class="fas fa-chevron-right"></i>
+</span>
+<span>Edit Vacancy</span>
+</nav>
+<!-- Step Progress -->
+<div class="step-progress">
+<div class="step-progress-line" id="progressLine"></div>
+<div class="step-item">
+<div class="step-circle active" data-step="1">
+<i class="fas fa-building"></i>
+</div>
+<div class="step-label active">Company & Job Details</div>
+</div>
+<div class="step-item">
+<div class="step-circle" data-step="2">
+<i class="fas fa-map-marker-alt"></i>
+</div>
+<div class="step-label">Location & Compensation</div>
+</div>
+<div class="step-item">
+<div class="step-circle" data-step="3">
+<i class="fas fa-calendar-alt"></i>
+</div>
+<div class="step-label">Timeline & Requirements</div>
+</div>
+<div class="step-item">
+<div class="step-circle" data-step="4">
+<i class="fas fa-address-book"></i>
+</div>
+<div class="step-label">Contact & Review</div>
+</div>
+</div>
+<!-- Form Container -->
+<div class="form-container">
+<form id="jobEditForm" method="POST" action="#" data-mock-action="/admin/job/update" novalidate>
+<input type="hidden" name="_method" value="PUT">
+<input type="hidden" name="_token" value="mDqX7nAfvAk2yIMrL0PVDp9WuYmE0LGCQ5FhQgvF">            <input type="hidden" name="jobid" value="2001">
+<!-- Step 1: Company & Job Details -->
+<div class="step-content active" data-step="1">
+<div class="step-header">
+<h2 class="step-title">Company & Job Details</h2>
+<p class="step-description">Basic information about the job position</p>
+</div>
+<div class="form-section">
+<div class="section-title">
+<i class="fas fa-info-circle"></i>
+Basic Information
+</div>
+<div class="form-row two-columns">
+<div class="form-group">
+<label for="vacancyrefno" class="form-label">Vacancy Reference Number</label>
+<div class="readonly-field">
+<input id="vacancyrefno"
+readonly
+class="form-control"
+name="vacancyrefno"
+type="text"
+value="JBS000301">
+<span class="readonly-badge">Read Only</span>
+</div>
+</div>
+<div class="form-group">
+<label for="title" class="form-label required">Job Title</label>
+<input id="title"
+required
+class="form-control"
+name="title"
+type="text"
+value="Store Supervisor"
+placeholder="e.g., Sales Manager">
+<div class="form-hint">Please type in sentence case</div>
+<div class="invalid-feedback">Please enter a job title</div>
+</div>
+</div>
+<div class="form-row two-columns">
+<div class="form-group">
+<label for="industrysector" class="form-label required">Industry Sector</label>
+<select id="industrysector"
+required
+class="form-control"
+onchange="selectJobsector(this.value)"
+name="industrysectorid">
+<option value="">Select Industry Sector</option>
+<option value="60" >Health Care</option>
+<option value="72" selected>Retail</option>
+<option value="75" >Security</option>
+<option value="79" >Drivers &amp; Receptionists</option>
+<option value="80" >Professional</option>
+</select>
+<div class="invalid-feedback">Please select an industry sector</div>
+</div>
+<div class="form-group">
+<label for="jobsector" class="form-label required">Job Sector</label>
+<select id="jobsector"
+class="form-control"
+required
+name="jobsector">
+<option value="">Select Job Sector</option>
+<option value="177" selected>Sales Associate</option>
+<option value="178" >Cashier</option>
+<option value="179" >Customer Service Representative</option>
+<option value="180" >Management</option>
+<option value="183" >Other</option>
+<option value="220" >Security Guarding</option>
+<option value="223" >Doctors</option>
+<option value="225" >Nursing</option>
+<option value="253" >Pharmacy</option>
+<option value="261" >Security Officer</option>
+<option value="268" >Cyber Security</option>
+<option value="287" >Chauffeur</option>
+<option value="288" >Delivery Driver</option>
+<option value="301" >Medical Receptionist</option>
+<option value="302" >Hotel Receptionist</option>
+<option value="304" >Receptionist</option>
+<option value="309" >Accountant</option>
+<option value="311" >Administration</option>
+<option value="312" >Banking</option>
+<option value="313" >Business Development</option>
+<option value="316" >Education</option>
+<option value="317" >Engineer</option>
+<option value="319" >Human Resources</option>
+<option value="321" >Information Technology</option>
+<option value="323" >Marketing</option>
+<option value="325" >Project Management</option>
+<option value="330" >Technology</option>
+<option value="347" >Finance</option>
+</select>
+<div class="invalid-feedback">Please select a job sector</div>
+</div>
+</div>
+<div class="form-row two-columns">
+<div class="form-group">
+<label for="jobtype" class="form-label">Job Type</label>
+<select id="jobtype"
+class="form-control"
+name="jobtype">
+<option value="">Select Job Type</option>
+<option value="1" selected>Permanent</option>
+<option value="2" >Fixed Term</option>
+<option value="3" >Temporary</option>
+<option value="4" >Casual</option>
+</select>
+</div>
+<div class="form-group">
+<label for="worktype" class="form-label required">Work Type</label>
+<select id="worktype"
+required
+class="form-control"
+name="worktype">
+<option value="">Select Work Type</option>
+<option value="5" selected>Full Time</option>
+<option value="6" >Part Time</option>
+<option value="8" >Casual</option>
+<option value="344" >Freelance</option>
+</select>
+<div class="invalid-feedback">Please select a work type</div>
+</div>
+</div>
+</div>
+<div class="step-navigation">
+<div></div>
+<button type="button" class="btn btn-primary" onclick="nextStep(1)">
+Next Step <i class="fas fa-arrow-right"></i>
+</button>
+</div>
+</div>
+<!-- Step 2: Location & Compensation -->
+<div class="step-content" data-step="2">
+<div class="step-header">
+<h2 class="step-title">Location & Compensation</h2>
+<p class="step-description">Job location and salary information</p>
+</div>
+<div class="form-section">
+<div class="section-title">
+<i class="fas fa-map-marker-alt"></i>
+Location Details
+</div>
+<div class="form-group">
+<label for="location" class="form-label required">Location</label>
+<select id="location"
+required
+class="form-control"
+name="locationid">
+<option value="">Select Location</option>
+<option value="900" selected>Sri Lanka</option>
+<option value="901" >Remote</option>
+</select>
+<div class="invalid-feedback">Please select a location</div>
+</div>
+<div class="form-row two-columns">
+<div class="form-group">
+<label for="country" class="form-label required">Country</label>
+<select id="country"
+required
+class="form-control"
+name="country_id"
+onchange="loadCitiesByCountry(this.value)">
+<option value="">Select Country</option>
+<option value="1" selected>Sri Lanka</option>
+</select>
+<div class="invalid-feedback">Please select a country</div>
+</div>
+<div class="form-group">
+<label for="city" class="form-label required">City</label>
+<select id="city"
+required
+class="form-control"
+name="city_id"
+>
+<option value="">Select City</option>
+<option value="1" >Colombo</option>
+<option value="2" >Kandy</option>
+<option value="3" selected>Galle</option>
+<option value="4" >Jaffna</option>
+<option value="5" >Negombo</option>
+<option value="6" >Anuradhapura</option>
+<option value="7" >Ratnapura</option>
+<option value="8" >Trincomalee</option>
+<option value="9" >Batticaloa</option>
+<option value="10" >Matara</option>
+<option value="21" >Remote</option>
+<option value="22" >Kurunegala</option>
+<option value="23" >Gampaha</option>
+<option value="24" >Kalutara</option>
+<option value="25" >Matale</option>
+<option value="26" >Nuwara Eliya</option>
+<option value="27" >Hambantota</option>
+<option value="28" >Kilinochchi</option>
+<option value="29" >Mannar</option>
+<option value="30" >Mullaitivu</option>
+<option value="31" >Vavuniya</option>
+<option value="32" >Ampara</option>
+<option value="33" >Puttalam</option>
+<option value="34" >Polonnaruwa</option>
+<option value="35" >Badulla</option>
+<option value="36" >Monaragala</option>
+<option value="37" >Kegalle</option>
+</select>
+<div class="invalid-feedback">Please select a city</div>
+</div>
+</div>
+<div class="section-title">
+<span class="salary-currency">LKR</span>
+Compensation
+</div>
+<div class="form-row two-columns">
+<div class="form-group">
+<label for="salary" class="form-label">Salary</label>
+<div class="salary-input-container">
+<span class="salary-currency">LKR</span>
+<input id="salary"
+class="form-control salary-input"
+name="salary"
+type="text"
+value="50000-60000"
+placeholder="e.g., 8.50 or 23000-27000">
+</div>
+<div class="form-hint">Optional — acceptable formats: 8.50 or 23000 or 23000-27000. Leave blank if the salary range is not yet defined; candidates will see it as "Salary Negotiable".</div>
+<div class="invalid-feedback" id="salary-feedback" style="display: none;">Please enter a valid salary format</div>
+</div>
+<div class="form-group">
+<label for="payroll" class="form-label required">Pay Roll</label>
+<select id="payroll"
+class="form-control"
+required
+name="payroll">
+<option value="">Select Pay Roll</option>
+<option value="perannum" >Per Annum</option>
+<option value="permonth" selected>Per Month</option>
+<option value="perday" >Per Day</option>
+<option value="perhour" >Per Hour</option>
+</select>
+<div class="invalid-feedback">Please select a pay roll type</div>
+</div>
+</div>
+</div>
+<div class="step-navigation">
+<button type="button" class="btn btn-secondary" onclick="prevStep(2)">
+<i class="fas fa-arrow-left"></i> Previous
+</button>
+<button type="button" class="btn btn-primary" onclick="nextStep(2)">
+Next Step <i class="fas fa-arrow-right"></i>
+</button>
+</div>
+</div>
+<!-- Step 3: Timeline & Requirements -->
+<div class="step-content" data-step="3">
+<div class="step-header">
+<h2 class="step-title">Timeline & Requirements</h2>
+<p class="step-description">Important dates and job requirements</p>
+</div>
+<div class="form-section">
+<div class="section-title">
+<i class="fas fa-calendar-alt"></i>
+Timeline
+</div>
+<div class="form-row three-columns">
+<div class="form-group">
+<label for="datetogolive" class="form-label required">Date to Go Live</label>
+<input type="date"
+id="datetogolive"
+required
+class="form-control"
+name="datetogolive"
+value="2026-11-26">
+<div class="invalid-feedback">Please select a go-live date</div>
+</div>
+<div class="form-group">
+<label for="vancancyclosedate" class="form-label required">Vacancy Close Date</label>
+<input type="date"
+id="vancancyclosedate"
+required
+class="form-control"
+name="vancancyclosedate"
+value="2026-12-26">
+<div class="invalid-feedback">Please select a close date</div>
+</div>
+<div class="form-group">
+<label for="exceptedstartdate" class="form-label required">Expected Start Date</label>
+<input type="date"
+id="exceptedstartdate"
+required
+class="form-control"
+name="exceptedstartdate"
+value="2027-01-07">
+<div class="invalid-feedback">Please select an expected start date</div>
+</div>
+</div>
+<div class="form-row two-columns">
+<div class="form-group">
+<label for="noofvancancy" class="form-label required">Number of Vacancies</label>
+<input id="noofvancancy"
+required
+class="form-control"
+name="noofvancancy"
+type="number"
+min="1"
+value="4"
+placeholder="Enter number of positions">
+<div class="invalid-feedback">Please enter a valid number of vacancies</div>
+</div>
+</div>
+<div class="section-title">
+<i class="fas fa-file-alt"></i>
+Job Requirements
+</div>
+<div class="form-group">
+<label for="jobdesc" class="form-label required">Job Description</label>
+<div class="editor-container">
+<div id="jobdesc" style="height: 200px;"><p>Galle Coast Retail is looking for friendly and energetic Sales Assistants to join our flagship Galle store.</p><p><strong>Key Responsibilities</strong></p><ul><li>Greet customers and help them find products</li><li>Keep shelves stocked, clean and correctly priced</li><li>Operate the till and handle cash accurately</li><li>Support stock counts and deliveries</li></ul><p><strong>Requirements</strong></p><ul><li>GCE O/L or A/L qualified</li><li>Good communication in Sinhala and English</li><li>Ability to work weekend shifts</li></ul></div>
+</div>
+<input type="hidden" name="jobdesc" id="jobdesc-input">
+<div id="ckvalidate" class="invalid-feedback"></div>
+</div>
+<div class="form-group">
+<label for="jobkeyword" class="form-label required">Skillset Required</label>
+<div class="editor-container">
+<div id="jobkeyword" style="height: 200px;"><p>Customer service, Cash handling, Merchandising</p></div>
+</div>
+<input type="hidden" name="jobkeyword" id="jobkeyword-input">
+<div id="ckvalidate1" class="invalid-feedback"></div>
+</div>
+<div class="form-group">
+<label for="jobbenifits" class="form-label required">Benefits</label>
+<div class="editor-container">
+<div id="jobbenifits" style="height: 200px;"><ul><li>Monthly sales bonus</li><li>Staff discount</li><li>Uniform & meals provided</li></ul></div>
+</div>
+<input type="hidden" name="jobbenifits" id="jobbenifits-input">
+<div id="ckvalidate2" class="invalid-feedback"></div>
+</div>
+</div>
+<div class="step-navigation">
+<button type="button" class="btn btn-secondary" onclick="prevStep(3)">
+<i class="fas fa-arrow-left"></i> Previous
+</button>
+<button type="button" class="btn btn-primary" onclick="nextStep(3)">
+Next Step <i class="fas fa-arrow-right"></i>
+</button>
+</div>
+</div>
+<!-- Step 4: Contact & Review -->
+<div class="step-content" data-step="4">
+<div class="step-header">
+<h2 class="step-title">Contact Details</h2>
+<p class="step-description">Provide contact information for applicants</p>
+</div>
+<div class="form-section">
+<div class="section-title">
+<i class="fas fa-address-book"></i>
+Contact Information
+</div>
+<div class="contact-section">
+<div class="form-row two-columns">
+<div class="form-group">
+<label for="contactname" class="form-label required">Contact Name</label>
+<input id="contactname"
+required
+pattern="^[a-zA-Z\s]{2,50}$"
+class="form-control"
+name="contactname"
+type="text"
+value="Kasun Bandara"
+placeholder="Enter contact person name">
+<div class="invalid-feedback">Please enter a valid contact name</div>
+</div>
+<div class="form-group">
+<label for="contactposition" class="form-label required">Position</label>
+<input id="contactposition"
+required
+pattern="^[a-zA-Z\s]{2,50}$"
+class="form-control"
+name="contactposition"
+type="text"
+value="HR Manager"
+placeholder="Enter position/designation">
+<div class="invalid-feedback">Please enter a valid position</div>
+</div>
+</div>
+<div class="form-group">
+<label for="contactemail" class="form-label required">Email Address</label>
+<input id="contactemail"
+required
+class="form-control"
+name="contactemail"
+type="email"
+value="kasun@gallecoast.lk"
+placeholder="Enter email address">
+<div class="invalid-feedback">Please enter a valid email address</div>
+</div>
+<div class="form-row two-columns">
+<div class="form-group">
+<label for="contactmobile" class="form-label required">Mobile Number</label>
+<input id="contactmobile"
+required
+class="form-control"
+pattern="^[0-9]{10,11}$"
+name="contactmobile"
+type="tel"
+maxlength="11"
+value="0771234567"
+placeholder="Enter mobile number">
+<div class="invalid-feedback">Please enter a valid mobile number</div>
+</div>
+<div class="form-group">
+<label for="contactlandline" class="form-label">Landline Number</label>
+<input id="contactlandline"
+required
+class="form-control"
+pattern="^([0-9\s]{10,12})?$"
+name="contactlandline"
+type="tel"
+maxlength="12"
+value="0112345678"
+placeholder="Enter landline number">
+<div class="invalid-feedback">Please enter a valid landline number</div>
+</div>
+</div>
+</div>
+</div>
+<div class="step-navigation">
+<button type="button" class="btn btn-secondary" onclick="prevStep(4)">
+<i class="fas fa-arrow-left"></i> Previous
+</button>
+<button type="button" class="btn btn-secondary btn-lg" onclick="openVacancyPreview('jobEditForm')" title="See how this vacancy will look on the website (opens in a new tab, nothing is saved)">
+<i class="fas fa-eye"></i> Preview
+</button>
+<button id="submit_btn"
+class="btn btn-primary btn-lg"
+type="submit">
+<i class="fas fa-save"></i> Update Job Vacancy
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="footer-content">
+<div class="footer-left">
+<p class="copyright">
+© 2026 <strong>Job Labs</strong> ATS. All rights reserved.
+</p>
+<div class="footer-links">
+<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+<a href="/terms-of-service" class="footer-link">Terms of Service</a>
+<a href="/cookie-policy" class="footer-link">Support</a>
+</div>
+</div>
+<div class="footer-right">
+<div class="system-status">
+<div class="status-indicator online"></div>
+<span class="status-text">All systems operational</span>
+</div>
+<div class="footer-actions">
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Help & Support">
+<i class="fas fa-question-circle"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Feedback">
+<i class="fas fa-comment-alt"></i>
+</button>
+<button class="footer-action-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Keyboard Shortcuts">
+<i class="fas fa-keyboard"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Version and Environment Info (for development) -->
+<!--     <div class="debug-info">
+<small class="text-muted">
+Version 2.0.1 | PHP 8.3.6 | Laravel 8.83.29
+</small>
+</div>
+-->
+</footer>
+<style>
+.main-footer {
+background: white;
+border-top: 1px solid var(--border-color);
+padding: 1rem 2rem;
+margin-top: auto;
+min-height: 60px;
+position: relative;
+}
+.footer-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 2rem;
+}
+.footer-left {
+display: flex;
+align-items: center;
+gap: 2rem;
+flex: 1;
+}
+.copyright {
+margin: 0;
+font-size: 0.85rem;
+color: var(--text-secondary);
+}
+.copyright strong {
+color: var(--primary-color);
+font-weight: 600;
+}
+.footer-links {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.footer-link {
+font-size: 0.8rem;
+color: var(--text-secondary);
+text-decoration: none;
+transition: var(--transition);
+padding: 0.25rem 0;
+position: relative;
+}
+.footer-link:hover {
+color: var(--primary-color);
+}
+.footer-link::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--primary-color);
+transition: var(--transition);
+}
+.footer-link:hover::after {
+width: 100%;
+}
+.footer-right {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+.system-status {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.5rem 1rem;
+background: rgba(16, 185, 129, 0.1);
+border-radius: 20px;
+border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.status-indicator {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+}
+.status-indicator.online {
+background: var(--success-color);
+box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+animation: pulse 2s infinite;
+}
+.status-indicator.warning {
+background: var(--warning-color);
+box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+}
+.status-indicator.offline {
+background: var(--danger-color);
+box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+}
+.status-text {
+font-size: 0.8rem;
+color: var(--success-color);
+font-weight: 500;
+}
+@keyframes  pulse {
+0% {
+transform: scale(1);
+}
+50% {
+transform: scale(1.1);
+}
+100% {
+transform: scale(1);
+}
+}
+.footer-actions {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+.footer-action-btn {
+width: 32px;
+height: 32px;
+border: none;
+background: rgba(107, 114, 128, 0.1);
+color: var(--text-secondary);
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(--transition);
+font-size: 0.9rem;
+}
+.footer-action-btn:hover {
+background: rgba(79, 70, 229, 0.1);
+color: var(--primary-color);
+transform: translateY(-1px);
+}
+.debug-info {
+position: absolute;
+bottom: 0;
+right: 2rem;
+transform: translateY(100%);
+background: rgba(0, 0, 0, 0.8);
+color: white;
+padding: 0.25rem 0.75rem;
+border-radius: 0 0 8px 8px;
+font-family: 'Courier New', monospace;
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.main-footer {
+padding: 1rem;
+}
+.footer-content {
+flex-direction: column;
+gap: 1rem;
+text-align: center;
+}
+.footer-left {
+flex-direction: column;
+gap: 1rem;
+align-items: center;
+}
+.footer-links {
+justify-content: center;
+}
+.footer-right {
+justify-content: center;
+}
+.system-status {
+order: -1;
+}
+}
+@media (max-width: 576px) {
+.footer-links {
+flex-wrap: wrap;
+gap: 1rem;
+}
+.footer-actions {
+gap: 0.25rem;
+}
+.footer-action-btn {
+width: 28px;
+height: 28px;
+font-size: 0.8rem;
+}
+}
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+.main-footer {
+background: var(--sidebar-bg);
+border-color: var(--border-color);
+}
+.debug-info {
+background: rgba(255, 255, 255, 0.1);
+color: var(--text-primary);
+}
+}
+/* Print styles */
+@media  print {
+.main-footer {
+display: none;
+}
+}
+/* High contrast mode */
+@media (prefers-contrast: high) {
+.footer-link {
+text-decoration: underline;
+}
+.status-indicator {
+border: 2px solid currentColor;
+}
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+.status-indicator.online {
+animation: none;
+}
+.footer-action-btn:hover {
+transform: none;
+}
+.footer-link::after {
+transition: none;
+}
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// System status simulation (replace with real API call)
+function updateSystemStatus() {
+const statusIndicator = document.querySelector('.status-indicator');
+const statusText = document.querySelector('.status-text');
+if (!statusIndicator || !statusText) return;
+// Simulate API call to check system status
+// Replace this with actual system health check
+const systemHealth = {
+database: true,
+cache: true,
+mail: true,
+storage: true
+};
+const allSystemsUp = Object.values(systemHealth).every(status => status);
+if (allSystemsUp) {
+statusIndicator.className = 'status-indicator online';
+statusText.textContent = 'All systems operational';
+statusText.style.color = 'var(--success-color)';
+} else {
+statusIndicator.className = 'status-indicator warning';
+statusText.textContent = 'Some services degraded';
+statusText.style.color = 'var(--warning-color)';
+}
+}
+// Update status every 30 seconds
+updateSystemStatus();
+setInterval(updateSystemStatus, 30000);
+// Keyboard shortcuts handler
+const keyboardBtn = document.querySelector('.footer-action-btn:last-child');
+if (keyboardBtn) {
+keyboardBtn.addEventListener('click', function() {
+showKeyboardShortcuts();
+});
+}
+// Help and support handler
+const helpBtn = document.querySelector('.footer-action-btn:first-child');
+if (helpBtn) {
+helpBtn.addEventListener('click', function() {
+// You can integrate with your help system here
+window.open('#', '_blank');
+});
+}
+// Feedback handler
+const feedbackBtn = document.querySelector('.footer-action-btn:nth-child(2)');
+if (feedbackBtn) {
+feedbackBtn.addEventListener('click', function() {
+// You can integrate with your feedback system here
+showFeedbackModal();
+});
+}
+});
+function showKeyboardShortcuts() {
+// Create modal for keyboard shortcuts
+const shortcuts = [
+{ key: 'Ctrl + /', description: 'Show keyboard shortcuts' },
+{ key: 'Ctrl + N', description: 'Create new job posting' },
+{ key: 'Ctrl + S', description: 'Save current form' },
+{ key: 'Esc', description: 'Close modal or cancel action' },
+{ key: 'Tab', description: 'Navigate between form fields' }
+];
+let shortcutsHtml = '<div class="keyboard-shortcuts-modal">';
+shortcutsHtml += '<h5>Keyboard Shortcuts</h5>';
+shortcutsHtml += '<div class="shortcuts-list">';
+shortcuts.forEach(shortcut => {
+shortcutsHtml += `
+<div class="shortcut-item">
+<kbd>${shortcut.key}</kbd>
+<span>${shortcut.description}</span>
+</div>
+`;
+});
+shortcutsHtml += '</div></div>';
+// You can implement modal display logic here
+console.log('Keyboard shortcuts:', shortcuts);
+}
+function showFeedbackModal() {
+// Implement feedback modal
+console.log('Show feedback modal');
+}
+</script>        </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery (if needed) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Custom JS -->
+<script>
+// Global JavaScript utilities
+document.addEventListener('DOMContentLoaded', function() {
+// Initialize tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+// Initialize popovers
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+return new bootstrap.Popover(popoverTriggerEl);
+});
+// Mobile sidebar toggle - the header menu button, the sidebar close
+// button and the dark overlay all open/close the sidebar.
+// (Before, only the FIRST [data-sidebar-toggle] - the hidden close
+// button inside the sidebar - was wired, so the menu button on
+// phones/tablets did nothing.)
+const sidebar = document.querySelector('.sidebar');
+const sidebarOverlay = document.querySelector('.sidebar-overlay');
+if (sidebar) {
+document.querySelectorAll('[data-sidebar-toggle]').forEach(function (btn) {
+btn.addEventListener('click', function (e) {
+e.preventDefault();
+const open = !sidebar.classList.contains('active');
+sidebar.classList.toggle('active', open);
+if (sidebarOverlay) { sidebarOverlay.classList.toggle('active', open); }
+});
+});
+}
+// Auto-hide alerts
+setTimeout(function() {
+const alerts = document.querySelectorAll('.alert');
+alerts.forEach(function(alert) {
+const bsAlert = new bootstrap.Alert(alert);
+bsAlert.close();
+});
+}, 5000);
+});
+// CSRF token setup for AJAX requests
+if (typeof $ !== 'undefined') {
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+}
+// Security features
+document.addEventListener('contextmenu', function(e) {
+e.preventDefault();
+});
+document.addEventListener('keydown', function(e) {
+// Disable F12
+if (e.keyCode === 123) {
+return false;
+}
+// Disable Ctrl+Shift+I
+if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+return false;
+}
+// Disable Ctrl+Shift+J
+if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+return false;
+}
+// Disable Ctrl+U
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+});
+</script>
+<script>
+function openVacancyPreview(formId) {
+var form = document.getElementById(formId);
+if (!form) { return; }
+// Copy the rich-text editor content into the hidden inputs (same as the real submit does)
+try {
+if (typeof quillJobDesc !== 'undefined' && quillJobDesc && document.getElementById('jobdesc-input')) {
+document.getElementById('jobdesc-input').value = quillJobDesc.root.innerHTML;
+}
+if (typeof quillJobKeyword !== 'undefined' && quillJobKeyword && document.getElementById('jobkeyword-input')) {
+document.getElementById('jobkeyword-input').value = quillJobKeyword.root.innerHTML;
+}
+if (typeof quillJobBenefits !== 'undefined' && quillJobBenefits && document.getElementById('jobbenifits-input')) {
+document.getElementById('jobbenifits-input').value = quillJobBenefits.root.innerHTML;
+}
+} catch (e) { /* editors not ready - preview whatever is in the form */ }
+var previewForm = document.createElement('form');
+previewForm.method = 'POST';
+previewForm.action = "http:\/\/127.0.0.1:8099\/admin\/job\/preview";
+previewForm.target = '_blank';
+previewForm.style.display = 'none';
+var data = new FormData(form);
+data.forEach(function (value, key) {
+if (typeof value !== 'string' || key === '_method') { return; }
+var input = document.createElement('input');
+input.type = 'hidden';
+input.name = key;
+input.value = value;
+previewForm.appendChild(input);
+});
+if (!previewForm.querySelector('input[name="_token"]')) {
+var token = document.querySelector('meta[name="csrf-token"]');
+if (token) {
+var t = document.createElement('input');
+t.type = 'hidden'; t.name = '_token'; t.value = token.getAttribute('content');
+previewForm.appendChild(t);
+}
+}
+document.body.appendChild(previewForm);
+previewForm.submit();
+setTimeout(function () { previewForm.remove(); }, 1000);
+}
+</script>
+<!-- CDN Scripts -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script>
+// Global Variables
+let currentStep = 1;
+const totalSteps = 4;
+let quillJobDesc, quillJobKeyword, quillJobBenefits;
+const CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+// Initialize on DOM Ready
+$(document).ready(function() {
+initializeQuillEditors();
+initializeFormValidation();
+initializeDateConstraints();
+updateProgressBar();
+// Initialize salary validation
+$('#salary').on('input', validateSalaryInput);
+// Initialize phone number formatting
+$('#contactmobile, #contactlandline').on('input', formatPhoneInput);
+// Initialize name capitalization
+$('#contactname, #contactposition').on('input', capitalizeNames);
+console.log('Edit Vacancy Form initialized successfully');
+});
+// Step Navigation Functions
+function nextStep(step) {
+if (validateCurrentStep(step)) {
+if (step < totalSteps) {
+showStep(step + 1);
+}
+}
+}
+function prevStep(step) {
+if (step > 1) {
+showStep(step - 1);
+}
+}
+function showStep(step) {
+// Hide all steps
+$('.step-content').removeClass('active').hide();
+// Show target step with animation
+$(`.step-content[data-step="${step}"]`).addClass('active animate-slide-in').show();
+// Update step circles
+$('.step-circle').removeClass('active completed');
+$('.step-label').removeClass('active');
+for (let i = 1; i <= totalSteps; i++) {
+const circle = $(`.step-circle[data-step="${i}"]`);
+const label = $(`.step-item`).eq(i-1).find('.step-label');
+if (i < step) {
+circle.addClass('completed');
+} else if (i === step) {
+circle.addClass('active');
+label.addClass('active');
+}
+}
+currentStep = step;
+updateProgressBar();
+// Scroll to top smoothly
+$('html, body').animate({scrollTop: 0}, 300);
+}
+function updateProgressBar() {
+const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+$('#progressLine').css('width', progressPercentage + '%');
+}
+// Form Validation Functions
+function validateCurrentStep(step) {
+let isValid = true;
+const stepContent = $(`.step-content[data-step="${step}"]`);
+// Clear previous validation states
+stepContent.find('.form-control').removeClass('is-invalid is-valid');
+stepContent.find('.invalid-feedback').hide();
+switch(step) {
+case 1:
+isValid = validateStep1();
+break;
+case 2:
+isValid = validateStep2();
+break;
+case 3:
+isValid = validateStep3();
+break;
+case 4:
+isValid = validateStep4();
+break;
+}
+if (!isValid) {
+// Scroll to first error
+const firstError = stepContent.find('.is-invalid').first();
+if (firstError.length) {
+$('html, body').animate({
+scrollTop: firstError.offset().top - 100
+}, 300);
+}
+}
+return isValid;
+}
+function validateStep1() {
+let isValid = true;
+// Job title validation (only if not readonly)
+const titleField = $('#title');
+if (!titleField.prop('readonly') && !titleField.val().trim()) {
+showFieldError(titleField, 'Job title is required');
+isValid = false;
+}
+// Industry sector validation
+if (!$('#industrysector').val()) {
+showFieldError($('#industrysector'), 'Industry sector is required');
+isValid = false;
+}
+// Job sector validation
+if (!$('#jobsector').val()) {
+showFieldError($('#jobsector'), 'Job sector is required');
+isValid = false;
+}
+// Work type validation
+if (!$('#worktype').val()) {
+showFieldError($('#worktype'), 'Work type is required');
+isValid = false;
+}
+return isValid;
+}
+function validateStep2() {
+let isValid = true;
+// Location validation
+if (!$('#location').val()) {
+showFieldError($('#location'), 'Location is required');
+isValid = false;
+}
+// Country validation
+if (!$('#country').val()) {
+showFieldError($('#country'), 'Country is required');
+isValid = false;
+}
+// City validation
+if (!$('#city').val()) {
+showFieldError($('#city'), 'City is required');
+isValid = false;
+}
+// Salary validation — optional. Only enforce the format when a value was entered;
+// a blank salary is allowed and means the salary range is not yet defined.
+const salaryValue = $('#salary').val().trim();
+if (salaryValue && !validateSalaryFormat(salaryValue)) {
+showFieldError($('#salary'), 'Valid salary format required (e.g., 25000 or 8.50 or 23000-27000)');
+isValid = false;
+}
+// Payroll validation
+if (!$('#payroll').val()) {
+showFieldError($('#payroll'), 'Pay roll type is required');
+isValid = false;
+}
+return isValid;
+}
+function validateStep3() {
+let isValid = true;
+// Date validations
+const today = new Date().toISOString().split('T')[0];
+const liveDate = $('#datetogolive').val();
+const closeDate = $('#vancancyclosedate').val();
+const startDate = $('#exceptedstartdate').val();
+if (!liveDate) {
+showFieldError($('#datetogolive'), 'Go live date is required');
+isValid = false;
+} else if (liveDate < today) {
+showFieldError($('#datetogolive'), 'Go live date cannot be in the past');
+isValid = false;
+}
+if (!closeDate) {
+showFieldError($('#vancancyclosedate'), 'Close date is required');
+isValid = false;
+} else if (liveDate && closeDate <= liveDate) {
+showFieldError($('#vancancyclosedate'), 'Close date must be after go live date');
+isValid = false;
+}
+if (!startDate) {
+showFieldError($('#exceptedstartdate'), 'Expected start date is required');
+isValid = false;
+} else if (startDate < today) {
+showFieldError($('#exceptedstartdate'), 'Start date cannot be in the past');
+isValid = false;
+}
+// Number of vacancies
+const vacancies = $('#noofvancancy').val();
+if (!vacancies || vacancies < 1) {
+showFieldError($('#noofvancancy'), 'Please enter a valid number of vacancies');
+isValid = false;
+}
+// Rich text editor validations
+const jobDescText = quillJobDesc.getText().trim();
+const jobKeywordText = quillJobKeyword.getText().trim();
+const jobBenefitsText = quillJobBenefits.getText().trim();
+if (jobDescText.length < 50) {
+$('#ckvalidate').text('Job description must be at least 50 characters').show();
+isValid = false;
+} else {
+$('#ckvalidate').hide();
+}
+if (jobKeywordText.length < 20) {
+$('#ckvalidate1').text('Skillset required must be at least 20 characters').show();
+isValid = false;
+} else {
+$('#ckvalidate1').hide();
+}
+if (jobBenefitsText.length < 10) {
+$('#ckvalidate2').text('Benefits must be at least 10 characters').show();
+isValid = false;
+} else {
+$('#ckvalidate2').hide();
+}
+return isValid;
+}
+function validateStep4() {
+let isValid = true;
+// Contact name validation
+const contactName = $('#contactname').val();
+if (!contactName || !/^[a-zA-Z\s]{2,50}$/.test(contactName)) {
+showFieldError($('#contactname'), 'Please enter a valid contact name (2-50 characters, letters only)');
+isValid = false;
+}
+// Contact position validation
+const contactPosition = $('#contactposition').val();
+if (!contactPosition || !/^[a-zA-Z\s]{2,50}$/.test(contactPosition)) {
+showFieldError($('#contactposition'), 'Please enter a valid position (2-50 characters, letters only)');
+isValid = false;
+}
+// Email validation
+const email = $('#contactemail').val();
+if (!email || !isValidEmail(email)) {
+showFieldError($('#contactemail'), 'Please enter a valid email address');
+isValid = false;
+}
+// Mobile validation
+const mobile = $('#contactmobile').val();
+if (!mobile || !/^[0-9]{10,11}$/.test(mobile.replace(/\s/g, ''))) {
+showFieldError($('#contactmobile'), 'Please enter a valid mobile number (10-11 digits)');
+isValid = false;
+}
+// Landline validation
+const landline = $('#contactlandline').val();
+if (landline && !/^[0-9\s]{10,12}$/.test(landline)) {
+showFieldError($('#contactlandline'), 'Please enter a valid landline number (10–12 digits)');
+isValid = false;
+}
+return isValid;
+}
+// Helper Functions
+function showFieldError(field, message) {
+field.addClass('is-invalid');
+field.next('.invalid-feedback').text(message).show();
+}
+function validateSalaryFormat(value) {
+return /^[\d\.\-]+$/.test(value);
+}
+function validateSalaryInput() {
+const value = $(this).val();
+const feedback = $('#salary-feedback');
+if (value && !validateSalaryFormat(value)) {
+$(this).addClass('is-invalid').removeClass('is-valid');
+feedback.text('Only numbers, decimal points, and hyphens allowed (e.g., 25000 or 8.50 or 23000-27000)').show();
+} else if (value) {
+$(this).removeClass('is-invalid').addClass('is-valid');
+feedback.hide();
+} else {
+$(this).removeClass('is-invalid is-valid');
+feedback.hide();
+}
+}
+function formatPhoneInput() {
+this.value = this.value.replace(/[^0-9\s]/g, '');
+}
+function capitalizeNames() {
+const words = this.value.split(' ');
+for (let i = 0; i < words.length; i++) {
+words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+}
+this.value = words.join(' ');
+}
+function isValidEmail(email) {
+return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+// Initialize Quill Editors
+function initializeQuillEditors() {
+quillJobDesc = new Quill('#jobdesc', {
+theme: 'snow',
+modules: {
+toolbar: [
+[{ 'header': [1, 2, 3, false] }],
+['bold', 'italic', 'underline', 'strike'],
+[{ 'color': [] }, { 'background': [] }],
+[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+[{ 'indent': '-1'}, { 'indent': '+1' }],
+['link', 'blockquote'],
+['clean']
+]
+},
+placeholder: 'Describe the job role, responsibilities, and requirements...'
+});
+quillJobKeyword = new Quill('#jobkeyword', {
+theme: 'snow',
+modules: {
+toolbar: [
+[{ 'header': [1, 2, 3, false] }],
+['bold', 'italic', 'underline'],
+[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+['link'],
+['clean']
+]
+},
+placeholder: 'List required skills, qualifications, and experience...'
+});
+quillJobBenefits = new Quill('#jobbenifits', {
+theme: 'snow',
+modules: {
+toolbar: [
+[{ 'header': [1, 2, 3, false] }],
+['bold', 'italic', 'underline'],
+[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+['link'],
+['clean']
+]
+},
+placeholder: 'Describe benefits, perks, and what makes this role attractive...'
+});
+}
+// Initialize Form Validation
+function initializeFormValidation() {
+$('#jobEditForm').on('submit', function(e) {
+e.preventDefault();
+// Update hidden inputs with Quill content
+$('#jobdesc-input').val(quillJobDesc.root.innerHTML);
+$('#jobkeyword-input').val(quillJobKeyword.root.innerHTML);
+$('#jobbenifits-input').val(quillJobBenefits.root.innerHTML);
+// Show loading state
+const submitBtn = $('#submit_btn');
+const originalText = submitBtn.html();
+submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Updating...').prop('disabled', true);
+// Final validation
+let allStepsValid = true;
+for (let i = 1; i <= totalSteps; i++) {
+if (!validateCurrentStep(i)) {
+allStepsValid = false;
+showStep(i);
+break;
+}
+}
+if (allStepsValid) {
+// Submit the form
+this.submit();
+} else {
+// Reset button state
+submitBtn.html(originalText).prop('disabled', false);
+}
+});
+}
+// Initialize Date Constraints
+function initializeDateConstraints() {
+const today = new Date().toISOString().split('T')[0];
+document.getElementById("datetogolive").setAttribute('min', today);
+document.getElementById("exceptedstartdate").setAttribute('min', today);
+document.getElementById("vancancyclosedate").setAttribute('min', today);
+}
+// Job Sector Selection
+function selectJobsector(industryId) {
+$('#jobsector').empty();
+$.ajax({
+url: "jobsector/list",
+type: 'post',
+dataType: "json",
+data: {
+_token: CSRF_TOKEN,
+label_parentId: industryId
+},
+success: function(data) {
+const defaultOption = $('<option value="">Select Job Sector</option>');
+$('#jobsector').append(defaultOption);
+for(let i = 0; i < data.length; i++) {
+const option = $('<option></option>').attr("value", data[i].value).text(data[i].label);
+$('#jobsector').append(option);
+}
+},
+error: function() {
+console.log('Error loading job sectors');
+}
+});
+}
+// Load Cities by Country
+function loadCitiesByCountry(countryId) {
+const citySelect = $('#city');
+citySelect.empty().append('<option value="">Select City</option>');
+if (!countryId) {
+citySelect.prop('disabled', true);
+return;
+}
+citySelect.prop('disabled', true).addClass('loading');
+$.ajax({
+url: "/admin/job/cities-by-country",
+type: 'POST',
+dataType: "json",
+data: {
+_token: CSRF_TOKEN,
+country_id: countryId
+},
+success: function(data) {
+citySelect.prop('disabled', false).removeClass('loading');
+$.each(data, function(cityId, cityName) {
+citySelect.append('<option value="' + cityId + '">' + cityName + '</option>');
+});
+},
+error: function() {
+console.log('Error loading cities');
+citySelect.prop('disabled', false).removeClass('loading');
+}
+});
+}
+// Success/Error Message Handling
+</script>
+</body>
+</html>

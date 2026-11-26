@@ -504,5 +504,24 @@ eleventyExcludeFromCollections: true
         &copy; {{ site.year }} Job Labs. All rights reserved.
     </footer>
 
+    <!-- PROTOTYPE: ATS links -> the ATS snapshot of the role picked on the login page -->
+    <script>
+    (function () {
+        var path = location.pathname.replace(/\/+$/, '');
+        var role = 'superadmin';
+        try { role = localStorage.getItem('jl_ats_role') || 'superadmin'; } catch (e) {}
+        if (/^\/(dashboard|admin|leads|logactivity|tickets|my-tickets|campaigns|acc-manager|raise|reset)(\/|$)/.test(path)) {
+            location.replace('/ats/' + role + path); return;
+        }
+        var m = path.match(/^\/ats\/([a-z-]+)/);
+        if (m) {
+            var box = document.createElement('div');
+            box.style.cssText = 'max-width:560px;margin:0 auto 28px;padding:16px 20px;border-radius:12px;background:#F5EFE1;color:#1F2A33;font:500 15px/1.5 Inter,Arial,sans-serif;text-align:center';
+            box.innerHTML = 'This ATS page is not part of the prototype. <br><a href="/ats/' + m[1] + '/dashboard" style="color:#790D16;font-weight:700">Back to the dashboard</a> &middot; <a href="/login" style="color:#790D16;font-weight:700">Switch role</a>';
+            var main = document.querySelector('main') || document.body;
+            main.insertBefore(box, main.firstChild);
+        }
+    })();
+    </script>
 </body>
 </html>

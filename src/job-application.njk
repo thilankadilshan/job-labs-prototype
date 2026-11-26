@@ -771,7 +771,7 @@ permalink: "/{{ job.job_refno }}/{{ job.slug }}/apply/"
                             <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            <span>Posted Date {{ ((job.job_adv_livedate | diffForHumans) if job.job_adv_livedate else "Recently") }}</span>
+                            <span>Posted {{ job | postedLabel }}</span>
                         </div>
 
                         {% if job.days_until_closing != null %}

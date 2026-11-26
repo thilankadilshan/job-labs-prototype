@@ -537,6 +537,36 @@ permalink: "/login/"
                 <form method="POST" action="/ats" id="loginForm" novalidate>
                     <input type="hidden" name="_token" value="prototype-csrf-token">
 
+                    <!-- PROTOTYPE: choose which ATS role to sign in as -->
+                    <style>
+                        .jl-role-pick { margin: 0 0 18px; }
+                        .jl-role-pick .form-label { display:block; margin-bottom:8px; }
+                        .jl-roles { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+                        .jl-role { border:1.5px solid #e2ddd2; background:#fff; border-radius:12px; padding:10px 6px; cursor:pointer;
+                                   text-align:center; font:600 12.5px/1.25 inherit; color:#3D5568; transition:all .2s; }
+                        .jl-role small { display:block; font-weight:500; font-size:10.5px; color:#8a8f98; margin-top:3px; }
+                        .jl-role:hover { border-color:#790D16; }
+                        .jl-role.is-active { border-color:#790D16; background:#F5EFE1; box-shadow:0 0 0 3px rgba(121,13,22,.10); color:#1F2A33; }
+                        .jl-role-note { font-size:11.5px; color:#8a8f98; margin-top:8px; }
+                        @media (max-width:420px){ .jl-role { font-size:11.5px; padding:9px 4px; } .jl-role small { display:none; } }
+                    </style>
+                    <div class="jl-field jl-role-pick" role="radiogroup" aria-label="Sign in as">
+                        <span class="form-label">Sign in as</span>
+                        <div class="jl-roles">
+                            <button type="button" class="jl-role is-active" data-role="superadmin" data-email="admin@job-labs.lk" role="radio" aria-checked="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 5px;color:#790D16"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Super Admin<small>Full access</small>
+                            </button>
+                            <button type="button" class="jl-role" data-role="account-manager" data-email="accounts@job-labs.lk" role="radio" aria-checked="false">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 5px;color:#790D16"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>Account Manager<small>Staff</small>
+                            </button>
+                            <button type="button" class="jl-role" data-role="hiring-manager" data-email="dilan@nuwaradigital.lk" role="radio" aria-checked="false">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 5px;color:#790D16"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Hiring Manager<small>Employer</small>
+                            </button>
+                        </div>
+                        <input type="hidden" name="proto_role" id="protoRole" value="superadmin">
+                        <div class="jl-role-note">Prototype: pick a role and click Sign In (demo email &amp; password are filled in for you).</div>
+                    </div>
+
                     <!-- Email Field -->
                     <div class="jl-field form-group">
                         <label for="email" class="form-label">Email address</label>
@@ -714,6 +744,23 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    /* ---------- PROTOTYPE: role picker ---------- */
+    const roleBtns = document.querySelectorAll('.jl-role');
+    const roleInput = document.getElementById('protoRole');
+    function pickRole(btn) {
+        roleBtns.forEach(b => { b.classList.toggle('is-active', b === btn); b.setAttribute('aria-checked', b === btn ? 'true' : 'false'); });
+        roleInput.value = btn.dataset.role;
+        emailInput.value = btn.dataset.email;
+        passwordInput.value = 'prototype';
+        emailInput.classList.remove('error'); passwordInput.classList.remove('error');
+    }
+    roleBtns.forEach(btn => btn.addEventListener('click', () => pickRole(btn)));
+    try {
+        const last = localStorage.getItem('jl_ats_role');
+        const lastBtn = last && document.querySelector('.jl-role[data-role="' + last + '"]');
+        pickRole(lastBtn || roleBtns[0]);
+    } catch (err) { pickRole(roleBtns[0]); }
+
     /* ---------- Submit: light client check + loading state ---------- */
     form.addEventListener('submit', function (e) {
         const email = emailInput.value.trim();
@@ -731,6 +778,13 @@ document.addEventListener('DOMContentLoaded', function () {
         submitBtn.disabled = true;
         const label = submitBtn.querySelector('.jl-btn-text');
         if (label) label.textContent = 'Signing in...';
+
+        // PROTOTYPE: open the ATS snapshot for the chosen role (no real sign-in).
+        e.preventDefault();
+        const role = roleInput.value || 'superadmin';
+        try { localStorage.setItem('jl_ats_role', role); } catch (err) {}
+        setTimeout(function () { window.location.href = '/ats/' + role + '/dashboard'; }, 500);
+        return;
         // Prototype: mock-api.js shows a "sign-in is disabled" notice instead of logging in,
         // so put the button back once that notice is closed.
         setTimeout(function () {

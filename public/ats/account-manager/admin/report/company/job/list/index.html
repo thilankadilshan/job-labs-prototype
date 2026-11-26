@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="robots" content="noindex, nofollow"><script>window.__ATS_ROLE="account-manager";window.__ATS_ROLE_LABEL="Account Manager";window.__ATS_BASE="/ats/account-manager";</script><script src="/js/ats-mock-data-account-manager.js"></script><script src="/js/ats-mock.js"></script>
+<title>Job Labs</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex" />
+<!-- CSRF Token -->
+<meta name="csrf-token" content="mDqX7nAfvAk2yIMrL0PVDp9WuYmE0LGCQ5FhQgvF">
+<link rel="shortcut icon" href="#" data-mock-href="/favicon.ico">
+<!-- plugin css -->
+<link media="all" type="text/css" rel="stylesheet" href="/assets/plugins/@mdi/font/css/materialdesignicons.min.css">
+<link media="all" type="text/css" rel="stylesheet" href="/assets/plugins/perfect-scrollbar/perfect-scrollbar.css">
+<link media="all" type="text/css" rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css">
+<!-- end plugin css -->
+<link media="all" type="text/css" rel="stylesheet" href="/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css">
+<!-- common css -->
+<link media="all" type="text/css" rel="stylesheet" href="/css/app.css">
+<style>
+.table-responsive table{
+text-transform: capitalize;
+}
+.datepicker table{
+background:#fff;
+}
+.table td img, .table th img {
+width: 100px !important;
+height: auto !important;
+border-radius: 0 !important;
+}
+.sidebar li.nav-item.nav-profile {
+margin-bottom: 15px !important;
+margin-top: 37px !important;
+background: #1b0639 !important;
+}
+.navbar .navbar-brand-wrapper .navbar-brand img {
+width: 120px !important;
+height: auto !important;
+padding-top: 0px;
+}
+.sidebar .nav .nav-item.nav-profile .nav-link .nav-profile-text {
+margin-left: 0 !important;
+}
+.dataTables_wrapper .dataTable .btn
+{
+padding: .875rem 2.5rem  !important;
+}
+@media(max-width:991px){
+.navbar .navbar-brand-wrapper .navbar-brand img {
+padding-top: 0px;
+margin-left: 20px !important;
+}
+.navbar {
+background: #3b1b68 !important;
+}
+}
+</style>
+<link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<!-- end common css -->
+</head>
+<body data-base-url="">
+<div class="container-scroller" id="app">
+<nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+<a class="navbar-brand brand-logo" href="/ats/account-manager/dashboard">
+<img src="/assets/images/logo_white.png" alt="logo" /> </a>
+<a class="navbar-brand brand-logo-mini" href="/ats/account-manager/dashboard">
+<img src="/assets/images/logo_white.png" alt="logo" /> </a>
+</div>
+<div class="navbar-menu-wrapper d-flex align-items-stretch">
+<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+<span class="mdi mdi-menu"></span>
+</button>
+<!--
+<div class="search-field d-none d-md-block">
+<form class="d-flex align-items-center h-100" action="#" data-mock-action="#">
+<div class="input-group">
+<div class="input-group-prepend bg-transparent">
+<i class="input-group-text border-0 mdi mdi-magnify"></i>
+</div>
+<input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+</div>
+</form>
+</div>
+-->
+<ul class="navbar-nav navbar-nav-right">
+<li class="nav-item nav-profile dropdown">
+<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+<div class="nav-profile-img">
+<img src="/assets/images/faces-clipart/pic-1.png" alt="image">
+<span class="availability-status online"></span>
+</div>
+<div class="nav-profile-text">
+<p class="mb-1 text-black font-weight-light">Nimesha
+</p>
+</div>
+</a>
+<div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+<div class="dropdown-divider"></div>
+<a class="dropdown-item" href="/login">
+<i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+</div>
+</li>
+<li class="nav-item nav-logout d-none d-lg-flex">
+<a class="nav-link" href="/login">
+<i class="mdi mdi-power"></i>
+</a>
+</li>
+</ul>
+<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+<span class="mdi mdi-menu"></span>
+</button>
+</div>
+</nav>    <div class="container-fluid page-body-wrapper">
+<!-- <div class="theme-setting-wrapper">
+<div id="color-settings" class="settings-panel">
+<i class="settings-close mdi mdi-close"></i>
+<div class="d-flex align-items-center justify-content-between border-bottom">
+<p class="settings-heading font-weight-bold border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Template Skins</p>
+</div>
+<div class="sidebar-bg-options selected" id="sidebar-light-theme">
+<div class="img-ss rounded-circle bg-light border mr-3"></div>Light
+</div>
+<div class="sidebar-bg-options" id="sidebar-dark-theme">
+<div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark
+</div>
+<p class="settings-heading font-weight-bold mt-2">Header Skins</p>
+<div class="color-tiles mx-0 px-2">
+<div class="tiles primary"></div>
+<div class="tiles success"></div>
+<div class="tiles warning"></div>
+<div class="tiles danger"></div>
+<div class="tiles pink"></div>
+<div class="tiles info"></div>
+<div class="tiles dark"></div>
+<div class="tiles default"></div>
+</div>
+</div>
+</div>
+<div id="right-sidebar" class="settings-panel">
+<i class="settings-close mdi mdi-close"></i>
+<div class="d-flex align-items-center justify-content-between border-bottom">
+<p class="settings-heading font-weight-bold border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
+</div>
+<ul class="chat-list">
+<li class="list active">
+<div class="profile">
+<img src="/assets/images/faces/face3.jpg" alt="image">
+<span class="online"></span>
+</div>
+<div class="info">
+<p>Thomas Douglas</p>
+<p>Available</p>
+</div>
+<small class="text-muted my-auto">19 min</small>
+</li>
+<li class="list">
+<div class="profile">
+<img src="/assets/images/faces/face2.jpg" alt="image">
+<span class="offline"></span>
+</div>
+<div class="info">
+<div class="wrapper d-flex">
+<p>Catherine</p>
+</div>
+<p>Away</p>
+</div>
+<div class="badge badge-success badge-pill my-auto mx-2">4</div>
+<small class="text-muted my-auto">23 min</small>
+</li>
+<li class="list">
+<div class="profile">
+<img src="/assets/images/faces/face3.jpg" alt="image">
+<span class="online"></span>
+</div>
+<div class="info">
+<p>Daniel Russell</p>
+<p>Available</p>
+</div>
+<small class="text-muted my-auto">14 min</small>
+</li>
+<li class="list">
+<div class="profile">
+<img src="/assets/images/faces/face4.jpg" alt="image">
+<span class="offline"></span>
+</div>
+<div class="info">
+<p>James Richardson</p>
+<p>Away</p>
+</div>
+<small class="text-muted my-auto">2 min</small>
+</li>
+<li class="list">
+<div class="profile">
+<img src="/assets/images/faces/face5.jpg" alt="image">
+<span class="online"></span>
+</div>
+<div class="info">
+<p>Madeline Kennedy</p>
+<p>Available</p>
+</div>
+<small class="text-muted my-auto">5 min</small>
+</li>
+<li class="list">
+<div class="profile">
+<img src="/assets/images/faces/face6.jpg" alt="image">
+<span class="online"></span>
+</div>
+<div class="info">
+<p>Sarah Graves</p>
+<p>Available</p>
+</div>
+<small class="text-muted my-auto">47 min</small>
+</li>
+</ul>
+</div> -->
+<nav class="sidebar sidebar-offcanvas dynamic-active-class-disabled" id="sidebar">
+<ul class="nav">
+<li class="nav-item nav-profile">
+<a href="#" class="nav-link">
+<div class="nav-profile-text d-flex flex-column">
+<span class="font-weight-bold mb-2">Nimesha</span>
+<span class="text-secondary text-small">Account Manager</span>
+</div>
+<i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+</a>
+</li>
+<li class="nav-item   ">
+<a class="nav-link" href="/ats/account-manager/dashboard">
+<span class="menu-title">Dashboard</span>
+<i class="mdi mdi-home menu-icon"></i>
+</a>
+</li>
+<li class="nav-item   ">
+<a class="nav-link" href="/ats/account-manager/leads">
+<span class="menu-title">Leads</span>
+<i class="mdi mdi-headset menu-icon"></i>
+</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" data-toggle="collapse" href="#forms" aria-expanded="false" aria-controls="forms">
+<span class="menu-title">Users</span>
+<i class="menu-arrow"></i>
+<i class="mdi mdi-format-list-bulleted menu-icon"></i>
+</a>
+<div class="collapse " id="forms">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/company/list">Company</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/user/list">User Login</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item ">
+<a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
+<span class="menu-title">Job Category Labels</span>
+<i class="menu-arrow"></i>
+<i class="mdi mdi-code-not-equal-variant menu-icon"></i>
+</a>
+<div class="collapse " id="editors">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/category/list">Main Category</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/label/list/4">Industry Sector</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/label/list/5">Job Sector</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/label/list/3">Location</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item ">
+<a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+<span class="menu-title">Jobs</span>
+<i class="menu-arrow"></i>
+<i class="mdi mdi-table-large menu-icon"></i>
+</a>
+<div class="collapse " id="tables">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/job/create">Post Vacancy</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/job/list">Track/Edit Vacancy</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/job/admin/list">Admin Actions</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item ">
+<a class="nav-link" data-toggle="collapse" href="#report" aria-expanded="false" aria-controls="editors">
+<span class="menu-title">Reports</span>
+<i class="menu-arrow"></i>
+<i class="mdi mdi-code-not-equal-variant menu-icon"></i>
+</a>
+<div class="collapse " id="report">
+<ul class="nav flex-column sub-menu">
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/report/vacancy/job/list">Vacancy Status</a>
+</li>
+<!-- <li class="nav-item active">
+<a class="nav-link" href="/ats/account-manager/admin/report/company/job/list">job List Per company</a>
+</li>-->
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/report/applicant/list">Candidate by Company</a>
+</li>
+<li class="nav-item ">
+<a class="nav-link" href="/ats/account-manager/admin/report/candidate/list">Candidate Info</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</nav>      <div class="main-panel">
+<div class="content-wrapper">
+<div class="page-header">
+<h3 class="page-title"> Company user List </h3>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="#">Tables</a></li>
+<li class="breadcrumb-item active" aria-current="page">Company user List</li>
+</ol>
+</nav>
+</div>
+<div class="card">
+<div class="card-body">
+<!--<h4 class="card-title">Company user List</h4>-->
+<div class="row">
+<form class="cmxform" id="jobform" method="POST" action="#" data-mock-action="/admin/report/company/job/list">
+<input type="hidden" name="_token" value="mDqX7nAfvAk2yIMrL0PVDp9WuYmE0LGCQ5FhQgvF">        <label for="companyname">Company</label>
+<input id="company_search" class="form-control" name="company_search" type="text">
+<input id="companyId" class="form-control" name="companyId"  type="hidden">
+<input class="btn btn-gradient-primary" type="submit" value="View Report" id="jobreport">
+</form>
+</div>
+<div class="row">
+<div class="col-12">
+<div class="table-responsive">
+<table id="order-listing" class="table">
+<thead>
+<tr>
+<th>Ref No</th>
+<th>Title</th>
+<th>Location</th>
+<th>Industry</th>
+<th>JobType</th>
+<th>Sector</th>
+<th>WorkType</th>
+<th>Description</th>
+<th>Salary</th>
+<th>Live Date</th>
+<th>Closing Date</th>
+<th>Total Vacancies</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr colspan="12"><td>No Records Found</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="footer">
+<div class="container-fluid clearfix">
+<span style="color:white !important" class="text-muted d-block text-center text-sm-left d-sm-inline-block">© 2026 Job Labs All rights reserved.</span>
+</div>
+</footer>
+<script >
+window.addEventListener('contextmenu', function (e) {
+e.preventDefault();
+}, false);
+document.onkeydown = function (e) {
+// disable F12 key
+if(e.keyCode == 123) {
+return false;
+}
+// disable I key
+if(e.ctrlKey && e.shiftKey && e.keyCode == 73){
+return false;
+}
+// disable J key
+if(e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+return false;
+}
+// disable U key
+if(e.ctrlKey && e.keyCode == 85) {
+return false;
+}
+}
+</script >      </div>
+</div>
+</div>
+<!-- base js -->
+<script src="/js/app.js"></script>
+<script src="/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<!-- end base js -->
+<!-- plugin js -->
+<script>
+// CSRF Token
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+// var jq = $.noConflict();
+$(document).ready(function(){
+$( "#company_search" ).autocomplete({
+source: function( request, response ) {
+// Fetch data
+$.ajax({
+url:"/admin/report/applicant/company/list",
+type: 'post',
+dataType: "json",
+data: {
+_token: CSRF_TOKEN,
+search: request.term
+},
+success: function( data ) {
+response( data );
+}
+});
+},
+select: function (event, ui) {
+// Set selection
+$('#company_search').val(ui.item.label); // display the selected text
+$('#companyId').val(ui.item.value); // save selected id to input
+return false;
+}
+});
+$("#jobreport").click(function(){
+var companyId = $('#companyId').val();
+alert(companyId);
+// Fetch data
+$.ajax({
+url:"/admin/report/company/job/list",
+type: 'post',
+dataType: "json",
+data: {
+_token: CSRF_TOKEN,
+companyId: companyId
+},
+success: function( data ) {
+console.log(data)
+$('#job-listing').DataTable({
+//for (i = 0; i < data.length; i++) {
+"columns": [
+{ "data": "jobTitle" },
+]
+//}
+});
+}
+});
+});
+});
+</script>
+<script src="/assets/plugins/datatables.net/jquery.dataTables.min.js"></script>
+<script src="/assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
+<!-- end plugin js -->
+<!-- common js -->
+<script src="/assets/js/off-canvas.js"></script>
+<script src="/assets/js/hoverable-collapse.js"></script>
+<script src="/assets/js/misc.js"></script>
+<script src="/assets/js/settings.js"></script>
+<script src="/assets/js/todolist.js"></script>
+<!-- end common js -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="/assets/js/data-table.js"></script>
+</body>
+</html>

@@ -22,6 +22,27 @@ export default function (eleventyConfig) {
     for (const [u, n] of units) if (s >= n) { const v = Math.floor(s / n); return `${v} ${u}${v > 1 ? "s" : ""} ago`; }
     return "1 second ago";
   });
+  // "Posted ..." text - same rules as JobModel::postedLabel() on the live site:
+  // exact time when known (job_adv_published_at), otherwise whole days from the go-live date
+  // (job_adv_livedate has no time, so counting hours from it was wrong).
+  eleventyConfig.addFilter("postedLabel", (job) => {
+    const pub = job && job.job_adv_published_at, live = job && job.job_adv_livedate;
+    if (pub) {
+      const s = Math.max(0, Math.round((Date.now() - new Date(pub).getTime()) / 1000));
+      const units = [["year", 31536000], ["month", 2592000], ["week", 604800], ["day", 86400], ["hour", 3600], ["minute", 60]];
+      for (const [u, n] of units) if (s >= n) { const v = Math.floor(s / n); return `${v} ${u}${v > 1 ? "s" : ""} ago`; }
+      return "just now";
+    }
+    if (!live) return "recently";
+    const today = new Date(new Date().toISOString().slice(0, 10) + "T00:00:00Z");
+    const days = Math.round((today - new Date(String(live).slice(0, 10) + "T00:00:00Z")) / 86400000);
+    if (days <= 0) return "today";
+    if (days === 1) return "yesterday";
+    if (days < 7) return `${days} days ago`;
+    const weeks = Math.floor(days / 7), months = Math.floor(days / 30);
+    if (days < 30) return `${weeks} week${weeks > 1 ? "s" : ""} ago`;
+    return `${months} month${months > 1 ? "s" : ""} ago`;
+  });
   eleventyConfig.addFilter("limitStr", (s, n) => {        // Str::limit
     s = String(s ?? "");
     return s.length > n ? s.slice(0, n).trimEnd() + "..." : s;
